@@ -233,49 +233,6 @@ export class ParachainStakingNominatorState2Storage {
   }
 }
 
-export class ParachainStakingNominatorStateStorage extends StorageBase {
-    protected getPrefix() {
-        return 'ParachainStaking'
-    }
-
-    protected getName() {
-        return 'NominatorState'
-    }
-
-    /**
-     *  Get nominator state associated with an account if account is nominating else None
-     */
-    get isV49(): boolean {
-        return this.getTypeHash() === 'f801fe87581f7dbb6db044ddd5a7adbe0d0ea1596ad42a8ccd22aa28f6be3e8f'
-    }
-
-    /**
-     *  Get nominator state associated with an account if account is nominating else None
-     */
-    get asV49(): ParachainStakingNominatorStateStorageV49 {
-        assert(this.isV49)
-        return this as any
-    }
-}
-
-/**
- *  Get nominator state associated with an account if account is nominating else None
- */
-export interface ParachainStakingNominatorStateStorageV49 {
-    get(key: Uint8Array): Promise<(v49.Nominator | undefined)>
-    getAll(): Promise<v49.Nominator[]>
-    getMany(keys: Uint8Array[]): Promise<(v49.Nominator | undefined)[]>
-    getKeys(): Promise<Uint8Array[]>
-    getKeys(key: Uint8Array): Promise<Uint8Array[]>
-    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
-    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
-    getPairs(): Promise<[k: Uint8Array, v: v49.Nominator][]>
-    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v49.Nominator][]>
-    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v49.Nominator][]>
-    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v49.Nominator][]>
-}
-
-
 export class ParachainStakingSelectedCandidatesStorage {
   constructor(private ctx: StorageContext) {}
 
