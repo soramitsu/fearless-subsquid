@@ -8,6 +8,7 @@ List   jobParams             = [
     string(defaultValue: targetProject, name: 'targetProject', trim: true),
     booleanParam(defaultValue: false, name: 'fullClean'),
     booleanParam(defaultValue: false, name: 'restart'),
+    booleanParam(defaultValue: false, name: 'hardReset'),
     ]
 String registry               = 'docker.soramitsu.co.jp'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
@@ -54,6 +55,7 @@ pipeline {
             when { not { anyOf {        
                 expression {params.fullClean}
                 expression {params.restart}
+                expression {params.hardReset}
                     }
                 }
             }
@@ -103,6 +105,24 @@ pipeline {
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd redeploy ${PROJECT_NAME}@v1
+                        """
+                    }
+                }
+            }
+        }
+        stage('Hard reset squid if needed') {
+            when {
+                expression {params.hardReset}
+            }
+            steps {
+                script {
+                    docker.image("${envImageName}").inside() {
+                        sh """
+                            apt-get update
+                            apt-get install make git curl -y
+                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
+                            sqd auth -k ${SUBSQUID_KEY}
+                            sqd deploy ${PROJECT_NAME} -r --no-stream-logs
                         """
                     }
                 }
