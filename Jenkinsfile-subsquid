@@ -68,7 +68,7 @@ pipeline {
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd init ${PROJECT_NAME} --template .
-                            sqd deploy ./${PROJECT_NAME}  --update --no-stream-logs
+                            sqd deploy ${PROJECT_NAME}  --update --no-stream-logs
                         """
                     }
                 }
