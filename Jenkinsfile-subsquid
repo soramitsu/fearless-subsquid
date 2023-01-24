@@ -3,10 +3,9 @@
 String agentLabel        = 'docker-build-agent'
 String envImageName      = 'node:16.18.1-bullseye-slim'
 String subsquidToken     = 'subsquidToken'
-String targetProject =  getEnvFromJobName()
-String chainId           = ''
+String targetProject =  'getEnvFromJobName()'
 List   jobParams         = [
-    string(defaultValue: targetEnvironment, name: 'targetEnvironment', trim: true),
+    string(defaultValue: targetProject, name: 'targetProject', trim: true),
     booleanParam(defaultValue: true, name: 'fullClean'),
     booleanParam(defaultValue: true, name: 'restart'),
     ]
