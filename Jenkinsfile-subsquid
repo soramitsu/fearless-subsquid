@@ -3,8 +3,7 @@
 String agentLabel            = 'docker-build-agent'
 String envImageName          = 'node:16.18.1-bullseye-slim'
 String subsquidToken         = 'subsquidToken'
-String targetProject         =  getEnvFromJobName()
-String jobList               = targetProject
+String targetProject         =  'moonbeam'
 List   jobParams             = [
     string(defaultValue: targetProject, name: 'targetProject', trim: true),
     booleanParam(defaultValue: true, name: 'fullClean'),
@@ -16,7 +15,6 @@ Boolean disableSecretScanner  = false
 
 properties([
     parameters( jobParams ),
-    pipelineTriggers([upstream( jobList )])
 ])
 
 pipeline {
