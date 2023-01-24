@@ -6,8 +6,8 @@ String subsquidToken         = 'subsquidToken'
 String targetProject         =  'moonbeam'
 List   jobParams             = [
     string(defaultValue: targetProject, name: 'targetProject', trim: true),
-    booleanParam(defaultValue: true, name: 'fullClean'),
-    booleanParam(defaultValue: true, name: 'restart'),
+    booleanParam(defaultValue: false, name: 'fullClean'),
+    booleanParam(defaultValue: false, name: 'restart'),
     ]
 String registry               = 'docker.soramitsu.co.jp'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
