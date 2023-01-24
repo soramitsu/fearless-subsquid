@@ -51,9 +51,10 @@ pipeline {
             }
         }
         stage('install dependencies & Deploy') {
-            when { not {
+            when { not { anyOf {        
                 expression {params.fullClean}
                 expression {params.restart}
+                    }
                 }
             }
             steps {
