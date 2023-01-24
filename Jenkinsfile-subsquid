@@ -2,15 +2,14 @@
 
 String agentLabel        = 'docker-build-agent'
 String envImageName      = 'node:16.18.1-bullseye-slim'
-String subqueryToken     = 'subquery-token'
-String targetEnvironment =  getEnvFromJobName()
+String subsquidToken     = 'subsquidToken'
+String targetProject =  getEnvFromJobName()
 String chainId           = ''
 List   jobParams         = [
     string(defaultValue: targetEnvironment, name: 'targetEnvironment', trim: true),
     booleanParam(defaultValue: true, name: 'fullClean'),
     booleanParam(defaultValue: true, name: 'restart'),
     ]
-// String endpoint          = targetEnvironment == 'dev' ? '3.s3.dev' : '1.v1.tst'
 String registry               = 'docker.soramitsu.co.jp'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
 Boolean disableSecretScanner  = false
@@ -36,7 +35,7 @@ pipeline {
     environment {
         SUBSQUID_CLI = '2.0.3'
         SUBSQUID_KEY = credentials("${subsquidToken}")
-        PROJECT_NAME = "${targetEnvironment}"
+        PROJECT_NAME = "${targetProject}"
     }
 
     stages {
