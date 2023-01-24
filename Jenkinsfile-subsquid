@@ -13,6 +13,8 @@ String registry               = 'docker.soramitsu.co.jp'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
 Boolean disableSecretScanner  = false
 String secretScannerExclusion = '.*squid.yaml'
+String telegramChatId    = 'telegram-deploy-chat-id'
+Boolean statusNotif      = true
 
 properties([
     parameters( jobParams )
@@ -35,6 +37,7 @@ pipeline {
         SUBSQUID_CLI = '2.0.3'
         SUBSQUID_KEY = credentials("${subsquidToken}")
         PROJECT_NAME = "${targetProject}"
+        TELEGRAM_CHAT_ID = credentials("${telegramChatId}")
     }
 
     stages {
@@ -48,12 +51,17 @@ pipeline {
             }
         }
         stage('install dependencies & Deploy') {
+            when { not {
+                expression {params.fullClean}
+                expression {params.restart}
+                }
+            }
             steps {
                 script {
                     docker.image("${envImageName}").inside() {
                         sh """
                             apt-get update
-                            apt-get install make git -y
+                            apt-get install make git curl -y
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd init ${PROJECT_NAME} --template .
@@ -72,7 +80,7 @@ pipeline {
                     docker.image("${envImageName}").inside() {
                         sh """
                             apt-get update
-                            apt-get install make git -y
+                            apt-get install make git curl -y
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd kill ${PROJECT_NAME} -f
@@ -90,7 +98,7 @@ pipeline {
                     docker.image("${envImageName}").inside() {
                         sh """
                             apt-get update
-                            apt-get install make git -y
+                            apt-get install make git curl -y
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd redeploy ${PROJECT_NAME}@v1
@@ -101,6 +109,12 @@ pipeline {
         }
     }
     post {
+        always {
+            pushNotiTelegram(
+              status: statusNotif,
+              telegramChatId: "${TELEGRAM_CHAT_ID}"
+            ) 
+        }
         cleanup { cleanWs() }
     }
 }
