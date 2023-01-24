@@ -77,7 +77,7 @@ export async function getNominatorsData(
     ctx: BlockContext,
     accounts: string[]
 ): Promise<(NominatorData | undefined)[] | undefined> {
-    const delegatorState = await storage.parachainStaking.old.getNominatorState(ctx, accounts)
+    const delegatorState = await storage.parachainStaking.getDelegatorState(ctx, accounts)
     if (!delegatorState) {
         const delegatorState = await storage.parachainStaking.old.getNominatorState(ctx, accounts)
     }
