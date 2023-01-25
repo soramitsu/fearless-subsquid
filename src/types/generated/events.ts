@@ -3,6 +3,7 @@ import {EventContext, Result, deprecateLatest} from './support'
 import * as v900 from './v900'
 import * as v1001 from './v1001'
 import * as v1300 from './v1300'
+import * as v1901 from './v1901'
 
 export class ParachainStakingCandidateBondedLessEvent {
   constructor(private ctx: EventContext) {
@@ -269,6 +270,19 @@ export class ParachainStakingDelegationEvent {
     assert(this.isV1300)
     return this.ctx._chain.decodeEvent(this.ctx.event)
   }
+
+  get isV1901(): boolean {
+        return this.ctx._chain.getEventHash('ParachainStaking.Delegation') === 'b79250d65573f20264ea546d6964696800161f34e3e18c9e5f5cc68ab741883d'
+    }
+
+    /**
+     * New delegation (increase of the existing one).
+     */
+    get asV1901(): {delegator: Uint8Array, lockedAmount: bigint, candidate: Uint8Array, delegatorPosition: v1901.DelegatorAdded, autoCompound: number} {
+        assert(this.isV1901)
+        return this.ctx._chain.decodeEvent(this.ctx.event)
+    }
+
 
   get isLatest(): boolean {
     deprecateLatest()
