@@ -1,7 +1,7 @@
 import { UnknownVersionError } from '../../../common/errors'
 import { encodeId } from '../../../common/tools'
 import {HistoryElement, Round, RoundCollator, Collator, Delegator} from '../../../model'
-import { ParachainStakingDelegationEvent } from '../../../types/generated/events'
+import { ParachainStakingDelegationEvent, ParachainStakingNominationEvent } from '../../../types/generated/events'
 import { EventContext, EventHandlerContext } from '../../types/contexts'
 import { createStaker, getOrCreateStaker } from '../../util/entities'
 
@@ -28,7 +28,15 @@ function getEventData(ctx: EventContext): EventData {
             amount,
             candidate,
         }
+    } else if (event.isV1901) {
+        const { delegator: account, lockedAmount: amount, candidate } = event.asV1901
+        return {
+            account,
+            amount,
+            candidate,
+        }
     }
+
     throw new UnknownVersionError(event.constructor.name)
 }
 
