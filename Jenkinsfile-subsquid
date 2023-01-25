@@ -1,0 +1,142 @@
+@Library('jenkins-library')
+
+String agentLabel            = 'docker-build-agent'
+String envImageName          = 'node:16.18.1-bullseye-slim'
+String subsquidToken         = 'subsquidToken'
+String targetProject         =  "fearless-x-moonbeam"
+List   jobParams             = [
+    string(defaultValue: targetProject, name: 'targetProject', trim: true),
+    booleanParam(defaultValue: false, name: 'fullClean'),
+    booleanParam(defaultValue: false, name: 'restart'),
+    booleanParam(defaultValue: false, name: 'hardReset'),
+    ]
+String registry               = 'docker.soramitsu.co.jp'
+String dockerBuildToolsUserId = 'bot-build-tools-ro'
+Boolean disableSecretScanner  = false
+String secretScannerExclusion = '.*squid.yaml'
+String telegramChatId    = 'telegram-deploy-chat-id'
+Boolean statusNotif      = true
+
+properties([
+    parameters( jobParams )
+])
+
+pipeline {
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '20'))
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
+    agent {
+        label agentLabel
+    }
+
+
+
+    environment {
+        SUBSQUID_CLI = '2.0.3'
+        SUBSQUID_KEY = credentials("${subsquidToken}")
+        PROJECT_NAME = "${targetProject}"
+        TELEGRAM_CHAT_ID = credentials("${telegramChatId}")
+    }
+
+    stages {
+        stage('Secret scanner') {
+            steps {
+                script {
+                    docker.withRegistry('https://' + registry, dockerBuildToolsUserId) {
+                        secretScanner(disableSecretScanner, secretScannerExclusion)
+                    }
+                }
+            }
+        }
+        stage('install dependencies & Deploy') {
+            when { not { anyOf {        
+                expression {params.fullClean}
+                expression {params.restart}
+                expression {params.hardReset}
+                    }
+                }
+            }
+            steps {
+                script {
+                    docker.image("${envImageName}").inside() {
+                        sh """
+                            apt-get update
+                            apt-get install make git curl -y
+                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
+                            sqd auth -k ${SUBSQUID_KEY}
+                            sqd init ${PROJECT_NAME} --template .
+                            sqd deploy ${PROJECT_NAME}  --update --no-stream-logs
+                        """
+                    }
+                }
+            }
+        }
+        stage('Remove squid if needed') {
+            when {
+                expression {params.fullClean}
+            }
+            steps {
+                script {
+                    docker.image("${envImageName}").inside() {
+                        sh """
+                            apt-get update
+                            apt-get install make git curl -y
+                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
+                            sqd auth -k ${SUBSQUID_KEY}
+                            sqd kill ${PROJECT_NAME} -f
+                        """
+                    }
+                }
+            }
+        }
+        stage('Restart squid if needed') {
+            when {
+                expression {params.restart}
+            }
+            steps {
+                script {
+                    docker.image("${envImageName}").inside() {
+                        sh """
+                            apt-get update
+                            apt-get install make git curl -y
+                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
+                            sqd auth -k ${SUBSQUID_KEY}
+                            sqd redeploy ${PROJECT_NAME}@v1
+                        """
+                    }
+                }
+            }
+        }
+        stage('Hard reset squid if needed') {
+            when {
+                expression {params.hardReset}
+            }
+            steps {
+                script {
+                    docker.image("${envImageName}").inside() {
+                        sh """
+                            apt-get update
+                            apt-get install make git curl -y
+                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
+                            sqd auth -k ${SUBSQUID_KEY}
+                            sqd init ${PROJECT_NAME} --template .
+                            sqd deploy ${PROJECT_NAME} -u -r --no-stream-logs
+                        """
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            pushNotiTelegram(
+              status: statusNotif,
+              telegramChatId: "${TELEGRAM_CHAT_ID}"
+            ) 
+        }
+        cleanup { cleanWs() }
+    }
+}
