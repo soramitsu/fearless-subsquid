@@ -1,0 +1,78 @@
+type Transfer @jsonField {
+  amount: String!
+  to: String!
+  from: String!
+  fee: BigInt
+  eventIdx: String!
+  success: Boolean!
+}
+
+type Reward @jsonField {
+  eventIdx: String!
+  amount: String!
+  isReward: Boolean!,
+  era: Int,
+  stash: String,
+  validator: String
+}
+
+type Extrinsic @jsonField {
+  hash: String!
+  module: String!
+  call: String!
+  fee: String!
+  success: Boolean!
+}
+
+type HistoryElement @entity {
+  id: ID!
+  blockNumber: Int!
+  extrinsicIdx: String,
+  extrinsicHash: String
+  timestamp: BigInt!
+  address: String! @index
+  reward: Reward
+  extrinsic: Extrinsic
+  transfer: Transfer
+}
+
+type AccumulatedReward @entity {
+  id: ID! #address
+  amount: BigInt!
+}
+
+type StakeChange @entity {
+  id: ID!
+  blockNumber: Int!
+  extrinsicHash: String
+  eventIdx: String!
+  timestamp: BigInt! @index
+  address: String! @index
+  amount: BigInt!
+  accumulatedAmount: BigInt!
+  type: String!
+}
+
+type AccumulatedStake @entity {
+  id: ID!
+  amount: BigInt!
+}
+
+type EraValidatorInfo @entity {
+  id: ID!
+  address: String! @index
+  era: Int! @index
+  total: BigInt!
+  own: BigInt!
+  others: [IndividualExposure]!
+}
+
+type IndividualExposure @jsonField {
+  who: String!
+  value: String!
+}
+
+type ErrorEvent @entity {
+  id: ID!
+  description: String!
+}
