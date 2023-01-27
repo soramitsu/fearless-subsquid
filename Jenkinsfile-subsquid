@@ -13,9 +13,10 @@ List   jobParams             = [
 String registry               = 'docker.soramitsu.co.jp'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
 Boolean disableSecretScanner  = false
-String secretScannerExclusion = '.*squid.yaml'
+String secretScannerExclusion = '.*squid.yaml$|.docker-compose.yml\$'
 String telegramChatId    = 'telegram-deploy-chat-id'
 Boolean statusNotif      = true
+
 
 properties([
     parameters( jobParams )
