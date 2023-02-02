@@ -1,7 +1,7 @@
 import assert from 'assert'
 import { UnknownVersionError } from '../../../common/errors'
 import { encodeId } from '../../../common/tools'
-import { HistoryElement, Reward, Round, RoundCollator, Delegator, Collator } from '../../../model'
+import { HistoryElement, Reward, Round, RoundCollator, Delegator, Collator, RoundNomination, Staker } from '../../../model'
 import { ParachainStakingRewardedEvent } from '../../../types/generated/events'
 import { CommonHandlerContext, EventContext, EventHandlerContext } from '../../types/contexts'
 import { ActionData } from '../../types/data'
@@ -54,6 +54,35 @@ export interface RewardData extends ActionData {
 
 export async function saveReward(ctx: CommonHandlerContext, data: RewardData) {
     const staker = await getOrCreateStaker(ctx, data.accountId)
+    if (staker != null && staker?.role === 'delegator') {
+            const round = await ctx.store.get(Round, { where: {}, order: { index: 'DESC' } })
+            assert(round != null)
+            const rewRound = await ctx.store.get(Round, { where: {index : round.index - 2} })
+            assert(rewRound != null)
+            const delegator = await ctx.store.get(Delegator, { where: { id: data.accountId } })
+            const delStaker = await ctx.store.get(Staker, { where: { id: data.accountId } })
+            await ctx.store.insert(
+                new Reward({
+                    ...getMeta(data),
+                    account: staker.stash,
+                    amount: data.amount,
+                    round: Math.min((round?.index || 0) - RewardPaymentDelay, 0),
+                    staker: delStaker,
+                })
+            )
+            await ctx.store.insert(
+                new HistoryElement({
+                    id: data.id,
+                    blockNumber: ctx.block.height,
+                    timestamp: new Date(ctx.block.timestamp),
+                    type: 2,
+                    round: rewRound,
+                    amount: data.amount,
+                    staker: delStaker,
+                    delegator: delegator,
+                })
+            )
+    }
     if (staker != null && staker?.role === 'collator') {
         staker.totalReward += data.amount
 
@@ -188,29 +217,6 @@ export async function saveReward(ctx: CommonHandlerContext, data: RewardData) {
                     })
                 )
             }
-        } else {
-            const delegator = await ctx.store.get(Delegator, { where: { id: data.accountId } })
-            await ctx.store.insert(
-                new Reward({
-                    ...getMeta(data),
-                    account: staker.stash,
-                    amount: data.amount,
-                    round: Math.min((round?.index || 0) - RewardPaymentDelay, 0),
-                    staker,
-                })
-            )
-            await ctx.store.insert(
-                new HistoryElement({
-                    id: data.id,
-                    blockNumber: ctx.block.height,
-                    timestamp: new Date(ctx.block.timestamp),
-                    type: 2,
-                    round: round,
-                    amount: data.amount,
-                    staker: staker,
-                    delegator: delegator,
-                })
-            )
         }
     }
 }
