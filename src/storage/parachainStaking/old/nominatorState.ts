@@ -16,12 +16,16 @@ async function getStorageData(
     accounts: Uint8Array[]
 ): Promise<(StorageData | undefined)[] | undefined> {
     const storage = new ParachainStakingNominatorStateStorage(ctx)
-    if (!storage.isExists) return undefined
 
     if (storage.isV49) {
         return await storage.asV49.getMany(accounts)
     } else {
-        return undefined
+        const storage = new ParachainStakingNominatorState2Storage(ctx)
+        if (storage.isV200) {
+            return await storage.asV200.getMany(accounts)
+        } else {
+            return undefined
+        }
     }
 }
 

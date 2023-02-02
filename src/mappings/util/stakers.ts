@@ -80,6 +80,9 @@ export async function getNominatorsData(
     const delegatorState = await storage.parachainStaking.getDelegatorState(ctx, accounts)
     if (!delegatorState) {
         const delegatorState = await storage.parachainStaking.old.getNominatorState(ctx, accounts)
+        if (!delegatorState) {
+            const delegatorState = await storage.parachainStaking.old.getNominatorState(ctx, accounts)
+        }
     }
     return delegatorState
 }
