@@ -60,7 +60,6 @@ export async function getOrCreateStaker(ctx: CommonHandlerContext, id: string): 
         }
 
         const nominatorData = (await getNominatorsData(prevCtx, [id]))
-        ctx.log.info(`nominatorData ${nominatorData}`)
         const data = nominatorData?.[0]
         if (data != null) {
             staker = await createStaker(ctx, {

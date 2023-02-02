@@ -1,13 +1,13 @@
 import { UnknownVersionError } from '../../../common/errors'
 import { ParachainStakingNewRoundEvent } from '../../../types/generated/events'
-import { ParachainStakingNominatorStateStorage } from '../../../types/generated/storage'
+import { ParachainStakingNominatorStateStorage, ParachainStakingNominatorState2Storage } from '../../../types/generated/storage'
 import { EventContext, EventHandlerContext } from '../../types/contexts'
 import { Round, RoundCollator, RoundNomination, RoundNominator, Collator,
-  Delegator } from '../../../model'
+  Delegator, Staker } from '../../../model'
 import assert from 'assert'
 import storage from '../../../storage'
-import { getCollatorsData } from '../../util/stakers'
-import { getOrCreateStakers, getOrCreateStaker } from '../../util/entities'
+import { getCollatorsData, getNominatorsData } from '../../util/stakers'
+import { getOrCreateStakers, getOrCreateStaker, createStaker } from '../../util/entities'
 import { DefaultCollatorCommission } from '../../util/consts'
 import { createPrevStorageContext } from '../../util/actions'
 
@@ -68,60 +68,121 @@ export async function handleNewRound(ctx: EventHandlerContext) {
             nominatorIds.push(nomination.id)
             delegationsData.push({ vote: nomination.amount, nominatorId: nomination.id, collatorId: collatorData.id })
         }
-        const new_collator = await getOrCreateStaker(ctx,collatorData.id)
-        if (new_collator) {
-        const collator_entity = new RoundCollator({
-                        id: `${round.index}-${collatorData.id}`,
-                        round,
-                        staker: new_collator,
-                        ownBond: collatorData.bond,
-                        totalBond: totalBond,
-                        rewardAmount: DefaultCollatorCommission,
-                        nominatorsCount: 0,
-                    })
-        await ctx.store.save(collator_entity)
+
+        const staker = collatorStakers.get(collatorData.id)
+        if (!staker) {
+            const staker = await getOrCreateStaker(ctx, collatorData.id)
         }
+        if (staker) {
+            collators.set(
+                collatorData.id,
+                new RoundCollator({
+                    id: `${round.index}-${collatorData.id}`,
+                    round,
+                    staker,
+                    ownBond: collatorData.bond,
+                    totalBond: totalBond,
+                    rewardAmount: DefaultCollatorCommission,
+                    nominatorsCount: collatorData.nominators.length,
+                })
+            )
+        }
+
     }
+
+    await ctx.store.save([...collators.values()])
 
     const nominators = new Map<string, RoundNominator>()
 
     const nominatorStakers = new Map((await getOrCreateStakers(ctx, nominatorIds)).map((s) => [s.id, s]))
 
-    for (const nominatorId of nominatorIds) {
-        const staker = await getOrCreateStaker(ctx,nominatorId)
+    const delegatorState = await storage.parachainStaking.old.getNominatorState(ctx, nominatorIds)
 
-        if (staker) {
-            nominators.set(
-            nominatorId,
-            new RoundNominator({
-                id: `${round.index}-${nominatorId}`,
-                round,
-                staker,
-                bond: staker.activeBond,
-                collatorsCount: 0,
+   const newStakers: Map<string, Staker> = new Map()
+   if (delegatorState) {
+        for (const nominatorData of delegatorState) {
+            if (!nominatorData) continue
+
+            const stashId = nominatorData.id
+
+            const staker = await createStaker(ctx, {
+                stashId,
+                activeBond: nominatorData.bond,
+                role: 'delegator',
             })
-        )
+            newStakers.set(stashId, staker)
+
+
         }
     }
 
+
+    for (const nominatorId of nominatorIds) {
+        const staker = await getOrCreateStaker(ctx, nominatorId)
+
+        if (staker) {
+            nominators.set(
+                nominatorId,
+                new RoundNominator({
+                    id: `${round.index}-${nominatorId}`,
+                    round,
+                    staker: staker,
+                    stakerId: staker.id,
+                    bond: staker.activeBond,
+                    collatorsCount: delegationsData.reduce(
+                        (count, d) => (d.nominatorId === nominatorId ? count++ : count),
+                        0
+                    ),
+                })
+            )
+    }
+
     await ctx.store.save([...nominators.values()])
+
     const delegations = new Array<RoundNomination>(delegationsData.length)
 
     for (let i = 0; i < delegationsData.length; i++) {
         const collator = collators.get(delegationsData[i].collatorId)
-        const nominator = nominators.get(delegationsData[i].nominatorId)
-        if (!collator) {
-            const collator = await getOrCreateStaker(ctx,delegationsData[i].collatorId)
-        }
-        if (collator && nominator ) {
+        const delegator = await ctx.store.get(RoundNominator, { where: { id:
+                                                            `${round.index}-${delegationsData[i].nominatorId}` } })
+        const delStaker = await ctx.store.get(Staker, { where: { id: delegationsData[i].nominatorId } })
+        assert(collator != null)
+        assert(delStaker != null)
+        ctx.log.info('here')
+        ctx.log.info(`here 2 ${collator.staker}`)
+        ctx.log.info(`here 23 ${delStaker.id}`)
+        if (delegator) {
             const delegation = new RoundNomination({
-                id: `${round.index}-${collator.staker.id}-${nominator.staker.id}`,
-                round,
-                collator,
-                nominator,
-                amount: delegationsData[i].vote,
-            })
+                    id: `${round.index}-${collator.staker.id}-${delStaker.id}`,
+                    round,
+                    collator,
+                    nominator: delegator,
+                    amount: delegationsData[i].vote,
+                })
+            ctx.log.info('here 22')
+            ctx.log.info(`here 2222${delegation.id}`)
+            await ctx.store.save(delegation)
+        } else {
+            const nominatorR = new RoundNominator({
+                    id: `${round.index}-${delegationsData[i].nominatorId}`,
+                    round,
+                    staker: delStaker,
+                    stakerId: delStaker.id,
+                    bond: delStaker.activeBond,
+                    collatorsCount: 0,
+                })
+            await ctx.store.save(nominatorR)
+
+            const delegation = new RoundNomination({
+                    id: `${round.index}-${collator.staker.id}-${nominatorR.staker.id}`,
+                    round,
+                    collator,
+                    nominator: nominatorR,
+                    amount: delegationsData[i].vote,
+                })
             await ctx.store.save(delegation)
         }
     }
 }
+}
+

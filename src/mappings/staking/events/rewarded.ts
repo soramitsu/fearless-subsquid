@@ -1,7 +1,7 @@
 import assert from 'assert'
 import { UnknownVersionError } from '../../../common/errors'
 import { encodeId } from '../../../common/tools'
-import { HistoryElement, Reward, Round, RoundCollator, Delegator, Collator } from '../../../model'
+import { HistoryElement, Reward, Round, RoundCollator, Delegator, Collator, Staker } from '../../../model'
 import { ParachainStakingRewardedEvent } from '../../../types/generated/events'
 import { CommonHandlerContext, EventContext, EventHandlerContext } from '../../types/contexts'
 import { ActionData } from '../../types/data'
@@ -54,6 +54,35 @@ export interface RewardData extends ActionData {
 
 export async function saveReward(ctx: CommonHandlerContext, data: RewardData) {
     const staker = await getOrCreateStaker(ctx, data.accountId)
+    if (staker != null && staker?.role === 'delegator') {
+            const round = await ctx.store.get(Round, { where: {}, order: { index: 'DESC' } })
+            assert(round != null)
+            const rewRound = await ctx.store.get(Round, { where: {index : round.index - 2} })
+            assert(rewRound != null)
+            const delegator = await ctx.store.get(Delegator, { where: { id: data.accountId } })
+            const delStaker = await ctx.store.get(Staker, { where: { id: data.accountId } })
+            await ctx.store.insert(
+                new Reward({
+                    ...getMeta(data),
+                    account: staker.stash,
+                    amount: data.amount,
+                    round: Math.min((round?.index || 0) - RewardPaymentDelay, 0),
+                    staker: delStaker,
+                })
+            )
+            await ctx.store.insert(
+                new HistoryElement({
+                    id: data.id,
+                    blockNumber: ctx.block.height,
+                    timestamp: new Date(ctx.block.timestamp),
+                    type: 2,
+                    round: rewRound,
+                    amount: data.amount,
+                    staker: delStaker,
+                    delegator: delegator,
+                })
+            )
+    }
     if (staker != null && staker?.role === 'collator') {
         staker.totalReward += data.amount
 
@@ -79,9 +108,6 @@ export async function saveReward(ctx: CommonHandlerContext, data: RewardData) {
                 const collatorLastRound = await ctx.store.get(RoundCollator, {
                     where: { id: `${round.index - 6}-${staker.stashId}` },
                 })
-                ctx.log.info(`${round.index - 6}-${staker.stashId} collatorRound.apr ${collatorRound.apr}`)
-                ctx.log.info(`${round.index - 6}-${staker.stashId} collatorLastRound?.apr ${collatorLastRound?.apr}`)
-                ctx.log.info(`${round.index - 6}-${staker.stashId} staker.apr24h ${staker.apr24h}`)
                 if (collatorLastRound) {
                     const lastApr = collatorLastRound.apr || 0
                     if (lastApr > 0) {
@@ -89,7 +115,6 @@ export async function saveReward(ctx: CommonHandlerContext, data: RewardData) {
                         const avgApr = Apr * 4
                         if (avgApr > 0) {
                             staker.apr24h = (avgApr - lastApr + collatorRound.apr) / 4
-                            ctx.log.info(`${round.index - 6}-${staker.stashId} apr24h: ${staker.apr24h} marker ${4}`)
                         } else {
                             const collatorLastRound3 = await ctx.store.get(RoundCollator, {
                                 where: { id: `${round.index - 5}-${staker.stashId}` },
@@ -103,16 +128,14 @@ export async function saveReward(ctx: CommonHandlerContext, data: RewardData) {
                                 where: { id: `${round.index - 3}-${staker.stashId}` },
                             })
                             const collatorLastRound1Apr = collatorLastRound1?.apr || 0
-                            ctx.log.info(
-                                `apreq: ${collatorLastRound1Apr} + ${collatorLastRound2Apr} + ${collatorLastRound3Apr} + ${collatorRound.apr}`
-                            )
+
                             const eqapr =
                                 (collatorLastRound3Apr +
                                     collatorLastRound2Apr +
                                     collatorLastRound1Apr +
                                     collatorRound.apr) /
                                 4
-                            ctx.log.info(`eqapr ${eqapr}`)
+
 
                             staker.apr24h =
                                 (collatorLastRound3Apr +
@@ -130,7 +153,6 @@ export async function saveReward(ctx: CommonHandlerContext, data: RewardData) {
                                     4
                                 await ctx.store.save(collator)
                             }
-                            ctx.log.info(`${round.index - 6}-${staker.stashId} apr24h: ${staker.apr24h} marker ${2}`)
                         }
                     } else {
                         staker.apr24h = collatorRound.apr / 4
@@ -139,7 +161,6 @@ export async function saveReward(ctx: CommonHandlerContext, data: RewardData) {
                             collator.apr24h = collatorRound.apr / 4
                             await ctx.store.save(collator)
                         }
-                        ctx.log.info(`apr24h: ${staker.apr24h} marker ${3}`)
                     }
                 } else {
                     staker.apr24h = collatorRound.apr / 4
@@ -149,7 +170,6 @@ export async function saveReward(ctx: CommonHandlerContext, data: RewardData) {
                         await ctx.store.save(collator)
                     }
 
-                    ctx.log.info(`apr24h: ${staker.apr24h} marker ${5}`)
                 }
             }
 
