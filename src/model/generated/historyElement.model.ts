@@ -13,6 +13,7 @@ export class HistoryElement {
     @PrimaryColumn_()
     id!: string
 
+    @Index_()
     @Column_("int4", {nullable: false})
     blockNumber!: number
 
@@ -22,6 +23,7 @@ export class HistoryElement {
     @Column_("text", {nullable: true})
     extrinsicHash!: string | undefined | null
 
+    @Index_()
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     timestamp!: bigint
 
