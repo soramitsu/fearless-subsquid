@@ -26,10 +26,10 @@ type Extrinsic @jsonField {
 
 type HistoryElement @entity {
   id: ID!
-  blockNumber: Int!
+  blockNumber: Int! @index
   extrinsicIdx: String,
   extrinsicHash: String
-  timestamp: BigInt!
+  timestamp: BigInt! @index
   address: String! @index
   reward: Reward
   extrinsic: Extrinsic
@@ -43,7 +43,7 @@ type AccumulatedReward @entity {
 
 type StakeChange @entity {
   id: ID!
-  blockNumber: Int!
+  blockNumber: Int! @index
   extrinsicHash: String
   eventIdx: String!
   timestamp: BigInt! @index
