@@ -51,29 +51,6 @@ pipeline {
                 }
             }
         }
-        stage('install dependencies & Deploy') {
-            when { not { anyOf {        
-                expression {params.fullClean}
-                expression {params.restart}
-                expression {params.hardReset}
-                    }
-                }
-            }
-            steps {
-                script {
-                    docker.image("${envImageName}").inside() {
-                        sh """
-                            apt-get update
-                            apt-get install make git curl -y
-                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
-                            sqd auth -k ${SUBSQUID_KEY}
-                            sqd init ${PROJECT_NAME} --template .
-                            sqd deploy ${PROJECT_NAME}  --update --no-stream-logs
-                        """
-                    }
-                }
-            }
-        }
         stage('Remove squid if needed') {
             when {
                 expression {params.fullClean}
@@ -87,6 +64,29 @@ pipeline {
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd kill ${PROJECT_NAME} -f
+                        """
+                    }
+                }
+            }
+        }
+        stage('install dependencies & Deploy') {
+            when { not { anyOf {        
+                expression {params.restart}
+                expression {params.hardReset}
+                    }
+                expression {params.fullClean}
+                }
+            }
+            steps {
+                script {
+                    docker.image("${envImageName}").inside() {
+                        sh """
+                            apt-get update
+                            apt-get install make git curl -y
+                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
+                            sqd auth -k ${SUBSQUID_KEY}
+                            sqd init ${PROJECT_NAME} --template .
+                            sqd deploy ${PROJECT_NAME}  --update --no-stream-logs
                         """
                     }
                 }
