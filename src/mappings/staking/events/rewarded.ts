@@ -33,10 +33,8 @@ function getRewardedEventData(ctx: EventContext): EventData | undefined {
 function getRewardEventData(ctx: EventHandlerContext): EventData | undefined {
   const event = new StakingRewardEvent(ctx)
 
-  if (event.isV1020)
-    return undefined
-  else if (event.isV1050) {
-    const [account, amount] = event.asV1050
+  if (event.isV0) {
+    const [account, amount] = event.asV0
 
     return {
       account,
@@ -100,5 +98,5 @@ export async function saveReward(ctx: EventHandlerContext, data: RewardData) {
     reward,
   })
 
-await ctx.store.insert(historyElement)
+  await ctx.store.insert(historyElement)
 }

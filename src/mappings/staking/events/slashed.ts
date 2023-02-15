@@ -13,7 +13,7 @@ interface EventData {
   account: Uint8Array
 }
 
-function getSlashedEvent(ctx: EventContext): EventData {
+function getSlashedEvent(ctx: EventContext): EventData | undefined {
   const event = new StakingSlashedEvent(ctx)
 
   if (event.isV9090) {
@@ -38,8 +38,8 @@ function getSlashedEvent(ctx: EventContext): EventData {
 function getSlashEvent(ctx: EventHandlerContext): EventData {
   const event = new StakingSlashEvent(ctx)
 
-  if (event.isV1020) {
-    const [account, amount] = event.asV1020
+  if (event.isV0) {
+    const [account, amount] = event.asV0
     return {
       account,
       amount,
@@ -51,6 +51,8 @@ function getSlashEvent(ctx: EventHandlerContext): EventData {
 
 export async function handleSlashed(ctx: EventHandlerContext, old = false) {
   const data = old ? getSlashEvent(ctx) : getSlashedEvent(ctx)
+
+  if (!data) return
 
   await saveSlash(ctx, {
     id: ctx.event.id,

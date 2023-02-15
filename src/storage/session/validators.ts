@@ -9,8 +9,8 @@ async function getStorageData(ctx: StorageContext): Promise<StorageData | undefi
     const storage = new SessionValidatorsStorage(ctx)
     if (!storage.isExists) return undefined
 
-    if (storage.isV1020) {
-        return await storage.getAsV1020()
+    if (storage.isV0) {
+        return await storage.asV0.get()
     } else {
         throw new UnknownVersionError(storage.constructor.name)
     }

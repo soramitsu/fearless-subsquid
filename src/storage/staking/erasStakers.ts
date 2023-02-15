@@ -1,23 +1,12 @@
 import { UnknownVersionError } from '../../common/errors'
 import { decodeId, encodeId } from '../../common/tools'
-import { StakingErasStakersStorage, StakingStakersStorage } from '../../types/generated/storage'
+import { StakingErasStakersStorage } from '../../types/generated/storage'
 import { BlockContext as StorageContext } from '../../types/generated/support'
 
 interface StorageData {
     total: bigint
     own: bigint
     others: { who: Uint8Array; value: bigint }[]
-}
-
-async function getStakersData(ctx: StorageContext, keys: Uint8Array[]): Promise<StorageData[] | undefined> {
-    const storage = new StakingStakersStorage(ctx)
-    if (!storage.isExists) return undefined
-
-    if (storage.isV1020) {
-        return await storage.getManyAsV1020(keys)
-    } else {
-        throw new UnknownVersionError(storage.constructor.name)
-    }
 }
 
 async function getErasStakersData(
@@ -27,8 +16,8 @@ async function getErasStakersData(
     const storage = new StakingErasStakersStorage(ctx)
     if (!storage.isExists) return undefined
 
-    if (storage.isV1050) {
-        return await storage.getManyAsV1050(keys)
+    if (storage.isV0) {
+        return await storage.asV0.getMany(keys)
     } else {
         throw new UnknownVersionError(storage.constructor.name)
     }
@@ -51,7 +40,7 @@ async function queryStorageFunction(
     const eraStakers: [number, Uint8Array][] = keys.map((k) => [k[1] || 0, decodeId(k[0])])
     const stakers: Uint8Array[] = keys.map((k) => decodeId(k[0]))
 
-    const data = (await getErasStakersData(ctx, eraStakers)) || (await getStakersData(ctx, stakers))
+    const data = await getErasStakersData(ctx, eraStakers)
     if (!data) return undefined
 
     return data.map((v) => ({

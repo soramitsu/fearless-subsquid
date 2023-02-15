@@ -10,10 +10,8 @@ async function getStorageData(ctx: StorageContext): Promise<StorageData | undefi
     const storage = new StakingCurrentEraStorage(ctx)
     if (!storage.isExists) return undefined
 
-    if (storage.isV1020) {
-        return { index: await storage.getAsV1020() }
-    } else if (storage.isV1050) {
-        return { index: await storage.getAsV1050() }
+    if (storage.isV0) {
+        return { index: await storage.asV0.get() }
     } else {
         throw new UnknownVersionError(storage.constructor.name)
     }
