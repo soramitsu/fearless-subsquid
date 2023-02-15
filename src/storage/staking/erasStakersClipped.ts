@@ -2,7 +2,6 @@ import { UnknownVersionError } from '../../common/errors'
 import { StakingErasStakersClippedStorage } from '../../types/generated/storage'
 import { BlockContext as StorageContext } from '../../types/generated/support'
 import { Exposure } from '../../types/generated/v1050'
-import { decodeId } from '../../common/tools'
 
 type StorageData = [k: [number, Uint8Array], v: Exposure][] | undefined
 type StorageDataPromise = Promise<StorageData>

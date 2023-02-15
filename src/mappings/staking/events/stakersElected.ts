@@ -60,14 +60,20 @@ export async function saveEraValidatorInfo(ctx: EventHandlerContext, data: EraVa
 
   if (!exposures) return
 
-  exposures.forEach(async ([[, validatorId], { others, own, total }]) => {
+  exposures.forEach(async ([[, validatorId], { others: othersTemp, own, total }]) => {
+    const others = othersTemp.map(({ value, who }) => new IndividualExposure({
+      who: encodeId(who),
+      value: value.toString()
+    }))
+    const address = encodeId(validatorId)
+
     const eraValidator = new EraValidatorInfo({
-      id,
-      address: encodeId(validatorId),
+      id: `${id}-${address}`,
+      address,
       era: currentEraData?.index,
-      others: others.map((other) => new IndividualExposure(undefined, other)),
       own,
-      total
+      total,
+      others
     })
 
     await ctx.store.insert(eraValidator)
