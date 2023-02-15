@@ -103,5 +103,5 @@ export async function saveReward(ctx: EventHandlerContext, data: RewardData) {
 
 
 
-await ctx.store.insert(historyElement)
+  await ctx.store.insert(historyElement)
 }

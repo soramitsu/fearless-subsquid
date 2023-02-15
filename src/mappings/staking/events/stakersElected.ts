@@ -1,19 +1,17 @@
 import { EventContext, EventHandlerContext } from '../../types/contexts'
 import {
-  EraValidatorInfo
+  EraValidatorInfo, IndividualExposure
 } from '../../../model'
-import { encodeId } from '../../../common/tools'
 import storage from '../../../storage'
 import { StakingStakersElectedEvent, StakingStakingElectionEvent } from '../../../types/generated/events'
+import { encodeId } from '../../../common/tools'
 
 export interface EraValidatorData {
-  accountId: string
   id: string
 }
 
 interface EventData {
-  amount: bigint
-  account: Uint8Array
+  __kind: "OnChain" | "Signed" | "Unsigned"
 }
 
 function getStakersElectedEventData(ctx: EventHandlerContext): EventData | undefined {
@@ -21,10 +19,6 @@ function getStakersElectedEventData(ctx: EventHandlerContext): EventData | undef
 
   if (event.isV9090)
     return undefined
-
-  // else {
-  //   throw new UnknownVersionError(event.constructor.name)
-  // }
 }
 
 
@@ -34,68 +28,49 @@ function getStakingElectionEventData(ctx: EventHandlerContext): EventData | unde
   if (event.isV2030)
     return undefined
   else if (event.isV1058) {
-    const [account, amount] = event.asV1058
+    const { __kind } = event.asV1058
 
     return {
-      account,
+      __kind,
     }
   }
-  // else {
-  //   throw new UnknownVersionError(event.constructor.name)
-  // }
 }
 
-
-export async function handleStakersElected(event: EventHandlerContext): Promise<void> {
-  await handleNewEra(event)
+export async function handleStakingElection(event: EventHandlerContext): Promise<void> {
+  await handleStakersElected(event, true)
 }
 
-export async function handleNewEra(ctx: EventHandlerContext, old = false): Promise<void> {
-  const data = old ? getStakersElectedEventData(ctx) : getStakingElectionEventData(ctx)
+export async function handleStakersElected(ctx: EventHandlerContext, old = false): Promise<void> {
+  // const data = old ? getStakingElectionEventData(ctx) : getStakersElectedEventData(ctx)
 
-  if (!data) return
+  // if (!data) return
 
-  // const currentEra = (await api.query.staking.currentEra()).unwrap()
-
-  // const exposures = await api.query.staking.erasStakersClipped.entries(currentEra.toNumber());
-
-  // await saveEraValidatorInfo(ctx, {
-  //   id: ctx.event.id,
-  //   accountId: encodeId(data.account),
-  // })
-
-  // exposures.forEach(async ([key, exposure]) => {
-  //   const [, validatorId] = key.args
-
-  //   let validatorIdString = validatorId.toString()
-  //   const eraValidatorInfo = new EraValidatorInfo(eventId(ctx) + validatorIdString)
-  //   eraValidatorInfo.era = currentEra.toNumber()
-  //   eraValidatorInfo.address = validatorIdString
-  //   eraValidatorInfo.total = exposure.total.toBigInt()
-  //   eraValidatorInfo.own = exposure.own.toBigInt()
-  //   eraValidatorInfo.others = exposure.others.map(other => {
-  //     return {
-  //       who: other.who.toString(),
-  //       value: other.value.toString()
-  //     }
-  //   })
-
-  //   await ctx.store.insert(eraValidatorInfo)
-  // })
+  await saveEraValidatorInfo(ctx, {
+    id: ctx.event.id,
+  })
 }
 
 export async function saveEraValidatorInfo(ctx: EventHandlerContext, data: EraValidatorData) {
-  const { accountId, id, } = data;
+  const { id, } = data;
   const currentEraData = await storage.staking.getCurrentEra(ctx)
 
-  const stakeChange = new EraValidatorInfo({
-    id,
-    address: accountId,
-    era: currentEraData?.index,
-    // others,
-    // own,
-    // total
+  if (!currentEraData) return
+
+  const exposures = await storage.staking.getStakingErasStakersClipped(ctx, currentEraData.index!)
+
+  if (!exposures) return
+
+  exposures.forEach(async ([[, validatorId], { others, own, total }]) => {
+    const eraValidator = new EraValidatorInfo({
+      id,
+      address: encodeId(validatorId),
+      era: currentEraData?.index,
+      others: others.map((other) => new IndividualExposure(undefined, other)),
+      own,
+      total
+    })
+
+    await ctx.store.insert(eraValidator)
   })
 
-  await ctx.store.insert(stakeChange)
 }

@@ -18,9 +18,10 @@ processor.addEventHandler('Staking.Rewarded', modules.staking.events.handleRewar
 processor.addEventHandler('Staking.Reward', modules.staking.events.handleReward) // Old name of Rewarded event
 processor.addEventHandler('Staking.Slashed', modules.staking.events.handleSlashed)
 processor.addEventHandler('Staking.Slash', modules.staking.events.handleSlash) // Old name of Slashed event
-processor.addEventHandler('Staking.StakersElected', modules.staking.events.handleNewEra)
-processor.addEventHandler('Staking.StakingElection', modules.staking.events.handleNewEra) // Old name of StakersElected event
+processor.addEventHandler('Staking.StakersElected', modules.staking.events.handleStakersElected) 
+processor.addEventHandler('Staking.StakingElection', modules.staking.events.handleStakingElection) // Old name of StakersElected event
 
+// call handlers
 processor.addCallHandler(
   'Balances.transfer',
   { triggerForFailedCalls: true },
