@@ -1,6 +1,20 @@
 import type {Result, Option} from './support'
 
-export type Proposal = Proposal_System | Proposal_Scheduler | Proposal_Babe | Proposal_Timestamp | Proposal_Indices | Proposal_Balances | Proposal_Authorship | Proposal_Staking | Proposal_Session | Proposal_Grandpa | Proposal_ImOnline | Proposal_Democracy | Proposal_Council | Proposal_TechnicalCommittee | Proposal_PhragmenElection | Proposal_TechnicalMembership | Proposal_Treasury | Proposal_Claims | Proposal_Vesting | Proposal_Utility | Proposal_Identity | Proposal_Proxy | Proposal_Multisig | Proposal_Bounties | Proposal_Tips | Proposal_ElectionProviderMultiPhase
+export type ElectionCompute = ElectionCompute_OnChain | ElectionCompute_Signed | ElectionCompute_Unsigned
+
+export interface ElectionCompute_OnChain {
+    __kind: 'OnChain'
+}
+
+export interface ElectionCompute_Signed {
+    __kind: 'Signed'
+}
+
+export interface ElectionCompute_Unsigned {
+    __kind: 'Unsigned'
+}
+
+export type Proposal = Proposal_System | Proposal_Scheduler | Proposal_Babe | Proposal_Timestamp | Proposal_Indices | Proposal_Balances | Proposal_Authorship | Proposal_Staking | Proposal_Offences | Proposal_Session | Proposal_Grandpa | Proposal_ImOnline | Proposal_AuthorityDiscovery | Proposal_Democracy | Proposal_Council | Proposal_TechnicalCommittee | Proposal_ElectionsPhragmen | Proposal_TechnicalMembership | Proposal_Treasury | Proposal_Claims | Proposal_Vesting | Proposal_Utility | Proposal_Identity | Proposal_Proxy | Proposal_Multisig | Proposal_Bounties | Proposal_Tips | Proposal_ElectionProviderMultiPhase
 
 export interface Proposal_System {
     __kind: 'System'
@@ -42,6 +56,11 @@ export interface Proposal_Staking {
     value: StakingCall
 }
 
+export interface Proposal_Offences {
+    __kind: 'Offences'
+    value: OffencesCall
+}
+
 export interface Proposal_Session {
     __kind: 'Session'
     value: SessionCall
@@ -55,6 +74,11 @@ export interface Proposal_Grandpa {
 export interface Proposal_ImOnline {
     __kind: 'ImOnline'
     value: ImOnlineCall
+}
+
+export interface Proposal_AuthorityDiscovery {
+    __kind: 'AuthorityDiscovery'
+    value: AuthorityDiscoveryCall
 }
 
 export interface Proposal_Democracy {
@@ -72,9 +96,9 @@ export interface Proposal_TechnicalCommittee {
     value: TechnicalCommitteeCall
 }
 
-export interface Proposal_PhragmenElection {
-    __kind: 'PhragmenElection'
-    value: PhragmenElectionCall
+export interface Proposal_ElectionsPhragmen {
+    __kind: 'ElectionsPhragmen'
+    value: ElectionsPhragmenCall
 }
 
 export interface Proposal_TechnicalMembership {
@@ -143,7 +167,7 @@ export interface SolutionOrSnapshotSize {
     targets: number
 }
 
-export type Type_52 = Type_52_System | Type_52_Scheduler | Type_52_Babe | Type_52_Timestamp | Type_52_Indices | Type_52_Balances | Type_52_Authorship | Type_52_Staking | Type_52_Session | Type_52_Grandpa | Type_52_ImOnline | Type_52_Democracy | Type_52_Council | Type_52_TechnicalCommittee | Type_52_PhragmenElection | Type_52_TechnicalMembership | Type_52_Treasury | Type_52_Claims | Type_52_Vesting | Type_52_Utility | Type_52_Identity | Type_52_Proxy | Type_52_Multisig | Type_52_Bounties | Type_52_Tips | Type_52_ElectionProviderMultiPhase
+export type Type_52 = Type_52_System | Type_52_Scheduler | Type_52_Babe | Type_52_Timestamp | Type_52_Indices | Type_52_Balances | Type_52_Authorship | Type_52_Staking | Type_52_Offences | Type_52_Session | Type_52_Grandpa | Type_52_ImOnline | Type_52_AuthorityDiscovery | Type_52_Democracy | Type_52_Council | Type_52_TechnicalCommittee | Type_52_ElectionsPhragmen | Type_52_TechnicalMembership | Type_52_Treasury | Type_52_Claims | Type_52_Vesting | Type_52_Utility | Type_52_Identity | Type_52_Proxy | Type_52_Multisig | Type_52_Bounties | Type_52_Tips | Type_52_ElectionProviderMultiPhase
 
 export interface Type_52_System {
     __kind: 'System'
@@ -185,6 +209,11 @@ export interface Type_52_Staking {
     value: StakingCall
 }
 
+export interface Type_52_Offences {
+    __kind: 'Offences'
+    value: OffencesCall
+}
+
 export interface Type_52_Session {
     __kind: 'Session'
     value: SessionCall
@@ -198,6 +227,11 @@ export interface Type_52_Grandpa {
 export interface Type_52_ImOnline {
     __kind: 'ImOnline'
     value: ImOnlineCall
+}
+
+export interface Type_52_AuthorityDiscovery {
+    __kind: 'AuthorityDiscovery'
+    value: AuthorityDiscoveryCall
 }
 
 export interface Type_52_Democracy {
@@ -215,9 +249,9 @@ export interface Type_52_TechnicalCommittee {
     value: TechnicalCommitteeCall
 }
 
-export interface Type_52_PhragmenElection {
-    __kind: 'PhragmenElection'
-    value: PhragmenElectionCall
+export interface Type_52_ElectionsPhragmen {
+    __kind: 'ElectionsPhragmen'
+    value: ElectionsPhragmenCall
 }
 
 export interface Type_52_TechnicalMembership {
@@ -309,6 +343,36 @@ export interface ProxyType_Auction {
     __kind: 'Auction'
 }
 
+export type ElectionPhase = ElectionPhase_Off | ElectionPhase_Signed | ElectionPhase_Unsigned | ElectionPhase_Emergency
+
+export interface ElectionPhase_Off {
+    __kind: 'Off'
+}
+
+export interface ElectionPhase_Signed {
+    __kind: 'Signed'
+}
+
+export interface ElectionPhase_Unsigned {
+    __kind: 'Unsigned'
+    value: [boolean, number]
+}
+
+export interface ElectionPhase_Emergency {
+    __kind: 'Emergency'
+}
+
+export interface ReadySolution {
+    supports: [Uint8Array, SolutionSupport][]
+    score: bigint[]
+    compute: ElectionCompute
+}
+
+export interface RoundSnapshot {
+    voters: [Uint8Array, bigint, Uint8Array[]][]
+    targets: Uint8Array[]
+}
+
 export interface Scheduled {
     maybeId: (Uint8Array | undefined)
     priority: number
@@ -317,7 +381,13 @@ export interface Scheduled {
     origin: PalletsOrigin
 }
 
-export type SystemCall = SystemCall_fill_block | SystemCall_remark | SystemCall_set_heap_pages | SystemCall_set_code | SystemCall_set_code_without_checks | SystemCall_set_changes_trie_config | SystemCall_set_storage | SystemCall_kill_storage | SystemCall_kill_prefix | SystemCall_remark_with_event
+export interface EventRecord {
+    phase: Phase
+    event: Event
+    topics: Uint8Array[]
+}
+
+export type SystemCall = SystemCall_fill_block | SystemCall_remark | SystemCall_set_heap_pages | SystemCall_set_code | SystemCall_set_code_without_checks | SystemCall_set_changes_trie_config | SystemCall_set_storage | SystemCall_kill_storage | SystemCall_kill_prefix
 
 /**
  *  A dispatch that will fill the block weight up to the given ratio.
@@ -332,6 +402,8 @@ export interface SystemCall_fill_block {
  * 
  *  # <weight>
  *  - `O(1)`
+ *  - Base Weight: 0.665 µs, independent of remark length.
+ *  - No DB operations.
  *  # </weight>
  */
 export interface SystemCall_remark {
@@ -452,19 +524,6 @@ export interface SystemCall_kill_prefix {
     subkeys: number
 }
 
-/**
- *  Make some on-chain remark and emit event.
- * 
- *  # <weight>
- *  - `O(b)` where b is the length of the remark.
- *  - 1 event.
- *  # </weight>
- */
-export interface SystemCall_remark_with_event {
-    __kind: 'remark_with_event'
-    remark: Uint8Array
-}
-
 export type SchedulerCall = SchedulerCall_schedule | SchedulerCall_cancel | SchedulerCall_schedule_named | SchedulerCall_cancel_named | SchedulerCall_schedule_after | SchedulerCall_schedule_named_after
 
 /**
@@ -562,7 +621,7 @@ export interface SchedulerCall_schedule_after {
  *  Schedule a named task after a delay.
  * 
  *  # <weight>
- *  Same as [`schedule_named`](Self::schedule_named).
+ *  Same as [`schedule_named`].
  *  # </weight>
  */
 export interface SchedulerCall_schedule_named_after {
@@ -574,7 +633,7 @@ export interface SchedulerCall_schedule_named_after {
     call: Type_52
 }
 
-export type BabeCall = BabeCall_report_equivocation | BabeCall_report_equivocation_unsigned | BabeCall_plan_config_change
+export type BabeCall = BabeCall_report_equivocation | BabeCall_report_equivocation_unsigned
 
 /**
  *  Report authority equivocation/misbehavior. This method will verify
@@ -602,17 +661,6 @@ export interface BabeCall_report_equivocation_unsigned {
     __kind: 'report_equivocation_unsigned'
     equivocationProof: BabeEquivocationProof
     keyOwnerProof: KeyOwnerProof
-}
-
-/**
- *  Plan an epoch config change. The epoch config change is recorded and will be enacted on
- *  the next call to `enact_epoch_change`. The config will be activated one epoch after.
- *  Multiple calls to this method will replace any existing planned config change that had
- *  not been enacted yet.
- */
-export interface BabeCall_plan_config_change {
-    __kind: 'plan_config_change'
-    config: NextConfigDescriptor
 }
 
 export type TimestampCall = TimestampCall_set
@@ -773,7 +821,7 @@ export interface IndicesCall_freeze {
     index: number
 }
 
-export type BalancesCall = BalancesCall_transfer | BalancesCall_set_balance | BalancesCall_force_transfer | BalancesCall_transfer_keep_alive | BalancesCall_transfer_all
+export type BalancesCall = BalancesCall_transfer | BalancesCall_set_balance | BalancesCall_force_transfer | BalancesCall_transfer_keep_alive
 
 /**
  *  Transfer some liquid free balance to another account.
@@ -871,32 +919,6 @@ export interface BalancesCall_transfer_keep_alive {
     value: bigint
 }
 
-/**
- *  Transfer the entire transferable balance from the caller account.
- * 
- *  NOTE: This function only attempts to transfer _transferable_ balances. This means that
- *  any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be
- *  transferred by this function. To ensure that this function results in a killed account,
- *  you might need to prepare the account by removing any reference counters, storage
- *  deposits, etc...
- * 
- *  The dispatch origin of this call must be Signed.
- * 
- *  - `dest`: The recipient of the transfer.
- *  - `keep_alive`: A boolean to determine if the `transfer_all` operation should send all
- *    of the funds the account has, causing the sender account to be killed (false), or
- *    transfer everything except at least the existential deposit, which will guarantee to
- *    keep the sender account alive (true).
- *    # <weight>
- *  - O(1). Just like transfer, but reading the user's transferable balance first.
- *    #</weight>
- */
-export interface BalancesCall_transfer_all {
-    __kind: 'transfer_all'
-    dest: LookupSource
-    keepAlive: boolean
-}
-
 export type AuthorshipCall = AuthorshipCall_set_uncles
 
 /**
@@ -907,7 +929,7 @@ export interface AuthorshipCall_set_uncles {
     newUncles: Header[]
 }
 
-export type StakingCall = StakingCall_bond | StakingCall_bond_extra | StakingCall_unbond | StakingCall_withdraw_unbonded | StakingCall_validate | StakingCall_nominate | StakingCall_chill | StakingCall_set_payee | StakingCall_set_controller | StakingCall_set_validator_count | StakingCall_increase_validator_count | StakingCall_scale_validator_count | StakingCall_force_no_eras | StakingCall_force_new_era | StakingCall_set_invulnerables | StakingCall_force_unstake | StakingCall_force_new_era_always | StakingCall_cancel_deferred_slash | StakingCall_payout_stakers | StakingCall_rebond | StakingCall_set_history_depth | StakingCall_reap_stash | StakingCall_kick | StakingCall_set_staking_limits | StakingCall_chill_other
+export type StakingCall = StakingCall_bond | StakingCall_bond_extra | StakingCall_unbond | StakingCall_withdraw_unbonded | StakingCall_validate | StakingCall_nominate | StakingCall_chill | StakingCall_set_payee | StakingCall_set_controller | StakingCall_set_validator_count | StakingCall_increase_validator_count | StakingCall_scale_validator_count | StakingCall_force_no_eras | StakingCall_force_new_era | StakingCall_set_invulnerables | StakingCall_force_unstake | StakingCall_force_new_era_always | StakingCall_cancel_deferred_slash | StakingCall_payout_stakers | StakingCall_rebond | StakingCall_set_history_depth | StakingCall_reap_stash | StakingCall_submit_election_solution | StakingCall_submit_election_solution_unsigned | StakingCall_kick
 
 /**
  *  Take the origin account as a stash and lock up `value` of its balance. `controller` will
@@ -918,6 +940,7 @@ export type StakingCall = StakingCall_bond | StakingCall_bond_extra | StakingCal
  *  The dispatch origin for this call must be _Signed_ by the stash account.
  * 
  *  Emits `Bonded`.
+ * 
  *  # <weight>
  *  - Independent of the arguments. Moderate complexity.
  *  - O(1).
@@ -926,6 +949,10 @@ export type StakingCall = StakingCall_bond | StakingCall_bond_extra | StakingCal
  *  NOTE: Two of the storage writes (`Self::bonded`, `Self::payee`) are _never_ cleaned
  *  unless the `origin` falls below _existential deposit_ and gets removed as dust.
  *  ------------------
+ *  Weight: O(1)
+ *  DB Weight:
+ *  - Read: Bonded, Ledger, [Origin Account], Current Era, History Depth, Locks
+ *  - Write: Bonded, Payee, [Origin Account], Locks, Ledger
  *  # </weight>
  */
 export interface StakingCall_bond {
@@ -939,17 +966,23 @@ export interface StakingCall_bond {
  *  Add some extra amount that have appeared in the stash `free_balance` into the balance up
  *  for staking.
  * 
- *  The dispatch origin for this call must be _Signed_ by the stash, not the controller.
- * 
  *  Use this if there are additional funds in your stash account that you wish to bond.
- *  Unlike [`bond`](Self::bond) or [`unbond`](Self::unbond) this function does not impose any limitation
- *  on the amount that can be added.
+ *  Unlike [`bond`] or [`unbond`] this function does not impose any limitation on the amount
+ *  that can be added.
+ * 
+ *  The dispatch origin for this call must be _Signed_ by the stash, not the controller and
+ *  it can be only called when [`EraElectionStatus`] is `Closed`.
  * 
  *  Emits `Bonded`.
  * 
  *  # <weight>
  *  - Independent of the arguments. Insignificant complexity.
  *  - O(1).
+ *  - One DB entry.
+ *  ------------
+ *  DB Weight:
+ *  - Read: Era Election Status, Bonded, Ledger, [Origin Account], Locks
+ *  - Write: [Origin Account], Locks, Ledger
  *  # </weight>
  */
 export interface StakingCall_bond_extra {
@@ -962,8 +995,6 @@ export interface StakingCall_bond_extra {
  *  period ends. If this leaves an amount actively bonded less than
  *  T::Currency::minimum_balance(), then it is increased to the full amount.
  * 
- *  The dispatch origin for this call must be _Signed_ by the controller, not the stash.
- * 
  *  Once the unlock period is done, you can call `withdraw_unbonded` to actually move
  *  the funds out of management ready for transfer.
  * 
@@ -971,12 +1002,27 @@ export interface StakingCall_bond_extra {
  *  can co-exists at the same time. In that case, [`Call::withdraw_unbonded`] need
  *  to be called first to remove some of the chunks (if possible).
  * 
- *  If a user encounters the `InsufficientBond` error when calling this extrinsic,
- *  they should call `chill` first in order to free up their bonded funds.
+ *  The dispatch origin for this call must be _Signed_ by the controller, not the stash.
+ *  And, it can be only called when [`EraElectionStatus`] is `Closed`.
  * 
  *  Emits `Unbonded`.
  * 
  *  See also [`Call::withdraw_unbonded`].
+ * 
+ *  # <weight>
+ *  - Independent of the arguments. Limited but potentially exploitable complexity.
+ *  - Contains a limited number of reads.
+ *  - Each call (requires the remainder of the bonded balance to be above `minimum_balance`)
+ *    will cause a new entry to be inserted into a vector (`Ledger.unlocking`) kept in storage.
+ *    The only way to clean the aforementioned storage item is also user-controlled via
+ *    `withdraw_unbonded`.
+ *  - One DB entry.
+ *  ----------
+ *  Weight: O(1)
+ *  DB Weight:
+ *  - Read: EraElectionStatus, Ledger, CurrentEra, Locks, BalanceOf Stash,
+ *  - Write: Locks, Ledger, BalanceOf Stash,
+ *  </weight>
  */
 export interface StakingCall_unbond {
     __kind: 'unbond'
@@ -989,14 +1035,30 @@ export interface StakingCall_unbond {
  *  This essentially frees up that balance to be used by the stash account to do
  *  whatever it wants.
  * 
- *  The dispatch origin for this call must be _Signed_ by the controller.
+ *  The dispatch origin for this call must be _Signed_ by the controller, not the stash.
+ *  And, it can be only called when [`EraElectionStatus`] is `Closed`.
  * 
  *  Emits `Withdrawn`.
  * 
  *  See also [`Call::unbond`].
  * 
  *  # <weight>
+ *  - Could be dependent on the `origin` argument and how much `unlocking` chunks exist.
+ *   It implies `consolidate_unlocked` which loops over `Ledger.unlocking`, which is
+ *   indirectly user-controlled. See [`unbond`] for more detail.
+ *  - Contains a limited number of reads, yet the size of which could be large based on `ledger`.
+ *  - Writes are limited to the `origin` account key.
+ *  ---------------
  *  Complexity O(S) where S is the number of slashing spans to remove
+ *  Update:
+ *  - Reads: EraElectionStatus, Ledger, Current Era, Locks, [Origin Account]
+ *  - Writes: [Origin Account], Locks, Ledger
+ *  Kill:
+ *  - Reads: EraElectionStatus, Ledger, Current Era, Bonded, Slashing Spans, [Origin
+ *    Account], Locks, BalanceOf stash
+ *  - Writes: Bonded, Slashing Spans (if S > 0), Ledger, Payee, Validators, Nominators,
+ *    [Origin Account], Locks, BalanceOf stash.
+ *  - Writes Each: SpanSlash * S
  *  NOTE: Weight annotation is the kill scenario, we refund otherwise.
  *  # </weight>
  */
@@ -1011,6 +1073,18 @@ export interface StakingCall_withdraw_unbonded {
  *  Effects will be felt at the beginning of the next era.
  * 
  *  The dispatch origin for this call must be _Signed_ by the controller, not the stash.
+ *  And, it can be only called when [`EraElectionStatus`] is `Closed`.
+ * 
+ *  # <weight>
+ *  - Independent of the arguments. Insignificant complexity.
+ *  - Contains a limited number of reads.
+ *  - Writes are limited to the `origin` account key.
+ *  -----------
+ *  Weight: O(1)
+ *  DB Weight:
+ *  - Read: Era Election Status, Ledger
+ *  - Write: Nominators, Validators
+ *  # </weight>
  */
 export interface StakingCall_validate {
     __kind: 'validate'
@@ -1020,14 +1094,22 @@ export interface StakingCall_validate {
 /**
  *  Declare the desire to nominate `targets` for the origin controller.
  * 
- *  Effects will be felt at the beginning of the next era.
+ *  Effects will be felt at the beginning of the next era. This can only be called when
+ *  [`EraElectionStatus`] is `Closed`.
  * 
  *  The dispatch origin for this call must be _Signed_ by the controller, not the stash.
+ *  And, it can be only called when [`EraElectionStatus`] is `Closed`.
  * 
  *  # <weight>
  *  - The transaction's complexity is proportional to the size of `targets` (N)
  *  which is capped at CompactAssignments::LIMIT (MAX_NOMINATIONS).
  *  - Both the reads and writes follow a similar pattern.
+ *  ---------
+ *  Weight: O(N)
+ *  where N is the number of targets
+ *  DB Weight:
+ *  - Reads: Era Election Status, Ledger, Current Era
+ *  - Writes: Validators, Nominators
  *  # </weight>
  */
 export interface StakingCall_nominate {
@@ -1041,11 +1123,17 @@ export interface StakingCall_nominate {
  *  Effects will be felt at the beginning of the next era.
  * 
  *  The dispatch origin for this call must be _Signed_ by the controller, not the stash.
+ *  And, it can be only called when [`EraElectionStatus`] is `Closed`.
  * 
  *  # <weight>
  *  - Independent of the arguments. Insignificant complexity.
  *  - Contains one read.
  *  - Writes are limited to the `origin` account key.
+ *  --------
+ *  Weight: O(1)
+ *  DB Weight:
+ *  - Read: EraElectionStatus, Ledger
+ *  - Write: Validators, Nominators
  *  # </weight>
  */
 export interface StakingCall_chill {
@@ -1119,7 +1207,7 @@ export interface StakingCall_set_validator_count {
  *  The dispatch origin must be Root.
  * 
  *  # <weight>
- *  Same as [`Self::set_validator_count`].
+ *  Same as [`set_validator_count`].
  *  # </weight>
  */
 export interface StakingCall_increase_validator_count {
@@ -1133,7 +1221,7 @@ export interface StakingCall_increase_validator_count {
  *  The dispatch origin must be Root.
  * 
  *  # <weight>
- *  Same as [`Self::set_validator_count`].
+ *  Same as [`set_validator_count`].
  *  # </weight>
  */
 export interface StakingCall_scale_validator_count {
@@ -1145,12 +1233,6 @@ export interface StakingCall_scale_validator_count {
  *  Force there to be no new eras indefinitely.
  * 
  *  The dispatch origin must be Root.
- * 
- *  # Warning
- * 
- *  The election process starts multiple blocks before the end of the era.
- *  Thus the election process may be ongoing when this is called. In this case the
- *  election will continue until the next era is triggered.
  * 
  *  # <weight>
  *  - No arguments.
@@ -1167,12 +1249,6 @@ export interface StakingCall_force_no_eras {
  *  reset to normal (non-forced) behaviour.
  * 
  *  The dispatch origin must be Root.
- * 
- *  # Warning
- * 
- *  The election process starts multiple blocks before the end of the era.
- *  If this is called just before a new era is triggered, the election process may not
- *  have enough blocks to get a result.
  * 
  *  # <weight>
  *  - No arguments.
@@ -1222,12 +1298,6 @@ export interface StakingCall_force_unstake {
  * 
  *  The dispatch origin must be Root.
  * 
- *  # Warning
- * 
- *  The election process starts multiple blocks before the end of the era.
- *  If this is called just before a new era is triggered, the election process may not
- *  have enough blocks to get a result.
- * 
  *  # <weight>
  *  - Weight: O(1)
  *  - Write: ForceEra
@@ -1268,6 +1338,8 @@ export interface StakingCall_cancel_deferred_slash {
  *  The origin of this call must be _Signed_. Any account can call this function, even if
  *  it is not one of the stakers.
  * 
+ *  This can only be called when [`EraElectionStatus`] is `Closed`.
+ * 
  *  # <weight>
  *  - Time complexity: at most O(MaxNominatorRewardedPerValidator).
  *  - Contains a limited number of reads and writes.
@@ -1276,6 +1348,11 @@ export interface StakingCall_cancel_deferred_slash {
  *  Weight:
  *  - Reward Destination Staked: O(N)
  *  - Reward Destination Controller (Creating): O(N)
+ *  DB Weight:
+ *  - Read: EraElectionStatus, CurrentEra, HistoryDepth, ErasValidatorReward,
+ *          ErasStakersClipped, ErasRewardPoints, ErasValidatorPrefs (8 items)
+ *  - Read Each: Bonded, Ledger, Payee, Locks, System Account (5 items)
+ *  - Write Each: System Account, Locks, Ledger (3 items)
  * 
  *    NOTE: weights are assuming that payouts are made to alive stash account (Staked).
  *    Paying even a dead controller is cheaper weight-wise. We don't do any refunds here.
@@ -1290,12 +1367,17 @@ export interface StakingCall_payout_stakers {
 /**
  *  Rebond a portion of the stash scheduled to be unlocked.
  * 
- *  The dispatch origin must be signed by the controller.
+ *  The dispatch origin must be signed by the controller, and it can be only called when
+ *  [`EraElectionStatus`] is `Closed`.
  * 
  *  # <weight>
  *  - Time complexity: O(L), where L is unlocking chunks
  *  - Bounded by `MAX_UNLOCKING_CHUNKS`.
  *  - Storage changes: Can't increase storage, only decrease it.
+ *  ---------------
+ *  - DB Weight:
+ *      - Reads: EraElectionStatus, Ledger, Locks, [Origin Account]
+ *      - Writes: [Origin Account], Locks, Ledger
  *  # </weight>
  */
 export interface StakingCall_rebond {
@@ -1356,11 +1438,93 @@ export interface StakingCall_reap_stash {
 }
 
 /**
+ *  Submit an election result to the chain. If the solution:
+ * 
+ *  1. is valid.
+ *  2. has a better score than a potentially existing solution on chain.
+ * 
+ *  then, it will be _put_ on chain.
+ * 
+ *  A solution consists of two pieces of data:
+ * 
+ *  1. `winners`: a flat vector of all the winners of the round.
+ *  2. `assignments`: the compact version of an assignment vector that encodes the edge
+ *     weights.
+ * 
+ *  Both of which may be computed using _phragmen_, or any other algorithm.
+ * 
+ *  Additionally, the submitter must provide:
+ * 
+ *  - The `score` that they claim their solution has.
+ * 
+ *  Both validators and nominators will be represented by indices in the solution. The
+ *  indices should respect the corresponding types ([`ValidatorIndex`] and
+ *  [`NominatorIndex`]). Moreover, they should be valid when used to index into
+ *  [`SnapshotValidators`] and [`SnapshotNominators`]. Any invalid index will cause the
+ *  solution to be rejected. These two storage items are set during the election window and
+ *  may be used to determine the indices.
+ * 
+ *  A solution is valid if:
+ * 
+ *  0. It is submitted when [`EraElectionStatus`] is `Open`.
+ *  1. Its claimed score is equal to the score computed on-chain.
+ *  2. Presents the correct number of winners.
+ *  3. All indexes must be value according to the snapshot vectors. All edge values must
+ *     also be correct and should not overflow the granularity of the ratio type (i.e. 256
+ *     or billion).
+ *  4. For each edge, all targets are actually nominated by the voter.
+ *  5. Has correct self-votes.
+ * 
+ *  A solutions score is consisted of 3 parameters:
+ * 
+ *  1. `min { support.total }` for each support of a winner. This value should be maximized.
+ *  2. `sum { support.total }` for each support of a winner. This value should be minimized.
+ *  3. `sum { support.total^2 }` for each support of a winner. This value should be
+ *     minimized (to ensure less variance)
+ * 
+ *  # <weight>
+ *  The transaction is assumed to be the longest path, a better solution.
+ *    - Initial solution is almost the same.
+ *    - Worse solution is retraced in pre-dispatch-checks which sets its own weight.
+ *  # </weight>
+ */
+export interface StakingCall_submit_election_solution {
+    __kind: 'submit_election_solution'
+    winners: number[]
+    compact: CompactAssignments
+    score: bigint[]
+    era: number
+    size: ElectionSize
+}
+
+/**
+ *  Unsigned version of `submit_election_solution`.
+ * 
+ *  Note that this must pass the [`ValidateUnsigned`] check which only allows transactions
+ *  from the local node to be included. In other words, only the block author can include a
+ *  transaction in the block.
+ * 
+ *  # <weight>
+ *  See [`submit_election_solution`].
+ *  # </weight>
+ */
+export interface StakingCall_submit_election_solution_unsigned {
+    __kind: 'submit_election_solution_unsigned'
+    winners: number[]
+    compact: CompactAssignments
+    score: bigint[]
+    era: number
+    size: ElectionSize
+}
+
+/**
  *  Remove the given nominations from the calling validator.
  * 
  *  Effects will be felt at the beginning of the next era.
  * 
  *  The dispatch origin for this call must be _Signed_ by the controller, not the stash.
+ *  And, it can be only called when [`EraElectionStatus`] is `Closed`. The controller
+ *  account should represent a validator.
  * 
  *  - `who`: A list of nominator stash accounts who are nominating this validator which
  *    should no longer be nominating this validator.
@@ -1373,57 +1537,7 @@ export interface StakingCall_kick {
     who: LookupSource[]
 }
 
-/**
- *  Update the various staking limits this pallet.
- * 
- *  * `min_nominator_bond`: The minimum active bond needed to be a nominator.
- *  * `min_validator_bond`: The minimum active bond needed to be a validator.
- *  * `max_nominator_count`: The max number of users who can be a nominator at once.
- *    When set to `None`, no limit is enforced.
- *  * `max_validator_count`: The max number of users who can be a validator at once.
- *    When set to `None`, no limit is enforced.
- * 
- *  Origin must be Root to call this function.
- * 
- *  NOTE: Existing nominators and validators will not be affected by this update.
- *  to kick people under the new limits, `chill_other` should be called.
- */
-export interface StakingCall_set_staking_limits {
-    __kind: 'set_staking_limits'
-    minNominatorBond: bigint
-    minValidatorBond: bigint
-    maxNominatorCount: (number | undefined)
-    maxValidatorCount: (number | undefined)
-    threshold: (number | undefined)
-}
-
-/**
- *  Declare a `controller` to stop participating as either a validator or nominator.
- * 
- *  Effects will be felt at the beginning of the next era.
- * 
- *  The dispatch origin for this call must be _Signed_, but can be called by anyone.
- * 
- *  If the caller is the same as the controller being targeted, then no further checks are
- *  enforced, and this function behaves just like `chill`.
- * 
- *  If the caller is different than the controller being targeted, the following conditions
- *  must be met:
- *  * A `ChillThreshold` must be set and checked which defines how close to the max
- *    nominators or validators we must reach before users can start chilling one-another.
- *  * A `MaxNominatorCount` and `MaxValidatorCount` must be set which is used to determine
- *    how close we are to the threshold.
- *  * A `MinNominatorBond` and `MinValidatorBond` must be set and checked, which determines
- *    if this is a person that should be chilled because they have not met the threshold
- *    bond required.
- * 
- *  This can be helpful if bond requirements are updated, and we need to remove old users
- *  who do not satisfy these requirements.
- */
-export interface StakingCall_chill_other {
-    __kind: 'chill_other'
-    controller: Uint8Array
-}
+export type OffencesCall = never
 
 export type SessionCall = SessionCall_set_keys | SessionCall_purge_keys
 
@@ -1460,7 +1574,7 @@ export interface SessionCall_set_keys {
  *    Actual cost depends on the number of length of `T::Keys::key_ids()` which is fixed.
  *  - DbReads: `T::ValidatorIdOf`, `NextKeys`, `origin account`
  *  - DbWrites: `NextKeys`, `origin account`
- *  - DbWrites per key id: `KeyOwner`
+ *  - DbWrites per key id: `KeyOwnder`
  *  # </weight>
  */
 export interface SessionCall_purge_keys {
@@ -1531,6 +1645,8 @@ export interface ImOnlineCall_heartbeat {
     heartbeat: Heartbeat
     signature: Uint8Array
 }
+
+export type AuthorityDiscoveryCall = never
 
 export type DemocracyCall = DemocracyCall_propose | DemocracyCall_second | DemocracyCall_vote | DemocracyCall_emergency_cancel | DemocracyCall_external_propose | DemocracyCall_external_propose_majority | DemocracyCall_external_propose_default | DemocracyCall_fast_track | DemocracyCall_veto_external | DemocracyCall_cancel_referendum | DemocracyCall_cancel_queued | DemocracyCall_delegate | DemocracyCall_undelegate | DemocracyCall_clear_public_proposals | DemocracyCall_note_preimage | DemocracyCall_note_preimage_operational | DemocracyCall_note_imminent_preimage | DemocracyCall_note_imminent_preimage_operational | DemocracyCall_reap_preimage | DemocracyCall_unlock | DemocracyCall_remove_vote | DemocracyCall_remove_other_vote | DemocracyCall_enact_proposal | DemocracyCall_blacklist | DemocracyCall_cancel_proposal
 
@@ -2317,7 +2433,7 @@ export interface TechnicalCommitteeCall_disapprove_proposal {
     proposalHash: Uint8Array
 }
 
-export type PhragmenElectionCall = PhragmenElectionCall_vote | PhragmenElectionCall_remove_voter | PhragmenElectionCall_submit_candidacy | PhragmenElectionCall_renounce_candidacy | PhragmenElectionCall_remove_member | PhragmenElectionCall_clean_defunct_voters
+export type ElectionsPhragmenCall = ElectionsPhragmenCall_vote | ElectionsPhragmenCall_remove_voter | ElectionsPhragmenCall_submit_candidacy | ElectionsPhragmenCall_renounce_candidacy | ElectionsPhragmenCall_remove_member | ElectionsPhragmenCall_clean_defunct_voters
 
 /**
  *  Vote for a set of candidates for the upcoming round of election. This can be called to
@@ -2344,7 +2460,7 @@ export type PhragmenElectionCall = PhragmenElectionCall_vote | PhragmenElectionC
  *  We assume the maximum weight among all 3 cases: vote_equal, vote_more and vote_less.
  *  # </weight>
  */
-export interface PhragmenElectionCall_vote {
+export interface ElectionsPhragmenCall_vote {
     __kind: 'vote'
     votes: Uint8Array[]
     value: bigint
@@ -2357,7 +2473,7 @@ export interface PhragmenElectionCall_vote {
  * 
  *  The dispatch origin of this call must be signed and be a voter.
  */
-export interface PhragmenElectionCall_remove_voter {
+export interface ElectionsPhragmenCall_remove_voter {
     __kind: 'remove_voter'
 }
 
@@ -2378,7 +2494,7 @@ export interface PhragmenElectionCall_remove_voter {
  *  The number of current candidates must be provided as witness data.
  *  # </weight>
  */
-export interface PhragmenElectionCall_submit_candidacy {
+export interface ElectionsPhragmenCall_submit_candidacy {
     __kind: 'submit_candidacy'
     candidateCount: number
 }
@@ -2393,9 +2509,8 @@ export interface PhragmenElectionCall_submit_candidacy {
  *    origin is removed as a runner-up.
  *  - `origin` is a current member. In this case, the deposit is unreserved and origin is
  *    removed as a member, consequently not being a candidate for the next round anymore.
- *    Similar to [`remove_member`](Self::remove_member), if replacement runners exists,
- *    they are immediately used. If the prime is renouncing, then no prime will exist until
- *    the next round.
+ *    Similar to [`remove_members`], if replacement runners exists, they are immediately used.
+ *    If the prime is renouncing, then no prime will exist until the next round.
  * 
  *  The dispatch origin of this call must be signed, and have one of the above roles.
  * 
@@ -2403,7 +2518,7 @@ export interface PhragmenElectionCall_submit_candidacy {
  *  The type of renouncing must be provided as witness data.
  *  # </weight>
  */
-export interface PhragmenElectionCall_renounce_candidacy {
+export interface ElectionsPhragmenCall_renounce_candidacy {
     __kind: 'renounce_candidacy'
     renouncing: Renouncing
 }
@@ -2424,7 +2539,7 @@ export interface PhragmenElectionCall_renounce_candidacy {
  *  will go into phragmen, we assume full block for now.
  *  # </weight>
  */
-export interface PhragmenElectionCall_remove_member {
+export interface ElectionsPhragmenCall_remove_member {
     __kind: 'remove_member'
     who: LookupSource
     hasReplacement: boolean
@@ -2442,7 +2557,7 @@ export interface PhragmenElectionCall_remove_member {
  *  The total number of voters and those that are defunct must be provided as witness data.
  *  # </weight>
  */
-export interface PhragmenElectionCall_clean_defunct_voters {
+export interface ElectionsPhragmenCall_clean_defunct_voters {
     __kind: 'clean_defunct_voters'
     numVoters: number
     numDefunct: number
@@ -2708,7 +2823,7 @@ export type VestingCall = VestingCall_vest | VestingCall_vest_other | VestingCal
  *  Unlock any vested funds of the sender account.
  * 
  *  The dispatch origin for this call must be _Signed_ and the sender must have funds still
- *  locked under this pallet.
+ *  locked under this module.
  * 
  *  Emits either `VestingCompleted` or `VestingUpdated`.
  * 
@@ -2729,7 +2844,7 @@ export interface VestingCall_vest {
  *  The dispatch origin for this call must be _Signed_.
  * 
  *  - `target`: The account whose vested funds should be unlocked. Must have funds still
- *  locked under this pallet.
+ *  locked under this module.
  * 
  *  Emits either `VestingCompleted` or `VestingUpdated`.
  * 
@@ -2802,8 +2917,7 @@ export type UtilityCall = UtilityCall_batch | UtilityCall_as_derivative | Utilit
  * 
  *  May be called from any origin.
  * 
- *  - `calls`: The calls to be dispatched from the same origin. The number of call must not
- *    exceed the constant: `batched_calls_limit` (available in constant metadata).
+ *  - `calls`: The calls to be dispatched from the same origin.
  * 
  *  If origin is root then call are dispatch without checking origin filter. (This includes
  *  bypassing `frame_system::Config::BaseCallFilter`).
@@ -2850,8 +2964,7 @@ export interface UtilityCall_as_derivative {
  * 
  *  May be called from any origin.
  * 
- *  - `calls`: The calls to be dispatched from the same origin. The number of call must not
- *    exceed the constant: `batched_calls_limit` (available in constant metadata).
+ *  - `calls`: The calls to be dispatched from the same origin.
  * 
  *  If origin is root then call are dispatch without checking origin filter. (This includes
  *  bypassing `frame_system::Config::BaseCallFilter`).
@@ -3419,7 +3532,7 @@ export interface ProxyCall_reject_announcement {
 }
 
 /**
- *  Dispatch the given `call` from an account that the sender is authorized for through
+ *  Dispatch the given `call` from an account that the sender is authorised for through
  *  `add_proxy`.
  * 
  *  Removes any corresponding announcement(s).
@@ -3936,7 +4049,7 @@ export interface TipsCall_slash_tip {
     hash: Uint8Array
 }
 
-export type ElectionProviderMultiPhaseCall = ElectionProviderMultiPhaseCall_submit_unsigned | ElectionProviderMultiPhaseCall_set_minimum_untrusted_score | ElectionProviderMultiPhaseCall_set_emergency_election_result | ElectionProviderMultiPhaseCall_submit
+export type ElectionProviderMultiPhaseCall = ElectionProviderMultiPhaseCall_submit_unsigned
 
 /**
  *  Submit a solution for the unsigned phase.
@@ -3956,56 +4069,8 @@ export type ElectionProviderMultiPhaseCall = ElectionProviderMultiPhaseCall_subm
  */
 export interface ElectionProviderMultiPhaseCall_submit_unsigned {
     __kind: 'submit_unsigned'
-    rawSolution: RawSolution
+    solution: RawSolution
     witness: SolutionOrSnapshotSize
-}
-
-/**
- *  Set a new value for `MinimumUntrustedScore`.
- * 
- *  Dispatch origin must be aligned with `T::ForceOrigin`.
- * 
- *  This check can be turned off by setting the value to `None`.
- */
-export interface ElectionProviderMultiPhaseCall_set_minimum_untrusted_score {
-    __kind: 'set_minimum_untrusted_score'
-    maybeNextScore: (bigint[] | undefined)
-}
-
-/**
- *  Set a solution in the queue, to be handed out to the client of this pallet in the next
- *  call to `ElectionProvider::elect`.
- * 
- *  This can only be set by `T::ForceOrigin`, and only when the phase is `Emergency`.
- * 
- *  The solution is not checked for any feasibility and is assumed to be trustworthy, as any
- *  feasibility check itself can in principle cause the election process to fail (due to
- *  memory/weight constrains).
- */
-export interface ElectionProviderMultiPhaseCall_set_emergency_election_result {
-    __kind: 'set_emergency_election_result'
-    supports: [Uint8Array, SolutionSupport][]
-}
-
-/**
- *  Submit a solution for the signed phase.
- * 
- *  The dispatch origin fo this call must be __signed__.
- * 
- *  The solution is potentially queued, based on the claimed score and processed at the end
- *  of the signed phase.
- * 
- *  A deposit is reserved and recorded for the solution. Based on the outcome, the solution
- *  might be rewarded, slashed, or get all or a part of the deposit back.
- * 
- *  # <weight>
- *  Queue size must be provided as witness data.
- *  # </weight>
- */
-export interface ElectionProviderMultiPhaseCall_submit {
-    __kind: 'submit'
-    rawSolution: RawSolution
-    numSignedSubmissions: number
 }
 
 export interface CompactAssignmentsWith16 {
@@ -4027,6 +4092,11 @@ export interface CompactAssignmentsWith16 {
     votes16: [number, [number, number][], number][]
 }
 
+export interface SolutionSupport {
+    total: bigint
+    voters: [Uint8Array, bigint][]
+}
+
 export type PalletsOrigin = PalletsOrigin_System | PalletsOrigin_Council | PalletsOrigin_TechnicalCommittee
 
 export interface PalletsOrigin_System {
@@ -4042,6 +4112,143 @@ export interface PalletsOrigin_Council {
 export interface PalletsOrigin_TechnicalCommittee {
     __kind: 'TechnicalCommittee'
     value: CollectiveOrigin
+}
+
+export type Phase = Phase_ApplyExtrinsic | Phase_Finalization | Phase_Initialization
+
+export interface Phase_ApplyExtrinsic {
+    __kind: 'ApplyExtrinsic'
+    value: number
+}
+
+export interface Phase_Finalization {
+    __kind: 'Finalization'
+}
+
+export interface Phase_Initialization {
+    __kind: 'Initialization'
+}
+
+export type Event = Event_System | Event_Scheduler | Event_Indices | Event_Balances | Event_Staking | Event_Offences | Event_Session | Event_Grandpa | Event_ImOnline | Event_Democracy | Event_Council | Event_TechnicalCommittee | Event_ElectionsPhragmen | Event_TechnicalMembership | Event_Treasury | Event_Claims | Event_Vesting | Event_Utility | Event_Identity | Event_Proxy | Event_Multisig | Event_Bounties | Event_Tips | Event_ElectionProviderMultiPhase
+
+export interface Event_System {
+    __kind: 'System'
+    value: SystemEvent
+}
+
+export interface Event_Scheduler {
+    __kind: 'Scheduler'
+    value: SchedulerEvent
+}
+
+export interface Event_Indices {
+    __kind: 'Indices'
+    value: IndicesEvent
+}
+
+export interface Event_Balances {
+    __kind: 'Balances'
+    value: BalancesEvent
+}
+
+export interface Event_Staking {
+    __kind: 'Staking'
+    value: StakingEvent
+}
+
+export interface Event_Offences {
+    __kind: 'Offences'
+    value: OffencesEvent
+}
+
+export interface Event_Session {
+    __kind: 'Session'
+    value: SessionEvent
+}
+
+export interface Event_Grandpa {
+    __kind: 'Grandpa'
+    value: GrandpaEvent
+}
+
+export interface Event_ImOnline {
+    __kind: 'ImOnline'
+    value: ImOnlineEvent
+}
+
+export interface Event_Democracy {
+    __kind: 'Democracy'
+    value: DemocracyEvent
+}
+
+export interface Event_Council {
+    __kind: 'Council'
+    value: CouncilEvent
+}
+
+export interface Event_TechnicalCommittee {
+    __kind: 'TechnicalCommittee'
+    value: TechnicalCommitteeEvent
+}
+
+export interface Event_ElectionsPhragmen {
+    __kind: 'ElectionsPhragmen'
+    value: ElectionsPhragmenEvent
+}
+
+export interface Event_TechnicalMembership {
+    __kind: 'TechnicalMembership'
+    value: TechnicalMembershipEvent
+}
+
+export interface Event_Treasury {
+    __kind: 'Treasury'
+    value: TreasuryEvent
+}
+
+export interface Event_Claims {
+    __kind: 'Claims'
+    value: ClaimsEvent
+}
+
+export interface Event_Vesting {
+    __kind: 'Vesting'
+    value: VestingEvent
+}
+
+export interface Event_Utility {
+    __kind: 'Utility'
+    value: UtilityEvent
+}
+
+export interface Event_Identity {
+    __kind: 'Identity'
+    value: IdentityEvent
+}
+
+export interface Event_Proxy {
+    __kind: 'Proxy'
+    value: ProxyEvent
+}
+
+export interface Event_Multisig {
+    __kind: 'Multisig'
+    value: MultisigEvent
+}
+
+export interface Event_Bounties {
+    __kind: 'Bounties'
+    value: BountiesEvent
+}
+
+export interface Event_Tips {
+    __kind: 'Tips'
+    value: TipsEvent
+}
+
+export interface Event_ElectionProviderMultiPhase {
+    __kind: 'ElectionProviderMultiPhase'
+    value: ElectionProviderMultiPhaseEvent
 }
 
 export interface ChangesTrieConfiguration {
@@ -4060,17 +4267,6 @@ export interface KeyOwnerProof {
     session: number
     trieNodes: Uint8Array[]
     validatorCount: number
-}
-
-export type NextConfigDescriptor = NextConfigDescriptor_V0 | NextConfigDescriptor_V1
-
-export interface NextConfigDescriptor_V0 {
-    __kind: 'V0'
-}
-
-export interface NextConfigDescriptor_V1 {
-    __kind: 'V1'
-    value: NextConfigDescriptorV1
 }
 
 export type LookupSource = LookupSource_Id | LookupSource_Index | LookupSource_Raw | LookupSource_Address32 | LookupSource_Address20
@@ -4134,6 +4330,30 @@ export interface RewardDestination_None {
 export interface ValidatorPrefs {
     commission: number
     blocked: boolean
+}
+
+export interface CompactAssignments {
+    votes1: [number, number][]
+    votes2: [number, [number, number], number][]
+    votes3: [number, [number, number][], number][]
+    votes4: [number, [number, number][], number][]
+    votes5: [number, [number, number][], number][]
+    votes6: [number, [number, number][], number][]
+    votes7: [number, [number, number][], number][]
+    votes8: [number, [number, number][], number][]
+    votes9: [number, [number, number][], number][]
+    votes10: [number, [number, number][], number][]
+    votes11: [number, [number, number][], number][]
+    votes12: [number, [number, number][], number][]
+    votes13: [number, [number, number][], number][]
+    votes14: [number, [number, number][], number][]
+    votes15: [number, [number, number][], number][]
+    votes16: [number, [number, number][], number][]
+}
+
+export interface ElectionSize {
+    validators: number
+    nominators: number
 }
 
 export interface GrandpaEquivocationProof {
@@ -4461,11 +4681,6 @@ export interface Timepoint {
     index: number
 }
 
-export interface SolutionSupport {
-    total: bigint
-    voters: [Uint8Array, bigint][]
-}
-
 export type SystemOrigin = SystemOrigin_Root | SystemOrigin_Signed | SystemOrigin_None
 
 export interface SystemOrigin_Root {
@@ -4493,9 +4708,1127 @@ export interface CollectiveOrigin_Member {
     value: Uint8Array
 }
 
-export interface NextConfigDescriptorV1 {
-    c: [bigint, bigint]
-    allowedSlots: AllowedSlots
+export type SystemEvent = SystemEvent_ExtrinsicSuccess | SystemEvent_ExtrinsicFailed | SystemEvent_CodeUpdated | SystemEvent_NewAccount | SystemEvent_KilledAccount
+
+/**
+ *  An extrinsic completed successfully. \[info\]
+ */
+export interface SystemEvent_ExtrinsicSuccess {
+    __kind: 'ExtrinsicSuccess'
+    value: DispatchInfo
+}
+
+/**
+ *  An extrinsic failed. \[error, info\]
+ */
+export interface SystemEvent_ExtrinsicFailed {
+    __kind: 'ExtrinsicFailed'
+    value: [DispatchError, DispatchInfo]
+}
+
+/**
+ *  `:code` was updated.
+ */
+export interface SystemEvent_CodeUpdated {
+    __kind: 'CodeUpdated'
+}
+
+/**
+ *  A new \[account\] was created.
+ */
+export interface SystemEvent_NewAccount {
+    __kind: 'NewAccount'
+    value: Uint8Array
+}
+
+/**
+ *  An \[account\] was reaped.
+ */
+export interface SystemEvent_KilledAccount {
+    __kind: 'KilledAccount'
+    value: Uint8Array
+}
+
+export type SchedulerEvent = SchedulerEvent_Scheduled | SchedulerEvent_Canceled | SchedulerEvent_Dispatched
+
+/**
+ *  Scheduled some task. \[when, index\]
+ */
+export interface SchedulerEvent_Scheduled {
+    __kind: 'Scheduled'
+    value: [number, number]
+}
+
+/**
+ *  Canceled some task. \[when, index\]
+ */
+export interface SchedulerEvent_Canceled {
+    __kind: 'Canceled'
+    value: [number, number]
+}
+
+/**
+ *  Dispatched some task. \[task, id, result\]
+ */
+export interface SchedulerEvent_Dispatched {
+    __kind: 'Dispatched'
+    value: [[number, number], (Uint8Array | undefined), DispatchResult]
+}
+
+export type IndicesEvent = IndicesEvent_IndexAssigned | IndicesEvent_IndexFreed | IndicesEvent_IndexFrozen
+
+/**
+ *  A account index was assigned. \[index, who\]
+ */
+export interface IndicesEvent_IndexAssigned {
+    __kind: 'IndexAssigned'
+    value: [Uint8Array, number]
+}
+
+/**
+ *  A account index has been freed up (unassigned). \[index\]
+ */
+export interface IndicesEvent_IndexFreed {
+    __kind: 'IndexFreed'
+    value: number
+}
+
+/**
+ *  A account index has been frozen to its current account ID. \[index, who\]
+ */
+export interface IndicesEvent_IndexFrozen {
+    __kind: 'IndexFrozen'
+    value: [number, Uint8Array]
+}
+
+export type BalancesEvent = BalancesEvent_Endowed | BalancesEvent_DustLost | BalancesEvent_Transfer | BalancesEvent_BalanceSet | BalancesEvent_Deposit | BalancesEvent_Reserved | BalancesEvent_Unreserved | BalancesEvent_ReserveRepatriated
+
+/**
+ *  An account was created with some free balance. \[account, free_balance\]
+ */
+export interface BalancesEvent_Endowed {
+    __kind: 'Endowed'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  An account was removed whose balance was non-zero but below ExistentialDeposit,
+ *  resulting in an outright loss. \[account, balance\]
+ */
+export interface BalancesEvent_DustLost {
+    __kind: 'DustLost'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  Transfer succeeded. \[from, to, value\]
+ */
+export interface BalancesEvent_Transfer {
+    __kind: 'Transfer'
+    value: [Uint8Array, Uint8Array, bigint]
+}
+
+/**
+ *  A balance was set by root. \[who, free, reserved\]
+ */
+export interface BalancesEvent_BalanceSet {
+    __kind: 'BalanceSet'
+    value: [Uint8Array, bigint, bigint]
+}
+
+/**
+ *  Some amount was deposited (e.g. for transaction fees). \[who, deposit\]
+ */
+export interface BalancesEvent_Deposit {
+    __kind: 'Deposit'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  Some balance was reserved (moved from free to reserved). \[who, value\]
+ */
+export interface BalancesEvent_Reserved {
+    __kind: 'Reserved'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  Some balance was unreserved (moved from reserved to free). \[who, value\]
+ */
+export interface BalancesEvent_Unreserved {
+    __kind: 'Unreserved'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  Some balance was moved from the reserve of the first account to the second account.
+ *  Final argument indicates the destination balance type.
+ *  \[from, to, balance, destination_status\]
+ */
+export interface BalancesEvent_ReserveRepatriated {
+    __kind: 'ReserveRepatriated'
+    value: [Uint8Array, Uint8Array, bigint, BalanceStatus]
+}
+
+export type StakingEvent = StakingEvent_EraPayout | StakingEvent_Reward | StakingEvent_Slash | StakingEvent_OldSlashingReportDiscarded | StakingEvent_StakingElection | StakingEvent_SolutionStored | StakingEvent_Bonded | StakingEvent_Unbonded | StakingEvent_Withdrawn | StakingEvent_Kicked
+
+/**
+ *  The era payout has been set; the first balance is the validator-payout; the second is
+ *  the remainder from the maximum amount of reward.
+ *  \[era_index, validator_payout, remainder\]
+ */
+export interface StakingEvent_EraPayout {
+    __kind: 'EraPayout'
+    value: [number, bigint, bigint]
+}
+
+/**
+ *  The staker has been rewarded by this amount. \[stash, amount\]
+ */
+export interface StakingEvent_Reward {
+    __kind: 'Reward'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  One validator (and its nominators) has been slashed by the given amount.
+ *  \[validator, amount\]
+ */
+export interface StakingEvent_Slash {
+    __kind: 'Slash'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  An old slashing report from a prior era was discarded because it could
+ *  not be processed. \[session_index\]
+ */
+export interface StakingEvent_OldSlashingReportDiscarded {
+    __kind: 'OldSlashingReportDiscarded'
+    value: number
+}
+
+/**
+ *  A new set of stakers was elected with the given \[compute\].
+ */
+export interface StakingEvent_StakingElection {
+    __kind: 'StakingElection'
+    value: ElectionCompute
+}
+
+/**
+ *  A new solution for the upcoming election has been stored. \[compute\]
+ */
+export interface StakingEvent_SolutionStored {
+    __kind: 'SolutionStored'
+    value: ElectionCompute
+}
+
+/**
+ *  An account has bonded this amount. \[stash, amount\]
+ * 
+ *  NOTE: This event is only emitted when funds are bonded via a dispatchable. Notably,
+ *  it will not be emitted for staking rewards when they are added to stake.
+ */
+export interface StakingEvent_Bonded {
+    __kind: 'Bonded'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  An account has unbonded this amount. \[stash, amount\]
+ */
+export interface StakingEvent_Unbonded {
+    __kind: 'Unbonded'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  An account has called `withdraw_unbonded` and removed unbonding chunks worth `Balance`
+ *  from the unlocking queue. \[stash, amount\]
+ */
+export interface StakingEvent_Withdrawn {
+    __kind: 'Withdrawn'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  A nominator has been kicked from a validator. \[nominator, stash\]
+ */
+export interface StakingEvent_Kicked {
+    __kind: 'Kicked'
+    value: [Uint8Array, Uint8Array]
+}
+
+export type OffencesEvent = OffencesEvent_Offence
+
+/**
+ *  There is an offence reported of the given `kind` happened at the `session_index` and
+ *  (kind-specific) time slot. This event is not deposited for duplicate slashes. last
+ *  element indicates of the offence was applied (true) or queued (false)
+ *  \[kind, timeslot, applied\].
+ */
+export interface OffencesEvent_Offence {
+    __kind: 'Offence'
+    value: [Uint8Array, Uint8Array, boolean]
+}
+
+export type SessionEvent = SessionEvent_NewSession
+
+/**
+ *  New session has happened. Note that the argument is the \[session_index\], not the block
+ *  number as the type might suggest.
+ */
+export interface SessionEvent_NewSession {
+    __kind: 'NewSession'
+    value: number
+}
+
+export type GrandpaEvent = GrandpaEvent_NewAuthorities | GrandpaEvent_Paused | GrandpaEvent_Resumed
+
+/**
+ *  New authority set has been applied. \[authority_set\]
+ */
+export interface GrandpaEvent_NewAuthorities {
+    __kind: 'NewAuthorities'
+    value: [Uint8Array, bigint][]
+}
+
+/**
+ *  Current authority set has been paused.
+ */
+export interface GrandpaEvent_Paused {
+    __kind: 'Paused'
+}
+
+/**
+ *  Current authority set has been resumed.
+ */
+export interface GrandpaEvent_Resumed {
+    __kind: 'Resumed'
+}
+
+export type ImOnlineEvent = ImOnlineEvent_HeartbeatReceived | ImOnlineEvent_AllGood | ImOnlineEvent_SomeOffline
+
+/**
+ *  A new heartbeat was received from `AuthorityId` \[authority_id\]
+ */
+export interface ImOnlineEvent_HeartbeatReceived {
+    __kind: 'HeartbeatReceived'
+    value: Uint8Array
+}
+
+/**
+ *  At the end of the session, no offence was committed.
+ */
+export interface ImOnlineEvent_AllGood {
+    __kind: 'AllGood'
+}
+
+/**
+ *  At the end of the session, at least one validator was found to be \[offline\].
+ */
+export interface ImOnlineEvent_SomeOffline {
+    __kind: 'SomeOffline'
+    value: [Uint8Array, FullIdentification][]
+}
+
+export type DemocracyEvent = DemocracyEvent_Proposed | DemocracyEvent_Tabled | DemocracyEvent_ExternalTabled | DemocracyEvent_Started | DemocracyEvent_Passed | DemocracyEvent_NotPassed | DemocracyEvent_Cancelled | DemocracyEvent_Executed | DemocracyEvent_Delegated | DemocracyEvent_Undelegated | DemocracyEvent_Vetoed | DemocracyEvent_PreimageNoted | DemocracyEvent_PreimageUsed | DemocracyEvent_PreimageInvalid | DemocracyEvent_PreimageMissing | DemocracyEvent_PreimageReaped | DemocracyEvent_Unlocked | DemocracyEvent_Blacklisted
+
+/**
+ *  A motion has been proposed by a public account. \[proposal_index, deposit\]
+ */
+export interface DemocracyEvent_Proposed {
+    __kind: 'Proposed'
+    value: [number, bigint]
+}
+
+/**
+ *  A public proposal has been tabled for referendum vote. \[proposal_index, deposit, depositors\]
+ */
+export interface DemocracyEvent_Tabled {
+    __kind: 'Tabled'
+    value: [number, bigint, Uint8Array[]]
+}
+
+/**
+ *  An external proposal has been tabled.
+ */
+export interface DemocracyEvent_ExternalTabled {
+    __kind: 'ExternalTabled'
+}
+
+/**
+ *  A referendum has begun. \[ref_index, threshold\]
+ */
+export interface DemocracyEvent_Started {
+    __kind: 'Started'
+    value: [number, VoteThreshold]
+}
+
+/**
+ *  A proposal has been approved by referendum. \[ref_index\]
+ */
+export interface DemocracyEvent_Passed {
+    __kind: 'Passed'
+    value: number
+}
+
+/**
+ *  A proposal has been rejected by referendum. \[ref_index\]
+ */
+export interface DemocracyEvent_NotPassed {
+    __kind: 'NotPassed'
+    value: number
+}
+
+/**
+ *  A referendum has been cancelled. \[ref_index\]
+ */
+export interface DemocracyEvent_Cancelled {
+    __kind: 'Cancelled'
+    value: number
+}
+
+/**
+ *  A proposal has been enacted. \[ref_index, is_ok\]
+ */
+export interface DemocracyEvent_Executed {
+    __kind: 'Executed'
+    value: [number, boolean]
+}
+
+/**
+ *  An account has delegated their vote to another account. \[who, target\]
+ */
+export interface DemocracyEvent_Delegated {
+    __kind: 'Delegated'
+    value: [Uint8Array, Uint8Array]
+}
+
+/**
+ *  An \[account\] has cancelled a previous delegation operation.
+ */
+export interface DemocracyEvent_Undelegated {
+    __kind: 'Undelegated'
+    value: Uint8Array
+}
+
+/**
+ *  An external proposal has been vetoed. \[who, proposal_hash, until\]
+ */
+export interface DemocracyEvent_Vetoed {
+    __kind: 'Vetoed'
+    value: [Uint8Array, Uint8Array, number]
+}
+
+/**
+ *  A proposal's preimage was noted, and the deposit taken. \[proposal_hash, who, deposit\]
+ */
+export interface DemocracyEvent_PreimageNoted {
+    __kind: 'PreimageNoted'
+    value: [Uint8Array, Uint8Array, bigint]
+}
+
+/**
+ *  A proposal preimage was removed and used (the deposit was returned).
+ *  \[proposal_hash, provider, deposit\]
+ */
+export interface DemocracyEvent_PreimageUsed {
+    __kind: 'PreimageUsed'
+    value: [Uint8Array, Uint8Array, bigint]
+}
+
+/**
+ *  A proposal could not be executed because its preimage was invalid.
+ *  \[proposal_hash, ref_index\]
+ */
+export interface DemocracyEvent_PreimageInvalid {
+    __kind: 'PreimageInvalid'
+    value: [Uint8Array, number]
+}
+
+/**
+ *  A proposal could not be executed because its preimage was missing.
+ *  \[proposal_hash, ref_index\]
+ */
+export interface DemocracyEvent_PreimageMissing {
+    __kind: 'PreimageMissing'
+    value: [Uint8Array, number]
+}
+
+/**
+ *  A registered preimage was removed and the deposit collected by the reaper.
+ *  \[proposal_hash, provider, deposit, reaper\]
+ */
+export interface DemocracyEvent_PreimageReaped {
+    __kind: 'PreimageReaped'
+    value: [Uint8Array, Uint8Array, bigint, Uint8Array]
+}
+
+/**
+ *  An \[account\] has been unlocked successfully.
+ */
+export interface DemocracyEvent_Unlocked {
+    __kind: 'Unlocked'
+    value: Uint8Array
+}
+
+/**
+ *  A proposal \[hash\] has been blacklisted permanently.
+ */
+export interface DemocracyEvent_Blacklisted {
+    __kind: 'Blacklisted'
+    value: Uint8Array
+}
+
+export type CouncilEvent = CouncilEvent_Proposed | CouncilEvent_Voted | CouncilEvent_Approved | CouncilEvent_Disapproved | CouncilEvent_Executed | CouncilEvent_MemberExecuted | CouncilEvent_Closed
+
+/**
+ *  A motion (given hash) has been proposed (by given account) with a threshold (given
+ *  `MemberCount`).
+ *  \[account, proposal_index, proposal_hash, threshold\]
+ */
+export interface CouncilEvent_Proposed {
+    __kind: 'Proposed'
+    value: [Uint8Array, number, Uint8Array, number]
+}
+
+/**
+ *  A motion (given hash) has been voted on by given account, leaving
+ *  a tally (yes votes and no votes given respectively as `MemberCount`).
+ *  \[account, proposal_hash, voted, yes, no\]
+ */
+export interface CouncilEvent_Voted {
+    __kind: 'Voted'
+    value: [Uint8Array, Uint8Array, boolean, number, number]
+}
+
+/**
+ *  A motion was approved by the required threshold.
+ *  \[proposal_hash\]
+ */
+export interface CouncilEvent_Approved {
+    __kind: 'Approved'
+    value: Uint8Array
+}
+
+/**
+ *  A motion was not approved by the required threshold.
+ *  \[proposal_hash\]
+ */
+export interface CouncilEvent_Disapproved {
+    __kind: 'Disapproved'
+    value: Uint8Array
+}
+
+/**
+ *  A motion was executed; result will be `Ok` if it returned without error.
+ *  \[proposal_hash, result\]
+ */
+export interface CouncilEvent_Executed {
+    __kind: 'Executed'
+    value: [Uint8Array, DispatchResult]
+}
+
+/**
+ *  A single member did some action; result will be `Ok` if it returned without error.
+ *  \[proposal_hash, result\]
+ */
+export interface CouncilEvent_MemberExecuted {
+    __kind: 'MemberExecuted'
+    value: [Uint8Array, DispatchResult]
+}
+
+/**
+ *  A proposal was closed because its threshold was reached or after its duration was up.
+ *  \[proposal_hash, yes, no\]
+ */
+export interface CouncilEvent_Closed {
+    __kind: 'Closed'
+    value: [Uint8Array, number, number]
+}
+
+export type TechnicalCommitteeEvent = TechnicalCommitteeEvent_Proposed | TechnicalCommitteeEvent_Voted | TechnicalCommitteeEvent_Approved | TechnicalCommitteeEvent_Disapproved | TechnicalCommitteeEvent_Executed | TechnicalCommitteeEvent_MemberExecuted | TechnicalCommitteeEvent_Closed
+
+/**
+ *  A motion (given hash) has been proposed (by given account) with a threshold (given
+ *  `MemberCount`).
+ *  \[account, proposal_index, proposal_hash, threshold\]
+ */
+export interface TechnicalCommitteeEvent_Proposed {
+    __kind: 'Proposed'
+    value: [Uint8Array, number, Uint8Array, number]
+}
+
+/**
+ *  A motion (given hash) has been voted on by given account, leaving
+ *  a tally (yes votes and no votes given respectively as `MemberCount`).
+ *  \[account, proposal_hash, voted, yes, no\]
+ */
+export interface TechnicalCommitteeEvent_Voted {
+    __kind: 'Voted'
+    value: [Uint8Array, Uint8Array, boolean, number, number]
+}
+
+/**
+ *  A motion was approved by the required threshold.
+ *  \[proposal_hash\]
+ */
+export interface TechnicalCommitteeEvent_Approved {
+    __kind: 'Approved'
+    value: Uint8Array
+}
+
+/**
+ *  A motion was not approved by the required threshold.
+ *  \[proposal_hash\]
+ */
+export interface TechnicalCommitteeEvent_Disapproved {
+    __kind: 'Disapproved'
+    value: Uint8Array
+}
+
+/**
+ *  A motion was executed; result will be `Ok` if it returned without error.
+ *  \[proposal_hash, result\]
+ */
+export interface TechnicalCommitteeEvent_Executed {
+    __kind: 'Executed'
+    value: [Uint8Array, DispatchResult]
+}
+
+/**
+ *  A single member did some action; result will be `Ok` if it returned without error.
+ *  \[proposal_hash, result\]
+ */
+export interface TechnicalCommitteeEvent_MemberExecuted {
+    __kind: 'MemberExecuted'
+    value: [Uint8Array, DispatchResult]
+}
+
+/**
+ *  A proposal was closed because its threshold was reached or after its duration was up.
+ *  \[proposal_hash, yes, no\]
+ */
+export interface TechnicalCommitteeEvent_Closed {
+    __kind: 'Closed'
+    value: [Uint8Array, number, number]
+}
+
+export type ElectionsPhragmenEvent = ElectionsPhragmenEvent_NewTerm | ElectionsPhragmenEvent_EmptyTerm | ElectionsPhragmenEvent_ElectionError | ElectionsPhragmenEvent_MemberKicked | ElectionsPhragmenEvent_Renounced | ElectionsPhragmenEvent_CandidateSlashed | ElectionsPhragmenEvent_SeatHolderSlashed
+
+/**
+ *  A new term with \[new_members\]. This indicates that enough candidates existed to run the
+ *  election, not that enough have has been elected. The inner value must be examined for
+ *  this purpose. A `NewTerm(\[\])` indicates that some candidates got their bond slashed and
+ *  none were elected, whilst `EmptyTerm` means that no candidates existed to begin with.
+ */
+export interface ElectionsPhragmenEvent_NewTerm {
+    __kind: 'NewTerm'
+    value: [Uint8Array, bigint][]
+}
+
+/**
+ *  No (or not enough) candidates existed for this round. This is different from
+ *  `NewTerm(\[\])`. See the description of `NewTerm`.
+ */
+export interface ElectionsPhragmenEvent_EmptyTerm {
+    __kind: 'EmptyTerm'
+}
+
+/**
+ *  Internal error happened while trying to perform election.
+ */
+export interface ElectionsPhragmenEvent_ElectionError {
+    __kind: 'ElectionError'
+}
+
+/**
+ *  A \[member\] has been removed. This should always be followed by either `NewTerm` or
+ *  `EmptyTerm`.
+ */
+export interface ElectionsPhragmenEvent_MemberKicked {
+    __kind: 'MemberKicked'
+    value: Uint8Array
+}
+
+/**
+ *  Someone has renounced their candidacy.
+ */
+export interface ElectionsPhragmenEvent_Renounced {
+    __kind: 'Renounced'
+    value: Uint8Array
+}
+
+/**
+ *  A \[candidate\] was slashed by \[amount\] due to failing to obtain a seat as member or
+ *  runner-up.
+ * 
+ *  Note that old members and runners-up are also candidates.
+ */
+export interface ElectionsPhragmenEvent_CandidateSlashed {
+    __kind: 'CandidateSlashed'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  A \[seat holder\] was slashed by \[amount\] by being forcefully removed from the set.
+ */
+export interface ElectionsPhragmenEvent_SeatHolderSlashed {
+    __kind: 'SeatHolderSlashed'
+    value: [Uint8Array, bigint]
+}
+
+export type TechnicalMembershipEvent = TechnicalMembershipEvent_MemberAdded | TechnicalMembershipEvent_MemberRemoved | TechnicalMembershipEvent_MembersSwapped | TechnicalMembershipEvent_MembersReset | TechnicalMembershipEvent_KeyChanged | TechnicalMembershipEvent_Dummy
+
+/**
+ *  The given member was added; see the transaction for who.
+ */
+export interface TechnicalMembershipEvent_MemberAdded {
+    __kind: 'MemberAdded'
+}
+
+/**
+ *  The given member was removed; see the transaction for who.
+ */
+export interface TechnicalMembershipEvent_MemberRemoved {
+    __kind: 'MemberRemoved'
+}
+
+/**
+ *  Two members were swapped; see the transaction for who.
+ */
+export interface TechnicalMembershipEvent_MembersSwapped {
+    __kind: 'MembersSwapped'
+}
+
+/**
+ *  The membership was reset; see the transaction for who the new set is.
+ */
+export interface TechnicalMembershipEvent_MembersReset {
+    __kind: 'MembersReset'
+}
+
+/**
+ *  One of the members' keys changed.
+ */
+export interface TechnicalMembershipEvent_KeyChanged {
+    __kind: 'KeyChanged'
+}
+
+/**
+ *  Phantom member, never used.
+ */
+export interface TechnicalMembershipEvent_Dummy {
+    __kind: 'Dummy'
+}
+
+export type TreasuryEvent = TreasuryEvent_Proposed | TreasuryEvent_Spending | TreasuryEvent_Awarded | TreasuryEvent_Rejected | TreasuryEvent_Burnt | TreasuryEvent_Rollover | TreasuryEvent_Deposit
+
+/**
+ *  New proposal. \[proposal_index\]
+ */
+export interface TreasuryEvent_Proposed {
+    __kind: 'Proposed'
+    value: number
+}
+
+/**
+ *  We have ended a spend period and will now allocate funds. \[budget_remaining\]
+ */
+export interface TreasuryEvent_Spending {
+    __kind: 'Spending'
+    value: bigint
+}
+
+/**
+ *  Some funds have been allocated. \[proposal_index, award, beneficiary\]
+ */
+export interface TreasuryEvent_Awarded {
+    __kind: 'Awarded'
+    value: [number, bigint, Uint8Array]
+}
+
+/**
+ *  A proposal was rejected; funds were slashed. \[proposal_index, slashed\]
+ */
+export interface TreasuryEvent_Rejected {
+    __kind: 'Rejected'
+    value: [number, bigint]
+}
+
+/**
+ *  Some of our funds have been burnt. \[burn\]
+ */
+export interface TreasuryEvent_Burnt {
+    __kind: 'Burnt'
+    value: bigint
+}
+
+/**
+ *  Spending has finished; this is the amount that rolls over until next spend.
+ *  \[budget_remaining\]
+ */
+export interface TreasuryEvent_Rollover {
+    __kind: 'Rollover'
+    value: bigint
+}
+
+/**
+ *  Some funds have been deposited. \[deposit\]
+ */
+export interface TreasuryEvent_Deposit {
+    __kind: 'Deposit'
+    value: bigint
+}
+
+export type ClaimsEvent = ClaimsEvent_Claimed
+
+/**
+ *  Someone claimed some DOTs. [who, ethereum_address, amount]
+ */
+export interface ClaimsEvent_Claimed {
+    __kind: 'Claimed'
+    value: [Uint8Array, Uint8Array, bigint]
+}
+
+export type VestingEvent = VestingEvent_VestingUpdated | VestingEvent_VestingCompleted
+
+/**
+ *  The amount vested has been updated. This could indicate more funds are available. The
+ *  balance given is the amount which is left unvested (and thus locked).
+ *  \[account, unvested\]
+ */
+export interface VestingEvent_VestingUpdated {
+    __kind: 'VestingUpdated'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  An \[account\] has become fully vested. No further vesting can happen.
+ */
+export interface VestingEvent_VestingCompleted {
+    __kind: 'VestingCompleted'
+    value: Uint8Array
+}
+
+export type UtilityEvent = UtilityEvent_BatchInterrupted | UtilityEvent_BatchCompleted
+
+/**
+ *  Batch of dispatches did not complete fully. Index of first failing dispatch given, as
+ *  well as the error. \[index, error\]
+ */
+export interface UtilityEvent_BatchInterrupted {
+    __kind: 'BatchInterrupted'
+    value: [number, DispatchError]
+}
+
+/**
+ *  Batch of dispatches completed fully with no error.
+ */
+export interface UtilityEvent_BatchCompleted {
+    __kind: 'BatchCompleted'
+}
+
+export type IdentityEvent = IdentityEvent_IdentitySet | IdentityEvent_IdentityCleared | IdentityEvent_IdentityKilled | IdentityEvent_JudgementRequested | IdentityEvent_JudgementUnrequested | IdentityEvent_JudgementGiven | IdentityEvent_RegistrarAdded | IdentityEvent_SubIdentityAdded | IdentityEvent_SubIdentityRemoved | IdentityEvent_SubIdentityRevoked
+
+/**
+ *  A name was set or reset (which will remove all judgements). \[who\]
+ */
+export interface IdentityEvent_IdentitySet {
+    __kind: 'IdentitySet'
+    value: Uint8Array
+}
+
+/**
+ *  A name was cleared, and the given balance returned. \[who, deposit\]
+ */
+export interface IdentityEvent_IdentityCleared {
+    __kind: 'IdentityCleared'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  A name was removed and the given balance slashed. \[who, deposit\]
+ */
+export interface IdentityEvent_IdentityKilled {
+    __kind: 'IdentityKilled'
+    value: [Uint8Array, bigint]
+}
+
+/**
+ *  A judgement was asked from a registrar. \[who, registrar_index\]
+ */
+export interface IdentityEvent_JudgementRequested {
+    __kind: 'JudgementRequested'
+    value: [Uint8Array, number]
+}
+
+/**
+ *  A judgement request was retracted. \[who, registrar_index\]
+ */
+export interface IdentityEvent_JudgementUnrequested {
+    __kind: 'JudgementUnrequested'
+    value: [Uint8Array, number]
+}
+
+/**
+ *  A judgement was given by a registrar. \[target, registrar_index\]
+ */
+export interface IdentityEvent_JudgementGiven {
+    __kind: 'JudgementGiven'
+    value: [Uint8Array, number]
+}
+
+/**
+ *  A registrar was added. \[registrar_index\]
+ */
+export interface IdentityEvent_RegistrarAdded {
+    __kind: 'RegistrarAdded'
+    value: number
+}
+
+/**
+ *  A sub-identity was added to an identity and the deposit paid. \[sub, main, deposit\]
+ */
+export interface IdentityEvent_SubIdentityAdded {
+    __kind: 'SubIdentityAdded'
+    value: [Uint8Array, Uint8Array, bigint]
+}
+
+/**
+ *  A sub-identity was removed from an identity and the deposit freed.
+ *  \[sub, main, deposit\]
+ */
+export interface IdentityEvent_SubIdentityRemoved {
+    __kind: 'SubIdentityRemoved'
+    value: [Uint8Array, Uint8Array, bigint]
+}
+
+/**
+ *  A sub-identity was cleared, and the given deposit repatriated from the
+ *  main identity account to the sub-identity account. \[sub, main, deposit\]
+ */
+export interface IdentityEvent_SubIdentityRevoked {
+    __kind: 'SubIdentityRevoked'
+    value: [Uint8Array, Uint8Array, bigint]
+}
+
+export type ProxyEvent = ProxyEvent_ProxyExecuted | ProxyEvent_AnonymousCreated | ProxyEvent_Announced
+
+/**
+ *  A proxy was executed correctly, with the given \[result\].
+ */
+export interface ProxyEvent_ProxyExecuted {
+    __kind: 'ProxyExecuted'
+    value: DispatchResult
+}
+
+/**
+ *  Anonymous account has been created by new proxy with given
+ *  disambiguation index and proxy type. \[anonymous, who, proxy_type, disambiguation_index\]
+ */
+export interface ProxyEvent_AnonymousCreated {
+    __kind: 'AnonymousCreated'
+    value: [Uint8Array, Uint8Array, ProxyType, number]
+}
+
+/**
+ *  An announcement was placed to make a call in the future. \[real, proxy, call_hash\]
+ */
+export interface ProxyEvent_Announced {
+    __kind: 'Announced'
+    value: [Uint8Array, Uint8Array, Uint8Array]
+}
+
+export type MultisigEvent = MultisigEvent_NewMultisig | MultisigEvent_MultisigApproval | MultisigEvent_MultisigExecuted | MultisigEvent_MultisigCancelled
+
+/**
+ *  A new multisig operation has begun. \[approving, multisig, call_hash\]
+ */
+export interface MultisigEvent_NewMultisig {
+    __kind: 'NewMultisig'
+    value: [Uint8Array, Uint8Array, Uint8Array]
+}
+
+/**
+ *  A multisig operation has been approved by someone.
+ *  \[approving, timepoint, multisig, call_hash\]
+ */
+export interface MultisigEvent_MultisigApproval {
+    __kind: 'MultisigApproval'
+    value: [Uint8Array, Timepoint, Uint8Array, Uint8Array]
+}
+
+/**
+ *  A multisig operation has been executed. \[approving, timepoint, multisig, call_hash\]
+ */
+export interface MultisigEvent_MultisigExecuted {
+    __kind: 'MultisigExecuted'
+    value: [Uint8Array, Timepoint, Uint8Array, Uint8Array, DispatchResult]
+}
+
+/**
+ *  A multisig operation has been cancelled. \[cancelling, timepoint, multisig, call_hash\]
+ */
+export interface MultisigEvent_MultisigCancelled {
+    __kind: 'MultisigCancelled'
+    value: [Uint8Array, Timepoint, Uint8Array, Uint8Array]
+}
+
+export type BountiesEvent = BountiesEvent_BountyProposed | BountiesEvent_BountyRejected | BountiesEvent_BountyBecameActive | BountiesEvent_BountyAwarded | BountiesEvent_BountyClaimed | BountiesEvent_BountyCanceled | BountiesEvent_BountyExtended
+
+/**
+ *  New bounty proposal. \[index\]
+ */
+export interface BountiesEvent_BountyProposed {
+    __kind: 'BountyProposed'
+    value: number
+}
+
+/**
+ *  A bounty proposal was rejected; funds were slashed. \[index, bond\]
+ */
+export interface BountiesEvent_BountyRejected {
+    __kind: 'BountyRejected'
+    value: [number, bigint]
+}
+
+/**
+ *  A bounty proposal is funded and became active. \[index\]
+ */
+export interface BountiesEvent_BountyBecameActive {
+    __kind: 'BountyBecameActive'
+    value: number
+}
+
+/**
+ *  A bounty is awarded to a beneficiary. \[index, beneficiary\]
+ */
+export interface BountiesEvent_BountyAwarded {
+    __kind: 'BountyAwarded'
+    value: [number, Uint8Array]
+}
+
+/**
+ *  A bounty is claimed by beneficiary. \[index, payout, beneficiary\]
+ */
+export interface BountiesEvent_BountyClaimed {
+    __kind: 'BountyClaimed'
+    value: [number, bigint, Uint8Array]
+}
+
+/**
+ *  A bounty is cancelled. \[index\]
+ */
+export interface BountiesEvent_BountyCanceled {
+    __kind: 'BountyCanceled'
+    value: number
+}
+
+/**
+ *  A bounty expiry is extended. \[index\]
+ */
+export interface BountiesEvent_BountyExtended {
+    __kind: 'BountyExtended'
+    value: number
+}
+
+export type TipsEvent = TipsEvent_NewTip | TipsEvent_TipClosing | TipsEvent_TipClosed | TipsEvent_TipRetracted | TipsEvent_TipSlashed
+
+/**
+ *  A new tip suggestion has been opened. \[tip_hash\]
+ */
+export interface TipsEvent_NewTip {
+    __kind: 'NewTip'
+    value: Uint8Array
+}
+
+/**
+ *  A tip suggestion has reached threshold and is closing. \[tip_hash\]
+ */
+export interface TipsEvent_TipClosing {
+    __kind: 'TipClosing'
+    value: Uint8Array
+}
+
+/**
+ *  A tip suggestion has been closed. \[tip_hash, who, payout\]
+ */
+export interface TipsEvent_TipClosed {
+    __kind: 'TipClosed'
+    value: [Uint8Array, Uint8Array, bigint]
+}
+
+/**
+ *  A tip suggestion has been retracted. \[tip_hash\]
+ */
+export interface TipsEvent_TipRetracted {
+    __kind: 'TipRetracted'
+    value: Uint8Array
+}
+
+/**
+ *  A tip suggestion has been slashed. \[tip_hash, finder, deposit\]
+ */
+export interface TipsEvent_TipSlashed {
+    __kind: 'TipSlashed'
+    value: [Uint8Array, Uint8Array, bigint]
+}
+
+export type ElectionProviderMultiPhaseEvent = ElectionProviderMultiPhaseEvent_SolutionStored | ElectionProviderMultiPhaseEvent_ElectionFinalized | ElectionProviderMultiPhaseEvent_Rewarded | ElectionProviderMultiPhaseEvent_Slashed | ElectionProviderMultiPhaseEvent_SignedPhaseStarted | ElectionProviderMultiPhaseEvent_UnsignedPhaseStarted
+
+/**
+ *  A solution was stored with the given compute.
+ * 
+ *  If the solution is signed, this means that it hasn't yet been processed. If the
+ *  solution is unsigned, this means that it has also been processed.
+ */
+export interface ElectionProviderMultiPhaseEvent_SolutionStored {
+    __kind: 'SolutionStored'
+    value: ElectionCompute
+}
+
+/**
+ *  The election has been finalized, with `Some` of the given computation, or else if the
+ *  election failed, `None`.
+ */
+export interface ElectionProviderMultiPhaseEvent_ElectionFinalized {
+    __kind: 'ElectionFinalized'
+    value: (ElectionCompute | undefined)
+}
+
+/**
+ *  An account has been rewarded for their signed submission being finalized.
+ */
+export interface ElectionProviderMultiPhaseEvent_Rewarded {
+    __kind: 'Rewarded'
+    value: Uint8Array
+}
+
+/**
+ *  An account has been slashed for submitting an invalid signed submission.
+ */
+export interface ElectionProviderMultiPhaseEvent_Slashed {
+    __kind: 'Slashed'
+    value: Uint8Array
+}
+
+/**
+ *  The signed phase of the given round has started.
+ */
+export interface ElectionProviderMultiPhaseEvent_SignedPhaseStarted {
+    __kind: 'SignedPhaseStarted'
+    value: number
+}
+
+/**
+ *  The unsigned phase of the given round has started.
+ */
+export interface ElectionProviderMultiPhaseEvent_UnsignedPhaseStarted {
+    __kind: 'UnsignedPhaseStarted'
+    value: number
 }
 
 export interface Digest {
@@ -4529,18 +5862,88 @@ export interface AccountVoteSplit {
     nay: bigint
 }
 
-export type AllowedSlots = AllowedSlots_PrimarySlots | AllowedSlots_PrimaryAndSecondaryPlainSlots | AllowedSlots_PrimaryAndSecondaryVRFSlots
-
-export interface AllowedSlots_PrimarySlots {
-    __kind: 'PrimarySlots'
+export interface DispatchInfo {
+    weight: bigint
+    class: DispatchClass
+    paysFee: Pays
 }
 
-export interface AllowedSlots_PrimaryAndSecondaryPlainSlots {
-    __kind: 'PrimaryAndSecondaryPlainSlots'
+export type DispatchError = DispatchError_Other | DispatchError_CannotLookup | DispatchError_BadOrigin | DispatchError_Module | DispatchError_ConsumerRemaining | DispatchError_NoProviders | DispatchError_Token | DispatchError_Arithmetic
+
+export interface DispatchError_Other {
+    __kind: 'Other'
 }
 
-export interface AllowedSlots_PrimaryAndSecondaryVRFSlots {
-    __kind: 'PrimaryAndSecondaryVRFSlots'
+export interface DispatchError_CannotLookup {
+    __kind: 'CannotLookup'
+}
+
+export interface DispatchError_BadOrigin {
+    __kind: 'BadOrigin'
+}
+
+export interface DispatchError_Module {
+    __kind: 'Module'
+    value: DispatchErrorModule
+}
+
+export interface DispatchError_ConsumerRemaining {
+    __kind: 'ConsumerRemaining'
+}
+
+export interface DispatchError_NoProviders {
+    __kind: 'NoProviders'
+}
+
+export interface DispatchError_Token {
+    __kind: 'Token'
+    value: TokenError
+}
+
+export interface DispatchError_Arithmetic {
+    __kind: 'Arithmetic'
+    value: ArithmeticError
+}
+
+export type DispatchResult = DispatchResult_Ok | DispatchResult_Err
+
+export interface DispatchResult_Ok {
+    __kind: 'Ok'
+}
+
+export interface DispatchResult_Err {
+    __kind: 'Err'
+    value: DispatchError
+}
+
+export type BalanceStatus = BalanceStatus_Free | BalanceStatus_Reserved
+
+export interface BalanceStatus_Free {
+    __kind: 'Free'
+}
+
+export interface BalanceStatus_Reserved {
+    __kind: 'Reserved'
+}
+
+export interface FullIdentification {
+    total: bigint
+    own: bigint
+    others: IndividualExposure[]
+}
+
+export type VoteThreshold = VoteThreshold_SuperMajorityApprove | VoteThreshold_SuperMajorityAgainst | VoteThreshold_SimpleMajority
+
+export interface VoteThreshold_SuperMajorityApprove {
+    __kind: 'SuperMajorityApprove'
+}
+
+export interface VoteThreshold_SuperMajorityAgainst {
+    __kind: 'SuperMajorityAgainst'
+}
+
+export interface VoteThreshold_SimpleMajority {
+    __kind: 'SimpleMajority'
 }
 
 export type DigestItem = DigestItem_Other | DigestItem_AuthoritiesChange | DigestItem_ChangesTrieRoot | DigestItem_SealV0 | DigestItem_Consensus | DigestItem_Seal | DigestItem_PreRuntime | DigestItem_ChangesTrieSignal | DigestItem_RuntimeEnvironmentUpdated
@@ -4594,6 +5997,88 @@ export interface GrandpaEquivocationValue {
     identity: Uint8Array
     first: [GrandpaPrevote, Uint8Array]
     second: [GrandpaPrevote, Uint8Array]
+}
+
+export type DispatchClass = DispatchClass_Normal | DispatchClass_Operational | DispatchClass_Mandatory
+
+export interface DispatchClass_Normal {
+    __kind: 'Normal'
+}
+
+export interface DispatchClass_Operational {
+    __kind: 'Operational'
+}
+
+export interface DispatchClass_Mandatory {
+    __kind: 'Mandatory'
+}
+
+export type Pays = Pays_Yes | Pays_No
+
+export interface Pays_Yes {
+    __kind: 'Yes'
+}
+
+export interface Pays_No {
+    __kind: 'No'
+}
+
+export interface DispatchErrorModule {
+    index: number
+    error: number
+}
+
+export type TokenError = TokenError_NoFunds | TokenError_WouldDie | TokenError_BelowMinimum | TokenError_CannotCreate | TokenError_UnknownAsset | TokenError_Frozen | TokenError_Underflow | TokenError_Overflow
+
+export interface TokenError_NoFunds {
+    __kind: 'NoFunds'
+}
+
+export interface TokenError_WouldDie {
+    __kind: 'WouldDie'
+}
+
+export interface TokenError_BelowMinimum {
+    __kind: 'BelowMinimum'
+}
+
+export interface TokenError_CannotCreate {
+    __kind: 'CannotCreate'
+}
+
+export interface TokenError_UnknownAsset {
+    __kind: 'UnknownAsset'
+}
+
+export interface TokenError_Frozen {
+    __kind: 'Frozen'
+}
+
+export interface TokenError_Underflow {
+    __kind: 'Underflow'
+}
+
+export interface TokenError_Overflow {
+    __kind: 'Overflow'
+}
+
+export type ArithmeticError = ArithmeticError_Underflow | ArithmeticError_Overflow | ArithmeticError_DivisionByZero
+
+export interface ArithmeticError_Underflow {
+    __kind: 'Underflow'
+}
+
+export interface ArithmeticError_Overflow {
+    __kind: 'Overflow'
+}
+
+export interface ArithmeticError_DivisionByZero {
+    __kind: 'DivisionByZero'
+}
+
+export interface IndividualExposure {
+    who: Uint8Array
+    value: bigint
 }
 
 export type ChangesTrieSignal = ChangesTrieSignal_NewConfiguration

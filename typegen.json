@@ -1,11 +1,7 @@
 {
-  "outDir": "src/types",
-  "specVersions": "https://kusama.archive.subsquid.io/graphql",
-  "events": [
-    "Balances.Transfer"
-  ],
-  "calls": [ 
-  ],
-  "storage": [
-  ]
+  "outDir": "src/types/generated",
+  "specVersions": "https://polkadot.archive.subsquid.io/graphql",
+  "events": true,
+  "calls": true,
+  "storage": true
 }
