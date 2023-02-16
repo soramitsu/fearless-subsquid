@@ -50,24 +50,4 @@ export async function handleAccumulatedStake(ctx: EventHandlerContext | CommonHa
   await ctx.store.save(accumulatedStake);
 
   return newAccumulatedAmount;
-
-  // const accumulatedStake = await ctx.store.get(AccumulatedStake, accountId)
-
-  // if (accumulatedStake !== undefined) {
-  //   const oldAccumulatedAmount = BigInt(accumulatedStake.amount).valueOf();
-  //   const newAccumulatedAmount = oldAccumulatedAmount + amount;
-
-  //   accumulatedStake.amount = newAccumulatedAmount;
-
-  //   await ctx.store.save(accumulatedStake);
-
-  //   return newAccumulatedAmount;
-  // }
-
-
-  // let newAccumulatedStake = new AccumulatedStake({ id: accountId, amount });
-
-  // await ctx.store.save(newAccumulatedStake);
-
-  // return amount;
 }

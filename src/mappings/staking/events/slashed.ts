@@ -1,5 +1,5 @@
 import { UnknownVersionError } from '../../../common/errors'
-import { encodeId, isStorageCorrupted } from '../../../common/tools'
+import { encodeId } from '../../../common/tools'
 import { StakingSlashedEvent, StakingSlashEvent } from '../../../types/generated/events'
 import { EventContext, EventHandlerContext } from '../../types/contexts'
 import { ActionData } from '../../types/data'
@@ -13,7 +13,7 @@ interface EventData {
   account: Uint8Array
 }
 
-function getSlashedEvent(ctx: EventContext): EventData {
+function getSlashedEvent(ctx: EventContext): EventData | undefined {
   const event = new StakingSlashedEvent(ctx)
 
   if (event.isV9090) {
@@ -30,12 +30,13 @@ function getSlashedEvent(ctx: EventContext): EventData {
       account,
       amount,
     }
-  } else {
-    throw new UnknownVersionError(event.constructor.name)
   }
+  //  else {
+  //   throw new UnknownVersionError(event.constructor.name)
+  // }
 }
 
-function getSlashEvent(ctx: EventHandlerContext): EventData {
+function getSlashEvent(ctx: EventHandlerContext): EventData | undefined {
   const event = new StakingSlashEvent(ctx)
 
   if (event.isV1020) {
@@ -44,13 +45,16 @@ function getSlashEvent(ctx: EventHandlerContext): EventData {
       account,
       amount,
     }
-  } else {
-    throw new UnknownVersionError(event.constructor.name)
   }
+  // else {
+  //   throw new UnknownVersionError(event.constructor.name)
+  // }
 }
 
 export async function handleSlashed(ctx: EventHandlerContext, old = false) {
   const data = old ? getSlashEvent(ctx) : getSlashedEvent(ctx)
+
+  if (!data) return
 
   await saveSlash(ctx, {
     id: ctx.event.id,

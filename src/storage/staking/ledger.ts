@@ -5,30 +5,44 @@ import { StakingLedgerStorage } from '../../types/generated/storage'
 import { BlockContext as StorageContext } from '../../types/generated/support'
 
 interface StorageData {
-    stash: Uint8Array
-    total: bigint
+    stash: string
     active: bigint
 }
 
 async function getStorageData(
     ctx: StorageContext,
-    account: Uint8Array[]
+    accounts: string[]
 ): Promise<(StorageData | undefined)[] | undefined> {
     const storage = new StakingLedgerStorage(ctx)
     if (!storage.isExists) return undefined
 
+    const u8s = accounts.map((a) => decodeId(a))
+
     try {
         if (storage.isV1020) {
-            return await storage.getManyAsV1020(account)
+            return await storage.asV1020
+                .getMany(u8s)
+                .then((data) =>
+                    data.map((ledger) => ledger && { active: ledger.active, stash: encodeId(ledger.stash) })
+                )
         } else if (storage.isV1050) {
-            return await storage.getManyAsV1050(account)
+            return await storage.asV1050
+                .getMany(u8s)
+                .then((data) =>
+                    data.map((ledger) => ledger && { active: ledger.active, stash: encodeId(ledger.stash) })
+                )
         } else if (storage.isV1058) {
-            return await storage.getManyAsV1058(account)
+            return await storage.asV1058
+                .getMany(u8s)
+                .then((data) =>
+                    data.map((ledger) => ledger && { active: ledger.active, stash: encodeId(ledger.stash) })
+                )
         } else {
             throw new UnknownVersionError(storage.constructor.name)
         }
     } catch (e) {
         if (isStorageCorrupted(ctx as CommonHandlerContext)) {
+            console.log(e)
             return undefined
         } else {
             throw e
@@ -42,26 +56,13 @@ export interface Ledger {
 }
 
 export const ledger = {
-    get: async (ctx: StorageContext, account: string): Promise<Ledger | undefined> => {
-        const u8 = decodeId(account)
-        if (!u8) return undefined
-
-        const data = await getStorageData(ctx, [u8])
-        if (!data || !data[0]) return undefined
-
-        return {
-            stash: encodeId(data[0].stash),
-            active: data[0].active,
-        }
+    async get(ctx: StorageContext, controllerId: string): Promise<Ledger | undefined> {
+        return await this.getMany(ctx, [controllerId]).then((data) => data?.[0])
     },
-    getMany: async (ctx: StorageContext, accounts: string[]): Promise<(Ledger | undefined)[] | undefined> => {
-        if (accounts.length === 0) return []
-
-        const u8s = accounts.map((a) => decodeId(a))
-
-        const data = await getStorageData(ctx, u8s)
+    async getMany(ctx: StorageContext, controllerIds: string[]): Promise<(Ledger | undefined)[] | undefined> {
+        const data = await getStorageData(ctx, controllerIds)
         if (!data) return undefined
 
-        return data.map((d) => (d ? { stash: encodeId(d.stash), active: d.active } : undefined))
+        return data
     },
 }

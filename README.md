@@ -1,3 +1,13 @@
+# STEPS
+- npx squid-substrate-typegen typegen.json
+- npx squid-typeorm-codegen
+- docker compose up -d
+- npx squid-typeorm-migration generate
+- npx squid-typeorm-migration create
+- npx squid-typeorm-migration apply
+- npm run build
+
+
 # Squid template project
 
 A starter [Squid](https://subsquid.io) project to demonstrate its structure and conventions.
