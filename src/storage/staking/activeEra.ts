@@ -11,8 +11,8 @@ async function getStorageData(ctx: StorageContext): Promise<StorageData | undefi
     const storage = new StakingActiveEraStorage(ctx)
     if (!storage.isExists) return undefined
 
-    if (storage.isV1050) {
-        const data = await storage.getAsV1050()
+    if (storage.isV0) {
+        const data = await storage.asV0.get()
         if (!data) return undefined
         return {
             index: data.index,
