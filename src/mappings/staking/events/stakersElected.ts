@@ -1,4 +1,4 @@
-import {  EventHandlerContext } from '../../types/contexts'
+import { EventHandlerContext } from '../../types/contexts'
 import {
   EraValidatorInfo, IndividualExposure
 } from '../../../model'
@@ -30,6 +30,7 @@ export async function saveEraValidatorInfo(ctx: EventHandlerContext, data: EraVa
   if (!exposures) return
 
   exposures.forEach(async ([[, validatorId], { others: othersTemp, own, total }]) => {
+    // @ts-ignore
     const others = othersTemp.map(({ value, who }) => new IndividualExposure({
       who: encodeId(who),
       value: value.toString()

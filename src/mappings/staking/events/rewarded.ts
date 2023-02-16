@@ -15,22 +15,24 @@ interface EventData {
 }
 
 function getRewardedEventData(ctx: EventContext): EventData | undefined {
-  const event = new StakingRewardedEvent(ctx)
+  const data = new StakingRewardedEvent(ctx)
 
-  if (event.isV9090) {
-    const [account, amount] = event.asV9090
-
+  if (data.isV9090) {
+    const [account, amount] = data.asV9090
     return {
       account,
       amount,
     }
+  } else if (data.isV9300) {
+    const { stash, amount } = data.asV9300
+    return {
+      account: stash,
+      amount,
+    }
   }
-  // else {
-  //   throw new UnknownVersionError(event.constructor.name)
-  // }
 }
 
-function getRewardEventData(ctx: EventHandlerContext): EventData | undefined {
+function getRewardEventData(ctx: EventContext): EventData | undefined {
   const event = new StakingRewardEvent(ctx)
 
   if (event.isV0) {
@@ -41,9 +43,7 @@ function getRewardEventData(ctx: EventHandlerContext): EventData | undefined {
       amount,
     }
   }
-  // else {
-  //   throw new UnknownVersionError(event.constructor.name)
-  // }
+
 }
 
 export async function handleRewarded(ctx: EventHandlerContext, old = false) {
