@@ -73,10 +73,10 @@ export async function saveEraValidatorInfo(ctx: EventHandlerContext, data: EraVa
       era: currentEraData?.index,
       own,
       total,
-      others
+      others,
+      othersWho: others.map(({ who }) => who).join(' ')
     })
 
     await ctx.store.insert(eraValidator)
   })
-
 }

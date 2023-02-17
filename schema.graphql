@@ -65,6 +65,7 @@ type EraValidatorInfo @entity {
   total: BigInt!
   own: BigInt!
   others: [IndividualExposure]!
+  othersWho: String!
 }
 
 type IndividualExposure @jsonField {
