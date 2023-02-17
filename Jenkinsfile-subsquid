@@ -65,13 +65,7 @@ pipeline {
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd kill ${PROJECT_NAME} -f
                         """
-                        if ({ not { anyOf {        
-                            expression {params.restart}
-                            expression {params.hardReset}
-                        }
-                            expression {params.fullClean}
-                            }
-                        })
+                        if ({expression {params.fullClean}})
                         sh """
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd init ${PROJECT_NAME} --template .
@@ -79,9 +73,6 @@ pipeline {
                         """
                         if ({expression { params.restart }})
                         sh """
-                            apt-get update
-                            apt-get install make git curl -y
-                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd redeploy ${PROJECT_NAME}@v1
                         """
