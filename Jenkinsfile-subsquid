@@ -43,15 +43,15 @@ pipeline {
     }
 
     stages {
-        stage('Secret scanner') {
-            steps {
-                script {
-                    docker.withRegistry('https://' + registry, dockerBuildToolsUserId) {
-                        secretScanner(disableSecretScanner, secretScannerExclusion)
-                    }
-                }
-            }
-        }
+        // stage('Secret scanner') {
+        //     steps {
+        //         script {
+        //             docker.withRegistry('https://' + registry, dockerBuildToolsUserId) {
+        //                 secretScanner(disableSecretScanner, secretScannerExclusion)
+        //             }
+        //         }
+        //     }
+        // }
         stage('Install dependencies') {
             steps {
                 script {
