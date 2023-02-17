@@ -61,41 +61,44 @@ pipeline {
                             apt-get install make git curl -y
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
-                        if ({expression {params.fullClean}})
+                        if ({expression {params.fullClean}}) {
                         sh """
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd kill ${PROJECT_NAME} -f
                         """
-                        if ({expression {params.fullClean}})
-                        if ({expression {params.deploy}})
+                        }
+                        if ({expression {params.deploy}}) {
                         sh """
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd init ${PROJECT_NAME} --template .
                             sqd deploy ${PROJECT_NAME}  --update --no-stream-logs
                         """
-                        if ({expression { params.restart }})
+                        }
+                        if ({expression { params.restart }}){
                         sh """
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd redeploy ${PROJECT_NAME}@v1
                         """
-                        if ({expression {params.hardReset}})
+                        }
+                        if ({expression {params.hardReset}}) {
                         sh """
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd init ${PROJECT_NAME} --template .
                             sqd deploy ${PROJECT_NAME} -u -r --no-stream-logs
                         """
+                        }
                     }
                 }
             }
         }
     }
     post {
-        always {
-            pushNotiTelegram(
-              status: statusNotif,
-              telegramChatId: "${TELEGRAM_CHAT_ID}"
-            )
-        }
+        // always {
+        //     pushNotiTelegram(
+        //       status: statusNotif,
+        //       telegramChatId: "${TELEGRAM_CHAT_ID}"
+        //     )
+        // }
         cleanup { cleanWs() }
     }
 }
