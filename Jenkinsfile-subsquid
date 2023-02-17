@@ -3,13 +3,12 @@
 String agentLabel            = 'docker-build-agent'
 String envImageName          = 'node:16.18.1-bullseye-slim'
 String subsquidToken         = 'subsquidToken'
-String targetProject         =  "fearless-x-polkadot-test"
+String targetProject         =  "fearless-x-polkadot"
 List   jobParams             = [
     string(defaultValue: targetProject, name: 'targetProject', trim: true),
     booleanParam(defaultValue: false, name: 'fullClean'),
     booleanParam(defaultValue: false, name: 'restart'),
     booleanParam(defaultValue: false, name: 'hardReset'),
-    booleanParam(defaultValue: false, name: 'deploy'),
     ]
 String registry               = 'docker.soramitsu.co.jp'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
@@ -37,11 +36,12 @@ pipeline {
 
 
     environment {
-        SUBSQUID_CLI = '2.1.2'
+        SUBSQUID_CLI = '2.0.3'
         SUBSQUID_KEY = credentials("${subsquidToken}")
         PROJECT_NAME = "${targetProject}"
         TELEGRAM_CHAT_ID = credentials("${telegramChatId}")
     }
+
     stages {
         stage('Secret scanner') {
             steps {
@@ -52,7 +52,10 @@ pipeline {
                 }
             }
         }
-        stage('Params') {
+        stage('Install dependencies') {
+            when {
+                expression {params.fullClean}
+            }
             steps {
                 script {
                     docker.image("${envImageName}").inside() {
@@ -61,33 +64,52 @@ pipeline {
                             apt-get install make git curl -y
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
-                        if (expression {params.fullClean}) {
-                        sh """
-                            sqd auth -k ${SUBSQUID_KEY}
-                            sqd kill ${PROJECT_NAME} -f
-                        """
-                        }
-                        else if (expression {params.deploy}) {
+                    }
+                }
+            }
+        }
+        stage('install dependencies & Deploy') {
+            when { not { anyOf {        
+                expression {params.restart}
+                expression {params.hardReset}
+                }
+                expression {params.fullClean}
+                }
+            }
+            steps {
+                script {
                         sh """
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd init ${PROJECT_NAME} --template .
                             sqd deploy ${PROJECT_NAME}  --update --no-stream-logs
                         """
-                        }
-                        else if (expression { params.restart }){
-                        sh """
-                            sqd auth -k ${SUBSQUID_KEY}
-                            sqd redeploy ${PROJECT_NAME}@v1
-                        """
-                        }
-                        else if (expression {params.hardReset}) {
-                        sh """
-                            sqd auth -k ${SUBSQUID_KEY}
-                            sqd init ${PROJECT_NAME} --template .
-                            sqd deploy ${PROJECT_NAME} -u -r --no-stream-logs
-                        """
-                        }
+                }
+            }
+        }
+        stage('Restart squid if needed') {
+            when {
+                expression {params.restart}
+            }
+            steps {
+                script {
+                    sh """
+                        sqd auth -k ${SUBSQUID_KEY}
+                        sqd redeploy ${PROJECT_NAME}@v1
+                    """
                     }
+                }
+        }
+        stage('Hard reset squid if needed') {
+            when {
+                expression {params.hardReset}
+            }
+            steps {
+                script {
+                    sh """
+                        sqd auth -k ${SUBSQUID_KEY}
+                        sqd init ${PROJECT_NAME} --template .
+                        sqd deploy ${PROJECT_NAME} -u -r --no-stream-logs
+                    """
                 }
             }
         }
@@ -97,7 +119,7 @@ pipeline {
         //     pushNotiTelegram(
         //       status: statusNotif,
         //       telegramChatId: "${TELEGRAM_CHAT_ID}"
-        //     )
+        //     ) 
         // }
         cleanup { cleanWs() }
     }
