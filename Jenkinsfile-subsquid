@@ -2,7 +2,6 @@
 
 String agentLabel            = 'docker-build-agent'
 String envImageName          = 'node:16.18.1-bullseye-slim'
-String agentImage            = 'node:16-ubuntu'
 String subsquidToken         = 'subsquidToken'
 String targetProject         =  "fearless-x-polkadot-test"
 List   jobParams             = [
@@ -13,7 +12,7 @@ List   jobParams             = [
     booleanParam(defaultValue: false, name: 'deploy'),
     ]
 String registry               = 'docker.soramitsu.co.jp'
-String registryCredentialsId = 'bot-build-tools-ro'
+String dockerBuildToolsUserId = 'bot-build-tools-ro'
 Boolean disableSecretScanner  = false
 String secretScannerExclusion = '.*squid.yaml$|.docker-compose.yml\$'
 String telegramChatId    = 'telegram-deploy-chat-id'
@@ -29,11 +28,10 @@ pipeline {
         timestamps()
         disableConcurrentBuilds()
     }
-
     agent {
       docker {
         label agentLabel
-        image "docker.soramitsu.co.jp/build-tools/" + agentImage
+        image envImageName
       }
     }
 
@@ -48,7 +46,7 @@ pipeline {
         stage('Secret scanner') {
             steps {
                 script {
-                    docker.withRegistry('https://' + registry, registryCredentialsId) {
+                    docker.withRegistry('https://' + registry, dockerBuildToolsUserId) {
                         secretScanner(disableSecretScanner, secretScannerExclusion)
                     }
                 }
@@ -57,15 +55,11 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 script {
-                    docker.withRegistry('https://' + registry, registryCredentialsId){
-                        docker.image( "docker.soramitsu.co.jp/build-tools/" + agentImage ).inside(){
                     sh """
                         apt-get update
                         apt-get install make git curl -y
                         npm install -g @subsquid/cli@${SUBSQUID_CLI}
                     """
-                        }
-                    }
                 }
             }
         }
