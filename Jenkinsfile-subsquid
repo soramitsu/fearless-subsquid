@@ -2,6 +2,7 @@
 
 String agentLabel            = 'docker-build-agent'
 String envImageName          = 'node:16.18.1-bullseye-slim'
+String agentImage            = 'node:16-ubuntu'
 String subsquidToken         = 'subsquidToken'
 String targetProject         =  "fearless-x-polkadot-test"
 List   jobParams             = [
@@ -18,7 +19,6 @@ String secretScannerExclusion = '.*squid.yaml$|.docker-compose.yml\$'
 String telegramChatId    = 'telegram-deploy-chat-id'
 Boolean statusNotif      = true
 
-
 properties([
     parameters( jobParams )
 ])
@@ -33,7 +33,7 @@ pipeline {
     agent {
       docker {
         label agentLabel
-        image envImageName
+        image "docker.soramitsu.co.jp/build-tools/" + agentImage
       }
     }
 
@@ -57,13 +57,11 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 script {
-                    docker.image("${envImageName}").inside() {
-                        sh """
-                            apt-get update
-                            apt-get install make git curl -y
-                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
-                        """
-                    }
+                    sh """
+                        apt-get update
+                        apt-get install make git curl -y
+                        npm install -g @subsquid/cli@${SUBSQUID_CLI}
+                    """
                 }
             }
         }
