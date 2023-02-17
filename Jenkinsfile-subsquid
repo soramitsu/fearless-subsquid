@@ -9,6 +9,7 @@ List   jobParams             = [
     booleanParam(defaultValue: false, name: 'fullClean'),
     booleanParam(defaultValue: false, name: 'restart'),
     booleanParam(defaultValue: false, name: 'hardReset'),
+    booleanParam(defaultValue: false, name: 'deploy'),
     ]
 String registry               = 'docker.soramitsu.co.jp'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
@@ -66,6 +67,7 @@ pipeline {
                             sqd kill ${PROJECT_NAME} -f
                         """
                         if ({expression {params.fullClean}})
+                        if ({expression {params.deploy}})
                         sh """
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd init ${PROJECT_NAME} --template .
