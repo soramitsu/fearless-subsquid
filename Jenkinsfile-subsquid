@@ -3,7 +3,7 @@
 String agentLabel            = 'docker-build-agent'
 String envImageName          = 'node:16.18.1-bullseye-slim'
 String subsquidToken         = 'subsquidToken'
-String targetProject         =  "fearless-x-polkadot"
+String targetProject         =  "fearless-x-polkadot-test"
 List   jobParams             = [
     string(defaultValue: targetProject, name: 'targetProject', trim: true),
     booleanParam(defaultValue: false, name: 'fullClean'),
