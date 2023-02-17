@@ -31,8 +31,10 @@ pipeline {
     }
 
     agent {
+      docker {
         label agentLabel
         image envImageName
+      }
     }
 
     environment {
