@@ -13,7 +13,7 @@ List   jobParams             = [
     booleanParam(defaultValue: false, name: 'deploy'),
     ]
 String registry               = 'docker.soramitsu.co.jp'
-String dockerBuildToolsUserId = 'bot-build-tools-ro'
+String registryCredentialsId = 'bot-build-tools-ro'
 Boolean disableSecretScanner  = false
 String secretScannerExclusion = '.*squid.yaml$|.docker-compose.yml\$'
 String telegramChatId    = 'telegram-deploy-chat-id'
@@ -48,7 +48,7 @@ pipeline {
         stage('Secret scanner') {
             steps {
                 script {
-                    docker.withRegistry('https://' + registry, dockerBuildToolsUserId) {
+                    docker.withRegistry('https://' + registry, registryCredentialsId) {
                         secretScanner(disableSecretScanner, secretScannerExclusion)
                     }
                 }
@@ -57,7 +57,7 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 script {
-                    docker.withRegistry('https://' + registry, dockerBuildToolsUserId){
+                    docker.withRegistry('https://' + registry, registryCredentialsId){
                         docker.image( "docker.soramitsu.co.jp/build-tools/" + agentImage ).inside(){
                     sh """
                         apt-get update
