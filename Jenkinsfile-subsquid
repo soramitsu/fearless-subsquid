@@ -64,6 +64,7 @@ pipeline {
                         apt-get install make git curl -y
                         npm install -g @subsquid/cli@${SUBSQUID_CLI}
                     """
+                        }
                     }
                 }
             }
