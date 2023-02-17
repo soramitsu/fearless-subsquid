@@ -60,24 +60,24 @@ pipeline {
                             apt-get install make git curl -y
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
-                        when {expression {params.fullClean}}
+                        if ({expression {params.fullClean}})
                         sh """
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd kill ${PROJECT_NAME} -f
                         """
-                        when { not { anyOf {        
+                        if ({ not { anyOf {        
                             expression {params.restart}
                             expression {params.hardReset}
                         }
                             expression {params.fullClean}
                             }
-                        }
+                        })
                         sh """
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd init ${PROJECT_NAME} --template .
                             sqd deploy ${PROJECT_NAME}  --update --no-stream-logs
                         """
-                        when {expression { params.restart }}
+                        if ({expression { params.restart }})
                         sh """
                             apt-get update
                             apt-get install make git curl -y
@@ -85,7 +85,7 @@ pipeline {
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd redeploy ${PROJECT_NAME}@v1
                         """
-                        when {expression {params.hardReset}}
+                        if ({expression {params.hardReset}})
                         sh """
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd init ${PROJECT_NAME} --template .
