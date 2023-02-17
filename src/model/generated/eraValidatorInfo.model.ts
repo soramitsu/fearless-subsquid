@@ -27,4 +27,7 @@ export class EraValidatorInfo {
 
     @Column_("jsonb", {transformer: {to: obj => obj.map((val: any) => val == null ? undefined : val.toJSON()), from: obj => obj == null ? undefined : marshal.fromList(obj, val => val == null ? undefined : new IndividualExposure(undefined, val))}, nullable: false})
     others!: (IndividualExposure | undefined | null)[]
+
+    @Column_("text", {nullable: false})
+    othersWho!: string
 }
