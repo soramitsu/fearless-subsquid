@@ -32,9 +32,8 @@ pipeline {
 
     agent {
         label agentLabel
+        image envImageName
     }
-
-
 
     environment {
         SUBSQUID_CLI = '2.0.3'
