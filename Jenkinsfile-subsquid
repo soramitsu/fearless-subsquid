@@ -63,6 +63,21 @@ pipeline {
                 }
             }
         }
+        stage('Remove squid if needed') {
+            when {
+                expression {params.fullClean}
+            }
+            steps {
+                script {
+                    docker.image("${envImageName}").inside() {
+                        sh """
+                            sqd auth -k ${SUBSQUID_KEY}
+                            sqd kill ${PROJECT_NAME} -f
+                        """
+                    }
+                }
+            }
+        }
         stage('install dependencies & Deploy') {
             when {  anyOf {        
                 expression {params.fullClean}
@@ -81,7 +96,9 @@ pipeline {
         }
         stage('Restart squid if needed') {
             when {
-                expression {params.restart}
+                expression {
+                    params.restart
+                }
             }
             steps {
                 script {
