@@ -29,10 +29,7 @@ pipeline {
         disableConcurrentBuilds()
     }
     agent {
-      docker {
         label agentLabel
-        image envImageName
-      }
     }
 
     environment {
@@ -53,6 +50,9 @@ pipeline {
             }
         }
         stage('Install dependencies') {
+            agent {
+                docker { image envImageName }
+            }
             steps {
                 script {
                     docker.image("${envImageName}").inside() {
