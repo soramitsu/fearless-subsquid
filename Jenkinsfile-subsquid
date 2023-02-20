@@ -53,7 +53,6 @@ pipeline {
             agent {
                 docker {
                     image envImageName
-                    reuseNode true
                 }
             }
             steps {
@@ -69,7 +68,6 @@ pipeline {
         stage('Remove squid if needed') {
             agent {
                 docker {
-                    image envImageName
                     reuseNode true
                 }
             }
@@ -88,7 +86,6 @@ pipeline {
         stage('Deploy') {
             agent {
                 docker {
-                    image envImageName
                     reuseNode true
                 }
             }
