@@ -43,23 +43,26 @@ pipeline {
     }
 
     stages {
-        // stage('Secret scanner') {
-        //     steps {
-        //         script {
-        //             docker.withRegistry('https://' + registry, dockerBuildToolsUserId) {
-        //                 secretScanner(disableSecretScanner, secretScannerExclusion)
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Secret scanner') {
+            steps {
+                script {
+                    docker.withRegistry('https://' + registry, dockerBuildToolsUserId) {
+                        secretScanner(disableSecretScanner, secretScannerExclusion)
+                    }
+                }
+            }
+        }
         stage('Install dependencies') {
             steps {
                 script {
-                    sh """
-                        apt-get update
-                        apt-get install make git curl -y
-                        npm install -g @subsquid/cli@${SUBSQUID_CLI}
-                    """
+                    docker.image("${envImageName}").inside() {
+                        sh """
+                            apt-get update
+                            apt-get install make git curl -y
+                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
+                        """
+                        reuseNode true
+                    }
                 }
             }
         }
@@ -74,11 +77,12 @@ pipeline {
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd kill ${PROJECT_NAME} -f
                         """
+                        reuseNode true
                     }
                 }
             }
         }
-        stage('install dependencies & Deploy') {
+        stage('Deploy') {
             when {  anyOf {        
                 expression {params.fullClean}
                 expression {params.deploy}
@@ -91,6 +95,7 @@ pipeline {
                         sqd init ${PROJECT_NAME} --template .
                         sqd deploy ${PROJECT_NAME}  --update --no-stream-logs
                     """
+                    reuseNode true
                 }
             }
         }
