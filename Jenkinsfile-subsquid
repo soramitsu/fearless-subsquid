@@ -28,8 +28,10 @@ pipeline {
         timestamps()
         disableConcurrentBuilds()
     }
-    agent any
-    
+    agent {
+        label agentLabel
+    }
+
     environment {
         SUBSQUID_CLI = '2.0.3'
         SUBSQUID_KEY = credentials("${subsquidToken}")
@@ -49,18 +51,18 @@ pipeline {
         }
         stage('Install dependencies') {
             agent {
-                docker { image envImageName }
+                docker {
+                    image envImageName
+                    reuseNode true
+                }
             }
             steps {
                 script {
-                    docker.image("${envImageName}").inside() {
                         sh """
                             apt-get update
                             apt-get install make git curl -y
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
-                        reuseNode true
-                    }
                 }
             }
         }
@@ -70,13 +72,10 @@ pipeline {
             }
             steps {
                 script {
-                    docker.image("${envImageName}").inside() {
                         sh """
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd kill ${PROJECT_NAME} -f
                         """
-                        reuseNode true
-                    }
                 }
             }
         }
@@ -99,9 +98,7 @@ pipeline {
         }
         stage('Restart squid if needed') {
             when {
-                expression {
-                    params.restart
-                }
+                expression {params.restart}
             }
             steps {
                 script {
@@ -109,8 +106,8 @@ pipeline {
                         sqd auth -k ${SUBSQUID_KEY}
                         sqd redeploy ${PROJECT_NAME}@v1
                     """
-                    }
                 }
+            }
         }
         stage('Hard reset squid if needed') {
             when {
