@@ -67,6 +67,12 @@ pipeline {
             }
         }
         stage('Remove squid if needed') {
+            agent {
+                docker {
+                    image envImageName
+                    reuseNode true
+                }
+            }
             when {
                 expression {params.fullClean}
             }
@@ -80,6 +86,12 @@ pipeline {
             }
         }
         stage('Deploy') {
+            agent {
+                docker {
+                    image envImageName
+                    reuseNode true
+                }
+            }
             when {  anyOf {        
                 expression {params.fullClean}
                 expression {params.deploy}
