@@ -29,8 +29,11 @@ pipeline {
         disableConcurrentBuilds()
     }
     agent {
-        label agentLabel
-        args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
+        docker {
+            image agentLabel
+            label agentLabel
+            args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
+        }
     }
 
     environment {
