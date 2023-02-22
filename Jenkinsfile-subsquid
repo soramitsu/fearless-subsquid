@@ -4,6 +4,7 @@ String agentLabel            = 'docker-build-agent'
 String envImageName          = 'node:16.18.1-bullseye-slim'
 String subsquidToken         = 'subsquidToken'
 String targetProject         =  "fearless-x-polkadot-test"
+String agentImage            =  "node:16-pnpm7"
 List   jobParams             = [
     string(defaultValue: targetProject, name: 'targetProject', trim: true),
     booleanParam(defaultValue: false, name: 'fullClean'),
@@ -11,8 +12,8 @@ List   jobParams             = [
     booleanParam(defaultValue: false, name: 'hardReset'),
     booleanParam(defaultValue: false, name: 'deploy'),
     ]
-String registry               = 'docker.soramitsu.co.jp'
-String dockerBuildToolsUserId = 'bot-build-tools-ro'
+String registryUrl            = 'docker.soramitsu.co.jp'
+String registryCredentialsId  = 'bot-build-tools-ro'
 Boolean disableSecretScanner  = false
 String secretScannerExclusion = '.*squid.yaml$|.docker-compose.yml\$'
 String telegramChatId    = 'telegram-deploy-chat-id'
@@ -29,7 +30,12 @@ pipeline {
         disableConcurrentBuilds()
     }
     agent {
-        label agentLabel
+        docker {
+            label agentLabel
+            image "docker.soramitsu.co.jp/build-tools/" + agentImage
+            registryUrl 'https://docker.soramitsu.co.jp'
+            args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
+        }
     }
 
     environment {
@@ -68,6 +74,7 @@ pipeline {
         stage('Remove squid if needed') {
             agent {
                 docker {
+                    image envImageName
                     reuseNode true
                 }
             }
@@ -86,6 +93,7 @@ pipeline {
         stage('Deploy') {
             agent {
                 docker {
+                    image envImageName
                     reuseNode true
                 }
             }
@@ -101,7 +109,6 @@ pipeline {
                         sqd init ${PROJECT_NAME} --template .
                         sqd deploy ${PROJECT_NAME}  --update --no-stream-logs
                     """
-                    reuseNode true
                 }
             }
         }
