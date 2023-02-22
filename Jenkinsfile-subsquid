@@ -1,7 +1,7 @@
 @Library('jenkins-library')
 
 String agentLabel            = 'docker-build-agent'
-String agentImage            = 'node:16-pnpm7'
+String agentImage            = registry + 'node:16-pnpm7'
 String subsquidToken         = 'subsquidToken'
 String targetProject         =  "fearless-x-polkadot-test"
 List   jobParams             = [
