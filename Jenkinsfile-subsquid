@@ -28,18 +28,12 @@ pipeline {
         timestamps()
         disableConcurrentBuilds()
     }
-    // agent {
-    //     docker {
-    //         label agentLabel
-    //         image "docker.soramitsu.co.jp/build-tools/" + agentImage
-    //         registryUrl 'https://docker.soramitsu.co.jp'
-    //         registryCredentialsId 'bot-build-tools-ro'
-    //         args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
-    //     }
-    // }
     agent {
         label agentLabel
     }
+    // agent {
+    //     label agentLabel
+    // }
 
     environment {
         SUBSQUID_CLI = '2.0.3'
@@ -61,11 +55,15 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 script {
+                    docker.withRegistry( 'https://' + registry, dockerBuildToolsUserId) {
+                        docker.image(agentImage).inside(){
                         sh """
                             apt-get update
                             apt-get install make git curl -y
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
+                        }
+                    }
                 }
             }
         }
