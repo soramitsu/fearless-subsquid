@@ -30,7 +30,10 @@ pipeline {
         disableConcurrentBuilds()
     }
     agent {
-        label agentLabel
+        docker {
+            label agentLabel
+            args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
+        }
     }
 
     environment {
