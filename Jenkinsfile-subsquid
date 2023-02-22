@@ -31,6 +31,7 @@ pipeline {
     }
     agent {
         docker {
+            image envImageName
             label agentLabel
             args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
         }
@@ -54,11 +55,6 @@ pipeline {
             }
         }
         stage('Install dependencies') {
-            agent {
-                docker {
-                    image envImageName
-                }
-            }
             steps {
                 script {
                         sh """
@@ -70,12 +66,6 @@ pipeline {
             }
         }
         stage('Remove squid if needed') {
-            agent {
-                docker {
-                    image envImageName
-                    reuseNode true
-                }
-            }
             when {
                 expression {params.fullClean}
             }
@@ -89,12 +79,6 @@ pipeline {
             }
         }
         stage('Deploy') {
-            agent {
-                docker {
-                    image envImageName
-                    reuseNode true
-                }
-            }
             when {  anyOf {        
                 expression {params.fullClean}
                 expression {params.deploy}
