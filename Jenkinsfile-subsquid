@@ -4,7 +4,6 @@ String agentLabel            = 'docker-build-agent'
 String envImageName          = 'node:16.18.1-bullseye-slim'
 String subsquidToken         = 'subsquidToken'
 String targetProject         =  "fearless-x-polkadot-test"
-String agentImage            =  "node:16-pnpm7"
 List   jobParams             = [
     string(defaultValue: targetProject, name: 'targetProject', trim: true),
     booleanParam(defaultValue: false, name: 'fullClean'),
@@ -32,7 +31,6 @@ pipeline {
     agent {
         docker {
             image envImageName
-            label agentLabel
             args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
         }
     }
@@ -55,6 +53,13 @@ pipeline {
             }
         }
         stage('Install dependencies') {
+            agent {
+                docker {
+                    image envImageName
+                    args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
+                    reuseNode true
+                }
+            }
             steps {
                 script {
                         sh """
