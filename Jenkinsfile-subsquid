@@ -1,6 +1,7 @@
 @Library('jenkins-library')
 
 String agentLabel            = 'docker-build-agent'
+String agentImage            = 'node:16-pnpm7'
 String subsquidToken         = 'subsquidToken'
 String targetProject         =  "fearless-x-polkadot-test"
 List   jobParams             = [
@@ -11,7 +12,6 @@ List   jobParams             = [
     booleanParam(defaultValue: false, name: 'deploy'),
     ]
 String registry               = 'docker.soramitsu.co.jp'
-String agentImage             = registry + '/build-tools/node:16-pnpm7'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
 Boolean disableSecretScanner  = false
 String secretScannerExclusion = '.*squid.yaml$|.docker-compose.yml\$'
@@ -30,13 +30,14 @@ pipeline {
     }
     agent {
         docker {
-            image agentImage
             label agentLabel
-            registryUrl 'https://' + registry
-            registryCredentialsId dockerBuildToolsUserId
+            image "docker.soramitsu.co.jp/build-tools/" + agentImage
+            registryUrl 'https://docker.soramitsu.co.jp'
+            registryCredentialsId 'bot-build-tools-ro'
             args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
         }
     }
+
     environment {
         SUBSQUID_CLI = '2.0.3'
         SUBSQUID_KEY = credentials("${subsquidToken}")
@@ -57,33 +58,11 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 script {
-                    // docker.withRegistry( 'https://' + registry, dockerBuildToolsUserId) {
-                    //     docker.image(agentImage).inside(){
                         sh """
                             apt-get update
                             apt-get install make git curl -y
-                            npm i --location=global npx --force
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
-                        // }
-                }
-            }
-        }
-        stage('Create Database migrations') {
-            steps {
-                script {
-                    docker.withRegistry( 'https://' + registry, dockerBuildToolsUserId) {
-                        docker.image(agentImage).inside(){
-                    sh """
-                        rm -rf db
-                        docker-compose up -d
-                        npx squid-typeorm-migration generate
-                        npx squid-typeorm-migration create
-                        npx squid-typeorm-migration apply
-                        docker-compose down
-                    """
-                        }
-                    }
                 }
             }
         }
@@ -145,12 +124,12 @@ pipeline {
         }
     }
     post {
-        always {
-            pushNotiTelegram(
-              status: statusNotif,
-              telegramChatId: "${TELEGRAM_CHAT_ID}"
-            ) 
-        }
+        // always {
+        //     pushNotiTelegram(
+        //       status: statusNotif,
+        //       telegramChatId: "${TELEGRAM_CHAT_ID}"
+        //     ) 
+        // }
         cleanup { cleanWs() }
     }
 }
