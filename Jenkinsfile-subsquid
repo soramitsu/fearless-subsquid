@@ -10,7 +10,7 @@ List   jobParams             = [
     booleanParam(defaultValue: false, name: 'hardReset'),
     booleanParam(defaultValue: false, name: 'deploy'),
     ]
-String registry               = 'docker.soramitsu.co.jp'
+String registry               = 'https://docker.soramitsu.co.jp'
 String agentImage             = registry + '/build-tools/node:16-pnpm7'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
 Boolean disableSecretScanner  = false
@@ -29,7 +29,9 @@ pipeline {
         disableConcurrentBuilds()
     }
     agent {
-        label agentLabel
+        docker {
+            image agentImage
+        }
     }
 
     environment {
@@ -52,15 +54,15 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 script {
-                    docker.withRegistry( 'https://' + registry, dockerBuildToolsUserId) {
-                        docker.image(agentImage).inside(){
+                    // docker.withRegistry( 'https://' + registry, dockerBuildToolsUserId) {
+                    //     docker.image(agentImage).inside(){
                         sh """
                             apt-get update
                             apt-get install make git curl -y
                             npm -i -g npx
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
-                        }
+                        // }
                     }
                 }
             }
