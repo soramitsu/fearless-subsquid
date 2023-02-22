@@ -32,6 +32,9 @@ pipeline {
         docker {
             image agentImage
             label agentLabel
+            registryUrl 'https://' + registry
+            registryCredentialsId dockerBuildToolsUserId
+            args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
         }
     }
     environment {
