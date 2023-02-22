@@ -12,8 +12,8 @@ List   jobParams             = [
     booleanParam(defaultValue: false, name: 'hardReset'),
     booleanParam(defaultValue: false, name: 'deploy'),
     ]
-String registryUrl            = 'docker.soramitsu.co.jp'
-String registryCredentialsId  = 'bot-build-tools-ro'
+String registry               = 'docker.soramitsu.co.jp'
+String dockerBuildToolsUserId = 'bot-build-tools-ro'
 Boolean disableSecretScanner  = false
 String secretScannerExclusion = '.*squid.yaml$|.docker-compose.yml\$'
 String telegramChatId    = 'telegram-deploy-chat-id'
@@ -32,8 +32,6 @@ pipeline {
     agent {
         docker {
             label agentLabel
-            image "docker.soramitsu.co.jp/build-tools/" + agentImage
-            registryUrl 'https://docker.soramitsu.co.jp'
             args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
         }
     }
