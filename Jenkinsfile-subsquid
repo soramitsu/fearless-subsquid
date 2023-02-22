@@ -70,11 +70,10 @@ pipeline {
             }
         }
         stage('Create Database migrations') {
-            agent {
-                label agentLabel
-            }
             steps {
                 script {
+                    docker.withRegistry( 'https://' + registry, dockerBuildToolsUserId) {
+                        docker.image(agentImage).inside(){
                     sh """
                         rm -rf db
                         docker-compose up -d
@@ -83,6 +82,7 @@ pipeline {
                         npx squid-typeorm-migration apply
                         docker-compose down
                     """
+                    }  
                 }
             }
         }
