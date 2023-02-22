@@ -11,7 +11,7 @@ List   jobParams             = [
     booleanParam(defaultValue: false, name: 'deploy'),
     ]
 String registry               = 'docker.soramitsu.co.jp'
-String agentImage             = registry + '/build-tools/node:16-pnpm7'
+String agentImage             = registry + 'node:16-pnpm7'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
 Boolean disableSecretScanner  = false
 String secretScannerExclusion = '.*squid.yaml$|.docker-compose.yml\$'
@@ -31,9 +31,6 @@ pipeline {
     agent {
         label agentLabel
     }
-    // agent {
-    //     label agentLabel
-    // }
 
     environment {
         SUBSQUID_CLI = '2.0.3'
@@ -53,19 +50,18 @@ pipeline {
             }
         }
         stage('Install dependencies') {
-            agent {
-                docker {
-                    image agentImage
-                    args '--entrypoint="" -u root -v /var/run/docker.sock:/var/run/docker.sock'
-                }
-            }
             steps {
                 script {
+                    docker.withRegistry( 'https://' + registry, dockerBuildToolsUserId) {
+                        docker.image(agentImage).inside(){
                         sh """
                             apt-get update
                             apt-get install make git curl -y
+                            npm -i -g npx
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
+                        }
+                    }
                 }
             }
         }
@@ -75,7 +71,6 @@ pipeline {
                     sh """
                         rm -rf db
                         docker-compose up -d
-                        npm i -g npx
                         npx squid-typeorm-migration generate
                         npx squid-typeorm-migration create
                         npx squid-typeorm-migration apply
