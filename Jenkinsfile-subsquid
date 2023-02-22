@@ -28,14 +28,17 @@ pipeline {
         timestamps()
         disableConcurrentBuilds()
     }
+    // agent {
+    //     docker {
+    //         label agentLabel
+    //         image "docker.soramitsu.co.jp/build-tools/" + agentImage
+    //         registryUrl 'https://docker.soramitsu.co.jp'
+    //         registryCredentialsId 'bot-build-tools-ro'
+    //         args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
+    //     }
+    // }
     agent {
-        docker {
-            label agentLabel
-            image "docker.soramitsu.co.jp/build-tools/" + agentImage
-            registryUrl 'https://docker.soramitsu.co.jp'
-            registryCredentialsId 'bot-build-tools-ro'
-            args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
-        }
+        label agentLabel
     }
 
     environment {
