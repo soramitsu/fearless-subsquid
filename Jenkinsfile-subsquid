@@ -62,7 +62,7 @@ pipeline {
                         sh """
                             apt-get update
                             apt-get install make git curl -y
-                            npm -i --location=global npx
+                            npm i --location=global npx
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
                         // }
