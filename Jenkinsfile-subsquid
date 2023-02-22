@@ -57,13 +57,6 @@ pipeline {
             }
         }
         stage('Install dependencies') {
-            agent {
-                docker {
-                    image envImageName
-                    args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
-                    reuseNode true
-                }
-            }
             steps {
                 script {
                         sh """
