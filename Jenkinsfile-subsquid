@@ -62,7 +62,6 @@ pipeline {
                             npm -i -g npx
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
-                    }
                 }
             }
         }
