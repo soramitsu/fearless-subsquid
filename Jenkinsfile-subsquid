@@ -10,7 +10,7 @@ List   jobParams             = [
     booleanParam(defaultValue: false, name: 'hardReset'),
     booleanParam(defaultValue: false, name: 'deploy'),
     ]
-String registry               = 'https://docker.soramitsu.co.jp'
+String registry               = 'docker.soramitsu.co.jp'
 String agentImage             = registry + '/build-tools/node:16-pnpm7'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
 Boolean disableSecretScanner  = false
