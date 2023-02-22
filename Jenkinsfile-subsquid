@@ -2,6 +2,7 @@
 
 String agentLabel            = 'docker-build-agent'
 String envImageName          = 'node:16.18.1-bullseye-slim'
+String agentImage            = 'node:16-pnpm7'
 String subsquidToken         = 'subsquidToken'
 String targetProject         =  "fearless-x-polkadot-test"
 List   jobParams             = [
@@ -30,8 +31,10 @@ pipeline {
     }
     agent {
         docker {
-            image agentLabel
             label agentLabel
+            image "docker.soramitsu.co.jp/build-tools/" + agentImage
+            registryUrl 'https://docker.soramitsu.co.jp'
+            registryCredentialsId 'bot-build-tools-ro'
             args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
         }
     }
