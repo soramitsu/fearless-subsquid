@@ -53,17 +53,19 @@ pipeline {
             }
         }
         stage('Install dependencies') {
+            agent {
+                docker {
+                    image agentImage
+                    args '--entrypoint="" -u root -v /var/run/docker.sock:/var/run/docker.sock'
+                }
+            }
             steps {
                 script {
-                    docker.withRegistry( 'https://' + registry, dockerBuildToolsUserId) {
-                        docker.image(agentImage).inside(){
                         sh """
                             apt-get update
                             apt-get install make git curl -y
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
-                        }
-                    }
                 }
             }
         }
