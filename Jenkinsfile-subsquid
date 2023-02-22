@@ -31,9 +31,9 @@ pipeline {
     agent {
         docker {
             image agentImage
+            label agentLabel
         }
     }
-
     environment {
         SUBSQUID_CLI = '2.0.3'
         SUBSQUID_KEY = credentials("${subsquidToken}")
@@ -62,6 +62,7 @@ pipeline {
                             npm -i -g npx
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
                         """
+                        // }
                 }
             }
         }
