@@ -73,6 +73,7 @@ pipeline {
                     sh """
                         rm -rf db
                         docker-compose up -d
+                        npm i -g npx
                         npx squid-typeorm-migration generate
                         npx squid-typeorm-migration create
                         npx squid-typeorm-migration apply
