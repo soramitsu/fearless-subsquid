@@ -80,11 +80,7 @@ pipeline {
             }
         }
         stage('Deploy') {
-            when {  anyOf {        
-                expression {params.fullClean}
-                expression {params.deploy}
-                }
-            }
+            when {  expression {params.deploy} }
             steps {
                 script {
                     sh """
@@ -124,12 +120,12 @@ pipeline {
         }
     }
     post {
-        // always {
-        //     pushNotiTelegram(
-        //       status: statusNotif,
-        //       telegramChatId: "${TELEGRAM_CHAT_ID}"
-        //     ) 
-        // }
+        always {
+            pushNotiTelegram(
+              status: statusNotif,
+              telegramChatId: "${TELEGRAM_CHAT_ID}"
+            ) 
+        }
         cleanup { cleanWs() }
     }
 }
