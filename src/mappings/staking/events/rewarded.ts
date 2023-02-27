@@ -19,15 +19,17 @@ function getRewardedEventData(ctx: EventContext): EventData | undefined {
 
   if (event.isV9090) {
     const [account, amount] = event.asV9090
-
     return {
       account,
       amount,
     }
   }
-  // else {
-  //   throw new UnknownVersionError(event.constructor.name)
-  // }
+  else if (event.isV9300) {
+    return {account: event.asV9300.stash, amount: event.asV9300.amount }
+  }
+   else {
+     throw new UnknownVersionError(event.constructor.name)
+   }
 }
 
 function getRewardEventData(ctx: EventHandlerContext): EventData | undefined {
@@ -37,15 +39,14 @@ function getRewardEventData(ctx: EventHandlerContext): EventData | undefined {
     return undefined
   else if (event.isV1050) {
     const [account, amount] = event.asV1050
-
     return {
       account,
       amount,
     }
   }
-  // else {
-  //   throw new UnknownVersionError(event.constructor.name)
-  // }
+  else {
+     throw new UnknownVersionError(event.constructor.name)
+   }
 }
 
 export async function handleRewarded(ctx: EventHandlerContext, old = false) {
