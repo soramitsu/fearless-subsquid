@@ -1,7 +1,7 @@
 @Library('jenkins-library')
 
 String agentLabel            = 'docker-build-agent'
-String envImageName          = 'node:16.18.1-bullseye-slim'
+String agentImage            = 'node:16-pnpm7'
 String subsquidToken         = 'subsquidToken'
 String targetProject         =  "fearless-x-polkadot"
 List   jobParams             = [
@@ -9,6 +9,7 @@ List   jobParams             = [
     booleanParam(defaultValue: false, name: 'fullClean'),
     booleanParam(defaultValue: false, name: 'restart'),
     booleanParam(defaultValue: false, name: 'hardReset'),
+    booleanParam(defaultValue: false, name: 'deploy'),
     ]
 String registry               = 'docker.soramitsu.co.jp'
 String dockerBuildToolsUserId = 'bot-build-tools-ro'
@@ -16,7 +17,6 @@ Boolean disableSecretScanner  = false
 String secretScannerExclusion = '.*squid.yaml$|.docker-compose.yml\$'
 String telegramChatId    = 'telegram-deploy-chat-id'
 Boolean statusNotif      = true
-
 
 properties([
     parameters( jobParams )
@@ -28,12 +28,15 @@ pipeline {
         timestamps()
         disableConcurrentBuilds()
     }
-
     agent {
-        label agentLabel
+        docker {
+            label agentLabel
+            image registry + "/build-tools/" + agentImage
+            registryUrl "https://" + registry
+            registryCredentialsId dockerBuildToolsUserId
+            args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
+        }
     }
-
-
 
     environment {
         SUBSQUID_CLI = '2.0.3'
@@ -52,26 +55,14 @@ pipeline {
                 }
             }
         }
-        stage('install dependencies & Deploy') {
-            when { not { anyOf {        
-                expression {params.fullClean}
-                expression {params.restart}
-                expression {params.hardReset}
-                    }
-                }
-            }
+        stage('Install dependencies') {
             steps {
                 script {
-                    docker.image("${envImageName}").inside() {
                         sh """
                             apt-get update
                             apt-get install make git curl -y
                             npm install -g @subsquid/cli@${SUBSQUID_CLI}
-                            sqd auth -k ${SUBSQUID_KEY}
-                            sqd init ${PROJECT_NAME} --template .
-                            sqd deploy ${PROJECT_NAME}  --update --no-stream-logs
                         """
-                    }
                 }
             }
         }
@@ -81,15 +72,22 @@ pipeline {
             }
             steps {
                 script {
-                    docker.image("${envImageName}").inside() {
                         sh """
-                            apt-get update
-                            apt-get install make git curl -y
-                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
                             sqd auth -k ${SUBSQUID_KEY}
                             sqd kill ${PROJECT_NAME} -f
                         """
-                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            when {  expression {params.deploy} }
+            steps {
+                script {
+                    sh """
+                        sqd auth -k ${SUBSQUID_KEY}
+                        sqd init ${PROJECT_NAME} --template .
+                        sqd deploy ${PROJECT_NAME}  --update --no-stream-logs
+                    """
                 }
             }
         }
@@ -99,15 +97,10 @@ pipeline {
             }
             steps {
                 script {
-                    docker.image("${envImageName}").inside() {
-                        sh """
-                            apt-get update
-                            apt-get install make git curl -y
-                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
-                            sqd auth -k ${SUBSQUID_KEY}
-                            sqd redeploy ${PROJECT_NAME}@v1
-                        """
-                    }
+                    sh """
+                        sqd auth -k ${SUBSQUID_KEY}
+                        sqd redeploy ${PROJECT_NAME}@v1
+                    """
                 }
             }
         }
@@ -117,16 +110,11 @@ pipeline {
             }
             steps {
                 script {
-                    docker.image("${envImageName}").inside() {
-                        sh """
-                            apt-get update
-                            apt-get install make git curl -y
-                            npm install -g @subsquid/cli@${SUBSQUID_CLI}
-                            sqd auth -k ${SUBSQUID_KEY}
-                            sqd init ${PROJECT_NAME} --template .
-                            sqd deploy ${PROJECT_NAME} -u -r --no-stream-logs
-                        """
-                    }
+                    sh """
+                        sqd auth -k ${SUBSQUID_KEY}
+                        sqd init ${PROJECT_NAME} --template .
+                        sqd deploy ${PROJECT_NAME} -u -r --no-stream-logs
+                    """
                 }
             }
         }
