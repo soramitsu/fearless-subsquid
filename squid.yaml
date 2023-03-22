@@ -1,0 +1,30 @@
+manifestVersion: subsquid.io/v0.1
+name: fearless-x-moonbeam
+version: 2
+description: |-
+  Parachain staking tracking
+build:
+deploy:
+  addons:
+    postgres:
+  processor:
+    cmd: ["node", "lib/chains/moonbeam/processor"]
+  api:
+    cmd:
+      [
+        "npx",
+        "squid-graphql-server",
+        "--dumb-cache",
+        "in-memory",
+        "--dumb-cache-ttl",
+        "1000",
+        "--dumb-cache-size",
+        "100",
+        "--dumb-cache-max-age",
+        "1000",
+      ]
+scale:
+  addons:
+    postgres:
+      storage: 100Gi
+  dedicated: true
