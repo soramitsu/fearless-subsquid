@@ -84,7 +84,22 @@ function getCallData(ctx: CallContext): CallData {
             destination: payee.__kind,
           },
     }
-  } else {
+  } else  if (call.isV9430) {
+      const { value, payee } = call.asV9430
+        return {
+          amount: value,
+          payee:
+            payee.__kind === 'Account'
+              ? {
+                destination: payee.__kind,
+                account: payee.value,
+              }
+              : {
+                destination: payee.__kind,
+              },
+        }
+  }
+  else {
     throw new UnknownVersionError(call.constructor.name)
   }
 }
