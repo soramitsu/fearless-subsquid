@@ -7,7 +7,7 @@ import { BondType } from '../../types'
 
 interface CallData {
   amount: bigint
-  controller: Uint8Array
+  controller: Uint8Array | 'None'
   payee: PayeeDataCommon | PayeeDataAccount
 }
 
