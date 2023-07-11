@@ -32,16 +32,6 @@ processor.addCallHandler(
   { triggerForFailedCalls: true },
   modules.balances.extrinsics.handleTransferKeepAlive
 )
-processor.addCallHandler(
-  'Balances.force_transfer',
-  { triggerForFailedCalls: true },
-  modules.balances.extrinsics.handleTransferKeepAlive
-)
-processor.addCallHandler(
-  'Balances.transfer_all',
-  { triggerForFailedCalls: true },
-  modules.balances.extrinsics.handleTransferKeepAlive
-)
 processor.addCallHandler('Staking.bond', modules.staking.extrinsics.handleBond)
 processor.addCallHandler('Staking.unbond', modules.staking.extrinsics.handleUnbond)
 
