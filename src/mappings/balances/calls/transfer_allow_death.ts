@@ -5,7 +5,7 @@ import { CallContext, CallHandlerContext } from '../../types/contexts'
 import { saveTransfer } from '../../util/entities'
 
 interface EventData {
-    to: Uint8Array
+    to: MultiAddress
     amount: bigint
 }
 
@@ -16,7 +16,7 @@ function getCallData(ctx: CallContext): EventData | undefined {
     if (call.isV9420) {
         const { dest, value } = call.asV9420
         return {
-            to: dest as Uint8Array,
+            to: dest,
             amount: value,
         }
     } else {
