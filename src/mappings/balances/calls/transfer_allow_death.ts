@@ -3,6 +3,7 @@ import { encodeId, getOriginAccountId, isAdressSS58 } from '../../../common/tool
 import { BalancesTransferAllowDeathCall } from '../../../types/generated/calls'
 import { CallContext, CallHandlerContext } from '../../types/contexts'
 import { saveTransfer } from '../../util/entities'
+import { MultiAddress } from '../../../types/generated/v9420'
 
 interface EventData {
     to: MultiAddress
