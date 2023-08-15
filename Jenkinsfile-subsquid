@@ -5,6 +5,7 @@ def jobParams  = [
     booleanParam(defaultValue: false, name: 'deploy'),
     booleanParam(defaultValue: false, name: 'restart'),
     booleanParam(defaultValue: false, name: 'hardReset'),
+    booleanParam(defaultValue: false, name: 'dbincrease'),
     booleanParam(defaultValue: false, name: 'dbmigrate')
 ]
 

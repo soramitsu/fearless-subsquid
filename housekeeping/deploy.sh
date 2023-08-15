@@ -1,7 +1,17 @@
 #!/bin/bash
 set -e
 
+# autorize
 sqd auth -k $SUBSQUID_KEY
+
+#increase disk size
+if [ "$dbincrease" = true ]; then
+echo "scale:
+  addons:
+    postgres:
+      storage: 100G
+      profile: medium" >> squid.yaml
+fi
 
 # database migration
 if [ "$dbmigrate" = true ]; then
@@ -39,4 +49,3 @@ if [ "$hardreset" = true ]; then
     sqd deploy $project -u -r --no-stream-logs
     printf "✅ hardreset of $project is done! \n"
 fi
-
