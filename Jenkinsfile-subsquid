@@ -5,7 +5,7 @@ def jobParams  = [
     booleanParam(defaultValue: false, name: 'deploy'),
     booleanParam(defaultValue: false, name: 'restart'),
     booleanParam(defaultValue: false, name: 'hardReset'),
-    booleanParam(defaultValue: false, name 'dbmigrate')
+    booleanParam(defaultValue: false, name: 'dbmigrate')
 ]
 
 def pipeline = new org.subqd.AppPipeline(
