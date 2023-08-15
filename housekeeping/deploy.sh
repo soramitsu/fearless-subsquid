@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sqd auth
 
 # database migration
 if [ "$dbmigrate" = true ]; then
