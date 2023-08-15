@@ -3,10 +3,9 @@ import { encodeId, getOriginAccountId, isAdressSS58 } from '../../../common/tool
 import { BalancesTransferAllowDeathCall } from '../../../types/generated/calls'
 import { CallContext, CallHandlerContext } from '../../types/contexts'
 import { saveTransfer } from '../../util/entities'
-import { MultiAddress } from '../../../types/generated/v9420'
 
 interface EventData {
-    to: MultiAddress
+    to: Uint8Array
     amount: bigint
 }
 
@@ -17,7 +16,7 @@ function getCallData(ctx: CallContext): EventData | undefined {
     if (call.isV9420) {
         const { dest, value } = call.asV9420
         return {
-            to: dest,
+            to: dest['value'],
             amount: value,
         }
     } else {
