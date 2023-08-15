@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sqd auth
+sqd auth -k $SUBSQUID_KEY
 
 # database migration
 if [ "$dbmigrate" = true ]; then
