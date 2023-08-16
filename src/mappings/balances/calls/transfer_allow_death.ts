@@ -5,8 +5,8 @@ import { CallContext, CallHandlerContext } from '../../types/contexts'
 import { saveTransfer } from '../../util/entities'
 
 interface EventData {
-    to: Uint8Array
-    amount: bigint
+    to: Uint8Array | null;
+    amount: bigint;
 }
 
 
@@ -14,9 +14,10 @@ function getCallData(ctx: CallContext): EventData | undefined {
     const call = new BalancesTransferAllowDeathCall(ctx)
 
     if (call.isV9420) {
-        const { dest, value } = call.asV9420
+        const { dest, value } = call.asV9420;
+
         return {
-            to: dest['value'],
+            to: dest.value,
             amount: value,
         }
     } else {
