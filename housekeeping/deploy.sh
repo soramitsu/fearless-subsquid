@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# can be uncommented if needed
+#project=$(cat squid.yaml | grep name | grep -oE ': .*' | tr -d ': ') 
+
 # autorize
 sqd auth -k $SUBSQUID_KEY
 

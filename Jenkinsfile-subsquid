@@ -2,7 +2,7 @@
 
 def jobParams  = [
     booleanParam(defaultValue: false, name: 'fullClean'),
-    booleanParam(defaultValue: false, name: 'deploy'),
+    booleanParam(defaultValue: false, name: 'createProject'),
     booleanParam(defaultValue: false, name: 'restart'),
     booleanParam(defaultValue: false, name: 'hardReset'),
     booleanParam(defaultValue: false, name: 'dbincrease'),
@@ -12,7 +12,6 @@ def jobParams  = [
 def pipeline = new org.subqd.AppPipeline(
     steps: this,
     jobParams: jobParams,
-    project: 'mad-gold',
-    buildTestCmds: ['./housekeeping/deploy.sh']
+    project: 'mad-gold'
 )
 pipeline.runPipeline()
