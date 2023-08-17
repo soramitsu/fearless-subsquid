@@ -13,7 +13,7 @@ export function decodeId(id: string) {
     return ss58codec.decode(id)
 }
 
-export function isAdressSS58(address: Uint8Array) {
+export function isAddressS58(address: Uint8Array) {
     switch (address.length) {
         case 1:
         case 2:
