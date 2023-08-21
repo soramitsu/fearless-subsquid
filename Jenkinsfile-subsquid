@@ -12,6 +12,6 @@ def jobParams  = [
 def pipeline = new org.subqd.AppPipeline(
     steps: this,
     jobParams: jobParams,
-    project: 'mad-gold'
+    project: 'mad-gold' + getEnvFromJobName()
 )
 pipeline.runPipeline()
