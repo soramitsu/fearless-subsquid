@@ -1,12 +1,12 @@
 import { UnknownVersionError } from '../../../common/errors'
-import { encodeId, getOriginAccountId, isAdressSS58 } from '../../../common/tools'
+import { encodeId, getOriginAccountId, isAddressS58 } from '../../../common/tools'
 import { BalancesTransferAllowDeathCall } from '../../../types/generated/calls'
 import { CallContext, CallHandlerContext } from '../../types/contexts'
 import { saveTransfer } from '../../util/entities'
 
 interface EventData {
-    to: Uint8Array
-    amount: bigint
+    to: Uint8Array | null;
+    amount: bigint;
 }
 
 
@@ -14,9 +14,10 @@ function getCallData(ctx: CallContext): EventData | undefined {
     const call = new BalancesTransferAllowDeathCall(ctx)
 
     if (call.isV9420) {
-        const { dest, value } = call.asV9420
+        const { dest, value } = call.asV9420;
+
         return {
-            to: dest['value'],
+            to: dest.value,
             amount: value,
         }
     } else {
@@ -25,11 +26,15 @@ function getCallData(ctx: CallContext): EventData | undefined {
 }
 
 export async function handleTransferAllowDeath(ctx: CallHandlerContext) {
-    const data = getCallData(ctx)
-    if (!data) return
+    const data = getCallData(ctx);
 
-    const accountId = getOriginAccountId(ctx.call.origin)
-    if (!accountId) return
+    if (!data) return;
+
+    const accountId = getOriginAccountId(ctx.call.origin);
+
+    if (!accountId) return;
+
+    const toId = data.to !== null && isAddressS58(data.to) ? encodeId(data.to) : null;
 
     await saveTransfer(ctx, {
         id: ctx.call.id,
@@ -37,7 +42,7 @@ export async function handleTransferAllowDeath(ctx: CallHandlerContext) {
         timestamp: ctx.block.timestamp,
         blockNumber: ctx.block.height,
         fromId: accountId,
-        toId: isAdressSS58(data.to) ? encodeId(data.to) : null,
+        toId,
         amount: data.amount,
         success: ctx.call.success,
         extrinsicIdx: ctx.extrinsic.id,

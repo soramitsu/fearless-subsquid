@@ -1,5 +1,5 @@
 import { UnknownVersionError } from '../../../common/errors'
-import { encodeId, getOriginAccountId, isAdressSS58 } from '../../../common/tools'
+import { encodeId, getOriginAccountId, isAddressS58 } from '../../../common/tools'
 import { BalancesTransferKeepAliveCall } from '../../../types/generated/calls'
 import { CallContext, CallHandlerContext } from '../../types/contexts'
 import { saveTransfer } from '../../util/entities'
@@ -49,7 +49,7 @@ export async function handleTransferKeepAlive(ctx: CallHandlerContext) {
         timestamp: ctx.block.timestamp,
         blockNumber: ctx.block.height,
         fromId: accountId,
-        toId: isAdressSS58(data.to) ? encodeId(data.to) : null,
+        toId: isAddressS58(data.to) ? encodeId(data.to) : null,
         amount: data.amount,
         success: ctx.call.success,
         extrinsicIdx: ctx.extrinsic.id,
