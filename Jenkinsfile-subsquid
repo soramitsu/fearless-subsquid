@@ -1,4 +1,4 @@
-@Library('jenkins-library@feature/dops-2583/subqd_lib')
+@Library('jenkins-library@feature/dops-2538/subq-subsquid-lib')
 
 def jobParams  = [
     booleanParam(defaultValue: false, name: 'fullClean'),
