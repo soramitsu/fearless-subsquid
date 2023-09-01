@@ -6,7 +6,7 @@ def jobParams  = [
     booleanParam(defaultValue: false, name: 'restart'),
     booleanParam(defaultValue: false, name: 'hardReset'),
     booleanParam(defaultValue: false, name: 'dbincrease'),
-    stringParam(defaultValue: '10', name: 'pgsqlDiskSize'),
+    stringParam(defaultValue: '50', name: 'pgsqlDiskSize'), // at 50G for the first time, you can increase the disk
     booleanParam(defaultValue: false, name: 'dbmigrate')
 ]
 
