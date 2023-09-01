@@ -2,6 +2,11 @@ version: "3"
 
 services:
   db:
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d squid'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
     container_name: subsquid_db
     image: postgres:14
     environment:
