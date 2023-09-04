@@ -1,7 +1,7 @@
 manifestVersion: subsquid.io/v0.1
 name: moonriver-x-fearless
 version: 2
-description: 'The very first squid from manifest  '
+description: 'The very first squid from manifest'
 build: 
 deploy:
   addons:
@@ -26,4 +26,5 @@ scale:
   addons:
     postgres:
       storage: 200G
+  dedicated: true
       profile: medium
