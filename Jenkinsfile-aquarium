@@ -12,6 +12,7 @@ def jobParams  = [
 
 def pipeline = new org.subqd.AppPipeline(
     steps: this,
-    jobParams: jobParams
+    jobParams: jobParams,
+    upstreamJobList: '../../fearless-subsquid/fearless-x-moonriver'
 )
 pipeline.runPipeline()
