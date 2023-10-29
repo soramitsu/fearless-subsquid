@@ -1,5 +1,5 @@
-module.exports = class Data1697431737918 {
-    name = 'Data1697431737918'
+module.exports = class Data1698605339021 {
+    name = 'Data1698605339021'
 
     async up(db) {
         await db.query(`CREATE TABLE "round_nomination" ("id" character varying NOT NULL, "amount" numeric NOT NULL, "round_id" character varying, "collator_id" character varying, "nominator_id" character varying, CONSTRAINT "PK_4acdd00bb258e4dbddabdfccbc5" PRIMARY KEY ("id"))`)
@@ -22,13 +22,13 @@ module.exports = class Data1697431737918 {
         await db.query(`CREATE INDEX "IDX_51b4a3885904fbbc1296944ca4" ON "reward" ("extrinsic_hash") `)
         await db.query(`CREATE INDEX "IDX_4a8843fdb7840bfd00f8e4f7b3" ON "reward" ("account_id") `)
         await db.query(`CREATE INDEX "IDX_d244ddc409b7278fcd1e8e54da" ON "reward" ("staker_id") `)
+        await db.query(`CREATE TABLE "account" ("id" character varying NOT NULL, "last_update_block" integer NOT NULL, CONSTRAINT "PK_54115ee388cdb6d86bb4bf5b2ea" PRIMARY KEY ("id"))`)
         await db.query(`CREATE TABLE "delegator" ("id" character varying NOT NULL, CONSTRAINT "PK_a8359cef2656d4ecf83c3c20aa5" PRIMARY KEY ("id"))`)
         await db.query(`CREATE TABLE "history_element" ("id" character varying NOT NULL, "block_number" integer NOT NULL, "timestamp" TIMESTAMP WITH TIME ZONE NOT NULL, "type" integer NOT NULL, "amount" numeric NOT NULL, "staker_id" character varying, "delegator_id" character varying, "collator_id" character varying, "round_id" character varying, CONSTRAINT "PK_b10b09ee684b794e1ca6dc2470c" PRIMARY KEY ("id"))`)
         await db.query(`CREATE INDEX "IDX_5badec2bf06d27de5704d02ec7" ON "history_element" ("staker_id") `)
         await db.query(`CREATE INDEX "IDX_484227de657c4097c91cf5474d" ON "history_element" ("delegator_id") `)
         await db.query(`CREATE INDEX "IDX_b5498fcc1d93521fc152e30170" ON "history_element" ("collator_id") `)
         await db.query(`CREATE INDEX "IDX_21cdbf57bbe105ab629dee805c" ON "history_element" ("round_id") `)
-        await db.query(`ALTER TABLE "account" ADD "last_update_block" integer NOT NULL`)
         await db.query(`ALTER TABLE "round_nomination" ADD CONSTRAINT "FK_d7d08e5d9792cc89033806e86ed" FOREIGN KEY ("round_id") REFERENCES "round"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
         await db.query(`ALTER TABLE "round_nomination" ADD CONSTRAINT "FK_1519f7f925dfa2b757b2658cc5f" FOREIGN KEY ("collator_id") REFERENCES "round_collator"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
         await db.query(`ALTER TABLE "round_nomination" ADD CONSTRAINT "FK_2bb575e4b61cd624612d103d16e" FOREIGN KEY ("nominator_id") REFERENCES "round_nominator"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
@@ -67,13 +67,13 @@ module.exports = class Data1697431737918 {
         await db.query(`DROP INDEX "public"."IDX_51b4a3885904fbbc1296944ca4"`)
         await db.query(`DROP INDEX "public"."IDX_4a8843fdb7840bfd00f8e4f7b3"`)
         await db.query(`DROP INDEX "public"."IDX_d244ddc409b7278fcd1e8e54da"`)
+        await db.query(`DROP TABLE "account"`)
         await db.query(`DROP TABLE "delegator"`)
         await db.query(`DROP TABLE "history_element"`)
         await db.query(`DROP INDEX "public"."IDX_5badec2bf06d27de5704d02ec7"`)
         await db.query(`DROP INDEX "public"."IDX_484227de657c4097c91cf5474d"`)
         await db.query(`DROP INDEX "public"."IDX_b5498fcc1d93521fc152e30170"`)
         await db.query(`DROP INDEX "public"."IDX_21cdbf57bbe105ab629dee805c"`)
-        await db.query(`ALTER TABLE "account" DROP COLUMN "last_update_block"`)
         await db.query(`ALTER TABLE "round_nomination" DROP CONSTRAINT "FK_d7d08e5d9792cc89033806e86ed"`)
         await db.query(`ALTER TABLE "round_nomination" DROP CONSTRAINT "FK_1519f7f925dfa2b757b2658cc5f"`)
         await db.query(`ALTER TABLE "round_nomination" DROP CONSTRAINT "FK_2bb575e4b61cd624612d103d16e"`)
