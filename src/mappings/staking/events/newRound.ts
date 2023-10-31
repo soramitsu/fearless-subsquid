@@ -60,13 +60,11 @@ export async function handleNewRound(ctx: EventHandlerContext) {
     const delegationsData = new Array<{ vote: bigint; nominatorId: string; collatorId: string }>()
     for (const collatorData of collatorsData) {
         if (!collatorData || collators.has(collatorData.id)) continue
-           ctx.log.info("collatorsData")
 
 
         let totalBond = collatorData.bond
 
         for (const nomination of collatorData.nominators) {
-            ctx.log.info("collatorData.nominators")
             totalBond += nomination.amount
             nominatorIds.push(nomination.id)
             delegationsData.push({ vote: nomination.amount, nominatorId: nomination.id, collatorId: collatorData.id })
@@ -96,7 +94,6 @@ export async function handleNewRound(ctx: EventHandlerContext) {
 
     for (const nominatorId of nominatorIds) {
         const staker = nominatorStakers.get(nominatorId)
-        ctx.log.info('staker')
         if (staker) {
             nominators.set(
             nominatorId,
