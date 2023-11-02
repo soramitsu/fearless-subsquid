@@ -9,7 +9,7 @@ deploy:
   processor:
     cmd:
       - node
-      - lib/main
+      - lib/processor.ts
   api:
     cmd:
       - npx
