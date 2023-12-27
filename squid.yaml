@@ -1,6 +1,6 @@
 manifestVersion: subsquid.io/v0.1
 name: kusama-subsquid
-version: 1
+version: 2
 description: 'kusama network'
 build:
 deploy:
