@@ -5,7 +5,7 @@ import { CallContext, CallHandlerContext } from '../../types/contexts'
 import { saveTransfer } from '../../util/entities'
 
 interface EventData {
-    to: Uint8Array
+    to: Uint8Array | null
     amount: bigint
 }
 
@@ -29,7 +29,7 @@ export async function handleTransferAllowDeath(ctx: CallHandlerContext) {
     const accountId = getOriginAccountId(ctx.call.origin)
     if (!accountId) return
 
-    const toId = data.to !== null && isAddressS58(data.to) ? encodeId(data.to) : null;
+    const toId = data.to !== null && isAdressSS58(data.to) ? encodeId(data.to) : null;
 
     await saveTransfer(ctx, {
         id: ctx.call.id,
