@@ -9,7 +9,7 @@ def pipeline = new org.js.AppPipeline(
     buildDockerImage:   'docker.soramitsu.co.jp/build-tools/node:20-alpine',
     sonarProjectName:   'sora-subsquid',
     sonarProjectKey:    'jp.co.soramitsu:sora-subsquid',
-    preBuildCmds:       ['npm i -g sqd-cli', 'npm ci --include=dev'],
+    preBuildCmds:       ['npm i -g sqd-cli', 'npm ci'],
     buildCmds:          ['npm run build']
 )
 pipeline.runPipeline()
