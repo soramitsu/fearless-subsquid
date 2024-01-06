@@ -5,7 +5,7 @@ import { CallContext, CallHandlerContext } from '../../types/contexts'
 import { saveTransfer } from '../../util/entities'
 
 interface EventData {
-    to: Uint8Array
+    to: Uint8Array | null
     amount: bigint
 }
 
@@ -14,7 +14,7 @@ function getCallData(ctx: CallContext): EventData | undefined {
     if (call.isV9420) {
         const { dest, value } = call.asV9420
         return {
-            to: dest as Uint8Array,
+            to: dest.value,
             amount: value,
         }
     } else {
@@ -29,13 +29,15 @@ export async function handleTransferAllowDeath(ctx: CallHandlerContext) {
     const accountId = getOriginAccountId(ctx.call.origin)
     if (!accountId) return
 
+    const toId = data.to !== null && isAdressSS58(data.to) ? encodeId(data.to) : null;
+
     await saveTransfer(ctx, {
         id: ctx.call.id,
         extrinsicHash: ctx.extrinsic.hash,
         timestamp: ctx.block.timestamp,
         blockNumber: ctx.block.height,
         fromId: accountId,
-        toId: isAdressSS58(data.to) ? encodeId(data.to) : null,
+        toId: toId,
         amount: data.amount,
         success: ctx.call.success,
         extrinsicIdx: ctx.extrinsic.id,
