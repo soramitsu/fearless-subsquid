@@ -1,18 +1,24 @@
 manifestVersion: subsquid.io/v0.1
-name: sora-polkadot
-version: 1
-description: Substrate squid template
-build: 
+name: fearless-x-kusama
+version: 2
+description: 'kusama network'
+build:
 deploy:
   addons:
-    postgres: 
+    postgres:
   processor:
     cmd:
-      - sqd
-      - process:prod
-    env:
-      RPC_ENDPOINT: ${{ secrets.RPC_ENDPOINT }}
+      - node
+      - lib/processor
   api:
     cmd:
-      - sqd
-      - serve:prod
+      - npx
+      - squid-graphql-server
+      - '--dumb-cache'
+      - in-memory
+      - '--dumb-cache-ttl'
+      - '1000'
+      - '--dumb-cache-size'
+      - '100'
+      - '--dumb-cache-max-age'
+      - '1000'

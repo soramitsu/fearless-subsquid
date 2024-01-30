@@ -1,53 +1,26 @@
-import {assertNotNull} from '@subsquid/util-internal'
-import {lookupArchive} from '@subsquid/archive-registry'
-import {
-    BlockHeader,
-    DataHandlerContext,
-    SubstrateBatchProcessor,
-    SubstrateBatchProcessorFields,
-    Event as _Event,
-    Call as _Call,
-    Extrinsic as _Extrinsic
-} from '@subsquid/substrate-processor'
+import { TypeormDatabase } from "@subsquid/typeorm-store"
+import { SubstrateProcessor } from '@subsquid/substrate-processor'
+import * as modules from './mappings'
+import config from './config'
+import { DEFAULT_BATCH_SIZE, DEFAULT_PORT } from './common/consts'
 
-import {events} from './types'
+const database = new TypeormDatabase()
+const processor = new SubstrateProcessor(database)
 
-export const processor = new SubstrateBatchProcessor()
-    .setDataSource({
-        // Lookup archive by the network name in Subsquid registry
-        // See https://docs.subsquid.io/substrate-indexing/supported-networks/
-        archive: lookupArchive('kusama', {release: 'ArrowSquid'}),
-        // Chain RPC endpoint is required on Substrate for metadata and real-time updates
-        chain: {
-            // Set via .env for local runs or via secrets when deploying to Subsquid Cloud
-            // https://docs.subsquid.io/deploy-squid/env-variables/
-            url: assertNotNull(process.env.RPC_ENDPOINT),
-            // More RPC connection options at https://docs.subsquid.io/substrate-indexing/setup/general/#set-data-source
-            rateLimit: 10
-        }
-    })
-    .addEvent({
-        name: [events.balances.transfer.name],
-        extrinsic: true
-    })
-    .setFields({
-        event: {
-            args: true
-        },
-        extrinsic: {
-            hash: true,
-            fee: true
-        },
-        block: {
-            timestamp: true
-        }
-    })
-    // Uncomment to disable RPC ingestion and drastically reduce no of RPC calls
-    //.useArchiveOnly()
+processor.setTypesBundle(config.typesBundle)
+// processor.setBatchSize(config.batchSize || DEFAULT_BATCH_SIZE)
+processor.setDataSource(config.dataSource)
+processor.setPrometheusPort(config.port || DEFAULT_PORT)
+processor.setBlockRange(config.blockRange || { from: 0 })
 
-export type Fields = SubstrateBatchProcessorFields<typeof processor>
-export type Block = BlockHeader<Fields>
-export type Event = _Event<Fields>
-export type Call = _Call<Fields>
-export type Extrinsic = _Extrinsic<Fields>
-export type ProcessorContext<Store> = DataHandlerContext<Store, Fields>
+//events handlers
+processor.addEventHandler('Staking.Rewarded', modules.staking.events.handleRewarded)
+
+// call handlers
+processor.addCallHandler(
+  'Balances.transfer',
+  { triggerForFailedCalls: true },
+  modules.balances.extrinsics.handleTransfer
+)
+
+processor.run()
