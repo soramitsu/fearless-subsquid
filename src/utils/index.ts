@@ -9,9 +9,7 @@ import {
 	Call,
 	Event,
 } from '../types'
-import { SnapshotSecondsMap, SnapshotTimeDepthMap } from './consts'
 import { decodeHex } from '@subsquid/substrate-processor'
-import { SnapshotType } from '../model'
 import { Bytes } from '../types/generated/production/support'
 
 export function assertDefined<T>(value: T | null | undefined, message?: string): asserts value is T {
@@ -56,7 +54,7 @@ export const getBlockTimestamp = (ctx: BlockContext): number => {
 export const shouldUpdate = (ctx: BlockContext, diff = 3_600) => {
 	const blockTimestamp = getBlockTimestamp(ctx)
 	const currentTimestamp = formatDateTimestamp(new Date())
-  
+
 	return currentTimestamp - blockTimestamp < diff
 }
 
@@ -126,22 +124,6 @@ export const toCamelCase = (s: string): string => {
 
 	// Step 8: Return the result
 	return finalString
-}
-
-export const getSnapshotTypes = (ctx: BlockContext, types: SnapshotType[]) => {
-	return types.filter((type) => {
-		const diff = SnapshotTimeDepthMap[type]
-	
-		return !diff || shouldUpdate(ctx, diff)
-	})
-}
-
-export const getSnapshotIndex = (blockTimestamp: number, type: SnapshotType): { index: number; timestamp: number } => {
-	const seconds = SnapshotSecondsMap[type]
-	const index = Math.floor(blockTimestamp / seconds) // rounded snapshot index (from 0)
-	const timestamp = seconds * index // rounded snapshot timestamp
-
-	return { index, timestamp }
 }
 
 export const getCallId = (ctx: BlockContext, call: Call<any>): string => {
