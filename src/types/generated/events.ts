@@ -30,6 +30,76 @@ import * as v9381 from './v9381'
 import * as v9420 from './v9420'
 import * as v9430 from './v9430'
 import * as v1000000 from './v1000000'
+import * as v1001000 from './v1001000'
+
+export class AssetRateAssetRateCreatedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'AssetRate.AssetRateCreated')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('AssetRate.AssetRateCreated') === 'dc2879fe8fdc758670d5111e15ab0330e153355407866684bea46db819c91ad7'
+    }
+
+    get asV1001000(): {assetKind: v1001000.VersionedLocatableAsset, rate: bigint} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class AssetRateAssetRateRemovedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'AssetRate.AssetRateRemoved')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('AssetRate.AssetRateRemoved') === '0d1baf25e245231c5d8fb219a5a51629ccb543120e492a30d16a2d3c6c729334'
+    }
+
+    get asV1001000(): {assetKind: v1001000.VersionedLocatableAsset} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class AssetRateAssetRateUpdatedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'AssetRate.AssetRateUpdated')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('AssetRate.AssetRateUpdated') === '35c3c7acb3be83e6e328af7a44f8cbd585f9d0eeed09f959559d54a809a1d10c'
+    }
+
+    get asV1001000(): {assetKind: v1001000.VersionedLocatableAsset, old: bigint, new: bigint} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
 
 export class AuctionsAuctionClosedEvent {
     private readonly _chain: Chain
@@ -1339,6 +1409,35 @@ export class BalancesWithdrawEvent {
     }
 }
 
+export class BountiesBountyApprovedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Bounties.BountyApproved')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * A bounty is approved.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Bounties.BountyApproved') === '25a99cc820e15400356f62165725d9d84847d859e62ca1e5fd6eb340dc5c217e'
+    }
+
+    /**
+     * A bounty is approved.
+     */
+    get asV1001000(): {index: number} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
 export class BountiesBountyAwardedEvent {
     private readonly _chain: Chain
     private readonly event: Event
@@ -1643,6 +1742,93 @@ export class BountiesBountyRejectedEvent {
      */
     get asV9130(): {index: number, bond: bigint} {
         assert(this.isV9130)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BountiesCuratorAcceptedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Bounties.CuratorAccepted')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * A bounty curator is accepted.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Bounties.CuratorAccepted') === 'b6bed4e85cf1f959ac84aa806807124fca71fd7ffb381081311fc6f9c88bb694'
+    }
+
+    /**
+     * A bounty curator is accepted.
+     */
+    get asV1001000(): {bountyId: number, curator: Uint8Array} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BountiesCuratorProposedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Bounties.CuratorProposed')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * A bounty curator is proposed.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Bounties.CuratorProposed') === 'b6bed4e85cf1f959ac84aa806807124fca71fd7ffb381081311fc6f9c88bb694'
+    }
+
+    /**
+     * A bounty curator is proposed.
+     */
+    get asV1001000(): {bountyId: number, curator: Uint8Array} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class BountiesCuratorUnassignedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Bounties.CuratorUnassigned')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * A bounty curator is unassigned.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Bounties.CuratorUnassigned') === '0ce670c7823ed5f5367cdf1eca3f3bfa8c091f2aa0cbaf0eba1679394ee42d24'
+    }
+
+    /**
+     * A bounty curator is unassigned.
+     */
+    get asV1001000(): {bountyId: number} {
+        assert(this.isV1001000)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -5843,6 +6029,21 @@ export class HrmpChannelClosedEvent {
         assert(this.isV9111)
         return this._chain.decodeEvent(this.event)
     }
+
+    /**
+     * HRMP channel closed.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Hrmp.ChannelClosed') === 'd7a18fb63023184c36e9a84f51283d53917a412fb9e3b256e26f06dd898c2eed'
+    }
+
+    /**
+     * HRMP channel closed.
+     */
+    get asV1001000(): {byParachain: number, channelId: v1001000.HrmpChannelId} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
 }
 
 export class HrmpHrmpChannelForceOpenedEvent {
@@ -5874,6 +6075,50 @@ export class HrmpHrmpChannelForceOpenedEvent {
         assert(this.isV9320)
         return this._chain.decodeEvent(this.event)
     }
+
+    /**
+     * An HRMP channel was opened via Root origin.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Hrmp.HrmpChannelForceOpened') === 'f402043bffae3fae642308da58b5d572368b726bad038cc14e7b7e843b8f401e'
+    }
+
+    /**
+     * An HRMP channel was opened via Root origin.
+     */
+    get asV1001000(): {sender: number, recipient: number, proposedMaxCapacity: number, proposedMaxMessageSize: number} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class HrmpHrmpSystemChannelOpenedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Hrmp.HrmpSystemChannelOpened')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * An HRMP channel was opened between two system chains.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Hrmp.HrmpSystemChannelOpened') === 'f402043bffae3fae642308da58b5d572368b726bad038cc14e7b7e843b8f401e'
+    }
+
+    /**
+     * An HRMP channel was opened between two system chains.
+     */
+    get asV1001000(): {sender: number, recipient: number, proposedMaxCapacity: number, proposedMaxMessageSize: number} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
 }
 
 export class HrmpOpenChannelAcceptedEvent {
@@ -5901,6 +6146,21 @@ export class HrmpOpenChannelAcceptedEvent {
      */
     get asV9090(): [number, number] {
         assert(this.isV9090)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * Open HRMP channel accepted.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Hrmp.OpenChannelAccepted') === '76ea4ea2912278783f0f738af842ab3f70b4d40830132e51dbcd2aed25017b31'
+    }
+
+    /**
+     * Open HRMP channel accepted.
+     */
+    get asV1001000(): {sender: number, recipient: number} {
+        assert(this.isV1001000)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -5951,6 +6211,50 @@ export class HrmpOpenChannelCanceledEvent {
         assert(this.isV9111)
         return this._chain.decodeEvent(this.event)
     }
+
+    /**
+     * An HRMP channel request sent by the receiver was canceled by either party.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Hrmp.OpenChannelCanceled') === 'd7a18fb63023184c36e9a84f51283d53917a412fb9e3b256e26f06dd898c2eed'
+    }
+
+    /**
+     * An HRMP channel request sent by the receiver was canceled by either party.
+     */
+    get asV1001000(): {byParachain: number, channelId: v1001000.HrmpChannelId} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class HrmpOpenChannelDepositsUpdatedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Hrmp.OpenChannelDepositsUpdated')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * An HRMP channel's deposits were updated.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Hrmp.OpenChannelDepositsUpdated') === '76ea4ea2912278783f0f738af842ab3f70b4d40830132e51dbcd2aed25017b31'
+    }
+
+    /**
+     * An HRMP channel's deposits were updated.
+     */
+    get asV1001000(): {sender: number, recipient: number} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
 }
 
 export class HrmpOpenChannelRequestedEvent {
@@ -5980,6 +6284,21 @@ export class HrmpOpenChannelRequestedEvent {
      */
     get asV9090(): [number, number, number, number] {
         assert(this.isV9090)
+        return this._chain.decodeEvent(this.event)
+    }
+
+    /**
+     * Open HRMP channel requested.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Hrmp.OpenChannelRequested') === 'f402043bffae3fae642308da58b5d572368b726bad038cc14e7b7e843b8f401e'
+    }
+
+    /**
+     * Open HRMP channel requested.
+     */
+    get asV1001000(): {sender: number, recipient: number, proposedMaxCapacity: number, proposedMaxMessageSize: number} {
+        assert(this.isV1001000)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -8238,6 +8557,64 @@ export class NominationPoolsMemberRemovedEvent {
      */
     get asV9220(): {poolId: number, member: Uint8Array} {
         assert(this.isV9220)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class NominationPoolsMinBalanceDeficitAdjustedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'NominationPools.MinBalanceDeficitAdjusted')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Topped up deficit in frozen ED of the reward pool.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('NominationPools.MinBalanceDeficitAdjusted') === 'e97a940401503c89156c5be028d3653893ac6e357b451b4035127aa329ed53e0'
+    }
+
+    /**
+     * Topped up deficit in frozen ED of the reward pool.
+     */
+    get asV1001000(): {poolId: number, amount: bigint} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class NominationPoolsMinBalanceExcessAdjustedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'NominationPools.MinBalanceExcessAdjusted')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * Claimed excess frozen ED of af the reward pool.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('NominationPools.MinBalanceExcessAdjusted') === 'e97a940401503c89156c5be028d3653893ac6e357b451b4035127aa329ed53e0'
+    }
+
+    /**
+     * Claimed excess frozen ED of af the reward pool.
+     */
+    get asV1001000(): {poolId: number, amount: bigint} {
+        assert(this.isV1001000)
         return this._chain.decodeEvent(this.event)
     }
 }
@@ -13242,6 +13619,21 @@ export class StakingRewardedEvent {
         assert(this.isV9300)
         return this._chain.decodeEvent(this.event)
     }
+
+    /**
+     * The nominator has been rewarded by this amount to this destination.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Staking.Rewarded') === 'aa169b460298a3833e89c51c9a8b87e01c995327696f303fd797a6fd1468d9a6'
+    }
+
+    /**
+     * The nominator has been rewarded by this amount to this destination.
+     */
+    get asV1001000(): {stash: Uint8Array, dest: v1001000.RewardDestination, amount: bigint} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
 }
 
 export class StakingSlashEvent {
@@ -15264,6 +15656,64 @@ export class TransactionPaymentTransactionFeePaidEvent {
     }
 }
 
+export class TreasuryAssetSpendApprovedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Treasury.AssetSpendApproved')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * A new asset spend proposal has been approved.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Treasury.AssetSpendApproved') === 'c219d4aff532cafc7691d19f9929b86ce2c5ac6a5c5bef633427311056b30630'
+    }
+
+    /**
+     * A new asset spend proposal has been approved.
+     */
+    get asV1001000(): {index: number, assetKind: v1001000.VersionedLocatableAsset, amount: bigint, beneficiary: v1001000.VersionedMultiLocation, validFrom: number, expireAt: number} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class TreasuryAssetSpendVoidedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Treasury.AssetSpendVoided')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * An approved spend was voided.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Treasury.AssetSpendVoided') === '25a99cc820e15400356f62165725d9d84847d859e62ca1e5fd6eb340dc5c217e'
+    }
+
+    /**
+     * An approved spend was voided.
+     */
+    get asV1001000(): {index: number} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
 export class TreasuryAwardedEvent {
     private readonly _chain: Chain
     private readonly event: Event
@@ -15628,6 +16078,64 @@ export class TreasuryNewTipEvent {
     }
 }
 
+export class TreasuryPaidEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Treasury.Paid')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * A payment happened.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Treasury.Paid') === '973ae217fde5763751cfd1f303982b5a8bf92eab5121ba7457bde28a9494be7c'
+    }
+
+    /**
+     * A payment happened.
+     */
+    get asV1001000(): {index: number, paymentId: bigint} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class TreasuryPaymentFailedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Treasury.PaymentFailed')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * A payment failed and can be retried.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Treasury.PaymentFailed') === '973ae217fde5763751cfd1f303982b5a8bf92eab5121ba7457bde28a9494be7c'
+    }
+
+    /**
+     * A payment failed and can be retried.
+     */
+    get asV1001000(): {index: number, paymentId: bigint} {
+        assert(this.isV1001000)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
 export class TreasuryProposedEvent {
     private readonly _chain: Chain
     private readonly event: Event
@@ -15785,6 +16293,37 @@ export class TreasurySpendApprovedEvent {
      */
     get asV9250(): {proposalIndex: number, amount: bigint, beneficiary: Uint8Array} {
         assert(this.isV9250)
+        return this._chain.decodeEvent(this.event)
+    }
+}
+
+export class TreasurySpendProcessedEvent {
+    private readonly _chain: Chain
+    private readonly event: Event
+
+    constructor(ctx: EventContext)
+    constructor(ctx: ChainContext, event: Event)
+    constructor(ctx: EventContext, event?: Event) {
+        event = event || ctx.event
+        assert(event.name === 'Treasury.SpendProcessed')
+        this._chain = ctx._chain
+        this.event = event
+    }
+
+    /**
+     * A spend was processed and removed from the storage. It might have been successfully
+     * paid or it may have expired.
+     */
+    get isV1001000(): boolean {
+        return this._chain.getEventHash('Treasury.SpendProcessed') === '25a99cc820e15400356f62165725d9d84847d859e62ca1e5fd6eb340dc5c217e'
+    }
+
+    /**
+     * A spend was processed and removed from the storage. It might have been successfully
+     * paid or it may have expired.
+     */
+    get asV1001000(): {index: number} {
+        assert(this.isV1001000)
         return this._chain.decodeEvent(this.event)
     }
 }

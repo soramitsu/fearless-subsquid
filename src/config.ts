@@ -2,10 +2,11 @@
 import { ProcessorConfig } from './types/custom/processorConfig'
 
 const config: ProcessorConfig = {
-    chainName: 'kusama',
-    prefix: 'kusama',
+    chainName: 'SORA Polkadot parachain',
+    prefix: 'sora-polkadot-parachain',
     dataSource: {
-        chain: 'wss://kusama-rpc.polkadot.io', // сюда ссылку на ноду
+        archive: '',
+        chain: 'wss://ws.parachain-collator-3.pc3.sora2.soramitsu.co.jp/', // сюда ссылку на ноду
     },
     typesBundle: 'kusama',
     batchSize: 10,

@@ -66,6 +66,55 @@ import * as v9381 from './v9381'
 import * as v9420 from './v9420'
 import * as v9430 from './v9430'
 import * as v1000000 from './v1000000'
+import * as v1001000 from './v1001000'
+
+export class AssetRateConversionRateToNativeStorage extends StorageBase {
+    protected getPrefix() {
+        return 'AssetRate'
+    }
+
+    protected getName() {
+        return 'ConversionRateToNative'
+    }
+
+    /**
+     *  Maps an asset to its fixed point representation in the native balance.
+     * 
+     *  E.g. `native_amount = asset_amount * ConversionRateToNative::<T>::get(asset_kind)`
+     */
+    get isV1001000(): boolean {
+        return this.getTypeHash() === 'c41fd35de66de34fd8687f3563684c1c049a5ea1590c81162ef65494885a6f7c'
+    }
+
+    /**
+     *  Maps an asset to its fixed point representation in the native balance.
+     * 
+     *  E.g. `native_amount = asset_amount * ConversionRateToNative::<T>::get(asset_kind)`
+     */
+    get asV1001000(): AssetRateConversionRateToNativeStorageV1001000 {
+        assert(this.isV1001000)
+        return this as any
+    }
+}
+
+/**
+ *  Maps an asset to its fixed point representation in the native balance.
+ * 
+ *  E.g. `native_amount = asset_amount * ConversionRateToNative::<T>::get(asset_kind)`
+ */
+export interface AssetRateConversionRateToNativeStorageV1001000 {
+    get(key: v1001000.VersionedLocatableAsset): Promise<(bigint | undefined)>
+    getAll(): Promise<bigint[]>
+    getMany(keys: v1001000.VersionedLocatableAsset[]): Promise<(bigint | undefined)[]>
+    getKeys(): Promise<v1001000.VersionedLocatableAsset[]>
+    getKeys(key: v1001000.VersionedLocatableAsset): Promise<v1001000.VersionedLocatableAsset[]>
+    getKeysPaged(pageSize: number): AsyncIterable<v1001000.VersionedLocatableAsset[]>
+    getKeysPaged(pageSize: number, key: v1001000.VersionedLocatableAsset): AsyncIterable<v1001000.VersionedLocatableAsset[]>
+    getPairs(): Promise<[k: v1001000.VersionedLocatableAsset, v: bigint][]>
+    getPairs(key: v1001000.VersionedLocatableAsset): Promise<[k: v1001000.VersionedLocatableAsset, v: bigint][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: v1001000.VersionedLocatableAsset, v: bigint][]>
+    getPairsPaged(pageSize: number, key: v1001000.VersionedLocatableAsset): AsyncIterable<[k: v1001000.VersionedLocatableAsset, v: bigint][]>
+}
 
 export class AttestationsDidUpdateStorage extends StorageBase {
     protected getPrefix() {
@@ -1593,6 +1642,21 @@ export class BalancesFreezesStorage extends StorageBase {
         assert(this.isV9420)
         return this as any
     }
+
+    /**
+     *  Freeze locks on account balances.
+     */
+    get isV1001000(): boolean {
+        return this.getTypeHash() === '10a170851d297e936604560e4e7a2f438a05fe56cd9723821e6983c94325c30f'
+    }
+
+    /**
+     *  Freeze locks on account balances.
+     */
+    get asV1001000(): BalancesFreezesStorageV1001000 {
+        assert(this.isV1001000)
+        return this as any
+    }
 }
 
 /**
@@ -1610,6 +1674,23 @@ export interface BalancesFreezesStorageV9420 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v9420.Type_544[]][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v9420.Type_544[]][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v9420.Type_544[]][]>
+}
+
+/**
+ *  Freeze locks on account balances.
+ */
+export interface BalancesFreezesStorageV1001000 {
+    get(key: Uint8Array): Promise<v1001000.Type_566[]>
+    getAll(): Promise<v1001000.Type_566[][]>
+    getMany(keys: Uint8Array[]): Promise<v1001000.Type_566[][]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v1001000.Type_566[]][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v1001000.Type_566[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v1001000.Type_566[]][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v1001000.Type_566[]][]>
 }
 
 export class BalancesHoldsStorage extends StorageBase {
@@ -1635,6 +1716,21 @@ export class BalancesHoldsStorage extends StorageBase {
         assert(this.isV9420)
         return this as any
     }
+
+    /**
+     *  Holds on account balances.
+     */
+    get isV1001000(): boolean {
+        return this.getTypeHash() === 'a8467bcfceac8ff13bc7331e7e07e5365f5c6b7a0d1223e5d575c14ab1bca452'
+    }
+
+    /**
+     *  Holds on account balances.
+     */
+    get asV1001000(): BalancesHoldsStorageV1001000 {
+        assert(this.isV1001000)
+        return this as any
+    }
 }
 
 /**
@@ -1652,6 +1748,23 @@ export interface BalancesHoldsStorageV9420 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v9420.IdAmount[]][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v9420.IdAmount[]][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v9420.IdAmount[]][]>
+}
+
+/**
+ *  Holds on account balances.
+ */
+export interface BalancesHoldsStorageV1001000 {
+    get(key: Uint8Array): Promise<v1001000.IdAmount[]>
+    getAll(): Promise<v1001000.IdAmount[][]>
+    getMany(keys: Uint8Array[]): Promise<v1001000.IdAmount[][]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v1001000.IdAmount[]][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v1001000.IdAmount[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v1001000.IdAmount[]][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v1001000.IdAmount[]][]>
 }
 
 export class BalancesInactiveIssuanceStorage extends StorageBase {
@@ -13155,6 +13268,21 @@ export class NisCounterpartBalancesHoldsStorage extends StorageBase {
         assert(this.isV1000000)
         return this as any
     }
+
+    /**
+     *  Holds on account balances.
+     */
+    get isV1001000(): boolean {
+        return this.getTypeHash() === 'a8467bcfceac8ff13bc7331e7e07e5365f5c6b7a0d1223e5d575c14ab1bca452'
+    }
+
+    /**
+     *  Holds on account balances.
+     */
+    get asV1001000(): NisCounterpartBalancesHoldsStorageV1001000 {
+        assert(this.isV1001000)
+        return this as any
+    }
 }
 
 /**
@@ -13189,6 +13317,23 @@ export interface NisCounterpartBalancesHoldsStorageV1000000 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v1000000.IdAmount[]][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v1000000.IdAmount[]][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v1000000.IdAmount[]][]>
+}
+
+/**
+ *  Holds on account balances.
+ */
+export interface NisCounterpartBalancesHoldsStorageV1001000 {
+    get(key: Uint8Array): Promise<v1001000.IdAmount[]>
+    getAll(): Promise<v1001000.IdAmount[][]>
+    getMany(keys: Uint8Array[]): Promise<v1001000.IdAmount[][]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v1001000.IdAmount[]][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v1001000.IdAmount[]][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v1001000.IdAmount[]][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v1001000.IdAmount[]][]>
 }
 
 export class NisCounterpartBalancesInactiveIssuanceStorage extends StorageBase {
@@ -14255,6 +14400,50 @@ export interface NominationPoolsSubPoolsStorageStorageV9220 {
     getPairs(key: number): Promise<[k: number, v: v9220.SubPools][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v9220.SubPools][]>
     getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v9220.SubPools][]>
+}
+
+export class NominationPoolsTotalValueLockedStorage extends StorageBase {
+    protected getPrefix() {
+        return 'NominationPools'
+    }
+
+    protected getName() {
+        return 'TotalValueLocked'
+    }
+
+    /**
+     *  The sum of funds across all pools.
+     * 
+     *  This might be lower but never higher than the sum of `total_balance` of all [`PoolMembers`]
+     *  because calling `pool_withdraw_unbonded` might decrease the total stake of the pool's
+     *  `bonded_account` without adjusting the pallet-internal `UnbondingPool`'s.
+     */
+    get isV1001000(): boolean {
+        return this.getTypeHash() === 'f8ebe28eb30158172c0ccf672f7747c46a244f892d08ef2ebcbaadde34a26bc0'
+    }
+
+    /**
+     *  The sum of funds across all pools.
+     * 
+     *  This might be lower but never higher than the sum of `total_balance` of all [`PoolMembers`]
+     *  because calling `pool_withdraw_unbonded` might decrease the total stake of the pool's
+     *  `bonded_account` without adjusting the pallet-internal `UnbondingPool`'s.
+     */
+    get asV1001000(): NominationPoolsTotalValueLockedStorageV1001000 {
+        assert(this.isV1001000)
+        return this as any
+    }
+}
+
+/**
+ *  The sum of funds across all pools.
+ * 
+ *  This might be lower but never higher than the sum of `total_balance` of all [`PoolMembers`]
+ *  because calling `pool_withdraw_unbonded` might decrease the total stake of the pool's
+ *  `bonded_account` without adjusting the pallet-internal `UnbondingPool`'s.
+ */
+export interface NominationPoolsTotalValueLockedStorageV1001000 {
+    get(): Promise<bigint>
 }
 
 export class OffencesConcurrentReportsIndexStorage extends StorageBase {
@@ -16581,6 +16770,27 @@ export class ParasPvfActiveVoteMapStorage extends StorageBase {
         assert(this.isV1000000)
         return this as any
     }
+
+    /**
+     *  All currently active PVF pre-checking votes.
+     * 
+     *  Invariant:
+     *  - There are no PVF pre-checking votes that exists in list but not in the set and vice versa.
+     */
+    get isV1001000(): boolean {
+        return this.getTypeHash() === 'e88cfce5f4bdc91e660ae0141e79ca4df0ac1d9ab0beee2aec8516ed6415b782'
+    }
+
+    /**
+     *  All currently active PVF pre-checking votes.
+     * 
+     *  Invariant:
+     *  - There are no PVF pre-checking votes that exists in list but not in the set and vice versa.
+     */
+    get asV1001000(): ParasPvfActiveVoteMapStorageV1001000 {
+        assert(this.isV1001000)
+        return this as any
+    }
 }
 
 /**
@@ -16621,6 +16831,26 @@ export interface ParasPvfActiveVoteMapStorageV1000000 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v1000000.PvfCheckActiveVoteState][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v1000000.PvfCheckActiveVoteState][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v1000000.PvfCheckActiveVoteState][]>
+}
+
+/**
+ *  All currently active PVF pre-checking votes.
+ * 
+ *  Invariant:
+ *  - There are no PVF pre-checking votes that exists in list but not in the set and vice versa.
+ */
+export interface ParasPvfActiveVoteMapStorageV1001000 {
+    get(key: Uint8Array): Promise<(v1001000.PvfCheckActiveVoteState | undefined)>
+    getAll(): Promise<v1001000.PvfCheckActiveVoteState[]>
+    getMany(keys: Uint8Array[]): Promise<(v1001000.PvfCheckActiveVoteState | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v1001000.PvfCheckActiveVoteState][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v1001000.PvfCheckActiveVoteState][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v1001000.PvfCheckActiveVoteState][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v1001000.PvfCheckActiveVoteState][]>
 }
 
 export class ParasUpcomingParasGenesisStorage extends StorageBase {
@@ -17851,6 +18081,48 @@ export interface PreimagePreimageForStorageV9320 {
     getPairs(key: [Uint8Array, number]): Promise<[k: [Uint8Array, number], v: Uint8Array][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: [Uint8Array, number], v: Uint8Array][]>
     getPairsPaged(pageSize: number, key: [Uint8Array, number]): AsyncIterable<[k: [Uint8Array, number], v: Uint8Array][]>
+}
+
+export class PreimageRequestStatusForStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Preimage'
+    }
+
+    protected getName() {
+        return 'RequestStatusFor'
+    }
+
+    /**
+     *  The request status of a given hash.
+     */
+    get isV1001000(): boolean {
+        return this.getTypeHash() === '6a87e8113c01201fa0ee74181e0157bbf27414c84be015b1cf221c32fca76279'
+    }
+
+    /**
+     *  The request status of a given hash.
+     */
+    get asV1001000(): PreimageRequestStatusForStorageV1001000 {
+        assert(this.isV1001000)
+        return this as any
+    }
+}
+
+/**
+ *  The request status of a given hash.
+ */
+export interface PreimageRequestStatusForStorageV1001000 {
+    get(key: Uint8Array): Promise<(v1001000.RequestStatus | undefined)>
+    getAll(): Promise<v1001000.RequestStatus[]>
+    getMany(keys: Uint8Array[]): Promise<(v1001000.RequestStatus | undefined)[]>
+    getKeys(): Promise<Uint8Array[]>
+    getKeys(key: Uint8Array): Promise<Uint8Array[]>
+    getKeysPaged(pageSize: number): AsyncIterable<Uint8Array[]>
+    getKeysPaged(pageSize: number, key: Uint8Array): AsyncIterable<Uint8Array[]>
+    getPairs(): Promise<[k: Uint8Array, v: v1001000.RequestStatus][]>
+    getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: v1001000.RequestStatus][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: v1001000.RequestStatus][]>
+    getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: v1001000.RequestStatus][]>
 }
 
 export class PreimageStatusForStorage extends StorageBase {
@@ -27053,6 +27325,33 @@ export class SystemEventsStorage extends StorageBase {
         assert(this.isV1000000)
         return this as any
     }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get isV1001000(): boolean {
+        return this.getTypeHash() === 'f3d4e7e59d7675f832ac4334469452735de0afb977c687c98413bcda10d598bf'
+    }
+
+    /**
+     *  Events deposited for the current block.
+     * 
+     *  NOTE: The item is unbound and should therefore never be read on chain.
+     *  It could otherwise inflate the PoV size of a block.
+     * 
+     *  Events have a large in-memory size. Box the events to not go out-of-memory
+     *  just in case someone still reads them from within the runtime.
+     */
+    get asV1001000(): SystemEventsStorageV1001000 {
+        assert(this.isV1001000)
+        return this as any
+    }
 }
 
 /**
@@ -27562,6 +27861,19 @@ export interface SystemEventsStorageV9430 {
  */
 export interface SystemEventsStorageV1000000 {
     get(): Promise<v1000000.EventRecord[]>
+}
+
+/**
+ *  Events deposited for the current block.
+ * 
+ *  NOTE: The item is unbound and should therefore never be read on chain.
+ *  It could otherwise inflate the PoV size of a block.
+ * 
+ *  Events have a large in-memory size. Box the events to not go out-of-memory
+ *  just in case someone still reads them from within the runtime.
+ */
+export interface SystemEventsStorageV1001000 {
+    get(): Promise<v1001000.EventRecord[]>
 }
 
 export class SystemExecutionPhaseStorage extends StorageBase {
@@ -29339,6 +29651,80 @@ export interface TreasuryReasonsStorageV1038 {
     getPairs(key: Uint8Array): Promise<[k: Uint8Array, v: Uint8Array][]>
     getPairsPaged(pageSize: number): AsyncIterable<[k: Uint8Array, v: Uint8Array][]>
     getPairsPaged(pageSize: number, key: Uint8Array): AsyncIterable<[k: Uint8Array, v: Uint8Array][]>
+}
+
+export class TreasurySpendCountStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Treasury'
+    }
+
+    protected getName() {
+        return 'SpendCount'
+    }
+
+    /**
+     *  The count of spends that have been made.
+     */
+    get isV1001000(): boolean {
+        return this.getTypeHash() === '81bbbe8e62451cbcc227306706c919527aa2538970bd6d67a9969dd52c257d02'
+    }
+
+    /**
+     *  The count of spends that have been made.
+     */
+    get asV1001000(): TreasurySpendCountStorageV1001000 {
+        assert(this.isV1001000)
+        return this as any
+    }
+}
+
+/**
+ *  The count of spends that have been made.
+ */
+export interface TreasurySpendCountStorageV1001000 {
+    get(): Promise<number>
+}
+
+export class TreasurySpendsStorage extends StorageBase {
+    protected getPrefix() {
+        return 'Treasury'
+    }
+
+    protected getName() {
+        return 'Spends'
+    }
+
+    /**
+     *  Spends that have been approved and being processed.
+     */
+    get isV1001000(): boolean {
+        return this.getTypeHash() === '9e593b36c5f672933755bf09ad06f5d1cf24fae64e380dabfde4d7cdf576e62a'
+    }
+
+    /**
+     *  Spends that have been approved and being processed.
+     */
+    get asV1001000(): TreasurySpendsStorageV1001000 {
+        assert(this.isV1001000)
+        return this as any
+    }
+}
+
+/**
+ *  Spends that have been approved and being processed.
+ */
+export interface TreasurySpendsStorageV1001000 {
+    get(key: number): Promise<(v1001000.SpendStatus | undefined)>
+    getAll(): Promise<v1001000.SpendStatus[]>
+    getMany(keys: number[]): Promise<(v1001000.SpendStatus | undefined)[]>
+    getKeys(): Promise<number[]>
+    getKeys(key: number): Promise<number[]>
+    getKeysPaged(pageSize: number): AsyncIterable<number[]>
+    getKeysPaged(pageSize: number, key: number): AsyncIterable<number[]>
+    getPairs(): Promise<[k: number, v: v1001000.SpendStatus][]>
+    getPairs(key: number): Promise<[k: number, v: v1001000.SpendStatus][]>
+    getPairsPaged(pageSize: number): AsyncIterable<[k: number, v: v1001000.SpendStatus][]>
+    getPairsPaged(pageSize: number, key: number): AsyncIterable<[k: number, v: v1001000.SpendStatus][]>
 }
 
 export class TreasuryTipsStorage extends StorageBase {
