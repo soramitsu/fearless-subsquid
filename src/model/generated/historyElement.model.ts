@@ -1,8 +1,8 @@
-import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_, OneToMany as OneToMany_} from "typeorm"
 import * as marshal from "./marshal"
-import {Reward} from "./_reward"
-import {Extrinsic} from "./_extrinsic"
-import {Transfer} from "./_transfer"
+import {HistoryElementType} from "./_historyElementType"
+import {ExecutionResult} from "./_executionResult"
+import {HistoryElementCall} from "./historyElementCall.model"
 
 @Entity_()
 export class HistoryElement {
@@ -13,30 +13,61 @@ export class HistoryElement {
     @PrimaryColumn_()
     id!: string
 
-    @Index_()
+    @Column_("varchar", {length: 5, nullable: false})
+    type!: HistoryElementType
+
     @Column_("int4", {nullable: false})
-    blockNumber!: number
-
-    @Column_("text", {nullable: true})
-    extrinsicIdx!: string | undefined | null
-
-    @Column_("text", {nullable: true})
-    extrinsicHash!: string | undefined | null
+    blockHeight!: number
 
     @Index_()
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    timestamp!: bigint
+    @Column_("text", {nullable: false})
+    blockHash!: string
+
+    @Column_("text", {nullable: false})
+    name!: string
+
+    @Index_()
+    @Column_("text", {nullable: false})
+    module!: string
+
+    @Index_()
+    @Column_("text", {nullable: false})
+    method!: string
 
     @Index_()
     @Column_("text", {nullable: false})
     address!: string
 
-    @Column_("jsonb", {transformer: {to: obj => obj == null ? undefined : obj.toJSON(), from: obj => obj == null ? undefined : new Reward(undefined, obj)}, nullable: true})
-    reward!: Reward | undefined | null
+    @Column_("text", {nullable: true})
+    networkFee!: string | undefined | null
 
-    @Column_("jsonb", {transformer: {to: obj => obj == null ? undefined : obj.toJSON(), from: obj => obj == null ? undefined : new Extrinsic(undefined, obj)}, nullable: true})
-    extrinsic!: Extrinsic | undefined | null
+    @Column_("jsonb", {transformer: {to: obj => obj.toJSON(), from: obj => obj == null ? undefined : new ExecutionResult(undefined, obj)}, nullable: false})
+    execution!: ExecutionResult
 
-    @Column_("jsonb", {transformer: {to: obj => obj == null ? undefined : obj.toJSON(), from: obj => obj == null ? undefined : new Transfer(undefined, obj)}, nullable: true})
-    transfer!: Transfer | undefined | null
+    @Column_("int4", {nullable: false})
+    timestamp!: number
+
+    @Index_()
+    @Column_("jsonb", {nullable: true})
+    data!: unknown | undefined | null
+
+    @Index_()
+    @Column_("text", {nullable: true})
+    dataTo!: string | undefined | null
+
+    @Index_()
+    @Column_("text", {nullable: true})
+    dataFrom!: string | undefined | null
+
+    @Column_("text", {array: true, nullable: false})
+    dataReceivers!: (string | undefined | null)[]
+
+    @OneToMany_(() => HistoryElementCall, e => e.historyElement)
+    calls!: HistoryElementCall[]
+
+    @Column_("text", {array: true, nullable: false})
+    callNames!: (string | undefined | null)[]
+
+    @Column_("int4", {nullable: false})
+    updatedAtBlock!: number
 }
