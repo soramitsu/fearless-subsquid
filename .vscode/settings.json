@@ -22,5 +22,9 @@
 	"Unstake",
 	"xorless"
 ],
-"editor.detectIndentation": false
+"editor.detectIndentation": false,
+"cSpell.ignoreWords": [
+  "KUSAMA",
+  "POLKADOT"
+]
 }

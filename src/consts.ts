@@ -1,4 +1,4 @@
-export const callNames = [] as const
+export const callNames: string[] = [] as const
 
 export const eventNames = [
 	'ParachainSystem.DownwardMessagesProcessed',

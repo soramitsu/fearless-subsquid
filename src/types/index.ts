@@ -4,7 +4,6 @@ import { Opaque } from 'type-fest'
 import { callNames, eventNames } from '../consts'
 import { processor } from '../processor';
 
-
 type ExtractSubstrateBatchProcessorType<T> = T extends SubstrateBatchProcessor<infer U> ? U : never;
 
 type Fields = ExtractSubstrateBatchProcessorType<typeof processor>;
