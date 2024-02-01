@@ -1,10 +1,22 @@
 import dotenv from 'dotenv'
-import environments from './environments'
+import { ScaleProfile, EnvironmentAddresses } from './environments'
 
 dotenv.config()
 
 const environment = process.env.INDEXER_ENVIRONMENT || 'stage'
-const environmentConfig = environments[environment as keyof typeof environments]
+const environmentConfig: EnvironmentAddresses = {
+  name: 'sora',
+  description: 'Sora squid',
+  version: 4,
+  chain: 'wss://ws.parachain-collator-3.pc3.sora2.soramitsu.co.jp/',
+  archive: null,
+  storage: '100G',
+  scaleProfiles: {
+    postgres: ScaleProfile.LARGE,
+    processor: ScaleProfile.LARGE,
+    api: ScaleProfile.LARGE,
+  },
+};
 
 if (!environmentConfig) {
 	throw new Error(`Environment ${environment} is not defined`)

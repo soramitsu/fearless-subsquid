@@ -22,6 +22,7 @@ export class AssetSnapshot {
     @ManyToOne_(() => Asset, {nullable: true})
     asset!: Asset
 
+    @Index_()
     @Column_("int4", {nullable: false})
     timestamp!: number
 

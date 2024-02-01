@@ -5,13 +5,13 @@ export enum Environment {
 	DEV = 'dev',
 }
 
-enum ScaleProfile {
+export enum ScaleProfile {
 	SMALL = 'small',
 	MEDIUM = 'medium',
 	LARGE = 'large',
 }
 
-interface EnvironmentAddresses {
+export interface EnvironmentAddresses {
 	name: string
 	description: string
 	version: number

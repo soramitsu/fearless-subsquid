@@ -106,7 +106,7 @@ export const processor = new SubstrateBatchProcessor()
 if (archive) {
 	processor.setGateway(lookupArchive(archive, { type: 'Substrate', release: 'ArrowSquid' }))
 }
- 
+
 callNames.forEach((callName) => {
 	processor.addCall({ name: [callName], extrinsic: true })
 })
@@ -120,7 +120,7 @@ let lastSyncedBlock = -1
 processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 	ctx._chain
 	const context = ctx
-	
+
 	for (let block of context.blocks) {
 		let blockContext = {
 			...context,
@@ -157,7 +157,7 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 				if (call.name !== call.extrinsic?.call?.name) {
 					continue
 				}
-	
+
 				if (call.name === 'Assets.register') await assetRegistrationCallHandler(blockContext, call)
 				if (call.name === 'Assets.transfer') await assetTransferCallHandler(blockContext, call)
 				if (call.name === 'LiquidityProxy.xorless_transfer') await xorlessTransferHandler(blockContext, call)
@@ -183,7 +183,7 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 				if (call.name === 'DemeterFarmingPlatform.withdraw') await demeterWithdrawCallHandler(blockContext, call)
 				if (call.name === 'DemeterFarmingPlatform.get_rewards') await demeterGetRewardsCallHandler(blockContext, call)
 				if (call.name === 'Band.relay') await handleBandRateUpdate(blockContext, call)
-	
+
 				if (call.name === 'Staking.bond') await stakingBondCallHandler(blockContext, call)
 				if (call.name === 'Staking.bond_extra') await stakingBondExtraCallHandler(blockContext, call)
 				if (call.name === 'Staking.cancel_deferred_slash') await stakingCancelDeferredSlashCallHandler(blockContext, call)
