@@ -33,7 +33,6 @@ eventNames.forEach((eventName) => {
 	processor.addEvent({ name: [eventName], extrinsic: true })
 })
 
-
 processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 	ctx._chain
 	const context = ctx
