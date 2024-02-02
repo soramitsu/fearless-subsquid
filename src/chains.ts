@@ -1,4 +1,4 @@
-export enum Environment {
+export enum Chain {
 	SORA_POLKADOT = 'sora-polkadot',
 	SORA_KUSAMA = 'sora-kusama',
 }
@@ -23,37 +23,37 @@ export interface EnvironmentAddresses {
 	}
 }
 
-type Environments = {
-	[environment in Environment]: EnvironmentAddresses
+type Chains = {
+	[chain in Chain]: EnvironmentAddresses
 }
 
 const version = 4
 
-export const chains: Environments = {
-	[Environment.SORA_POLKADOT]: {
-    name: 'sora',
-    description: 'Sora squid',
+export const chains: Chains = {
+	[Chain.SORA_POLKADOT]: {
+    name: 'sora-polkadot',
+    description: 'sora-polkadot squid',
     version,
     chain: 'wss://ws.parachain-collator-3.pc3.sora2.soramitsu.co.jp/',
     archive: null,
     storage: '100G',
     scaleProfiles: {
-      postgres: ScaleProfile.LARGE,
-      processor: ScaleProfile.LARGE,
-      api: ScaleProfile.LARGE,
+      postgres: ScaleProfile.SMALL,
+      processor: ScaleProfile.SMALL,
+      api: ScaleProfile.SMALL,
     },
   },
-	[Environment.SORA_KUSAMA]: {
-    name: 'sora',
-    description: 'Sora squid',
+	[Chain.SORA_KUSAMA]: {
+    name: 'sora-kusama',
+    description: 'sora-kusama squid',
     version,
     chain: 'wss://ws.parachain-collator-2.c2.sora2.soramitsu.co.jp/',
     archive: null,
     storage: '100G',
     scaleProfiles: {
-      postgres: ScaleProfile.LARGE,
-      processor: ScaleProfile.LARGE,
-      api: ScaleProfile.LARGE,
+      postgres: ScaleProfile.SMALL,
+      processor: ScaleProfile.SMALL,
+      api: ScaleProfile.SMALL,
     },
   }
 }

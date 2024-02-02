@@ -1,9 +1,9 @@
-import { Environment } from '../../src/chains'
+import { Chain } from '../../src/chains'
 
-export function getTypegenConfig(environment: Environment) {
+export function getTypegenConfig(chain: Chain) {
 	return {
-		outDir: `src/types/generated/${environment}`,
-		specVersions: `spec/${environment}.jsonl`,
+		outDir: `src/types/generated/${chain}`,
+		specVersions: `spec/${chain}.jsonl`,
 		typesBundle: 'src/typesBundle.json',
 		events: true,
 		calls: true,

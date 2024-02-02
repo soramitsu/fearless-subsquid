@@ -8,6 +8,12 @@ type ExecutionResult @jsonField {
 	error: ExecutionError
 }
 
+type ExecutionError @jsonField {
+	moduleErrorId: Int
+	moduleErrorIndex: Int
+	nonModuleErrorMessage: String
+}
+
 type HistoryElementCall @entity {
 	id: ID!
 	historyElement: HistoryElement! @index

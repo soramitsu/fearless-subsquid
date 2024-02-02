@@ -1,12 +1,12 @@
 import fs from 'fs'
 import path from 'path'
 
-import { Environment } from '../src/environments'
+import { Chain } from '../src/chains'
 
 type ObjectName = string
 type ObjectInfo = {
 	name: string,
-	environment: Environment
+	chain: Chain
 	versions: number[]
 }
 type ObjectList = Record<ObjectName, ObjectInfo[]>
@@ -52,15 +52,15 @@ const entityTypes = ['calls', 'events', 'storage']
 
 fs.writeFileSync('src/types/generated/merged/index.ts', entityTypes.map((entityType) => `export * as ${entityType} from './${entityType}'`).join('\n'))
 
-const environments = [
-	Environment.PRODUCTION,
-	...Object.values(Environment).filter((environment) => environment !== Environment.PRODUCTION),
+const chains = [
+	Chain.PRODUCTION,
+	...Object.values(Chain).filter((chain) => chain !== Chain.PRODUCTION),
 ]
 
 const allModules = new Set<string>()
 
-environments.forEach((environment) => {
-	const files = fs.readdirSync(`src/types/generated/${environment}`)
+chains.forEach((chain) => {
+	const files = fs.readdirSync(`src/types/generated/${chain}`)
 	files.forEach(function (file) {
 		if (!file.endsWith('.ts')) {
 			allModules.add(file)
@@ -87,8 +87,8 @@ const modules = Array.from(allModules).map((module) => {
 		data: entityTypes.map((entityType) => {
 			const objects: ObjectList = {}
 		
-			environments.forEach((environment) => {
-				const filePath = `src/types/generated/${environment}/${module}/${entityType}.ts`
+			chains.forEach((chain) => {
+				const filePath = `src/types/generated/${chain}/${module}/${entityType}.ts`
 	
 				let content = ''
 				try {
@@ -108,14 +108,14 @@ const modules = Array.from(allModules).map((module) => {
 					if (!objects[objectName]) {
 						objects[objectName] = []
 					}
-					const objectInfo: ObjectInfo = { name, environment, versions: [] }
+					const objectInfo: ObjectInfo = { name, chain, versions: [] }
 					versionCodeList.forEach((versionCode) => {
 						const versionMatch = versionCode.match(/v(\d+): new \w+Type\(/)?.[1]
 						if (versionMatch) {
 
 							const version = parseInt(versionMatch)
 							objectInfo.versions.push(version)
-							if (environment === Environment.PRODUCTION) {
+							if (chain === Chain.PRODUCTION) {
 								maxProductionVersion = Math.max(maxProductionVersion, version)
 							}
 						}
@@ -146,10 +146,10 @@ modules.forEach((module) => {
 		const outputImports: string[] = []
 		const outputData: string[] = []
 	
-		Object.values(Environment).forEach((environment) => {
-			if (Object.values(objects).some((data) => data.some((object) => object.environment === environment))) {
+		Object.values(Chain).forEach((chain) => {
+			if (Object.values(objects).some((data) => data.some((object) => object.chain === chain))) {
 				outputImports.push(
-					`import * as ${environment}${entityTypeCapital} from '../../${environment}/${module.module}/${entityType}'`,
+					`import * as ${chain}${entityTypeCapital} from '../../${chain}/${module.module}/${entityType}'`,
 				)
 			}
 		})
@@ -158,17 +158,17 @@ modules.forEach((module) => {
 	
 		Object.entries(objects).forEach(([objectName, objectInfoArray]) => {
 			const versions: {
-				environment: Environment
+				chain: Chain
 				version: number
 			}[] = []
 
 			objectInfoArray.forEach((objectInfo) => {
 				objectInfo.versions.forEach((version) => {
-					// if (objectInfo.environment !== Environment.PRODUCTION && version <= maxProductionVersion) {
+					// if (objectInfo.chain !== Chain.PRODUCTION && version <= maxProductionVersion) {
 					// 	return
 					// }
 					versions.push({
-						environment: objectInfo.environment,
+						chain: objectInfo.chain,
 						version: version,
 					})
 				})
@@ -178,9 +178,9 @@ modules.forEach((module) => {
 			outputData.push(`\tname: '${objectInfoArray[0].name}',`)
 
 			versions.forEach((v) => {
-				const { environment, version } = v
-				const prefix = environment === Environment.PRODUCTION ? '' : environment.charAt(0).toUpperCase() + environment.slice(1)
-				outputData.push(`\tv${version}${prefix}: ${environment}${entityTypeCapital}.${objectName}['v${version}'],`)
+				const { chain, version } = v
+				const prefix = chain === Chain.PRODUCTION ? '' : chain.charAt(0).toUpperCase() + chain.slice(1)
+				outputData.push(`\tv${version}${prefix}: ${chain}${entityTypeCapital}.${objectName}['v${version}'],`)
 			})
 	
 			outputData.push('}\n')
