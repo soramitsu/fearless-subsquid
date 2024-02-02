@@ -1,4 +1,4 @@
-import { Environment } from '../../src/environments'
+import { Environment } from '../../src/chains'
 
 export function getTypegenConfig(environment: Environment) {
 	return {
