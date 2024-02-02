@@ -1,21 +1,15 @@
-import * as productionStorage from '../../production/preimage/storage'
-import * as stageStorage from '../../stage/preimage/storage'
-import * as testStorage from '../../test/preimage/storage'
-import * as devStorage from '../../dev/preimage/storage'
+import * as soraPolkadotStorage from '../../sora-polkadot/preimage/storage'
+import * as soraKusamaStorage from '../../sora-kusama/preimage/storage'
 
 
 export const statusFor = {
 	name: '',
-	v53: productionStorage.statusFor['v53'],
-	v52Stage: stageStorage.statusFor['v52'],
-	v52Test: testStorage.statusFor['v52'],
-	v70Dev: devStorage.statusFor['v70'],
+	soraPolkadotV10: soraPolkadotStorage.statusFor['v10'],
+	soraKusamaV7: soraKusamaStorage.statusFor['v7'],
 }
 
 export const preimageFor = {
 	name: '',
-	v53: productionStorage.preimageFor['v53'],
-	v52Stage: stageStorage.preimageFor['v52'],
-	v52Test: testStorage.preimageFor['v52'],
-	v70Dev: devStorage.preimageFor['v70'],
+	soraPolkadotV10: soraPolkadotStorage.preimageFor['v10'],
+	soraKusamaV7: soraKusamaStorage.preimageFor['v7'],
 }

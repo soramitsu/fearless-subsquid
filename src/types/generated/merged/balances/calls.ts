@@ -1,46 +1,39 @@
-import * as productionCalls from '../../production/balances/calls'
-import * as stageCalls from '../../stage/balances/calls'
-import * as testCalls from '../../test/balances/calls'
+import * as soraPolkadotCalls from '../../sora-polkadot/balances/calls'
+import * as soraKusamaCalls from '../../sora-kusama/balances/calls'
 
 
 export const transfer = {
 	name: 'Balances.transfer',
-	v1: productionCalls.transfer['v1'],
-	v33Stage: stageCalls.transfer['v33'],
-	v33Test: testCalls.transfer['v33'],
+	soraPolkadotV1: soraPolkadotCalls.transfer['v1'],
+	soraKusamaV1: soraKusamaCalls.transfer['v1'],
 }
 
 export const setBalance = {
 	name: 'Balances.set_balance',
-	v1: productionCalls.setBalance['v1'],
-	v33Stage: stageCalls.setBalance['v33'],
-	v33Test: testCalls.setBalance['v33'],
+	soraPolkadotV1: soraPolkadotCalls.setBalance['v1'],
+	soraKusamaV1: soraKusamaCalls.setBalance['v1'],
 }
 
 export const forceTransfer = {
 	name: 'Balances.force_transfer',
-	v1: productionCalls.forceTransfer['v1'],
-	v33Stage: stageCalls.forceTransfer['v33'],
-	v33Test: testCalls.forceTransfer['v33'],
+	soraPolkadotV1: soraPolkadotCalls.forceTransfer['v1'],
+	soraKusamaV1: soraKusamaCalls.forceTransfer['v1'],
 }
 
 export const transferKeepAlive = {
 	name: 'Balances.transfer_keep_alive',
-	v1: productionCalls.transferKeepAlive['v1'],
-	v33Stage: stageCalls.transferKeepAlive['v33'],
-	v33Test: testCalls.transferKeepAlive['v33'],
+	soraPolkadotV1: soraPolkadotCalls.transferKeepAlive['v1'],
+	soraKusamaV1: soraKusamaCalls.transferKeepAlive['v1'],
 }
 
 export const transferAll = {
 	name: 'Balances.transfer_all',
-	v42: productionCalls.transferAll['v42'],
-	v42Stage: stageCalls.transferAll['v42'],
-	v42Test: testCalls.transferAll['v42'],
+	soraPolkadotV1: soraPolkadotCalls.transferAll['v1'],
+	soraKusamaV1: soraKusamaCalls.transferAll['v1'],
 }
 
 export const forceUnreserve = {
 	name: 'Balances.force_unreserve',
-	v42: productionCalls.forceUnreserve['v42'],
-	v42Stage: stageCalls.forceUnreserve['v42'],
-	v42Test: testCalls.forceUnreserve['v42'],
+	soraPolkadotV1: soraPolkadotCalls.forceUnreserve['v1'],
+	soraKusamaV1: soraKusamaCalls.forceUnreserve['v1'],
 }

@@ -1,15 +1,10 @@
-import * as productionStorage from '../../production/sudo/storage'
-import * as stageStorage from '../../stage/sudo/storage'
-import * as testStorage from '../../test/sudo/storage'
-import * as devStorage from '../../dev/sudo/storage'
+import * as soraPolkadotStorage from '../../sora-polkadot/sudo/storage'
+import * as soraKusamaStorage from '../../sora-kusama/sudo/storage'
 
 
 export const key = {
 	name: '',
-	v22: productionStorage.key['v22'],
-	v33Stage: stageStorage.key['v33'],
-	v42Stage: stageStorage.key['v42'],
-	v33Test: testStorage.key['v33'],
-	v42Test: testStorage.key['v42'],
-	v70Dev: devStorage.key['v70'],
+	soraPolkadotV1: soraPolkadotStorage.key['v1'],
+	soraKusamaV1: soraKusamaStorage.key['v1'],
+	soraKusamaV7: soraKusamaStorage.key['v7'],
 }

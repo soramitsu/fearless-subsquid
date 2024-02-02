@@ -1,23 +1,9 @@
-import * as productionStorage from '../../production/multisig-verifier/storage'
-import * as stageStorage from '../../stage/multisig-verifier/storage'
-import * as testStorage from '../../test/multisig-verifier/storage'
-import * as devStorage from '../../dev/multisig-verifier/storage'
+import * as soraPolkadotStorage from '../../sora-polkadot/multisig-verifier/storage'
+import * as soraKusamaStorage from '../../sora-kusama/multisig-verifier/storage'
 
 
 export const peerKeys = {
 	name: '',
-	v64: productionStorage.peerKeys['v64'],
-	v70: productionStorage.peerKeys['v70'],
-	v54Stage: stageStorage.peerKeys['v54'],
-	v70Stage: stageStorage.peerKeys['v70'],
-	v54Test: testStorage.peerKeys['v54'],
-	v70Test: testStorage.peerKeys['v70'],
-	v70Dev: devStorage.peerKeys['v70'],
-}
-
-export const thisNetworkId = {
-	name: '',
-	v64: productionStorage.thisNetworkId['v64'],
-	v54Stage: stageStorage.thisNetworkId['v54'],
-	v54Test: testStorage.thisNetworkId['v54'],
+	soraPolkadotV10: soraPolkadotStorage.peerKeys['v10'],
+	soraKusamaV7: soraKusamaStorage.peerKeys['v7'],
 }

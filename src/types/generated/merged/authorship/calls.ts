@@ -1,14 +1,9 @@
-import * as productionCalls from '../../production/authorship/calls'
-import * as stageCalls from '../../stage/authorship/calls'
-import * as testCalls from '../../test/authorship/calls'
+import * as soraPolkadotCalls from '../../sora-polkadot/authorship/calls'
+import * as soraKusamaCalls from '../../sora-kusama/authorship/calls'
 
 
 export const setUncles = {
 	name: 'Authorship.set_uncles',
-	v1: productionCalls.setUncles['v1'],
-	v42: productionCalls.setUncles['v42'],
-	v33Stage: stageCalls.setUncles['v33'],
-	v42Stage: stageCalls.setUncles['v42'],
-	v33Test: testCalls.setUncles['v33'],
-	v42Test: testCalls.setUncles['v42'],
+	soraPolkadotV1: soraPolkadotCalls.setUncles['v1'],
+	soraKusamaV1: soraKusamaCalls.setUncles['v1'],
 }

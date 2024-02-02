@@ -1,25 +1,24 @@
-import * as stageEvents from '../../stage/beefy-light-client/events'
-import * as testEvents from '../../test/beefy-light-client/events'
-import * as devEvents from '../../dev/beefy-light-client/events'
+import * as soraPolkadotEvents from '../../sora-polkadot/beefy-light-client/events'
+import * as soraKusamaEvents from '../../sora-kusama/beefy-light-client/events'
 
 
 export const verificationSuccessful = {
 	name: 'BeefyLightClient.VerificationSuccessful',
-	v52Stage: stageEvents.verificationSuccessful['v52'],
-	v52Test: testEvents.verificationSuccessful['v52'],
-	v70Dev: devEvents.verificationSuccessful['v70'],
+	soraPolkadotV1: soraPolkadotEvents.verificationSuccessful['v1'],
+	soraPolkadotV10: soraPolkadotEvents.verificationSuccessful['v10'],
+	soraKusamaV7: soraKusamaEvents.verificationSuccessful['v7'],
 }
 
 export const newMmrRoot = {
 	name: 'BeefyLightClient.NewMMRRoot',
-	v52Stage: stageEvents.newMmrRoot['v52'],
-	v52Test: testEvents.newMmrRoot['v52'],
-	v70Dev: devEvents.newMmrRoot['v70'],
+	soraPolkadotV1: soraPolkadotEvents.newMmrRoot['v1'],
+	soraPolkadotV10: soraPolkadotEvents.newMmrRoot['v10'],
+	soraKusamaV7: soraKusamaEvents.newMmrRoot['v7'],
 }
 
 export const validatorRegistryUpdated = {
 	name: 'BeefyLightClient.ValidatorRegistryUpdated',
-	v52Stage: stageEvents.validatorRegistryUpdated['v52'],
-	v52Test: testEvents.validatorRegistryUpdated['v52'],
-	v70Dev: devEvents.validatorRegistryUpdated['v70'],
+	soraPolkadotV1: soraPolkadotEvents.validatorRegistryUpdated['v1'],
+	soraPolkadotV10: soraPolkadotEvents.validatorRegistryUpdated['v10'],
+	soraKusamaV7: soraKusamaEvents.validatorRegistryUpdated['v7'],
 }

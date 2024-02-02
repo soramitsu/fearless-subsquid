@@ -1,21 +1,15 @@
-import * as productionStorage from '../../production/timestamp/storage'
-import * as stageStorage from '../../stage/timestamp/storage'
-import * as testStorage from '../../test/timestamp/storage'
-import * as devStorage from '../../dev/timestamp/storage'
+import * as soraPolkadotStorage from '../../sora-polkadot/timestamp/storage'
+import * as soraKusamaStorage from '../../sora-kusama/timestamp/storage'
 
 
 export const now = {
 	name: '',
-	v1: productionStorage.now['v1'],
-	v33Stage: stageStorage.now['v33'],
-	v33Test: testStorage.now['v33'],
-	v70Dev: devStorage.now['v70'],
+	soraPolkadotV1: soraPolkadotStorage.now['v1'],
+	soraKusamaV1: soraKusamaStorage.now['v1'],
 }
 
 export const didUpdate = {
 	name: '',
-	v1: productionStorage.didUpdate['v1'],
-	v33Stage: stageStorage.didUpdate['v33'],
-	v33Test: testStorage.didUpdate['v33'],
-	v70Dev: devStorage.didUpdate['v70'],
+	soraPolkadotV1: soraPolkadotStorage.didUpdate['v1'],
+	soraKusamaV1: soraKusamaStorage.didUpdate['v1'],
 }

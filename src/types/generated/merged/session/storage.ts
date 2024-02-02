@@ -1,70 +1,47 @@
-import * as productionStorage from '../../production/session/storage'
-import * as stageStorage from '../../stage/session/storage'
-import * as testStorage from '../../test/session/storage'
-import * as devStorage from '../../dev/session/storage'
+import * as soraPolkadotStorage from '../../sora-polkadot/session/storage'
+import * as soraKusamaStorage from '../../sora-kusama/session/storage'
 
 
 export const validators = {
 	name: '',
-	v1: productionStorage.validators['v1'],
-	v33Stage: stageStorage.validators['v33'],
-	v33Test: testStorage.validators['v33'],
-	v70Dev: devStorage.validators['v70'],
+	soraPolkadotV1: soraPolkadotStorage.validators['v1'],
+	soraKusamaV1: soraKusamaStorage.validators['v1'],
 }
 
 export const currentIndex = {
 	name: '',
-	v1: productionStorage.currentIndex['v1'],
-	v33Stage: stageStorage.currentIndex['v33'],
-	v33Test: testStorage.currentIndex['v33'],
-	v70Dev: devStorage.currentIndex['v70'],
+	soraPolkadotV1: soraPolkadotStorage.currentIndex['v1'],
+	soraKusamaV1: soraKusamaStorage.currentIndex['v1'],
 }
 
 export const queuedChanged = {
 	name: '',
-	v1: productionStorage.queuedChanged['v1'],
-	v33Stage: stageStorage.queuedChanged['v33'],
-	v33Test: testStorage.queuedChanged['v33'],
-	v70Dev: devStorage.queuedChanged['v70'],
+	soraPolkadotV1: soraPolkadotStorage.queuedChanged['v1'],
+	soraKusamaV1: soraKusamaStorage.queuedChanged['v1'],
 }
 
 export const queuedKeys = {
 	name: '',
-	v1: productionStorage.queuedKeys['v1'],
-	v42: productionStorage.queuedKeys['v42'],
-	v33Stage: stageStorage.queuedKeys['v33'],
-	v42Stage: stageStorage.queuedKeys['v42'],
-	v33Test: testStorage.queuedKeys['v33'],
-	v42Test: testStorage.queuedKeys['v42'],
-	v70Dev: devStorage.queuedKeys['v70'],
+	soraPolkadotV1: soraPolkadotStorage.queuedKeys['v1'],
+	soraKusamaV1: soraKusamaStorage.queuedKeys['v1'],
+	soraKusamaV7: soraKusamaStorage.queuedKeys['v7'],
 }
 
 export const disabledValidators = {
 	name: '',
-	v1: productionStorage.disabledValidators['v1'],
-	v33Stage: stageStorage.disabledValidators['v33'],
-	v33Test: testStorage.disabledValidators['v33'],
-	v70Dev: devStorage.disabledValidators['v70'],
+	soraPolkadotV1: soraPolkadotStorage.disabledValidators['v1'],
+	soraKusamaV1: soraKusamaStorage.disabledValidators['v1'],
 }
 
 export const nextKeys = {
 	name: '',
-	v1: productionStorage.nextKeys['v1'],
-	v42: productionStorage.nextKeys['v42'],
-	v33Stage: stageStorage.nextKeys['v33'],
-	v42Stage: stageStorage.nextKeys['v42'],
-	v33Test: testStorage.nextKeys['v33'],
-	v42Test: testStorage.nextKeys['v42'],
-	v70Dev: devStorage.nextKeys['v70'],
+	soraPolkadotV1: soraPolkadotStorage.nextKeys['v1'],
+	soraKusamaV1: soraKusamaStorage.nextKeys['v1'],
+	soraKusamaV7: soraKusamaStorage.nextKeys['v7'],
 }
 
 export const keyOwner = {
 	name: '',
-	v1: productionStorage.keyOwner['v1'],
-	v42: productionStorage.keyOwner['v42'],
-	v33Stage: stageStorage.keyOwner['v33'],
-	v42Stage: stageStorage.keyOwner['v42'],
-	v33Test: testStorage.keyOwner['v33'],
-	v42Test: testStorage.keyOwner['v42'],
-	v70Dev: devStorage.keyOwner['v70'],
+	soraPolkadotV1: soraPolkadotStorage.keyOwner['v1'],
+	soraKusamaV1: soraKusamaStorage.keyOwner['v1'],
 }

@@ -1,29 +1,21 @@
-import * as productionStorage from '../../production/beefy/storage'
-import * as stageStorage from '../../stage/beefy/storage'
-import * as testStorage from '../../test/beefy/storage'
-import * as devStorage from '../../dev/beefy/storage'
+import * as soraPolkadotStorage from '../../sora-polkadot/beefy/storage'
+import * as soraKusamaStorage from '../../sora-kusama/beefy/storage'
 
 
 export const authorities = {
 	name: '',
-	v42: productionStorage.authorities['v42'],
-	v42Stage: stageStorage.authorities['v42'],
-	v42Test: testStorage.authorities['v42'],
-	v70Dev: devStorage.authorities['v70'],
+	soraPolkadotV1: soraPolkadotStorage.authorities['v1'],
+	soraKusamaV7: soraKusamaStorage.authorities['v7'],
 }
 
 export const validatorSetId = {
 	name: '',
-	v42: productionStorage.validatorSetId['v42'],
-	v42Stage: stageStorage.validatorSetId['v42'],
-	v42Test: testStorage.validatorSetId['v42'],
-	v70Dev: devStorage.validatorSetId['v70'],
+	soraPolkadotV1: soraPolkadotStorage.validatorSetId['v1'],
+	soraKusamaV7: soraKusamaStorage.validatorSetId['v7'],
 }
 
 export const nextAuthorities = {
 	name: '',
-	v42: productionStorage.nextAuthorities['v42'],
-	v42Stage: stageStorage.nextAuthorities['v42'],
-	v42Test: testStorage.nextAuthorities['v42'],
-	v70Dev: devStorage.nextAuthorities['v70'],
+	soraPolkadotV1: soraPolkadotStorage.nextAuthorities['v1'],
+	soraKusamaV7: soraKusamaStorage.nextAuthorities['v7'],
 }

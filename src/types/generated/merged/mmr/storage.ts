@@ -1,25 +1,17 @@
-import * as stageStorage from '../../stage/mmr/storage'
-import * as testStorage from '../../test/mmr/storage'
-import * as devStorage from '../../dev/mmr/storage'
+import * as soraPolkadotStorage from '../../sora-polkadot/mmr/storage'
 
 
 export const rootHash = {
 	name: '',
-	v52Stage: stageStorage.rootHash['v52'],
-	v52Test: testStorage.rootHash['v52'],
-	v70Dev: devStorage.rootHash['v70'],
+	soraPolkadotV1: soraPolkadotStorage.rootHash['v1'],
 }
 
 export const numberOfLeaves = {
 	name: '',
-	v52Stage: stageStorage.numberOfLeaves['v52'],
-	v52Test: testStorage.numberOfLeaves['v52'],
-	v70Dev: devStorage.numberOfLeaves['v70'],
+	soraPolkadotV1: soraPolkadotStorage.numberOfLeaves['v1'],
 }
 
 export const nodes = {
 	name: '',
-	v52Stage: stageStorage.nodes['v52'],
-	v52Test: testStorage.nodes['v52'],
-	v70Dev: devStorage.nodes['v70'],
+	soraPolkadotV1: soraPolkadotStorage.nodes['v1'],
 }

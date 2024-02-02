@@ -1,13 +1,9 @@
-import * as productionCalls from '../../production/timestamp/calls'
-import * as stageCalls from '../../stage/timestamp/calls'
-import * as testCalls from '../../test/timestamp/calls'
-import * as devCalls from '../../dev/timestamp/calls'
+import * as soraPolkadotCalls from '../../sora-polkadot/timestamp/calls'
+import * as soraKusamaCalls from '../../sora-kusama/timestamp/calls'
 
 
 export const set = {
 	name: 'Timestamp.set',
-	v1: productionCalls.set['v1'],
-	v33Stage: stageCalls.set['v33'],
-	v33Test: testCalls.set['v33'],
-	v70Dev: devCalls.set['v70'],
+	soraPolkadotV1: soraPolkadotCalls.set['v1'],
+	soraKusamaV1: soraKusamaCalls.set['v1'],
 }
