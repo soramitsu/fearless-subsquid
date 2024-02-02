@@ -12,6 +12,10 @@
 /archive/stage/cockroach-data
 /archive/dev/cockroach-data
 
+/scripts/fetch-spec-versions.sh
+
+/spec
+
 typegen.json
 
 .env

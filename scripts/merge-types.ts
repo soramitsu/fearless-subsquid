@@ -53,8 +53,7 @@ const entityTypes = ['calls', 'events', 'storage']
 fs.writeFileSync('src/types/generated/merged/index.ts', entityTypes.map((entityType) => `export * as ${entityType} from './${entityType}'`).join('\n'))
 
 const chains = [
-	Chain.PRODUCTION,
-	...Object.values(Chain).filter((chain) => chain !== Chain.PRODUCTION),
+	...Object.values(Chain),
 ]
 
 const allModules = new Set<string>()
@@ -74,8 +73,6 @@ entityTypes.forEach((entityType) => {
 	})
 	fs.writeFileSync(`src/types/generated/merged/${entityType}.ts`, imports.join('\n'))
 })
-
-let maxProductionVersion = 0
 
 const modules = Array.from(allModules).map((module) => {
 	if (module) {
@@ -115,9 +112,6 @@ const modules = Array.from(allModules).map((module) => {
 
 							const version = parseInt(versionMatch)
 							objectInfo.versions.push(version)
-							if (chain === Chain.PRODUCTION) {
-								maxProductionVersion = Math.max(maxProductionVersion, version)
-							}
 						}
 					})
 					objects[objectName].push(objectInfo)
@@ -140,7 +134,6 @@ modules.forEach((module) => {
 
 		const entityTypeSingle = entityType.replace(/s$/, '')
 		const entityTypeCapital = entityType.charAt(0).toUpperCase() + entityType.slice(1)
-		const entityTypeSingleCapital = entityTypeSingle.charAt(0).toUpperCase() + entityTypeSingle.slice(1)
 
 		const outputPath = path.resolve(__dirname, `../src/types/generated/merged/${module.module}/${entityType}.ts`)
 		const outputImports: string[] = []
@@ -149,7 +142,7 @@ modules.forEach((module) => {
 		Object.values(Chain).forEach((chain) => {
 			if (Object.values(objects).some((data) => data.some((object) => object.chain === chain))) {
 				outputImports.push(
-					`import * as ${chain}${entityTypeCapital} from '../../${chain}/${module.module}/${entityType}'`,
+					`import * as ${toCamelCase(chain)}${entityTypeCapital} from '../../${chain}/${module.module}/${entityType}'`,
 				)
 			}
 		})
@@ -164,9 +157,6 @@ modules.forEach((module) => {
 
 			objectInfoArray.forEach((objectInfo) => {
 				objectInfo.versions.forEach((version) => {
-					// if (objectInfo.chain !== Chain.PRODUCTION && version <= maxProductionVersion) {
-					// 	return
-					// }
 					versions.push({
 						chain: objectInfo.chain,
 						version: version,
@@ -179,8 +169,7 @@ modules.forEach((module) => {
 
 			versions.forEach((v) => {
 				const { chain, version } = v
-				const prefix = chain === Chain.PRODUCTION ? '' : chain.charAt(0).toUpperCase() + chain.slice(1)
-				outputData.push(`\tv${version}${prefix}: ${chain}${entityTypeCapital}.${objectName}['v${version}'],`)
+				outputData.push(`\t${toCamelCase(chain)}V${version}: ${toCamelCase(chain)}${entityTypeCapital}.${objectName}['v${version}'],`)
 			})
 	
 			outputData.push('}\n')

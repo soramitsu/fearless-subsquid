@@ -31,31 +31,31 @@ const version = 4
 
 export const chains: Chains = {
 	[Chain.SORA_POLKADOT]: {
-    name: 'sora-polkadot',
-    description: 'sora-polkadot squid',
-    version,
-    chain: 'wss://ws.parachain-collator-3.pc3.sora2.soramitsu.co.jp/',
-    archive: null,
-    storage: '100G',
-    scaleProfiles: {
-      postgres: ScaleProfile.SMALL,
-      processor: ScaleProfile.SMALL,
-      api: ScaleProfile.SMALL,
-    },
-  },
+		name: 'sora-polkadot',
+		description: 'sora-polkadot squid',
+		version,
+		chain: 'wss://ws.parachain-collator-3.pc3.sora2.soramitsu.co.jp/',
+		archive: null,
+		storage: '100G',
+		scaleProfiles: {
+		postgres: ScaleProfile.SMALL,
+		processor: ScaleProfile.SMALL,
+		api: ScaleProfile.SMALL,
+		},
+	},
 	[Chain.SORA_KUSAMA]: {
-    name: 'sora-kusama',
-    description: 'sora-kusama squid',
-    version,
-    chain: 'wss://ws.parachain-collator-2.c2.sora2.soramitsu.co.jp/',
-    archive: null,
-    storage: '100G',
-    scaleProfiles: {
-      postgres: ScaleProfile.SMALL,
-      processor: ScaleProfile.SMALL,
-      api: ScaleProfile.SMALL,
-    },
-  }
+		name: 'sora-kusama',
+		description: 'sora-kusama squid',
+		version,
+		chain: 'wss://ws.parachain-collator-2.c2.sora2.soramitsu.co.jp/',
+		archive: null,
+		storage: '100G',
+		scaleProfiles: {
+		postgres: ScaleProfile.SMALL,
+		processor: ScaleProfile.SMALL,
+		api: ScaleProfile.SMALL,
+		},
+  	}
 }
 
 export default chains
