@@ -54,11 +54,11 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 			if (item.kind === 'event') {
 				const { event } = item
 
+				if (event.name === 'SubstrateBridgeOutboundChannel.MessageAccepted') await messageAcceptedHandler(blockContext, event)
+
 				if (event.name === 'ParachainSystem.DownwardMessagesProcessed') await downwardMessagesProcessedHandler(blockContext, event)
 
-				if (event.name === 'XcmApp.AssetAddedToChannel') await assetAddedToChannelHandler(blockContext, event)
-
-				if (event.name === 'SubstrateBridgeOutboundChannel.MessageAccepted') await messageAcceptedHandler(blockContext, event)
+				if (event.name === 'XcmApp.') await assetAddedToChannelHandler(blockContext, event)
 			}
 		}
 	}
