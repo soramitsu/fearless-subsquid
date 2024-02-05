@@ -16,7 +16,6 @@ export interface EnvironmentAddresses {
 	chain: string
 	archive: string | null
 	storage: string
-	types: 'soraPolkadotV10' |  'soraKusamaV7'
 	scaleProfiles: {
 		postgres: ScaleProfile
 		processor: ScaleProfile
@@ -38,7 +37,6 @@ export const chains: Chains = {
 		chain: 'wss://ws.parachain-collator-3.pc3.sora2.soramitsu.co.jp/',
 		archive: null,
 		storage: '100G',
-    types: 'soraPolkadotV10', // TODO polkadot v1 or v10???
 		scaleProfiles: {
       postgres: ScaleProfile.SMALL,
       processor: ScaleProfile.SMALL,
@@ -52,7 +50,6 @@ export const chains: Chains = {
 		chain: 'wss://ws.parachain-collator-2.c2.sora2.soramitsu.co.jp/',
 		archive: null,
 		storage: '100G',
-    types: 'soraKusamaV7',
 		scaleProfiles: {
       postgres: ScaleProfile.SMALL,
       processor: ScaleProfile.SMALL,

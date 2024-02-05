@@ -2,7 +2,6 @@ import { BlockContext, Event } from '../../types'
 import { getEventData } from '../../utils/entities'
 import { events } from '../../types/generated/merged'
 import { nToU8a } from '@polkadot/util'
-import { types } from '../../config'
 import { getBlockTimestamp, getEventId } from '../../utils'
 import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementType } from '../../model'
 
@@ -24,7 +23,7 @@ export async function messageAcceptedHandler(
 	ctx: BlockContext,
 	event: Event<'SubstrateBridgeOutboundChannel.MessageAccepted'>
 ): Promise<void> {
-  const type = events.substrateBridgeOutboundChannel.messageAccepted[types]
+  const type = events.substrateBridgeOutboundChannel.messageAccepted
 	const data = getEventData(ctx, type, event)
 
   console.log('data', data);
@@ -64,6 +63,4 @@ export async function messageAcceptedHandler(
 	}
 
 	await ctx.store.save(historyElement)
-
-	return historyElement
 }
