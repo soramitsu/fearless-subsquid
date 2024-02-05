@@ -14,32 +14,16 @@ type ExecutionError @jsonField {
 	nonModuleErrorMessage: String
 }
 
-type HistoryElementCall @entity {
-	id: ID!
-	historyElement: HistoryElement! @index
-	module: String!
-	method: String!
-	data: JSON!
-	updatedAtBlock: Int! @index
-}
-
 type HistoryElement @entity {
 	id: ID!
 	type: HistoryElementType!
 	blockHeight: Int! @index
 	blockHash: String! @index
-	name: String!
-	module: String! @index
-	method: String! @index
-	address: String! @index
-	networkFee: String
 	execution: ExecutionResult!
 	timestamp: Int! @index
 	data: JSON @index
 	dataTo: String @index
 	dataFrom: String @index
 	dataReceivers: [String]!
-	calls: [HistoryElementCall!]! @derivedFrom(field: "historyElement")
-	callNames: [String]!
 	updatedAtBlock: Int! @index
 }
