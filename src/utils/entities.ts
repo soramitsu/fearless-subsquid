@@ -1,8 +1,6 @@
 import { BlockContext, Call, Event } from '../types'
-import { CallType as CallTypeProduction, EventType as EventTypeProduction } from '../types/generated/production/support'
-import { CallType as CallTypeStage, EventType as EventTypeStage } from '../types/generated/stage/support'
-import { CallType as CallTypeTest, EventType as EventTypeTest } from '../types/generated/test/support'
-import { CallType as CallTypeDev, EventType as EventTypeDev } from '../types/generated/dev/support'
+import { CallType as CallTypePolkadot, EventType as EventTypePolkadot } from '../types/generated/sora-polkadot/support'
+import { CallType as CallTypeKusama, EventType as EventTypeKusama } from '../types/generated/sora-kusama/support'
 import * as sts from '@subsquid/substrate-runtime/lib/sts'
 
 type VersionedObject = {
@@ -21,17 +19,13 @@ type EntityItem = {
 
 type ExtractType<T> = T extends sts.Type<infer U> ? U : never;
 export type ExtractCallType<T> = ExtractType<
-	T extends CallTypeProduction<infer U> ? U
-	: T extends CallTypeStage<infer U> ? U
-	: T extends CallTypeTest<infer U> ? U
-	: T extends CallTypeDev<infer U> ? U
+	T extends CallTypeKusama<infer U> ? U
+	: T extends CallTypePolkadot<infer U> ? U
 	: never
 >
 export type ExtractEventType<T> = ExtractType<
-	T extends EventTypeProduction<infer U> ? U
-	: T extends EventTypeStage<infer U> ? U
-	: T extends EventTypeTest<infer U> ? U
-	: T extends EventTypeDev<infer U> ? U
+	T extends EventTypeKusama<infer U> ? U
+	: T extends EventTypePolkadot<infer U> ? U
 	: never
 >
 
