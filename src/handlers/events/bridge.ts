@@ -30,7 +30,7 @@ export async function messageAcceptedHandler(
 
 	const historyElement = new HistoryElement()
 
-  historyElement.id = getEventId(ctx, { entity: event })
+  historyElement.id = getEventId(ctx, event)
 	historyElement.type = HistoryElementType.EVENT
 	historyElement.blockHeight = ctx.block.header.height
 	historyElement.blockHash = ctx.block.header.hash.toString()
