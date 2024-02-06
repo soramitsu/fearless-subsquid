@@ -1,6 +1,6 @@
 import { BlockContext, Event } from '../types'
 import { nToU8a } from '@polkadot/util'
-import { getBlockTimestamp, getEventId } from '../utils'
+import { getBlockTimestamp, getEventId, toCamelCase } from '../utils'
 import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementType } from '../model'
 
 export const createHistoryElement = async (

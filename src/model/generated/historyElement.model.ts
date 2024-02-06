@@ -30,6 +30,17 @@ export class HistoryElement {
     @Column_("jsonb", {transformer: {to: obj => obj.toJSON(), from: obj => obj == null ? undefined : new ExecutionResult(undefined, obj)}, nullable: false})
     execution!: ExecutionResult
 
+    @Column_("text", {nullable: false})
+    name!: string
+
+    @Index_()
+    @Column_("text", {nullable: false})
+    module!: string
+
+    @Index_()
+    @Column_("text", {nullable: false})
+    method!: string
+
     @Index_()
     @Column_("jsonb", {nullable: true})
     data!: unknown | undefined | null
