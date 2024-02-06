@@ -10,7 +10,6 @@ import {
 	Event,
 } from '../types'
 import { decodeHex } from '@subsquid/substrate-processor'
-import { Bytes } from '../types/generated/production/support'
 
 export function assertDefined<T>(value: T | null | undefined, message?: string): asserts value is T {
     if (value === null || value === undefined) {
@@ -72,9 +71,10 @@ export const decodeReferenceSymbol = (data: ReferenceSymbol): Uint8Array => {
 	return decodeText(data as unknown as string)
 }
 
-export const toAssetId = (data: Bytes): AssetId => {
+export const toAssetId = (data: any): AssetId => {
 	return data.toString() as unknown as AssetId
 }
+
 export const decodeAssetId = (data: AssetId): Uint8Array => {
 	return decodeHex(data as unknown as string)
 }

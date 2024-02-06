@@ -27,7 +27,7 @@ type Chains = {
 	[chain in Chain]: EnvironmentAddresses
 }
 
-const version = 4
+const version = 1
 
 export const chains: Chains = {
 	[Chain.SORA_POLKADOT]: {
