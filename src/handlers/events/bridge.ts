@@ -17,6 +17,7 @@ export async function assetAddedToChannelHandler(
 	ctx: BlockContext,
 	event: Event<'XcmApp.AssetAddedToChannel'>
 ): Promise<void> {
+	// await ctx.store.save(stakingReward)
 }
 
 export async function messageAcceptedHandler(
@@ -28,23 +29,41 @@ export async function messageAcceptedHandler(
 
   console.log('data', data);
 
+  if (Array.isArray(data)) return // TODO v1 полкадота не обрабатывается
+
+  const networkId = data.networkId
+  const batchNonce = data.batchNonce.toString()
+  const messageNonce = data.messageNonce.toString()
+
+	const historyData = {
+    networkId,
+    batchNonce,
+    messageNonce
+  }
+
+	createHistoryElement(ctx, event, historyData)
+}
+
+export const createHistoryElement = async (
+	ctx: BlockContext,
+	event: Event<'SubstrateBridgeOutboundChannel.MessageAccepted'>,
+  historyData: Record<string, any>
+): Promise<void> => {
 	const historyElement = new HistoryElement()
 
   historyElement.id = getEventId(ctx, event)
 	historyElement.type = HistoryElementType.EVENT
 	historyElement.blockHeight = ctx.block.header.height
 	historyElement.blockHash = ctx.block.header.hash.toString()
-	historyElement.updatedAtBlock = ctx.block.header.height
 	historyElement.timestamp = getBlockTimestamp(ctx)
+	historyElement.data = historyData
 
 	const extrinsic = event.extrinsic
 	const success = extrinsic?.success
 
-  if (success) {
-		historyElement.execution = new ExecutionResult({
-			success,
-		})
-	} else if (extrinsic) {
+  if (success)
+		historyElement.execution = new ExecutionResult({ success })
+	else if (extrinsic) {
 		const extrinsicError = extrinsic.error as any
 		const error =
 			extrinsicError.__kind === 'Module'
@@ -52,9 +71,7 @@ export async function messageAcceptedHandler(
 						moduleErrorId: nToU8a(extrinsicError.value.error).at(-1),
 						moduleErrorIndex: extrinsicError.value.index,
 				  })
-				: new ExecutionError({
-						nonModuleErrorMessage: JSON.stringify(extrinsicError),
-				  })
+				: new ExecutionError({ nonModuleErrorMessage: JSON.stringify(extrinsicError) })
 
 		historyElement.execution = new ExecutionResult({
 			success,
