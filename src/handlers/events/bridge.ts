@@ -1,23 +1,34 @@
 import { BlockContext, Event } from '../../types'
 import { getEventData } from '../../utils/entities'
 import { events } from '../../types/generated/merged'
-import { nToU8a } from '@polkadot/util'
-import { getBlockTimestamp, getEventId } from '../../utils'
-import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementType } from '../../model'
+import { createHistoryElement } from '../../utils/history'
 
-export async function downwardMessagesProcessedHandler(
+export async function transactionFeePaidHandler(
 	ctx: BlockContext,
-	event: Event<'ParachainSystem.DownwardMessagesProcessed'>
+	event: Event<'TransactionPayment.TransactionFeePaid'>
 ): Promise<void> {
-	// await ctx.store.save(stakingReward)
+  const type = events.transactionPayment.transactionFeePaid
+	const data = getEventData(ctx, type, event)
+
+  const actualFee = data.actualFee?.toString()
+  const tip = data.tip?.toString()
+  const who = data.who?.toString()
+
+	const historyData = {
+    actualFee,
+    tip,
+    who
+  }
+
+	createHistoryElement(ctx, event, historyData)
 }
 
-
-export async function assetAddedToChannelHandler(
+export async function xcmPalletAttemptedHandler(
 	ctx: BlockContext,
-	event: Event<'XcmApp.AssetAddedToChannel'>
+	event: Event<'XcmPallet.Attempted'>
 ): Promise<void> {
-	// await ctx.store.save(stakingReward)
+  // const type = events.xcmPallet.attempted
+	// const data = getEventData(ctx, type, event)
 }
 
 export async function messageAcceptedHandler(
@@ -27,16 +38,12 @@ export async function messageAcceptedHandler(
   const type = events.substrateBridgeOutboundChannel.messageAccepted
 	const data = getEventData(ctx, type, event)
 
-  console.log('data', data);
-
-  if (Array.isArray(data)) return // TODO v1 полкадота не обрабатывается
-
-  const networkId = data.networkId
-  const batchNonce = data.batchNonce.toString()
-  const messageNonce = data.messageNonce.toString()
+  const networkId = 'networkId' in data ? data.networkId : data[0]
+  const batchNonce = 'batchNonce' in data ? data.batchNonce.toString() : null
+  const messageNonce = 'messageNonce' in data ? data.messageNonce.toString() : null
 
 	const historyData = {
-    networkId,
+    networkId: networkId.__kind,
     batchNonce,
     messageNonce
   }
@@ -44,40 +51,161 @@ export async function messageAcceptedHandler(
 	createHistoryElement(ctx, event, historyData)
 }
 
-export const createHistoryElement = async (
+export async function downwardMessagesProcessedHandler(
 	ctx: BlockContext,
-	event: Event<'SubstrateBridgeOutboundChannel.MessageAccepted'>,
-  historyData: Record<string, any>
-): Promise<void> => {
-	const historyElement = new HistoryElement()
+	event: Event<'ParachainSystem.DownwardMessagesProcessed'>
+): Promise<void> {
+  const type = events.parachainSystem.downwardMessagesProcessed
+	const data = getEventData(ctx, type, event)
 
-  historyElement.id = getEventId(ctx, event)
-	historyElement.type = HistoryElementType.EVENT
-	historyElement.blockHeight = ctx.block.header.height
-	historyElement.blockHash = ctx.block.header.hash.toString()
-	historyElement.timestamp = getBlockTimestamp(ctx)
-	historyElement.data = historyData
+  const weightUsed = 'weightUsed' in data ? data.weightUsed : data[0]
+  const refTime = 'refTime' in data ? data.refTime : null
+  const proofSize = 'proofSize' in data ? data.proofSize : weightUsed
 
-	const extrinsic = event.extrinsic
-	const success = extrinsic?.success
+  const dmqHead = 'dmqHead' in data ? data.dmqHead : data[1]
 
-  if (success)
-		historyElement.execution = new ExecutionResult({ success })
-	else if (extrinsic) {
-		const extrinsicError = extrinsic.error as any
-		const error =
-			extrinsicError.__kind === 'Module'
-				? new ExecutionError({
-						moduleErrorId: nToU8a(extrinsicError.value.error).at(-1),
-						moduleErrorIndex: extrinsicError.value.index,
-				  })
-				: new ExecutionError({ nonModuleErrorMessage: JSON.stringify(extrinsicError) })
+	const historyData = {
+    dmqHead,
+    refTime,
+    proofSize
+  }
 
-		historyElement.execution = new ExecutionResult({
-			success,
-			error,
-		})
-	}
+	createHistoryElement(ctx, event, historyData)
+}
 
-	await ctx.store.save(historyElement)
+export async function systemExtrinsicFailedHandler(
+	ctx: BlockContext,
+	event: Event<'system.ExtrinsicFailed'>
+): Promise<void> {
+  const type = events.system.extrinsicFailed
+	const data = getEventData(ctx, type, event)
+
+  const dispatchError = 'dispatchError' in data ? data.dispatchError : data[0]
+  const dispatchInfo = 'dispatchInfo' in data ? data.dispatchInfo : data[1]
+
+  const classInfo = dispatchInfo?.class
+  const paysFee = dispatchInfo?.paysFee
+  const weight = dispatchInfo?.weight
+
+  const proofSize = typeof weight === 'object' ? weight.proofSize.toString() : null
+  const refTime = typeof weight === 'object' ? weight.refTime.toString() : null
+
+	const historyData: Record<string, any> = {
+    dispatchError,
+    classInfo,
+    paysFee,
+    proofSize,
+    refTime
+  }
+
+  if (typeof weight !== 'object') historyData.weight = weight.toString()
+
+	createHistoryElement(ctx, event, historyData)
+}
+
+export async function systemExtrinsicSuccessHandler(
+	ctx: BlockContext,
+	event: Event<'system.ExtrinsicSuccess'>
+): Promise<void> {
+  const type = events.system.extrinsicSuccess
+	const data = getEventData(ctx, type, event)
+
+  const dispatchInfo = 'dispatchInfo' in data ? data.dispatchInfo : data
+
+  const classInfo = dispatchInfo?.class
+  const paysFee = dispatchInfo?.paysFee
+  const weight = dispatchInfo?.weight
+
+  const proofSize = typeof weight === 'object' ? weight.proofSize.toString() : null
+  const refTime = typeof weight === 'object' ? weight.refTime.toString() : null
+
+	const historyData: Record<string, any> = {
+    classInfo,
+    paysFee,
+    proofSize,
+    refTime
+  }
+
+  if (typeof weight !== 'object') historyData.weight = weight.toString()
+
+	createHistoryElement(ctx, event, historyData)
+}
+
+export async function messageDispatchedHandler(
+	ctx: BlockContext,
+	event: Event<'SubstrateDispatch.MessageDispatched'>
+): Promise<void> {
+  const type = events.substrateDispatch.messageDispatched
+	const data = getEventData(ctx, type, event)
+
+  const messageId = data[0]
+  const result = data[1]
+
+  const sender = 'sender' in messageId ? messageId.sender : null
+  const receiver = 'receiver' in messageId ? messageId.receiver : null
+  const batchNonce = 'batchNonce' in messageId ? messageId.batchNonce ?? null : null
+  const messageNonce = 'messageNonce' in messageId ? messageId.messageNonce : null
+
+	const historyData: Record<string, any>  = {
+    sender,
+    receiver,
+    batchNonce,
+    messageNonce,
+    result
+  }
+
+  if (!('sender' in messageId)) {
+    historyData.direction = messageId.direction
+    historyData.messageNonce = messageId.nonce
+  }
+
+	createHistoryElement(ctx, event, historyData)
+}
+
+export async function upwardMessageSentHandler(
+	ctx: BlockContext,
+	event: Event<'ParachainSystem.UpwardMessageSent'>
+): Promise<void> {
+  const type = events.parachainSystem.upwardMessageSent
+	const data = getEventData(ctx, type, event)
+
+  const messageHash = data.messageHash?.toString()
+
+	const historyData = {
+    messageHash
+  }
+
+	createHistoryElement(ctx, event, historyData)
+}
+
+export async function requestStatusUpdateHandler(
+	ctx: BlockContext,
+	event: Event<'BridgeProxy.RequestStatusUpdate'>
+): Promise<void> {
+  // const type = events.bridgeProxy.requestStatusUpdate
+	// const data = getEventData(ctx, type, event)
+}
+
+export async function mintedHandler(
+	ctx: BlockContext,
+	event: Event<'ParachainBridgeApp.Minted'>
+): Promise<void> {
+  // const type = events.parachainBridgeApp.minted
+	// const data = getEventData(ctx, type, event)
+}
+
+export async function assetAddedToChannelHandler(
+	ctx: BlockContext,
+	event: Event<'XcmApp.AssetAddedToChannel'>
+): Promise<void> {
+  const type = events.xcmApp.assetAddedToChannel
+	const data = getEventData(ctx, type, event)
+
+  const kind = data.__kind?.toString()
+
+	const historyData = {
+    kind
+  }
+
+	createHistoryElement(ctx, event, historyData)
 }

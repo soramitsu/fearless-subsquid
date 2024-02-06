@@ -21,5 +21,8 @@ type HistoryElement @entity {
 	blockHash: String! @index
 	timestamp: Int! @index
 	execution: ExecutionResult!
+  name: String!
+	module: String! @index
+	method: String! @index
 	data: JSON @index
 }

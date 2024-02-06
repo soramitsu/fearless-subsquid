@@ -4,7 +4,7 @@ import { TypeormDatabase } from '@subsquid/typeorm-store'
 import { eventNames } from './consts'
 import { chain, startBlock } from './config'
 import { getSortedItems } from './utils/processor'
-import { assetAddedToChannelHandler, downwardMessagesProcessedHandler, messageAcceptedHandler } from './handlers/events/bridge'
+import { assetAddedToChannelHandler, downwardMessagesProcessedHandler, messageAcceptedHandler, messageDispatchedHandler, mintedHandler, requestStatusUpdateHandler, systemExtrinsicFailedHandler, systemExtrinsicSuccessHandler, transactionFeePaidHandler, upwardMessageSentHandler, xcmPalletAttemptedHandler } from './handlers/events/bridge'
 
 export const processor = new SubstrateBatchProcessor()
 	.setRpcEndpoint({
@@ -45,20 +45,30 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 		}
 
 		for (let item of getSortedItems(block)) {
-			// if (item.kind === 'call') {
-			// 	const { call } = item
-
-			// 	if (call.name !== call.extrinsic?.call?.name) continue
-			// }
-
 			if (item.kind === 'event') {
 				const { event } = item
+
+				if (event.name === 'TransactionPayment.TransactionFeePaid') await transactionFeePaidHandler(blockContext, event)
+
+				if (event.name === 'XcmPallet.Attempted') await xcmPalletAttemptedHandler(blockContext, event) // TODO не доделан
 
 				if (event.name === 'SubstrateBridgeOutboundChannel.MessageAccepted') await messageAcceptedHandler(blockContext, event)
 
 				if (event.name === 'ParachainSystem.DownwardMessagesProcessed') await downwardMessagesProcessedHandler(blockContext, event)
 
-				if (event.name === 'XcmApp.') await assetAddedToChannelHandler(blockContext, event)
+				if (event.name === 'system.ExtrinsicFailed') await systemExtrinsicFailedHandler(blockContext, event)
+
+				if (event.name === 'system.ExtrinsicSuccess') await systemExtrinsicSuccessHandler(blockContext, event)
+
+				if (event.name === 'SubstrateDispatch.MessageDispatched') await messageDispatchedHandler(blockContext, event)
+
+				if (event.name === 'ParachainSystem.UpwardMessageSent') await upwardMessageSentHandler(blockContext, event)
+
+				if (event.name === 'BridgeProxy.RequestStatusUpdate') await requestStatusUpdateHandler(blockContext, event) // TODO не доделан
+
+				if (event.name === 'ParachainBridgeApp.Minted') await mintedHandler(blockContext, event) // TODO не доделан
+
+				if (event.name === 'XcmApp.AssetAddedToChannel') await assetAddedToChannelHandler(blockContext, event) // TODO Нужен ли вообще?
 			}
 		}
 	}
