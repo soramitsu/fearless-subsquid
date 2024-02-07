@@ -160,8 +160,8 @@ export async function messageDispatchedHandler(
 
   const sender = 'sender' in messageId ? messageId.sender : null
   const receiver = 'receiver' in messageId ? messageId.receiver : null
-  const batchNonce = 'batchNonce' in messageId ? messageId.batchNonce ?? null : null
-  const messageNonce = 'messageNonce' in messageId ? messageId.messageNonce : null
+  const batchNonce = 'batchNonce' in messageId ? messageId.batchNonce?.toString() ?? null : null
+  const messageNonce = 'messageNonce' in messageId ? messageId.messageNonce?.toString() : null
 
 	const historyData: Record<string, any>  = {
     sender,
@@ -188,7 +188,7 @@ export async function upwardMessageSentHandler(
   const type = events.parachainSystem.upwardMessageSent
 	const data = getEventData(ctx, type, event)
 
-  const messageHash = data.messageHash?.toString()
+  const messageHash = data.messageHash
 
 	const historyData = {
     messageHash
