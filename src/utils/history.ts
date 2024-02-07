@@ -34,7 +34,7 @@ export const createHistoryElement = async (
 						moduleErrorId: nToU8a(extrinsicError.value.error).at(-1),
 						moduleErrorIndex: extrinsicError.value.index,
 				  })
-				: new ExecutionError({ nonModuleErrorMessage: JSON.stringify(extrinsicError) })
+				: new ExecutionError({ nonModuleErrorMessage: extrinsicError })
 
 		historyElement.execution = new ExecutionResult({
 			success,
