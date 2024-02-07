@@ -53,9 +53,9 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 
 				if (event.name === 'ParachainSystem.DownwardMessagesProcessed') await downwardMessagesProcessedHandler(blockContext, event)
 
-				if (event.name === 'system.ExtrinsicFailed') await systemExtrinsicFailedHandler(blockContext, event)
+				if (event.name === 'System.ExtrinsicFailed') await systemExtrinsicFailedHandler(blockContext, event)
 
-				if (event.name === 'system.ExtrinsicSuccess') await systemExtrinsicSuccessHandler(blockContext, event)
+				if (event.name === 'System.ExtrinsicSuccess') await systemExtrinsicSuccessHandler(blockContext, event)
 
 				if (event.name === 'SubstrateDispatch.MessageDispatched') await messageDispatchedHandler(blockContext, event)
 
