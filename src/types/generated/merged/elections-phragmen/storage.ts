@@ -4,30 +4,30 @@ import * as soraKusamaStorage from '../../sora-kusama/elections-phragmen/storage
 
 export const members = {
 	name: '',
-	soraPolkadotV10: soraPolkadotStorage.members['v10'],
-	soraKusamaV9: soraKusamaStorage.members['v9'],
+	v10SoraPolkadot: soraPolkadotStorage.members['v10'],
+	v9SoraKusama: soraKusamaStorage.members['v9'],
 }
 
 export const runnersUp = {
 	name: '',
-	soraPolkadotV10: soraPolkadotStorage.runnersUp['v10'],
-	soraKusamaV9: soraKusamaStorage.runnersUp['v9'],
+	v10SoraPolkadot: soraPolkadotStorage.runnersUp['v10'],
+	v9SoraKusama: soraKusamaStorage.runnersUp['v9'],
 }
 
 export const candidates = {
 	name: '',
-	soraPolkadotV10: soraPolkadotStorage.candidates['v10'],
-	soraKusamaV9: soraKusamaStorage.candidates['v9'],
+	v10SoraPolkadot: soraPolkadotStorage.candidates['v10'],
+	v9SoraKusama: soraKusamaStorage.candidates['v9'],
 }
 
 export const electionRounds = {
 	name: '',
-	soraPolkadotV10: soraPolkadotStorage.electionRounds['v10'],
-	soraKusamaV9: soraKusamaStorage.electionRounds['v9'],
+	v10SoraPolkadot: soraPolkadotStorage.electionRounds['v10'],
+	v9SoraKusama: soraKusamaStorage.electionRounds['v9'],
 }
 
 export const voting = {
 	name: '',
-	soraPolkadotV10: soraPolkadotStorage.voting['v10'],
-	soraKusamaV9: soraKusamaStorage.voting['v9'],
+	v10SoraPolkadot: soraPolkadotStorage.voting['v10'],
+	v9SoraKusama: soraKusamaStorage.voting['v9'],
 }

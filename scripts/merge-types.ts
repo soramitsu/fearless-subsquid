@@ -43,6 +43,10 @@ export const toCamelCase = (s: string): string => {
 	return finalString
 }
 
+function toPascalCase(str: string): string {
+	return toCamelCase(str)[0].toUpperCase() + toCamelCase(str).slice(1)
+}
+
 try {
 	fs.rmSync('src/types/generated/merged', { recursive: true })
 } catch {}
@@ -169,7 +173,7 @@ modules.forEach((module) => {
 
 			versions.forEach((v) => {
 				const { chain, version } = v
-				outputData.push(`\t${toCamelCase(chain)}V${version}: ${toCamelCase(chain)}${entityTypeCapital}.${objectName}['v${version}'],`)
+				outputData.push(`\tv${version}${toPascalCase(chain)}: ${toCamelCase(chain)}${entityTypeCapital}.${objectName}['v${version}'],`)
 			})
 	
 			outputData.push('}\n')

@@ -4,6 +4,6 @@ import * as soraKusamaStorage from '../../sora-kusama/parachain-info/storage'
 
 export const parachainId = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.parachainId['v1'],
-	soraKusamaV1: soraKusamaStorage.parachainId['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.parachainId['v1'],
+	v1SoraKusama: soraKusamaStorage.parachainId['v1'],
 }

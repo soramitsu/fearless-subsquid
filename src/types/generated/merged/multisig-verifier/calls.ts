@@ -4,18 +4,18 @@ import * as soraKusamaCalls from '../../sora-kusama/multisig-verifier/calls'
 
 export const initialize = {
 	name: 'MultisigVerifier.initialize',
-	soraPolkadotV10: soraPolkadotCalls.initialize['v10'],
-	soraKusamaV7: soraKusamaCalls.initialize['v7'],
+	v10SoraPolkadot: soraPolkadotCalls.initialize['v10'],
+	v7SoraKusama: soraKusamaCalls.initialize['v7'],
 }
 
 export const addPeer = {
 	name: 'MultisigVerifier.add_peer',
-	soraPolkadotV10: soraPolkadotCalls.addPeer['v10'],
-	soraKusamaV7: soraKusamaCalls.addPeer['v7'],
+	v10SoraPolkadot: soraPolkadotCalls.addPeer['v10'],
+	v7SoraKusama: soraKusamaCalls.addPeer['v7'],
 }
 
 export const removePeer = {
 	name: 'MultisigVerifier.remove_peer',
-	soraPolkadotV10: soraPolkadotCalls.removePeer['v10'],
-	soraKusamaV7: soraKusamaCalls.removePeer['v7'],
+	v10SoraPolkadot: soraPolkadotCalls.removePeer['v10'],
+	v7SoraKusama: soraKusamaCalls.removePeer['v7'],
 }

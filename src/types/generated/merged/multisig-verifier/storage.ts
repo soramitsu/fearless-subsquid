@@ -4,6 +4,6 @@ import * as soraKusamaStorage from '../../sora-kusama/multisig-verifier/storage'
 
 export const peerKeys = {
 	name: '',
-	soraPolkadotV10: soraPolkadotStorage.peerKeys['v10'],
-	soraKusamaV7: soraKusamaStorage.peerKeys['v7'],
+	v10SoraPolkadot: soraPolkadotStorage.peerKeys['v10'],
+	v7SoraKusama: soraKusamaStorage.peerKeys['v7'],
 }

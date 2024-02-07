@@ -4,129 +4,129 @@ import * as soraKusamaStorage from '../../sora-kusama/parachain-system/storage'
 
 export const pendingValidationCode = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.pendingValidationCode['v1'],
-	soraKusamaV1: soraKusamaStorage.pendingValidationCode['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.pendingValidationCode['v1'],
+	v1SoraKusama: soraKusamaStorage.pendingValidationCode['v1'],
 }
 
 export const newValidationCode = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.newValidationCode['v1'],
-	soraKusamaV1: soraKusamaStorage.newValidationCode['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.newValidationCode['v1'],
+	v1SoraKusama: soraKusamaStorage.newValidationCode['v1'],
 }
 
 export const validationData = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.validationData['v1'],
-	soraKusamaV1: soraKusamaStorage.validationData['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.validationData['v1'],
+	v1SoraKusama: soraKusamaStorage.validationData['v1'],
 }
 
 export const didSetValidationCode = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.didSetValidationCode['v1'],
-	soraKusamaV1: soraKusamaStorage.didSetValidationCode['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.didSetValidationCode['v1'],
+	v1SoraKusama: soraKusamaStorage.didSetValidationCode['v1'],
 }
 
 export const lastRelayChainBlockNumber = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.lastRelayChainBlockNumber['v1'],
-	soraKusamaV7: soraKusamaStorage.lastRelayChainBlockNumber['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.lastRelayChainBlockNumber['v1'],
+	v7SoraKusama: soraKusamaStorage.lastRelayChainBlockNumber['v7'],
 }
 
 export const upgradeRestrictionSignal = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.upgradeRestrictionSignal['v1'],
-	soraKusamaV1: soraKusamaStorage.upgradeRestrictionSignal['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.upgradeRestrictionSignal['v1'],
+	v1SoraKusama: soraKusamaStorage.upgradeRestrictionSignal['v1'],
 }
 
 export const relayStateProof = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.relayStateProof['v1'],
-	soraKusamaV7: soraKusamaStorage.relayStateProof['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.relayStateProof['v1'],
+	v7SoraKusama: soraKusamaStorage.relayStateProof['v7'],
 }
 
 export const relevantMessagingState = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.relevantMessagingState['v1'],
-	soraKusamaV1: soraKusamaStorage.relevantMessagingState['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.relevantMessagingState['v1'],
+	v1SoraKusama: soraKusamaStorage.relevantMessagingState['v1'],
 }
 
 export const hostConfiguration = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.hostConfiguration['v1'],
-	soraKusamaV1: soraKusamaStorage.hostConfiguration['v1'],
-	soraKusamaV7: soraKusamaStorage.hostConfiguration['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.hostConfiguration['v1'],
+	v1SoraKusama: soraKusamaStorage.hostConfiguration['v1'],
+	v7SoraKusama: soraKusamaStorage.hostConfiguration['v7'],
 }
 
 export const lastDmqMqcHead = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.lastDmqMqcHead['v1'],
-	soraKusamaV1: soraKusamaStorage.lastDmqMqcHead['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.lastDmqMqcHead['v1'],
+	v1SoraKusama: soraKusamaStorage.lastDmqMqcHead['v1'],
 }
 
 export const lastHrmpMqcHeads = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.lastHrmpMqcHeads['v1'],
-	soraKusamaV1: soraKusamaStorage.lastHrmpMqcHeads['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.lastHrmpMqcHeads['v1'],
+	v1SoraKusama: soraKusamaStorage.lastHrmpMqcHeads['v1'],
 }
 
 export const processedDownwardMessages = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.processedDownwardMessages['v1'],
-	soraKusamaV1: soraKusamaStorage.processedDownwardMessages['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.processedDownwardMessages['v1'],
+	v1SoraKusama: soraKusamaStorage.processedDownwardMessages['v1'],
 }
 
 export const hrmpWatermark = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.hrmpWatermark['v1'],
-	soraKusamaV1: soraKusamaStorage.hrmpWatermark['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.hrmpWatermark['v1'],
+	v1SoraKusama: soraKusamaStorage.hrmpWatermark['v1'],
 }
 
 export const hrmpOutboundMessages = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.hrmpOutboundMessages['v1'],
-	soraKusamaV1: soraKusamaStorage.hrmpOutboundMessages['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.hrmpOutboundMessages['v1'],
+	v1SoraKusama: soraKusamaStorage.hrmpOutboundMessages['v1'],
 }
 
 export const upwardMessages = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.upwardMessages['v1'],
-	soraKusamaV1: soraKusamaStorage.upwardMessages['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.upwardMessages['v1'],
+	v1SoraKusama: soraKusamaStorage.upwardMessages['v1'],
 }
 
 export const pendingUpwardMessages = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.pendingUpwardMessages['v1'],
-	soraKusamaV1: soraKusamaStorage.pendingUpwardMessages['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.pendingUpwardMessages['v1'],
+	v1SoraKusama: soraKusamaStorage.pendingUpwardMessages['v1'],
 }
 
 export const announcedHrmpMessagesPerCandidate = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.announcedHrmpMessagesPerCandidate['v1'],
-	soraKusamaV1: soraKusamaStorage.announcedHrmpMessagesPerCandidate['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.announcedHrmpMessagesPerCandidate['v1'],
+	v1SoraKusama: soraKusamaStorage.announcedHrmpMessagesPerCandidate['v1'],
 }
 
 export const reservedXcmpWeightOverride = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.reservedXcmpWeightOverride['v1'],
-	soraKusamaV1: soraKusamaStorage.reservedXcmpWeightOverride['v1'],
-	soraKusamaV7: soraKusamaStorage.reservedXcmpWeightOverride['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.reservedXcmpWeightOverride['v1'],
+	v1SoraKusama: soraKusamaStorage.reservedXcmpWeightOverride['v1'],
+	v7SoraKusama: soraKusamaStorage.reservedXcmpWeightOverride['v7'],
 }
 
 export const reservedDmpWeightOverride = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.reservedDmpWeightOverride['v1'],
-	soraKusamaV1: soraKusamaStorage.reservedDmpWeightOverride['v1'],
-	soraKusamaV7: soraKusamaStorage.reservedDmpWeightOverride['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.reservedDmpWeightOverride['v1'],
+	v1SoraKusama: soraKusamaStorage.reservedDmpWeightOverride['v1'],
+	v7SoraKusama: soraKusamaStorage.reservedDmpWeightOverride['v7'],
 }
 
 export const authorizedUpgrade = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.authorizedUpgrade['v1'],
-	soraKusamaV1: soraKusamaStorage.authorizedUpgrade['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.authorizedUpgrade['v1'],
+	v1SoraKusama: soraKusamaStorage.authorizedUpgrade['v1'],
 }
 
 export const customValidationHeadData = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.customValidationHeadData['v1'],
-	soraKusamaV7: soraKusamaStorage.customValidationHeadData['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.customValidationHeadData['v1'],
+	v7SoraKusama: soraKusamaStorage.customValidationHeadData['v7'],
 }

@@ -4,7 +4,7 @@ import * as soraKusamaEvents from '../../sora-kusama/x-tokens/events'
 
 export const transferredMultiAssets = {
 	name: 'XTokens.TransferredMultiAssets',
-	soraPolkadotV1: soraPolkadotEvents.transferredMultiAssets['v1'],
-	soraPolkadotV10: soraPolkadotEvents.transferredMultiAssets['v10'],
-	soraKusamaV7: soraKusamaEvents.transferredMultiAssets['v7'],
+	v1SoraPolkadot: soraPolkadotEvents.transferredMultiAssets['v1'],
+	v10SoraPolkadot: soraPolkadotEvents.transferredMultiAssets['v10'],
+	v7SoraKusama: soraKusamaEvents.transferredMultiAssets['v7'],
 }

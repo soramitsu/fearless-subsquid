@@ -4,12 +4,12 @@ import * as soraKusamaCalls from '../../sora-kusama/substrate-bridge-inbound-cha
 
 export const submit = {
 	name: 'SubstrateBridgeInboundChannel.submit',
-	soraPolkadotV1: soraPolkadotCalls.submit['v1'],
-	soraPolkadotV10: soraPolkadotCalls.submit['v10'],
-	soraKusamaV7: soraKusamaCalls.submit['v7'],
+	v1SoraPolkadot: soraPolkadotCalls.submit['v1'],
+	v10SoraPolkadot: soraPolkadotCalls.submit['v10'],
+	v7SoraKusama: soraKusamaCalls.submit['v7'],
 }
 
 export const setRewardFraction = {
 	name: 'SubstrateBridgeInboundChannel.set_reward_fraction',
-	soraPolkadotV1: soraPolkadotCalls.setRewardFraction['v1'],
+	v1SoraPolkadot: soraPolkadotCalls.setRewardFraction['v1'],
 }

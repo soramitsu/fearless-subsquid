@@ -4,12 +4,12 @@ import * as soraKusamaStorage from '../../sora-kusama/timestamp/storage'
 
 export const now = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.now['v1'],
-	soraKusamaV1: soraKusamaStorage.now['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.now['v1'],
+	v1SoraKusama: soraKusamaStorage.now['v1'],
 }
 
 export const didUpdate = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.didUpdate['v1'],
-	soraKusamaV1: soraKusamaStorage.didUpdate['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.didUpdate['v1'],
+	v1SoraKusama: soraKusamaStorage.didUpdate['v1'],
 }

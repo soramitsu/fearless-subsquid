@@ -4,38 +4,38 @@ import * as soraKusamaStorage from '../../sora-kusama/xcm-app/storage'
 
 export const assetIdToMultilocation = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.assetIdToMultilocation['v1'],
-	soraPolkadotV10: soraPolkadotStorage.assetIdToMultilocation['v10'],
-	soraKusamaV7: soraKusamaStorage.assetIdToMultilocation['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.assetIdToMultilocation['v1'],
+	v10SoraPolkadot: soraPolkadotStorage.assetIdToMultilocation['v10'],
+	v7SoraKusama: soraKusamaStorage.assetIdToMultilocation['v7'],
 }
 
 export const multilocationToAssetId = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.multilocationToAssetId['v1'],
-	soraPolkadotV10: soraPolkadotStorage.multilocationToAssetId['v10'],
-	soraKusamaV7: soraKusamaStorage.multilocationToAssetId['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.multilocationToAssetId['v1'],
+	v10SoraPolkadot: soraPolkadotStorage.multilocationToAssetId['v10'],
+	v7SoraKusama: soraKusamaStorage.multilocationToAssetId['v7'],
 }
 
 export const bridgeAssetTrap = {
 	name: '',
-	soraPolkadotV10: soraPolkadotStorage.bridgeAssetTrap['v10'],
-	soraKusamaV7: soraKusamaStorage.bridgeAssetTrap['v7'],
+	v10SoraPolkadot: soraPolkadotStorage.bridgeAssetTrap['v10'],
+	v7SoraKusama: soraKusamaStorage.bridgeAssetTrap['v7'],
 }
 
 export const bridgeAssetTrapNonce = {
 	name: '',
-	soraPolkadotV10: soraPolkadotStorage.bridgeAssetTrapNonce['v10'],
-	soraKusamaV7: soraKusamaStorage.bridgeAssetTrapNonce['v7'],
+	v10SoraPolkadot: soraPolkadotStorage.bridgeAssetTrapNonce['v10'],
+	v7SoraKusama: soraKusamaStorage.bridgeAssetTrapNonce['v7'],
 }
 
 export const assetMinimumAmount = {
 	name: '',
-	soraPolkadotV10: soraPolkadotStorage.assetMinimumAmount['v10'],
-	soraKusamaV7: soraKusamaStorage.assetMinimumAmount['v7'],
+	v10SoraPolkadot: soraPolkadotStorage.assetMinimumAmount['v10'],
+	v7SoraKusama: soraKusamaStorage.assetMinimumAmount['v7'],
 }
 
 export const trappedDoneResult = {
 	name: '',
-	soraPolkadotV10: soraPolkadotStorage.trappedDoneResult['v10'],
-	soraKusamaV7: soraKusamaStorage.trappedDoneResult['v7'],
+	v10SoraPolkadot: soraPolkadotStorage.trappedDoneResult['v10'],
+	v7SoraKusama: soraKusamaStorage.trappedDoneResult['v7'],
 }

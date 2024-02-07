@@ -4,18 +4,18 @@ import * as soraKusamaStorage from '../../sora-kusama/beefy/storage'
 
 export const authorities = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.authorities['v1'],
-	soraKusamaV7: soraKusamaStorage.authorities['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.authorities['v1'],
+	v7SoraKusama: soraKusamaStorage.authorities['v7'],
 }
 
 export const validatorSetId = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.validatorSetId['v1'],
-	soraKusamaV7: soraKusamaStorage.validatorSetId['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.validatorSetId['v1'],
+	v7SoraKusama: soraKusamaStorage.validatorSetId['v7'],
 }
 
 export const nextAuthorities = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.nextAuthorities['v1'],
-	soraKusamaV7: soraKusamaStorage.nextAuthorities['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.nextAuthorities['v1'],
+	v7SoraKusama: soraKusamaStorage.nextAuthorities['v7'],
 }

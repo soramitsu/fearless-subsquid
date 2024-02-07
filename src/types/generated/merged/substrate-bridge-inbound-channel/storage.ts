@@ -4,12 +4,12 @@ import * as soraKusamaStorage from '../../sora-kusama/substrate-bridge-inbound-c
 
 export const channelNonces = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.channelNonces['v1'],
-	soraPolkadotV10: soraPolkadotStorage.channelNonces['v10'],
-	soraKusamaV7: soraKusamaStorage.channelNonces['v7'],
+	v1SoraPolkadot: soraPolkadotStorage.channelNonces['v1'],
+	v10SoraPolkadot: soraPolkadotStorage.channelNonces['v10'],
+	v7SoraKusama: soraKusamaStorage.channelNonces['v7'],
 }
 
 export const rewardFraction = {
 	name: '',
-	soraPolkadotV1: soraPolkadotStorage.rewardFraction['v1'],
+	v1SoraPolkadot: soraPolkadotStorage.rewardFraction['v1'],
 }

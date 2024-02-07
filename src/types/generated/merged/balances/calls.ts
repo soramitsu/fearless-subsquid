@@ -4,36 +4,36 @@ import * as soraKusamaCalls from '../../sora-kusama/balances/calls'
 
 export const transfer = {
 	name: 'Balances.transfer',
-	soraPolkadotV1: soraPolkadotCalls.transfer['v1'],
-	soraKusamaV1: soraKusamaCalls.transfer['v1'],
+	v1SoraPolkadot: soraPolkadotCalls.transfer['v1'],
+	v1SoraKusama: soraKusamaCalls.transfer['v1'],
 }
 
 export const setBalance = {
 	name: 'Balances.set_balance',
-	soraPolkadotV1: soraPolkadotCalls.setBalance['v1'],
-	soraKusamaV1: soraKusamaCalls.setBalance['v1'],
+	v1SoraPolkadot: soraPolkadotCalls.setBalance['v1'],
+	v1SoraKusama: soraKusamaCalls.setBalance['v1'],
 }
 
 export const forceTransfer = {
 	name: 'Balances.force_transfer',
-	soraPolkadotV1: soraPolkadotCalls.forceTransfer['v1'],
-	soraKusamaV1: soraKusamaCalls.forceTransfer['v1'],
+	v1SoraPolkadot: soraPolkadotCalls.forceTransfer['v1'],
+	v1SoraKusama: soraKusamaCalls.forceTransfer['v1'],
 }
 
 export const transferKeepAlive = {
 	name: 'Balances.transfer_keep_alive',
-	soraPolkadotV1: soraPolkadotCalls.transferKeepAlive['v1'],
-	soraKusamaV1: soraKusamaCalls.transferKeepAlive['v1'],
+	v1SoraPolkadot: soraPolkadotCalls.transferKeepAlive['v1'],
+	v1SoraKusama: soraKusamaCalls.transferKeepAlive['v1'],
 }
 
 export const transferAll = {
 	name: 'Balances.transfer_all',
-	soraPolkadotV1: soraPolkadotCalls.transferAll['v1'],
-	soraKusamaV1: soraKusamaCalls.transferAll['v1'],
+	v1SoraPolkadot: soraPolkadotCalls.transferAll['v1'],
+	v1SoraKusama: soraKusamaCalls.transferAll['v1'],
 }
 
 export const forceUnreserve = {
 	name: 'Balances.force_unreserve',
-	soraPolkadotV1: soraPolkadotCalls.forceUnreserve['v1'],
-	soraKusamaV1: soraKusamaCalls.forceUnreserve['v1'],
+	v1SoraPolkadot: soraPolkadotCalls.forceUnreserve['v1'],
+	v1SoraKusama: soraKusamaCalls.forceUnreserve['v1'],
 }

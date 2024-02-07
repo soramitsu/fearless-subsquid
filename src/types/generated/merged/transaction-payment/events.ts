@@ -4,6 +4,6 @@ import * as soraKusamaEvents from '../../sora-kusama/transaction-payment/events'
 
 export const transactionFeePaid = {
 	name: 'TransactionPayment.TransactionFeePaid',
-	soraPolkadotV1: soraPolkadotEvents.transactionFeePaid['v1'],
-	soraKusamaV7: soraKusamaEvents.transactionFeePaid['v7'],
+	v1SoraPolkadot: soraPolkadotEvents.transactionFeePaid['v1'],
+	v7SoraKusama: soraKusamaEvents.transactionFeePaid['v7'],
 }

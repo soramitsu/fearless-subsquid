@@ -4,36 +4,36 @@ import * as soraKusamaEvents from '../../sora-kusama/scheduler/events'
 
 export const scheduled = {
 	name: 'Scheduler.Scheduled',
-	soraPolkadotV10: soraPolkadotEvents.scheduled['v10'],
-	soraKusamaV7: soraKusamaEvents.scheduled['v7'],
+	v10SoraPolkadot: soraPolkadotEvents.scheduled['v10'],
+	v7SoraKusama: soraKusamaEvents.scheduled['v7'],
 }
 
 export const canceled = {
 	name: 'Scheduler.Canceled',
-	soraPolkadotV10: soraPolkadotEvents.canceled['v10'],
-	soraKusamaV7: soraKusamaEvents.canceled['v7'],
+	v10SoraPolkadot: soraPolkadotEvents.canceled['v10'],
+	v7SoraKusama: soraKusamaEvents.canceled['v7'],
 }
 
 export const dispatched = {
 	name: 'Scheduler.Dispatched',
-	soraPolkadotV10: soraPolkadotEvents.dispatched['v10'],
-	soraKusamaV7: soraKusamaEvents.dispatched['v7'],
+	v10SoraPolkadot: soraPolkadotEvents.dispatched['v10'],
+	v7SoraKusama: soraKusamaEvents.dispatched['v7'],
 }
 
 export const callUnavailable = {
 	name: 'Scheduler.CallUnavailable',
-	soraPolkadotV10: soraPolkadotEvents.callUnavailable['v10'],
-	soraKusamaV7: soraKusamaEvents.callUnavailable['v7'],
+	v10SoraPolkadot: soraPolkadotEvents.callUnavailable['v10'],
+	v7SoraKusama: soraKusamaEvents.callUnavailable['v7'],
 }
 
 export const periodicFailed = {
 	name: 'Scheduler.PeriodicFailed',
-	soraPolkadotV10: soraPolkadotEvents.periodicFailed['v10'],
-	soraKusamaV7: soraKusamaEvents.periodicFailed['v7'],
+	v10SoraPolkadot: soraPolkadotEvents.periodicFailed['v10'],
+	v7SoraKusama: soraKusamaEvents.periodicFailed['v7'],
 }
 
 export const permanentlyOverweight = {
 	name: 'Scheduler.PermanentlyOverweight',
-	soraPolkadotV10: soraPolkadotEvents.permanentlyOverweight['v10'],
-	soraKusamaV7: soraKusamaEvents.permanentlyOverweight['v7'],
+	v10SoraPolkadot: soraPolkadotEvents.permanentlyOverweight['v10'],
+	v7SoraKusama: soraKusamaEvents.permanentlyOverweight['v7'],
 }

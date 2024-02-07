@@ -4,33 +4,33 @@ import * as soraKusamaCalls from '../../sora-kusama/sudo/calls'
 
 export const sudo = {
 	name: 'Sudo.sudo',
-	soraPolkadotV1: soraPolkadotCalls.sudo['v1'],
-	soraPolkadotV10: soraPolkadotCalls.sudo['v10'],
-	soraKusamaV1: soraKusamaCalls.sudo['v1'],
-	soraKusamaV7: soraKusamaCalls.sudo['v7'],
-	soraKusamaV9: soraKusamaCalls.sudo['v9'],
+	v1SoraPolkadot: soraPolkadotCalls.sudo['v1'],
+	v10SoraPolkadot: soraPolkadotCalls.sudo['v10'],
+	v1SoraKusama: soraKusamaCalls.sudo['v1'],
+	v7SoraKusama: soraKusamaCalls.sudo['v7'],
+	v9SoraKusama: soraKusamaCalls.sudo['v9'],
 }
 
 export const sudoUncheckedWeight = {
 	name: 'Sudo.sudo_unchecked_weight',
-	soraPolkadotV1: soraPolkadotCalls.sudoUncheckedWeight['v1'],
-	soraPolkadotV10: soraPolkadotCalls.sudoUncheckedWeight['v10'],
-	soraKusamaV1: soraKusamaCalls.sudoUncheckedWeight['v1'],
-	soraKusamaV7: soraKusamaCalls.sudoUncheckedWeight['v7'],
-	soraKusamaV9: soraKusamaCalls.sudoUncheckedWeight['v9'],
+	v1SoraPolkadot: soraPolkadotCalls.sudoUncheckedWeight['v1'],
+	v10SoraPolkadot: soraPolkadotCalls.sudoUncheckedWeight['v10'],
+	v1SoraKusama: soraKusamaCalls.sudoUncheckedWeight['v1'],
+	v7SoraKusama: soraKusamaCalls.sudoUncheckedWeight['v7'],
+	v9SoraKusama: soraKusamaCalls.sudoUncheckedWeight['v9'],
 }
 
 export const setKey = {
 	name: 'Sudo.set_key',
-	soraPolkadotV1: soraPolkadotCalls.setKey['v1'],
-	soraKusamaV1: soraKusamaCalls.setKey['v1'],
+	v1SoraPolkadot: soraPolkadotCalls.setKey['v1'],
+	v1SoraKusama: soraKusamaCalls.setKey['v1'],
 }
 
 export const sudoAs = {
 	name: 'Sudo.sudo_as',
-	soraPolkadotV1: soraPolkadotCalls.sudoAs['v1'],
-	soraPolkadotV10: soraPolkadotCalls.sudoAs['v10'],
-	soraKusamaV1: soraKusamaCalls.sudoAs['v1'],
-	soraKusamaV7: soraKusamaCalls.sudoAs['v7'],
-	soraKusamaV9: soraKusamaCalls.sudoAs['v9'],
+	v1SoraPolkadot: soraPolkadotCalls.sudoAs['v1'],
+	v10SoraPolkadot: soraPolkadotCalls.sudoAs['v10'],
+	v1SoraKusama: soraKusamaCalls.sudoAs['v1'],
+	v7SoraKusama: soraKusamaCalls.sudoAs['v7'],
+	v9SoraKusama: soraKusamaCalls.sudoAs['v9'],
 }
