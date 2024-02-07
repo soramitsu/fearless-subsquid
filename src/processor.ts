@@ -25,9 +25,6 @@ export const processor = new SubstrateBatchProcessor()
 		}
 	})
 
-// callNames.forEach((callName) => {
-// 	processor.addCall({ name: [callName], extrinsic: true })
-// })
 
 eventNames.forEach((eventName) => {
 	processor.addEvent({ name: [eventName], extrinsic: true })

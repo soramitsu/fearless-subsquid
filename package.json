@@ -45,7 +45,7 @@
 
 		"deploy:sora-polkadot": "ts-node ./scripts/generate-squid-yaml.ts sora-polkadot && sqd deploy ./",
 		"deploy:sora-kusama": "ts-node ./scripts/generate-squid-yaml.ts sora-kusama && sqd deploy ./",
-		
+
 		"serve": "sqd serve",
 		"process": "sqd process",
 		"process:clean": "sqd down && sqd up && sqd process",
