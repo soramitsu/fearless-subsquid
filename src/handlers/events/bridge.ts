@@ -2,11 +2,14 @@ import { BlockContext, Event } from '../../types'
 import { getEventData } from '../../utils/entities'
 import { events } from '../../types/generated/merged'
 import { createHistoryElement } from '../../utils/history'
+import { logStartProcessingEvent } from '../../utils/logs'
 
 export async function transactionFeePaidHandler(
 	ctx: BlockContext,
 	event: Event<'TransactionPayment.TransactionFeePaid'>
 ): Promise<void> {
+	logStartProcessingEvent(ctx, event)
+
   const type = events.transactionPayment.transactionFeePaid
 	const data = getEventData(ctx, type, event)
 
@@ -27,6 +30,8 @@ export async function xcmPalletAttemptedHandler(
 	ctx: BlockContext,
 	event: Event<'XcmPallet.Attempted'>
 ): Promise<void> {
+	logStartProcessingEvent(ctx, event)
+
   // const type = events.xcmPallet.attempted
 	// const data = getEventData(ctx, type, event)
 }
@@ -35,6 +40,8 @@ export async function messageAcceptedHandler(
 	ctx: BlockContext,
 	event: Event<'SubstrateBridgeOutboundChannel.MessageAccepted'>
 ): Promise<void> {
+	logStartProcessingEvent(ctx, event)
+
   const type = events.substrateBridgeOutboundChannel.messageAccepted
 	const data = getEventData(ctx, type, event)
 
@@ -55,6 +62,8 @@ export async function downwardMessagesProcessedHandler(
 	ctx: BlockContext,
 	event: Event<'ParachainSystem.DownwardMessagesProcessed'>
 ): Promise<void> {
+	logStartProcessingEvent(ctx, event)
+
   const type = events.parachainSystem.downwardMessagesProcessed
 	const data = getEventData(ctx, type, event)
 
@@ -79,6 +88,8 @@ export async function systemExtrinsicFailedHandler(
 	ctx: BlockContext,
 	event: Event<'system.ExtrinsicFailed'>
 ): Promise<void> {
+	logStartProcessingEvent(ctx, event)
+
   const type = events.system.extrinsicFailed
 	const data = getEventData(ctx, type, event)
 
@@ -109,6 +120,8 @@ export async function systemExtrinsicSuccessHandler(
 	ctx: BlockContext,
 	event: Event<'system.ExtrinsicSuccess'>
 ): Promise<void> {
+	logStartProcessingEvent(ctx, event)
+
   const type = events.system.extrinsicSuccess
 	const data = getEventData(ctx, type, event)
 
@@ -137,6 +150,8 @@ export async function messageDispatchedHandler(
 	ctx: BlockContext,
 	event: Event<'SubstrateDispatch.MessageDispatched'>
 ): Promise<void> {
+	logStartProcessingEvent(ctx, event)
+
   const type = events.substrateDispatch.messageDispatched
 	const data = getEventData(ctx, type, event)
 
@@ -168,6 +183,8 @@ export async function upwardMessageSentHandler(
 	ctx: BlockContext,
 	event: Event<'ParachainSystem.UpwardMessageSent'>
 ): Promise<void> {
+	logStartProcessingEvent(ctx, event)
+
   const type = events.parachainSystem.upwardMessageSent
 	const data = getEventData(ctx, type, event)
 
@@ -184,6 +201,8 @@ export async function requestStatusUpdateHandler(
 	ctx: BlockContext,
 	event: Event<'BridgeProxy.RequestStatusUpdate'>
 ): Promise<void> {
+	logStartProcessingEvent(ctx, event)
+
   // const type = events.bridgeProxy.requestStatusUpdate
 	// const data = getEventData(ctx, type, event)
 }
@@ -192,6 +211,8 @@ export async function mintedHandler(
 	ctx: BlockContext,
 	event: Event<'ParachainBridgeApp.Minted'>
 ): Promise<void> {
+	logStartProcessingEvent(ctx, event)
+
   // const type = events.parachainBridgeApp.minted
 	// const data = getEventData(ctx, type, event)
 }
@@ -200,6 +221,8 @@ export async function assetAddedToChannelHandler(
 	ctx: BlockContext,
 	event: Event<'XcmApp.AssetAddedToChannel'>
 ): Promise<void> {
+	logStartProcessingEvent(ctx, event)
+
   const type = events.xcmApp.assetAddedToChannel
 	const data = getEventData(ctx, type, event)
 
