@@ -59,8 +59,8 @@ export async function downwardMessagesProcessedHandler(
 	const data = getEventData(ctx, type, event)
 
   const weightUsed = 'weightUsed' in data ? data.weightUsed : data[0]
-  const refTime = 'refTime' in data ? data.refTime : null
-  const proofSize = 'proofSize' in data ? data.proofSize : weightUsed
+  const refTime = typeof weightUsed === 'object'? weightUsed.refTime.toString() : null
+  const proofSize = typeof weightUsed === 'object'? weightUsed.proofSize.toString() : null
 
   const dmqHead = 'dmqHead' in data ? data.dmqHead : data[1]
 
@@ -69,6 +69,8 @@ export async function downwardMessagesProcessedHandler(
     refTime,
     proofSize
   }
+
+  if (typeof weightUsed !== 'object') historyData.proofSize = weightUsed.toString()
 
 	createHistoryElement(ctx, event, historyData)
 }
@@ -201,10 +203,24 @@ export async function assetAddedToChannelHandler(
   const type = events.xcmApp.assetAddedToChannel
 	const data = getEventData(ctx, type, event)
 
-  const kind = data.__kind?.toString()
+  const kind = data.__kind
+  const sender = 'sender' in data ? data.sender : null
+  const amount = 'amount' in data ? data.amount.toString() : null
+  const assetId = 'assetId' in data ? data.assetId : null
+  const recipient = 'recipient' in data ? data.recipient : null
+  const assetKind = 'assetKind' in data ? data.assetKind.__kind : null
+  const messageId = 'messageId' in data ? data.messageId : null
+  const transferStatus = 'transferStatus' in data ? data.transferStatus.__kind : null
 
 	const historyData = {
-    kind
+    kind,
+    sender,
+    amount,
+    assetId,
+    recipient,
+    assetKind,
+    messageId,
+    transferStatus
   }
 
 	createHistoryElement(ctx, event, historyData)
