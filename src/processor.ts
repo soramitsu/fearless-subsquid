@@ -5,6 +5,7 @@ import { eventNames } from './consts'
 import { chain, startBlock } from './config'
 import { getSortedItems } from './utils/processor'
 import { assetAddedToChannelHandler, downwardMessagesProcessedHandler, messageAcceptedHandler, messageDispatchedHandler, mintedHandler, requestStatusUpdateHandler, systemExtrinsicFailedHandler, systemExtrinsicSuccessHandler, transactionFeePaidHandler, upwardMessageSentHandler, xcmPalletAttemptedHandler } from './handlers/events/bridge'
+import { checkSkipBlock } from './utils/blocks'
 
 export const processor = new SubstrateBatchProcessor()
 	.setRpcEndpoint({
@@ -31,10 +32,13 @@ eventNames.forEach((eventName) => {
 })
 
 processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
-	ctx._chain
 	const context = ctx
 
 	for (let block of context.blocks) {
+    const skip = checkSkipBlock(block.header.height)
+
+    if (skip) return
+
 		let blockContext = {
 			...context,
 			block,
