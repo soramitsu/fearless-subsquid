@@ -4,7 +4,7 @@ import { TypeormDatabase } from '@subsquid/typeorm-store'
 import { eventNames } from './consts'
 import { chain, startBlock } from './config'
 import { getSortedItems } from './utils/processor'
-import { assetAddedToChannelHandler, downwardMessagesProcessedHandler, messageAcceptedHandler, messageDispatchedHandler, mintedHandler, requestStatusUpdateHandler, systemExtrinsicFailedHandler, systemExtrinsicSuccessHandler, transactionFeePaidHandler, upwardMessageSentHandler, xcmPalletAttemptedHandler } from './handlers/events/bridge'
+import { downwardMessagesProcessedHandler, messageAcceptedHandler, messageDispatchedHandler, mintedHandler, requestStatusUpdateHandler, systemExtrinsicFailedHandler, systemExtrinsicSuccessHandler, transactionFeePaidHandler, upwardMessageSentHandler, xcmPalletAttemptedHandler } from './handlers/events/bridge'
 import { checkSkipBlock } from './utils/blocks'
 
 export const processor = new SubstrateBatchProcessor()
@@ -57,9 +57,9 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 
 				if (event.name === 'ParachainSystem.DownwardMessagesProcessed') await downwardMessagesProcessedHandler(blockContext, event)
 
-				if (event.name === 'System.ExtrinsicFailed') await systemExtrinsicFailedHandler(blockContext, event)
+				if (event.name === 'system.ExtrinsicFailed') await systemExtrinsicFailedHandler(blockContext, event)
 
-				if (event.name === 'System.ExtrinsicSuccess') await systemExtrinsicSuccessHandler(blockContext, event)
+				if (event.name === 'system.ExtrinsicSuccess') await systemExtrinsicSuccessHandler(blockContext, event)
 
 				if (event.name === 'SubstrateDispatch.MessageDispatched') await messageDispatchedHandler(blockContext, event)
 
@@ -68,8 +68,6 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 				if (event.name === 'BridgeProxy.RequestStatusUpdate') await requestStatusUpdateHandler(blockContext, event) // TODO не доделан
 
 				if (event.name === 'ParachainBridgeApp.Minted') await mintedHandler(blockContext, event) // TODO не доделан
-
-				if (event.name === 'XcmApp.AssetAddedToChannel') await assetAddedToChannelHandler(blockContext, event) // TODO Нужен ли вообще?
 			}
 		}
 	}

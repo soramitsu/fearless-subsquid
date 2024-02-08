@@ -158,8 +158,8 @@ export async function messageDispatchedHandler(
   const messageId = data[0]
   const result = data[1]
 
-  const sender = 'sender' in messageId ? messageId.sender : null
-  const receiver = 'receiver' in messageId ? messageId.receiver : null
+  const sender = 'sender' in messageId ? messageId.sender.value : null
+  const receiver = 'receiver' in messageId ? messageId.receiver.value : null
   const batchNonce = 'batchNonce' in messageId ? messageId.batchNonce?.toString() ?? null : null
   const messageNonce = 'messageNonce' in messageId ? messageId.messageNonce?.toString() : null
 
@@ -217,34 +217,3 @@ export async function mintedHandler(
 	// const data = getEventData(ctx, type, event)
 }
 
-export async function assetAddedToChannelHandler(
-	ctx: BlockContext,
-	event: Event<'XcmApp.AssetAddedToChannel'>
-): Promise<void> {
-	logStartProcessingEvent(ctx, event)
-
-  const type = events.xcmApp.assetAddedToChannel
-	const data = getEventData(ctx, type, event)
-
-  const kind = data.__kind
-  const sender = 'sender' in data ? data.sender : null
-  const amount = 'amount' in data ? data.amount.toString() : null
-  const assetId = 'assetId' in data ? data.assetId : null
-  const recipient = 'recipient' in data ? data.recipient : null
-  const assetKind = 'assetKind' in data ? data.assetKind.__kind : null
-  const messageId = 'messageId' in data ? data.messageId : null
-  const transferStatus = 'transferStatus' in data ? data.transferStatus.__kind : null
-
-	const historyData = {
-    kind,
-    sender,
-    amount,
-    assetId,
-    recipient,
-    assetKind,
-    messageId,
-    transferStatus
-  }
-
-	createHistoryElement(ctx, event, historyData)
-}
