@@ -2,10 +2,10 @@
 
 def jobParams = [
     booleanParam(defaultValue: true, name: 'deploy'),
-    (env.JOB_NAME == 'fearless-sora-polkadot') ? booleanParam(defaultValue: true, name: 'polkadot') : null,
-    (env.JOB_NAME == 'fearless-sora-polkadot') ? booleanParam(defaultValue: false, name: 'kusama') : null,
-    (env.JOB_NAME == 'fearless-sora-kusama') ? booleanParam(defaultValue: false, name: 'polkadot') : null,
-    (env.JOB_NAME == 'fearless-sora-kusama') ? booleanParam(defaultValue: true, name: 'kusama') : null,
+    (env.JOB_NAME == 'fearless-sora-polkadot') ? booleanParam(defaultValue: true, name: 'polkadot'),
+    (env.JOB_NAME == 'fearless-sora-polkadot') ? booleanParam(defaultValue: false, name: 'kusama'),
+    (env.JOB_NAME == 'fearless-sora-kusama') ? booleanParam(defaultValue: false, name: 'polkadot'),
+    (env.JOB_NAME == 'fearless-sora-kusama') ? booleanParam(defaultValue: true, name: 'kusama'),
     booleanParam(defaultValue: false, name: 'fullClean'),
     booleanParam(defaultValue: false, name: 'dbincrease')
 ]
