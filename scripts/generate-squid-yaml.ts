@@ -68,7 +68,7 @@ const configuration = {
 const yamlConfig = YAML.dump(configuration)
 
 // Define the file name
-const fileName = './squid.yaml'
+const fileName = 'squid.yaml'
 
 // Write the configuration to a yaml file
 writeFileSync(fileName, yamlConfig)
