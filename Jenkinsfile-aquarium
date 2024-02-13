@@ -1,10 +1,11 @@
 @Library('jenkins-library')
 
 def jobParams  = [
-    booleanParam(defaultValue: true, name: 'fullClean'),
     booleanParam(defaultValue: true, name: 'deploy'),
+    booleanParam(defaultValue: false, name: 'sora-polkadot'),
+    booleanParam(defaultValue: true, name: 'sora-kusama'),
+    booleanParam(defaultValue: false, name: 'fullClean'),
     booleanParam(defaultValue: false, name: 'restart'),
-    booleanParam(defaultValue: false, name: 'hardReset'),
     booleanParam(defaultValue: false, name: 'dbincrease'),
     stringParam(defaultValue: '50', name: 'pgsqlDiskSize'), // at 50G for the first time, you can increase the disk
     booleanParam(defaultValue: false, name: 'dbmigrate')
@@ -12,7 +13,6 @@ def jobParams  = [
 
 def pipeline = new org.subqd.AppPipeline(
     steps: this,
-    jobParams: jobParams,
-    upstreamJobList: '../sora2-dev,../../subsquid/develop'
+    jobParams: jobParams
 )
 pipeline.runPipeline()
