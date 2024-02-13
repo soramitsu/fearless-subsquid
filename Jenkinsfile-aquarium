@@ -1,14 +1,13 @@
 @Library('jenkins-library@duty/update_squid_deploy')
 
-def jobParams  = [
+def jobParams = [
     booleanParam(defaultValue: true, name: 'deploy'),
-    booleanParam(defaultValue: false, name: 'polkadot'),
-    booleanParam(defaultValue: true, name: 'kusama'),
+    (env.JOB_NAME == 'fearless-sora-polkadot') ? booleanParam(defaultValue: true, name: 'polkadot') : null,
+    (env.JOB_NAME == 'fearless-sora-polkadot') ? booleanParam(defaultValue: false, name: 'kusama') : null,
+    (env.JOB_NAME == 'fearless-sora-kusama') ? booleanParam(defaultValue: false, name: 'polkadot') : null,
+    (env.JOB_NAME == 'fearless-sora-kusama') ? booleanParam(defaultValue: true, name: 'kusama') : null,
     booleanParam(defaultValue: false, name: 'fullClean'),
-    booleanParam(defaultValue: false, name: 'restart'),
-    booleanParam(defaultValue: false, name: 'dbincrease'),
-    stringParam(defaultValue: '50', name: 'pgsqlDiskSize'), // at 50G for the first time, you can increase the disk
-    booleanParam(defaultValue: false, name: 'dbmigrate')
+    booleanParam(defaultValue: false, name: 'dbincrease')
 ]
 
 def pipeline = new org.subqd.AppPipeline(
