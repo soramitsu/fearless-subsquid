@@ -2,8 +2,8 @@
 
 def jobParams  = [
     booleanParam(defaultValue: true, name: 'deploy'),
-    booleanParam(defaultValue: false, name: 'sora-polkadot'),
-    booleanParam(defaultValue: true, name: 'sora-kusama'),
+    booleanParam(defaultValue: false, name: 'polkadot'),
+    booleanParam(defaultValue: true, name: 'kusama'),
     booleanParam(defaultValue: false, name: 'fullClean'),
     booleanParam(defaultValue: false, name: 'restart'),
     booleanParam(defaultValue: false, name: 'dbincrease'),
