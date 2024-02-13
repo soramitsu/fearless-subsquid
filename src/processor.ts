@@ -51,8 +51,6 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 
 				if (event.name === 'TransactionPayment.TransactionFeePaid') await transactionFeePaidHandler(blockContext, event)
 
-				if (event.name === 'XcmPallet.Attempted') await xcmPalletAttemptedHandler(blockContext, event) // TODO не доделан
-
 				if (event.name === 'SubstrateBridgeOutboundChannel.MessageAccepted') await messageAcceptedHandler(blockContext, event)
 
 				if (event.name === 'ParachainSystem.DownwardMessagesProcessed') await downwardMessagesProcessedHandler(blockContext, event)
@@ -65,9 +63,11 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 
 				if (event.name === 'ParachainSystem.UpwardMessageSent') await upwardMessageSentHandler(blockContext, event)
 
-				if (event.name === 'BridgeProxy.RequestStatusUpdate') await requestStatusUpdateHandler(blockContext, event) // TODO не доделан
+				// if (event.name === 'XcmPallet.Attempted') await xcmPalletAttemptedHandler(blockContext, event) // TODO не доделан
 
-				if (event.name === 'ParachainBridgeApp.Minted') await mintedHandler(blockContext, event) // TODO не доделан
+				// if (event.name === 'BridgeProxy.RequestStatusUpdate') await requestStatusUpdateHandler(blockContext, event) // TODO не доделан
+
+				// if (event.name === 'ParachainBridgeApp.Minted') await mintedHandler(blockContext, event) // TODO не доделан
 			}
 		}
 	}

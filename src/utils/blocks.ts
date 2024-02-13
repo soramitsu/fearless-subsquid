@@ -6,5 +6,6 @@ const KUSAMA_BLOCKS: number[] = []
 export function checkSkipBlock(id: number) {
   if (name === 'sora-polkadot') return POLKADOT_BLOCKS.includes(id)
 
-  return KUSAMA_BLOCKS.includes(id)
+  return false
+  // return KUSAMA_BLOCKS.includes(id)
 }
