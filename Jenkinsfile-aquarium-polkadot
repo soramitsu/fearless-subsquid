@@ -1,4 +1,4 @@
-@Library('jenkins-library@duty/update_squid_deploy')
+@Library('jenkins-library')
 
 def jobParams  = [
     booleanParam(defaultValue: true, name: 'deploy'),
