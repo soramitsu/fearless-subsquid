@@ -2,6 +2,7 @@ import { writeFileSync } from 'fs'
 import * as path from 'path'
 import * as YAML from 'js-yaml'
 import dotenv from 'dotenv'
+import { startBlock } from '../src/config'
 
 import { Chain, chains } from '../src/chains'
 
@@ -26,7 +27,7 @@ const configuration = {
 		processor: {
 			env: {
 				INDEXER_CHAIN: chain,
-				INDEXER_START_BLOCK: 0,
+				INDEXER_START_BLOCK: startBlock,
 				SQD_DEBUG: 'sqd:processor:mapping',
 			},
 			cmd: ['node', 'lib/processor'],
