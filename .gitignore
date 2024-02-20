@@ -7,4 +7,18 @@
 
 # IDE files
 /.idea
-.vscode
+
+/archive/prod/cockroach-data
+/archive/stage/cockroach-data
+/archive/dev/cockroach-data
+
+/scripts/fetch-spec-versions.sh
+
+/spec
+
+typegen.json
+
+.env
+squid.yaml
+.DS_Store
+log.txt

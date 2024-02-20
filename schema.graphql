@@ -1,79 +1,28 @@
-type Transfer @jsonField {
-  amount: String!
-  to: String!
-  from: String!
-  fee: BigInt
-  eventIdx: String!
-  success: Boolean!
+enum HistoryElementType {
+	CALL
+	EVENT
 }
 
-type Reward @jsonField {
-  eventIdx: String!
-  amount: String!
-  isReward: Boolean!,
-  era: Int,
-  stash: String,
-  validator: String
+type ExecutionResult @jsonField {
+	success: Boolean!
+	error: ExecutionError
 }
 
-type Extrinsic @jsonField {
-  hash: String!
-  module: String!
-  call: String!
-  fee: String!
-  success: Boolean!
+type ExecutionError @jsonField {
+	moduleErrorId: Int
+	moduleErrorIndex: Int
+	nonModuleErrorMessage: String
 }
 
 type HistoryElement @entity {
-  id: ID!
-  blockNumber: Int! @index
-  extrinsicIdx: String,
-  extrinsicHash: String
-  timestamp: BigInt! @index
-  address: String! @index
-  reward: Reward
-  extrinsic: Extrinsic
-  transfer: Transfer
-}
-
-type AccumulatedReward @entity {
-  id: ID! #address
-  amount: BigInt!
-}
-
-type StakeChange @entity {
-  id: ID!
-  blockNumber: Int! @index
-  extrinsicHash: String
-  eventIdx: String!
-  timestamp: BigInt! @index
-  address: String! @index
-  amount: BigInt!
-  accumulatedAmount: BigInt!
-  type: String!
-}
-
-type AccumulatedStake @entity {
-  id: ID!
-  amount: BigInt!
-}
-
-type EraValidatorInfo @entity {
-  id: ID!
-  address: String! @index
-  era: Int! @index
-  total: BigInt!
-  own: BigInt!
-  others: [IndividualExposure]!
-  othersWho: String!
-}
-
-type IndividualExposure @jsonField {
-  who: String!
-  value: String!
-}
-
-type ErrorEvent @entity {
-  id: ID!
-  description: String!
+	id: ID!
+	type: HistoryElementType!
+	blockHeight: Int! @index
+	blockHash: String! @index
+	timestamp: Int! @index
+	execution: ExecutionResult!
+  name: String!
+	module: String! @index
+	method: String! @index
+	data: JSON @index
 }

@@ -1,18 +1,19 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-import { ProcessorConfig } from './types/custom/processorConfig'
+import dotenv from 'dotenv'
+import chains from './chains'
 
-const config: ProcessorConfig = {
-    chainName: 'kusama',
-    prefix: 'kusama',
-    dataSource: {
-        archive: 'https://kusama.archive.subsquid.io/graphql',
-        chain: 'wss://kusama-rpc.polkadot.io',
-    },
-    typesBundle: 'kusama',
-    batchSize: 10,
-    blockRange: {
-        from: 100000,
-    },
+dotenv.config()
+
+const indexerChain = process.env.INDEXER_CHAIN ?? 'sora-polkadot'
+const chainConfig = chains[indexerChain as keyof typeof chains]
+
+if (!chainConfig) {
+	throw new Error(`Chain ${indexerChain} is not defined`)
 }
 
-export default config
+export const { chain, archive, name } = chainConfig
+export const startBlock = process.env.INDEXER_START_BLOCK ? parseInt(process.env.INDEXER_START_BLOCK) : 0
+export const testLogMode = process.env.INDEXER_TEST_LOG_MODE ? process.env.INDEXER_TEST_LOG_MODE === 'true' : false
+export const performanceLogMode = process.env.INDEXER_PERFORMANCE_LOG_MODE ? process.env.INDEXER_PERFORMANCE_LOG_MODE === 'true' : false
+export const performanceLogMinTime = process.env.INDEXER_PERFORMANCE_LOG_MIN_TIME
+	? parseInt(process.env.INDEXER_PERFORMANCE_LOG_MIN_TIME)
+	: 0

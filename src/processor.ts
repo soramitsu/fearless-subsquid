@@ -1,43 +1,74 @@
-import { TypeormDatabase } from "@subsquid/typeorm-store"
-import { SubstrateProcessor } from '@subsquid/substrate-processor'
-import * as modules from './mappings'
-import config from './config'
-import { DEFAULT_BATCH_SIZE, DEFAULT_PORT } from './common/consts'
+import { SubstrateBatchProcessor } from '@subsquid/substrate-processor'
+import typesBundle from './typesBundle.json'
+import { TypeormDatabase } from '@subsquid/typeorm-store'
+import { eventNames } from './consts'
+import { chain, startBlock } from './config'
+import { getSortedItems } from './utils/processor'
+import { downwardMessagesProcessedHandler, messageAcceptedHandler, messageDispatchedHandler, mintedHandler, requestStatusUpdateHandler, systemExtrinsicFailedHandler, systemExtrinsicSuccessHandler, transactionFeePaidHandler, upwardMessageSentHandler, xcmPalletAttemptedHandler } from './handlers/events/bridge'
+import { checkSkipBlock } from './utils/blocks'
 
-const database = new TypeormDatabase()
-const processor = new SubstrateProcessor(database)
+export const processor = new SubstrateBatchProcessor()
+	.setRpcEndpoint({
+		url: chain,
+		rateLimit: 10
+	})
+	.setTypesBundle(typesBundle as any)
+	.setBlockRange({ from: startBlock })
+	.setFields({
+		extrinsic: {
+			success: true,
+			error: true,
+			hash: true,
+			signature: true,
+		},
+		block: {
+			timestamp: true,
+		}
+	})
 
-processor.setTypesBundle(config.typesBundle)
-// processor.setBatchSize(config.batchSize || DEFAULT_BATCH_SIZE)
-processor.setDataSource(config.dataSource)
-processor.setPrometheusPort(config.port || DEFAULT_PORT)
-processor.setBlockRange(config.blockRange || { from: 0 })
 
-//events handlers
-processor.addEventHandler('Staking.Rewarded', modules.staking.events.handleRewarded)
-processor.addEventHandler('Staking.Reward', modules.staking.events.handleReward) // Old name of Rewarded event
-processor.addEventHandler('Staking.Slashed', modules.staking.events.handleSlashed)
-processor.addEventHandler('Staking.Slash', modules.staking.events.handleSlash) // Old name of Slashed event
-processor.addEventHandler('Staking.StakersElected', modules.staking.events.handleStakersElected) 
-processor.addEventHandler('Staking.StakingElection', modules.staking.events.handleStakingElection) // Old name of StakersElected event
+eventNames.forEach((eventName) => {
+	processor.addEvent({ name: [eventName], extrinsic: true })
+})
 
-// call handlers
-processor.addCallHandler(
-  'Balances.transfer',
-  { triggerForFailedCalls: true },
-  modules.balances.extrinsics.handleTransfer
-)
-processor.addCallHandler(
-  'Balances.transfer_keep_alive',
-  { triggerForFailedCalls: true },
-  modules.balances.extrinsics.handleTransferKeepAlive
-)
-processor.addCallHandler(
-  'Balances.transfer_allow_death',
-  { triggerForFailedCalls: true },
-  modules.balances.extrinsics.handleTransferAllowDeath
-)
-processor.addCallHandler('Staking.bond', modules.staking.extrinsics.handleBond)
-processor.addCallHandler('Staking.unbond', modules.staking.extrinsics.handleUnbond)
+processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
+	const context = ctx
 
-processor.run()
+	for (let block of context.blocks) {
+    const skip = checkSkipBlock(block.header.height)
+
+    if (skip) return
+
+		let blockContext = {
+			...context,
+			block,
+			now: performance.now(),
+		}
+
+		for (let item of getSortedItems(block)) {
+			if (item.kind === 'event') {
+				const { event } = item
+
+				if (event.name === 'TransactionPayment.TransactionFeePaid') await transactionFeePaidHandler(blockContext, event)
+
+				if (event.name === 'SubstrateBridgeOutboundChannel.MessageAccepted') await messageAcceptedHandler(blockContext, event)
+
+				if (event.name === 'ParachainSystem.DownwardMessagesProcessed') await downwardMessagesProcessedHandler(blockContext, event)
+
+				if (event.name === 'system.ExtrinsicFailed') await systemExtrinsicFailedHandler(blockContext, event)
+
+				if (event.name === 'system.ExtrinsicSuccess') await systemExtrinsicSuccessHandler(blockContext, event)
+
+				if (event.name === 'SubstrateDispatch.MessageDispatched') await messageDispatchedHandler(blockContext, event)
+
+				if (event.name === 'ParachainSystem.UpwardMessageSent') await upwardMessageSentHandler(blockContext, event)
+
+				if (event.name === 'XcmPallet.Attempted') await xcmPalletAttemptedHandler(blockContext, event) // TODO не доделан
+
+				if (event.name === 'BridgeProxy.RequestStatusUpdate') await requestStatusUpdateHandler(blockContext, event) // TODO не доделан
+
+				if (event.name === 'ParachainBridgeApp.Minted') await mintedHandler(blockContext, event) // TODO не доделан
+			}
+		}
+	}
+})

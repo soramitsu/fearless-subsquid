@@ -1,0 +1,15 @@
+@Library('jenkins-library')
+
+def jobParams  = [
+    booleanParam(defaultValue: true, name: 'deploy'),
+    booleanParam(defaultValue: true, name: 'polkadot'),
+    booleanParam(defaultValue: false, name: 'kusama'),
+    booleanParam(defaultValue: false, name: 'fullClean'),
+    booleanParam(defaultValue: false, name: 'dbincrease'),
+]
+
+def pipeline = new org.subqd.AppPipeline(
+    steps: this,
+    jobParams: jobParams
+)
+pipeline.runPipeline()
