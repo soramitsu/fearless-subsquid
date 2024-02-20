@@ -8,17 +8,17 @@ const createHistoryElement = async (
   historyData: Record<string, any>,
 	isCall = true
 ): Promise<void> => {
-	let historyElement = new StakeChange()
+	let stakeChange = new StakeChange()
 
-  historyElement.id = getEventId(ctx, entity)
-	historyElement.blockHeight = ctx.block.header.height
-	historyElement.blockHash = ctx.block.header.hash.toString()
-	historyElement.timestamp = getBlockTimestamp(ctx)
-  historyElement.module = toCamelCase(entity.name.split('.')[0])
-	historyElement.method = toCamelCase(entity.name.split('.')[1])
-	historyElement.name = historyElement.module + '.' + historyElement.method
+  stakeChange.id = getEventId(ctx, entity)
+	stakeChange.blockHeight = ctx.block.header.height
+	stakeChange.blockHash = ctx.block.header.hash.toString()
+	stakeChange.timestamp = getBlockTimestamp(ctx)
+  stakeChange.module = toCamelCase(entity.name.split('.')[0])
+	stakeChange.method = toCamelCase(entity.name.split('.')[1])
+	stakeChange.name = stakeChange.module + '.' + stakeChange.method
 
-	historyElement = { ...historyElement, ...historyData }
+	stakeChange = { ...stakeChange, ...historyData }
 
-	await ctx.store.save(historyElement)
+	await ctx.store.save(stakeChange)
 }

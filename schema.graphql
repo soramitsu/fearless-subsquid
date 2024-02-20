@@ -15,15 +15,17 @@ type ExecutionError @jsonField {
 }
 
 type StakeChange @entity {
-  id: ID!
-  blockNumber: Int! @index
-  extrinsicHash: String
-  eventIdx: String!
-  timestamp: BigInt! @index
-  address: String! @index
-  amount: BigInt!
+	id: ID!
+	type: HistoryElementType!
+	blockHeight: Int! @index
+	blockHash: String! @index
+	timestamp: Int! @index
+	execution: ExecutionResult!
+  name: String!
+	module: String! @index
+	method: String! @index
+
   accumulatedAmount: BigInt!
-  type: String!
 }
 
 type AccumulatedStake @entity {

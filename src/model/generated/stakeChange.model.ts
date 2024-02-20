@@ -2,12 +2,10 @@ import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, I
 import * as marshal from "./marshal"
 import {HistoryElementType} from "./_historyElementType"
 import {ExecutionResult} from "./_executionResult"
-import {Reward} from "./_reward"
-import {Transfer} from "./_transfer"
 
 @Entity_()
-export class HistoryElement {
-    constructor(props?: Partial<HistoryElement>) {
+export class StakeChange {
+    constructor(props?: Partial<StakeChange>) {
         Object.assign(this, props)
     }
 
@@ -43,13 +41,6 @@ export class HistoryElement {
     @Column_("text", {nullable: false})
     method!: string
 
-    @Index_()
-    @Column_("jsonb", {nullable: true})
-    data!: unknown | undefined | null
-
-    @Column_("jsonb", {transformer: {to: obj => obj == null ? undefined : obj.toJSON(), from: obj => obj == null ? undefined : new Reward(undefined, obj)}, nullable: true})
-    reward!: Reward | undefined | null
-
-    @Column_("jsonb", {transformer: {to: obj => obj == null ? undefined : obj.toJSON(), from: obj => obj == null ? undefined : new Transfer(undefined, obj)}, nullable: true})
-    transfer!: Transfer | undefined | null
+    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
+    accumulatedAmount!: bigint
 }
