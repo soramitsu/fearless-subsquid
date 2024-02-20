@@ -1,31 +1,37 @@
 import { SubstrateBatchProcessor } from '@subsquid/substrate-processor'
 import typesBundle from './typesBundle.json'
 import { TypeormDatabase } from '@subsquid/typeorm-store'
-import { eventNames } from './consts'
-import { chain, startBlock } from './config'
+import { eventNames, callNames } from './consts'
+import { chain, startBlock, archive } from './config'
 import { getSortedItems } from './utils/processor'
 import { downwardMessagesProcessedHandler, messageAcceptedHandler, messageDispatchedHandler, mintedHandler, requestStatusUpdateHandler, systemExtrinsicFailedHandler, systemExtrinsicSuccessHandler, transactionFeePaidHandler, upwardMessageSentHandler, xcmPalletAttemptedHandler } from './handlers/events/bridge'
 import { checkSkipBlock } from './utils/blocks'
+import { lookupArchive } from '@subsquid/archive-registry'
 
 export const processor = new SubstrateBatchProcessor()
-	.setRpcEndpoint({
-		url: chain,
-		rateLimit: 10
-	})
-	.setTypesBundle(typesBundle as any)
-	.setBlockRange({ from: startBlock })
-	.setFields({
-		extrinsic: {
-			success: true,
-			error: true,
-			hash: true,
-			signature: true,
-		},
-		block: {
-			timestamp: true,
-		}
-	})
+.setRpcEndpoint({
+	url: chain,
+	rateLimit: 10
+})
+.setTypesBundle(typesBundle as any)
+.setBlockRange({ from: startBlock })
+.setFields({
+	extrinsic: {
+		success: true,
+		error: true,
+		hash: true,
+		signature: true,
+	},
+	block: {
+		timestamp: true,
+	}
+})
 
+if (archive) processor.setGateway(lookupArchive(archive, { type: 'Substrate', release: 'ArrowSquid' }))
+
+callNames.forEach((callName) => {
+	processor.addCall({ name: [callName], extrinsic: true })
+})
 
 eventNames.forEach((eventName) => {
 	processor.addEvent({ name: [eventName], extrinsic: true })
@@ -35,9 +41,9 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 	const context = ctx
 
 	for (let block of context.blocks) {
-    const skip = checkSkipBlock(block.header.height)
+		const skip = checkSkipBlock(block.header.height)
 
-    if (skip) return
+		if (skip) return
 
 		let blockContext = {
 			...context,
