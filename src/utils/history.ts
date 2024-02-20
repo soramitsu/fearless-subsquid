@@ -1,27 +1,45 @@
-import { BlockContext, Event } from '../types'
+import { BlockContext, Event, Call } from '../types'
 import { nToU8a } from '@polkadot/util'
 import { getBlockTimestamp, getEventId, toCamelCase } from '../utils'
 import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementType } from '../model'
 
-export const createHistoryElement = async (
+export const createCallHistoryElement = async (
+	ctx: BlockContext,
+	call: Call<any>,
+  historyData: Record<string, any>
+): Promise<void> => {
+	createHistoryElement(ctx, call, historyData)
+}
+
+export const createEventHistoryElement = async (
 	ctx: BlockContext,
 	event: Event<any>,
   historyData: Record<string, any>
 ): Promise<void> => {
-	const historyElement = new HistoryElement()
+	createHistoryElement(ctx, event, historyData, false)
+}
 
-  historyElement.id = getEventId(ctx, event)
-	historyElement.type = HistoryElementType.EVENT
+const createHistoryElement = async (
+	ctx: BlockContext,
+	entity: Event<any>,
+  historyData: Record<string, any>,
+	isCall = true
+): Promise<void> => {
+	let historyElement = new HistoryElement()
+
+  historyElement.id = getEventId(ctx, entity)
+	historyElement.type = isCall ? HistoryElementType.CALL  : HistoryElementType.EVENT
 	historyElement.blockHeight = ctx.block.header.height
 	historyElement.blockHash = ctx.block.header.hash.toString()
 	historyElement.timestamp = getBlockTimestamp(ctx)
-  historyElement.module = toCamelCase(event.name.split('.')[0])
-	historyElement.method = toCamelCase(event.name.split('.')[1])
+  historyElement.module = toCamelCase(entity.name.split('.')[0])
+	historyElement.method = toCamelCase(entity.name.split('.')[1])
 	historyElement.name = historyElement.module + '.' + historyElement.method
 
-	historyElement.data = historyData
+	if (isCall) historyElement = { ...historyElement, ...historyData }
+	else historyElement.data = historyData
 
-	const extrinsic = event.extrinsic
+	const extrinsic = entity.extrinsic
 	const success = extrinsic?.success
 
   if (success)

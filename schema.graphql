@@ -14,6 +14,41 @@ type ExecutionError @jsonField {
 	nonModuleErrorMessage: String
 }
 
+type StakeChange @entity {
+  id: ID!
+  blockNumber: Int! @index
+  extrinsicHash: String
+  eventIdx: String!
+  timestamp: BigInt! @index
+  address: String! @index
+  amount: BigInt!
+  accumulatedAmount: BigInt!
+  type: String!
+}
+
+type AccumulatedStake @entity {
+  id: ID!
+  amount: BigInt!
+}
+
+type Transfer @jsonField {
+  amount: String!
+  to: String!
+  from: String!
+  fee: BigInt
+  eventIdx: String!
+  success: Boolean!
+}
+
+type Reward @jsonField {
+  eventIdx: String!
+  amount: String!
+  isReward: Boolean!,
+  era: Int,
+  stash: String,
+  validator: String
+}
+
 type HistoryElement @entity {
 	id: ID!
 	type: HistoryElementType!
@@ -25,4 +60,7 @@ type HistoryElement @entity {
 	module: String! @index
 	method: String! @index
 	data: JSON @index
+
+	reward: Reward
+  transfer: Transfer
 }

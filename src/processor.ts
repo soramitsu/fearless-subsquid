@@ -4,9 +4,9 @@ import { TypeormDatabase } from '@subsquid/typeorm-store'
 import { eventNames, callNames } from './consts'
 import { chain, startBlock, archive } from './config'
 import { getSortedItems } from './utils/processor'
-import { downwardMessagesProcessedHandler, messageAcceptedHandler, messageDispatchedHandler, mintedHandler, requestStatusUpdateHandler, systemExtrinsicFailedHandler, systemExtrinsicSuccessHandler, transactionFeePaidHandler, upwardMessageSentHandler, xcmPalletAttemptedHandler } from './handlers/events/bridge'
-import { checkSkipBlock } from './utils/blocks'
+import { downwardMessagesProcessedHandler, rewardedEventHandler, slashedEventHandler, stakersElectedEventHandler } from './handlers/events/staking'
 import { lookupArchive } from '@subsquid/archive-registry'
+import { bondCallHandler, transferAllowDeathCallHandler, transferCallHandler, transferKeepAliveCallHandler, unbondCallHandler } from './handlers/calls/transfers'
 
 export const processor = new SubstrateBatchProcessor()
 .setRpcEndpoint({
@@ -41,10 +41,6 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 	const context = ctx
 
 	for (let block of context.blocks) {
-		const skip = checkSkipBlock(block.header.height)
-
-		if (skip) return
-
 		let blockContext = {
 			...context,
 			block,
@@ -52,28 +48,36 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 		}
 
 		for (let item of getSortedItems(block)) {
+			if (item.kind === 'call') {
+				const { call } = item
+
+        if (call.name !== call.extrinsic?.call?.name) continue
+
+				if (call.name === 'Balances.transfer') await transferCallHandler(blockContext, call)
+
+				if (call.name === 'Balances.transfer_keep_alive') await transferKeepAliveCallHandler(blockContext, call)
+
+				if (call.name === 'Balances.transfer_allow_death') await transferAllowDeathCallHandler(blockContext, call)
+
+				if (call.name === 'Staking.bond') await bondCallHandler(blockContext, call)
+
+				if (call.name === 'Staking.unbond') await unbondCallHandler(blockContext, call)
+
+      }
+
 			if (item.kind === 'event') {
 				const { event } = item
 
-				if (event.name === 'TransactionPayment.TransactionFeePaid') await transactionFeePaidHandler(blockContext, event)
+				if (event.name === 'Staking.Rewarded') await rewardedEventHandler(blockContext, event)
+				if (event.name === 'Staking.Reward') await rewardedEventHandler(blockContext, event)
 
-				if (event.name === 'SubstrateBridgeOutboundChannel.MessageAccepted') await messageAcceptedHandler(blockContext, event)
+				if (event.name === 'Staking.Slashed') await slashedEventHandler(blockContext, event)
+				if (event.name === 'Staking.Slash') await slashedEventHandler(blockContext, event)
 
-				if (event.name === 'ParachainSystem.DownwardMessagesProcessed') await downwardMessagesProcessedHandler(blockContext, event)
+				if (event.name === 'Staking.StakersElected') await stakersElectedEventHandler(blockContext, event)
+				if (event.name === 'Staking.StakingElection') await stakersElectedEventHandler(blockContext, event)
 
-				if (event.name === 'system.ExtrinsicFailed') await systemExtrinsicFailedHandler(blockContext, event)
 
-				if (event.name === 'system.ExtrinsicSuccess') await systemExtrinsicSuccessHandler(blockContext, event)
-
-				if (event.name === 'SubstrateDispatch.MessageDispatched') await messageDispatchedHandler(blockContext, event)
-
-				if (event.name === 'ParachainSystem.UpwardMessageSent') await upwardMessageSentHandler(blockContext, event)
-
-				if (event.name === 'XcmPallet.Attempted') await xcmPalletAttemptedHandler(blockContext, event) // TODO не доделан
-
-				if (event.name === 'BridgeProxy.RequestStatusUpdate') await requestStatusUpdateHandler(blockContext, event) // TODO не доделан
-
-				if (event.name === 'ParachainBridgeApp.Minted') await mintedHandler(blockContext, event) // TODO не доделан
 			}
 		}
 	}

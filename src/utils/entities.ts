@@ -2,6 +2,8 @@ import { BlockContext, Call, Event } from '../types'
 import { CallType as CallTypePolkadot, EventType as EventTypePolkadot } from '../types/generated/sora-polkadot/support'
 import { CallType as CallTypeKusama, EventType as EventTypeKusama } from '../types/generated/sora-kusama/support'
 import * as sts from '@subsquid/substrate-runtime/lib/sts'
+import { decodeHex } from '@subsquid/util-internal-hex'
+import * as ss58 from '@subsquid/ss58'
 
 type VersionedObject = {
 	[key: string]: any
@@ -235,4 +237,37 @@ export function getStorageRepresentation<
 	filter?: FilterArgs<K, V>,
 ) {
 	return getEntityRepresentation<T, K, V, true>(ctx, types, { kind: 'storage' }, filter, true)
+}
+
+const ss58codec = ss58.codec(config.prefix)
+
+export function encodeId(id: Uint8Array) {
+	return ss58codec.encode(typeof id === 'string' ? decodeHex(id) : id)
+}
+
+export function getOriginAccountId(origin: any): string | undefined {
+	if (origin && origin.__kind === 'system' && origin.value.__kind === 'Signed') {
+			const id = origin.value.value
+			if (id.__kind === 'Id') {
+					return encodeId(id.value)
+			} else {
+					return encodeId(id)
+			}
+	} else {
+			return undefined
+	}
+}
+
+export function isAdressSS58(address: Uint8Array) {
+	switch (address.length) {
+			case 1:
+			case 2:
+			case 4:
+			case 8:
+			case 32:
+			case 33:
+					return true
+			default:
+					return false
+	}
 }

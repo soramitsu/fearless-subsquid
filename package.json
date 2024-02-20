@@ -27,24 +27,16 @@
 		"processor:start": "node lib/processor.js",
 		"query-node:start": "squid-graphql-server --subscriptions --max-response-size 10000 --dumb-cache in-memory --dumb-cache-ttl 1000 --dumb-cache-size 100 --dumb-cache-max-age 1000",
 
-		"fetch-spec-versions:sora-polkadot": "ts-node ./scripts/generate-fetch-spec-versions-command.ts sora-polkadot && ./scripts/fetch-spec-versions.sh",
-		"fetch-spec-versions:sora-kusama": "ts-node ./scripts/generate-fetch-spec-versions-command.ts sora-kusama && ./scripts/fetch-spec-versions.sh",
+		"fetch-spec-versions:kusama": "ts-node ./scripts/generate-fetch-spec-versions-command.ts kusama && ./scripts/fetch-spec-versions.sh",
 
-		"fetch-spec-versions:all": "npm run fetch-spec-versions:sora-polkadot && npm run fetch-spec-versions:sora-kusama",
-
-		"generate-types:sora-polkadot": "ts-node ./scripts/prepare-typegen-json.ts sora-polkadot && sqd typegen",
-		"generate-types:sora-kusama": "ts-node ./scripts/prepare-typegen-json.ts sora-kusama && sqd typegen",
-
-		"generate-types:all": "npm run generate-types:sora-polkadot && npm run generate-types:sora-kusama",
+		"generate-types:kusama": "ts-node ./scripts/prepare-typegen-json.ts kusama && sqd typegen",
 
 		"merge-types": "ts-node ./scripts/merge-types.ts",
 		"generate-types": "npm run fetch-spec-versions:all && npm run generate-types:all && npm run merge-types",
 
-		"generate-squid-yaml:sora-polkadot": "ts-node ./scripts/generate-squid-yaml.ts sora-polkadot",
-		"generate-squid-yaml:sora-kusama": "ts-node ./scripts/generate-squid-yaml.ts sora-kusama",
+		"generate-squid-yaml:kusama": "ts-node ./scripts/generate-squid-yaml.ts kusama",
 
-		"deploy:sora-polkadot": "ts-node ./scripts/generate-squid-yaml.ts sora-polkadot && sqd deploy ./",
-		"deploy:sora-kusama": "ts-node ./scripts/generate-squid-yaml.ts sora-kusama && sqd deploy ./",
+		"deploy:kusama": "ts-node ./scripts/generate-squid-yaml.ts kusama && sqd deploy ./",
 
 		"serve": "sqd serve",
 		"process": "sqd process",
