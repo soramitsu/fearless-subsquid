@@ -28,37 +28,22 @@ const createHistoryElement = async (
 	let historyElement = new HistoryElement()
 
   historyElement.id = isCall ? getCallId(ctx, entity as Call<any>) : getEventId(ctx, entity as Event<any>)
-	historyElement.type = isCall ? HistoryElementType.CALL  : HistoryElementType.EVENT
-	historyElement.blockHeight = ctx.block.header.height
-	historyElement.blockHash = ctx.block.header.hash.toString()
 	historyElement.timestamp = getBlockTimestamp(ctx)
+	historyElement.type = isCall ? HistoryElementType.CALL  : HistoryElementType.EVENT
+	historyElement.success = entity?.extrinsic?.success
+	historyElement.data = {}
+
+	historyElement.blockHeight = ctx.block.header.height
+	historyElement.blockHash = ctx.block.header.hash
+
   historyElement.module = toCamelCase(entity.name.split('.')[0])
 	historyElement.method = toCamelCase(entity.name.split('.')[1])
 	historyElement.name = historyElement.module + '.' + historyElement.method
 
-	if (isCall) historyElement = { ...historyElement, ...historyData }
-	else historyElement.data = historyData
+	historyElement.extrinsicIdx = entity.extrinsicIndex
+	historyElement.extrinsicHash = entity.extrinsic?.hash
 
-	const extrinsic = entity.extrinsic
-	const success = extrinsic?.success
-
-  if (success)
-		historyElement.execution = new ExecutionResult({ success })
-	else if (extrinsic) {
-		const extrinsicError = extrinsic.error as any
-		const error =
-			extrinsicError.__kind === 'Module'
-				? new ExecutionError({
-						moduleErrorId: nToU8a(extrinsicError.value.error).at(-1),
-						moduleErrorIndex: extrinsicError.value.index,
-				  })
-				: new ExecutionError({ nonModuleErrorMessage: JSON.stringify(extrinsicError) })
-
-		historyElement.execution = new ExecutionResult({
-			success,
-			error,
-		})
-	}
+	historyElement = { ...historyElement, ...historyData }
 
 	await ctx.store.save(historyElement)
 }

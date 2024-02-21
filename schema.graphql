@@ -3,29 +3,20 @@ enum HistoryElementType {
 	EVENT
 }
 
-type ExecutionResult @jsonField {
-	success: Boolean!
-	error: ExecutionError
-}
-
-type ExecutionError @jsonField {
-	moduleErrorId: Int
-	moduleErrorIndex: Int
-	nonModuleErrorMessage: String
-}
-
 type StakeChange @entity {
 	id: ID!
-	type: HistoryElementType!
 	blockHeight: Int! @index
 	blockHash: String! @index
 	timestamp: Int! @index
-	execution: ExecutionResult!
+	success: Boolean!
+  address: String! @index
+  payee: String!
+  amount: String!
   name: String!
 	module: String! @index
 	method: String! @index
-
   accumulatedAmount: BigInt!
+	data: JSON @index
 }
 
 type AccumulatedStake @entity {
@@ -38,17 +29,14 @@ type Transfer @jsonField {
   to: String!
   from: String!
   fee: BigInt
-  eventIdx: String!
   success: Boolean!
 }
 
 type Reward @jsonField {
-  eventIdx: String!
   amount: String!
   isReward: Boolean!,
   era: Int,
   stash: String,
-  validator: String
 }
 
 type HistoryElement @entity {
@@ -56,13 +44,14 @@ type HistoryElement @entity {
 	type: HistoryElementType!
 	blockHeight: Int! @index
 	blockHash: String! @index
+	extrinsicIdx: String! @index
+	extrinsicIHash: String! @index
 	timestamp: Int! @index
-	execution: ExecutionResult!
+	success: Boolean!
   name: String!
 	module: String! @index
 	method: String! @index
 	data: JSON @index
-
 	reward: Reward
   transfer: Transfer
 }

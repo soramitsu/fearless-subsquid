@@ -51,9 +51,6 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 			now: performance.now(),
 		}
 
-		console.log('specVersion', blockContext.block.header._runtime.specVersion);
-		console.log('specVersion', blockContext.block.header._runtime.specName);
-
 		for (let item of getSortedItems(block)) {
 			if (item.kind === 'call') {
 				const { call } = item

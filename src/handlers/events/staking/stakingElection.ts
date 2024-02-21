@@ -1,47 +1,39 @@
 import { BlockContext, Event } from '../../../types'
-import { getEventData } from '../../../utils/entities'
-import { events } from '../../../types/generated/merged'
+import { getStorageRepresentation } from '../../../utils/entities'
+import { storage } from '../../../types/generated/merged'
 import { logStartProcessingEvent } from '../../../utils/logs'
+import { getActiveStakingEra } from '../../../utils/staking'
+import { toAddress } from '../../../utils'
+import { EraValidatorInfo, IndividualExposure } from '../../../model'
 
 export async function stakersElectionEventHandler(
 	ctx: BlockContext,
-	event: Event<'Staking.StakersElected' | 'Staking.StakingElection'>
+	event: Event<'Staking.StakingElection'>
 ): Promise<void> {
-	// logStartProcessingEvent(ctx, event)
+	logStartProcessingEvent(ctx, event)
 
-  // const type = events.transactionPayment.transactionFeePaid
-	// const data = getEventData(ctx, type, event)
+	const activeStakingEra = await getActiveStakingEra(ctx)
+	const exposures = await getStorageRepresentation(ctx, storage.staking.erasStakers)?.getPairs(ctx.block.header, activeStakingEra.index)
 
-  // const exposures = await storage.staking.getStakingErasStakersClipped(ctx, currentEraData.index!)
+	exposures?.forEach(async ([[, validatorId], exposure ]) => {
+    const others = exposure?.others.map(({ value, who }) => new IndividualExposure({
+        who: toAddress(who),
+        value: value.toString()
+      }
+    ))
 
-	// const historyData = {
-	// 	id: `${id}-${address}`,
-	// 	address,
-	// 	era: currentEraData?.index,
-	// 	own,
-	// 	total,
-	// 	others,
-	// 	othersWho: others.map(({ who }) => who).join(' ')
-	// }
+    const address = toAddress(validatorId)
 
-	// exposures.forEach(async ([[, validatorId], { others: othersTemp, own, total }]) => {
-  //   const others = othersTemp.map(({ value, who }) => new IndividualExposure({
-  //     who: encodeId(who),
-  //     value: value.toString()
-  //   }))
-  //   const address = encodeId(validatorId)
+    const eraValidator = new EraValidatorInfo({
+      id: `${activeStakingEra.id}-${address}`,
+      address,
+      era: activeStakingEra?.index,
+      own: exposure?.own,
+      total: exposure?.total,
+      others,
+      othersWho: others?.map(({ who }) => who).join(' ')
+    })
 
-  //   const eraValidator = new EraValidatorInfo({
-  //     id: `${id}-${address}`,
-  //     address,
-  //     era: currentEraData?.index,
-  //     own,
-  //     total,
-  //     others,
-  //     othersWho: others.map(({ who }) => who).join(' ')
-  //   })
-
-	// 	await createEventHistoryElement(ctx, event, historyData)
-  // })
-
+	  await ctx.store.save(eraValidator)
+  })
 }

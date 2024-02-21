@@ -10,6 +10,9 @@ import {
 	Event,
 } from '../types'
 import { decodeHex } from '@subsquid/substrate-processor'
+import { name } from '../config'
+
+const ss58codec = ss58.codec(name)
 
 export function assertDefined<T>(value: T | null | undefined, message?: string): asserts value is T {
     if (value === null || value === undefined) {
@@ -86,12 +89,12 @@ export const decodeAddressEthereum = (data: AddressEthereum): Uint8Array => {
 	return decodeHex(data as unknown as string)
 }
 
-export const toAddress = (data: string): Address => {
-	return ss58.codec('sora').encode(typeof data === 'string' ? decodeHex(data) : data) as unknown as Address
+export const toAddress = (data: any): Address => {
+	return ss58codec.encode(typeof data === 'string' ? decodeHex(data) : data) as unknown as Address
 }
 
 export const decodeAddress = (data: Address): string => {
-	return ss58.codec('sora').decode(data as unknown as string)
+	return ss58codec.decode(data as unknown as string)
 }
 
 export const toCamelCase = (s: string): string => {

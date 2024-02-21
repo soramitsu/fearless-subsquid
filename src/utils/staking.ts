@@ -1,31 +1,45 @@
-import { AccumulatedStake } from '../model';
+import { AccumulatedStake, StakingEra } from '../model';
 import { BlockContext } from '../types';
+import { storage } from '../types/generated/merged';
+import { getStorageRepresentation } from './entities';
 
-
-export interface ActionData {
-  id: string
-  timestamp: number
-  blockNumber: number
-  extrinsicHash?: string
-  extrinsicIdx?: string
-}
-
-interface AccumulatedStakeData extends ActionData {
+interface AccumulatedStakeData {
   amount: bigint
-  accountId: string
+  address: string
 }
 
-export async function handleAccumulatedStake(ctx: BlockContext, data: AccumulatedStakeData): Promise<bigint | undefined> {
-  const { accountId, amount } = data;
-  const accumulatedStake =
-    await ctx.store.get(AccumulatedStake, accountId)
-    ?? new AccumulatedStake({ id: accountId, amount: 0n });
+export async function handleAccumulatedStake(ctx: BlockContext, data: AccumulatedStakeData, isBond = true): Promise<string | undefined> {
+  const { address, amount } = data;
+  const stakeStore = await ctx.store.get(AccumulatedStake, address)
+  const accumulatedStake = stakeStore ?? new AccumulatedStake({ id: address, amount: 0n });
 
-  const newAccumulatedAmount = accumulatedStake.amount + amount;
+  const newAccumulatedAmount = accumulatedStake.amount + (isBond ? amount : -amount);
 
   accumulatedStake.amount = newAccumulatedAmount;
 
   await ctx.store.save(accumulatedStake);
 
-  return newAccumulatedAmount;
+  return newAccumulatedAmount.toString();
+}
+
+export const getActiveStakingEra = async (ctx: BlockContext): Promise<StakingEra> => {
+	const activeEra = await getStorageRepresentation(ctx, storage.staking.activeEra)?.get(ctx.block.header)
+
+	let stakingEra = await ctx.store.get(StakingEra, activeEra?.index.toString()!)
+
+	if (!stakingEra) {
+		stakingEra = new StakingEra()
+		stakingEra.id = activeEra?.index.toString()
+		stakingEra.index = activeEra?.index
+
+		if (activeEra.start) {
+			stakingEra.start = activeEra.start
+		}
+
+		await ctx.store.save(stakingEra)
+
+		getUtilsLog(ctx).debug({ index: activeEra.index }, 'Staking era saved')
+	}
+
+	return stakingEra
 }
