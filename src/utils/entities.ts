@@ -1,9 +1,9 @@
 import { BlockContext, Call, Event } from '../types'
-import { CallType as CallTypePolkadot, EventType as EventTypePolkadot } from '../types/generated/sora-polkadot/support'
-import { CallType as CallTypeKusama, EventType as EventTypeKusama } from '../types/generated/sora-kusama/support'
+import { CallType as CallTypeKusama, EventType as EventTypeKusama } from '../types/generated/kusama/support'
 import * as sts from '@subsquid/substrate-runtime/lib/sts'
 import { decodeHex } from '@subsquid/util-internal-hex'
 import * as ss58 from '@subsquid/ss58'
+import { name } from '../config'
 
 type VersionedObject = {
 	[key: string]: any
@@ -20,14 +20,14 @@ type EntityItem = {
 }
 
 type ExtractType<T> = T extends sts.Type<infer U> ? U : never;
+
 export type ExtractCallType<T> = ExtractType<
 	T extends CallTypeKusama<infer U> ? U
-	: T extends CallTypePolkadot<infer U> ? U
 	: never
 >
+
 export type ExtractEventType<T> = ExtractType<
 	T extends EventTypeKusama<infer U> ? U
-	: T extends EventTypePolkadot<infer U> ? U
 	: never
 >
 
@@ -239,7 +239,7 @@ export function getStorageRepresentation<
 	return getEntityRepresentation<T, K, V, true>(ctx, types, { kind: 'storage' }, filter, true)
 }
 
-const ss58codec = ss58.codec(config.prefix)
+const ss58codec = ss58.codec(name)
 
 export function encodeId(id: Uint8Array) {
 	return ss58codec.encode(typeof id === 'string' ? decodeHex(id) : id)

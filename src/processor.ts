@@ -3,10 +3,15 @@ import { TypeormDatabase } from '@subsquid/typeorm-store'
 import { eventNames, callNames } from './consts'
 import { chain, startBlock, archive } from './config'
 import { getSortedItems } from './utils/processor'
-import { rewardedEventHandler, slashedEventHandler, stakersElectedEventHandler } from './handlers/events/staking'
 import { lookupArchive } from '@subsquid/archive-registry'
 import { transferAllowDeathCallHandler, transferCallHandler, transferKeepAliveCallHandler } from './handlers/calls/transfers'
 import { bondCallHandler, unbondCallHandler } from './handlers/calls/staking'
+import { rewardedEventHandler } from './handlers/events/staking/rewarded'
+import { rewardEventHandler } from './handlers/events/staking/reward'
+import { slashEventHandler } from './handlers/events/staking/slash'
+import { slashedEventHandler } from './handlers/events/staking/slashed'
+import { stakersElectedEventHandler } from './handlers/events/staking/stakersElected'
+import { stakersElectionEventHandler } from './handlers/events/staking/stakingElection'
 
 export const processor = new SubstrateBatchProcessor()
 .setRpcEndpoint({
@@ -46,6 +51,9 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 			now: performance.now(),
 		}
 
+		console.log('specVersion', blockContext.block.header._runtime.specVersion);
+		console.log('specVersion', blockContext.block.header._runtime.specName);
+
 		for (let item of getSortedItems(block)) {
 			if (item.kind === 'call') {
 				const { call } = item
@@ -67,13 +75,13 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 				const { event } = item
 
 				if (event.name === 'Staking.Rewarded') await rewardedEventHandler(blockContext, event)
-				if (event.name === 'Staking.Reward') await rewardedEventHandler(blockContext, event)
+				if (event.name === 'Staking.Reward') await rewardEventHandler(blockContext, event)
 
 				if (event.name === 'Staking.Slashed') await slashedEventHandler(blockContext, event)
-				if (event.name === 'Staking.Slash') await slashedEventHandler(blockContext, event)
+				if (event.name === 'Staking.Slash') await slashEventHandler(blockContext, event)
 
 				if (event.name === 'Staking.StakersElected') await stakersElectedEventHandler(blockContext, event)
-				if (event.name === 'Staking.StakingElection') await stakersElectedEventHandler(blockContext, event)
+				if (event.name === 'Staking.StakingElection') await stakersElectionEventHandler(blockContext, event)
 
 
 			}
