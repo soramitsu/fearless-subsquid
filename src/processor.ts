@@ -13,7 +13,6 @@ export const processor = new SubstrateBatchProcessor()
 	url: chain,
 	rateLimit: 10
 })
-.setTypesBundle(typesBundle as any)
 .setBlockRange({ from: startBlock })
 .setFields({
 	extrinsic: {
