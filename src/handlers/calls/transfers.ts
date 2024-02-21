@@ -10,17 +10,17 @@ export async function transferCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-  // const type = calls.balances.transfer
-	// const data = getCallData(ctx, type, call)
+  const type = calls.balances.transfer
+	const data = getCallData(ctx, type, call)
 
-	// const accountId = getOriginAccountId(ctx.call.origin)
+	const accountId = getOriginAccountId(ctx.call.origin)
 
 	const historyData = {
-		// amount: data.amount,
-		// fee: ctx.extrinsic.fee,
-		// extrinsicIdx: ctx.extrinsic.id,
-		// fromId: accountId,
-		// toId: isAdressSS58(data.to) ? encodeId(data.to) : null,
+		amount: data.amount,
+		fee: ctx.extrinsic.fee,
+		extrinsicIdx: ctx.extrinsic.id,
+		fromId: accountId,
+		toId: isAdressSS58(data.to) ? encodeId(data.to) : null,
 	}
 
 	createCallHistoryElement(ctx, call, historyData)
@@ -32,17 +32,17 @@ export async function transferKeepAliveCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-  // const type = calls.balances.transferKeepAlive
-	// const data = getCallData(ctx, type, call)
+  const type = calls.balances.transferKeepAlive
+	const data = getCallData(ctx, type, call)
 
-	// const accountId = getOriginAccountId(ctx.call.origin)
+	const accountId = getOriginAccountId(ctx.call.origin)
 
 	const historyData = {
-		// amount: data.amount,
-		// fee: ctx.extrinsic.fee,
-		// extrinsicIdx: ctx.extrinsic.id,
-		// fromId: accountId,
-		// toId: isAdressSS58(data.to) ? encodeId(data.to) : null,
+		amount: data.amount,
+		fee: ctx.extrinsic.fee,
+		extrinsicIdx: ctx.extrinsic.id,
+		fromId: accountId,
+		toId: isAdressSS58(data.to) ? encodeId(data.to) : null,
 	}
 
 	createCallHistoryElement(ctx, call, historyData)
@@ -54,17 +54,17 @@ export async function transferAllowDeathCallHandler(
 ): Promise<void> {
 	logStartProcessingCall(ctx, call)
 
-  // const type = calls.balances.transferAllowDeath
-	// const data = getCallData(ctx, type, call)
+  const type = calls.balances.transferAllowDeath
+	const data = getCallData(ctx, type, call)
 
-	// const accountId = getOriginAccountId(ctx.call.origin)
+	const accountId = getOriginAccountId(ctx.call.origin)
 
 	const historyData = {
-		// amount: data.amount,
-		// fee: ctx.extrinsic.fee,
-		// extrinsicIdx: ctx.extrinsic.id,
-		// fromId: accountId,
-		// toId: isAdressSS58(data.to) ? encodeId(data.to) : null,
+		amount: data.amount,
+		fee: ctx.extrinsic.fee,
+		extrinsicIdx: ctx.extrinsic.id,
+		fromId: accountId,
+		toId: isAdressSS58(data.to) ? encodeId(data.to) : null,
 	}
 
 	createCallHistoryElement(ctx, call, historyData)

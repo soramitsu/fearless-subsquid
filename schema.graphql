@@ -66,3 +66,18 @@ type HistoryElement @entity {
 	reward: Reward
   transfer: Transfer
 }
+
+type EraValidatorInfo @entity {
+  id: ID!
+  address: String! @index
+  era: Int! @index
+  total: BigInt!
+  own: BigInt!
+  others: [IndividualExposure]!
+  othersWho: String!
+}
+
+type IndividualExposure @jsonField {
+  who: String!
+  value: String!
+}

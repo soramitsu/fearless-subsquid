@@ -2,11 +2,10 @@ import { BlockContext, Event, Call } from '../types'
 import { getBlockTimestamp, getEventId, toCamelCase } from '../utils'
 import { StakeChange } from '../model'
 
-const createHistoryElement = async (
+export const createStakeChange = async (
 	ctx: BlockContext,
 	entity: Event<any>,
-  historyData: Record<string, any>,
-	isCall = true
+  historyData: Record<string, any>
 ): Promise<void> => {
 	let stakeChange = new StakeChange()
 

@@ -6,6 +6,7 @@ import { getSortedItems } from './utils/processor'
 import { rewardedEventHandler, slashedEventHandler, stakersElectedEventHandler } from './handlers/events/staking'
 import { lookupArchive } from '@subsquid/archive-registry'
 import { transferAllowDeathCallHandler, transferCallHandler, transferKeepAliveCallHandler } from './handlers/calls/transfers'
+import { bondCallHandler, unbondCallHandler } from './handlers/calls/staking'
 
 export const processor = new SubstrateBatchProcessor()
 .setRpcEndpoint({
@@ -60,7 +61,6 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 				if (call.name === 'Staking.bond') await bondCallHandler(blockContext, call)
 
 				if (call.name === 'Staking.unbond') await unbondCallHandler(blockContext, call)
-
       }
 
 			if (item.kind === 'event') {
