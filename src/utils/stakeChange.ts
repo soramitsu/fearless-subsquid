@@ -12,7 +12,7 @@ export const createStakeChange = async (
 
   stakeChange.id = isCall ? getCallId(ctx, entity as Call<any>) : getEventId(ctx, entity as Event<any>)
 	stakeChange.timestamp = getBlockTimestamp(ctx)
-	stakeChange.success = entity?.extrinsic?.success
+	stakeChange.success = entity?.extrinsic?.success ?? false
 
 	stakeChange.blockHeight = ctx.block.header.height
 	stakeChange.blockHash = ctx.block.header.hash.toString()

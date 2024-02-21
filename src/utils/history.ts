@@ -1,7 +1,6 @@
 import { BlockContext, Event, Call } from '../types'
-import { nToU8a } from '@polkadot/util'
 import { getBlockTimestamp, getCallId, getEventId, toCamelCase } from '../utils'
-import { ExecutionResult, ExecutionError, HistoryElement, HistoryElementType } from '../model'
+import {  HistoryElement, HistoryElementType } from '../model'
 
 export const createCallHistoryElement = async (
 	ctx: BlockContext,
@@ -30,7 +29,7 @@ const createHistoryElement = async (
   historyElement.id = isCall ? getCallId(ctx, entity as Call<any>) : getEventId(ctx, entity as Event<any>)
 	historyElement.timestamp = getBlockTimestamp(ctx)
 	historyElement.type = isCall ? HistoryElementType.CALL  : HistoryElementType.EVENT
-	historyElement.success = entity?.extrinsic?.success
+	historyElement.success = entity?.extrinsic?.success ?? false
 	historyElement.data = {}
 
 	historyElement.blockHeight = ctx.block.header.height

@@ -2,6 +2,7 @@ import { AccumulatedStake, StakingEra } from '../model';
 import { BlockContext } from '../types';
 import { storage } from '../types/generated/merged';
 import { getStorageRepresentation } from './entities';
+import { getUtilsLog } from './logs';
 
 interface AccumulatedStakeData {
   amount: bigint
@@ -27,19 +28,17 @@ export const getActiveStakingEra = async (ctx: BlockContext): Promise<StakingEra
 
 	let stakingEra = await ctx.store.get(StakingEra, activeEra?.index.toString()!)
 
-	if (!stakingEra) {
+	if (!stakingEra && activeEra) {
 		stakingEra = new StakingEra()
 		stakingEra.id = activeEra?.index.toString()
-		stakingEra.index = activeEra?.index
+		stakingEra.index = activeEra.index
 
-		if (activeEra.start) {
-			stakingEra.start = activeEra.start
-		}
+		if (activeEra?.start) stakingEra.start = activeEra.start
 
 		await ctx.store.save(stakingEra)
 
 		getUtilsLog(ctx).debug({ index: activeEra.index }, 'Staking era saved')
 	}
 
-	return stakingEra
+	return stakingEra!
 }

@@ -44,8 +44,8 @@ type HistoryElement @entity {
 	type: HistoryElementType!
 	blockHeight: Int! @index
 	blockHash: String! @index
-	extrinsicIdx: String! @index
-	extrinsicIHash: String! @index
+	extrinsicIdx: Int @index
+	extrinsicHash: String @index
 	timestamp: Int! @index
 	success: Boolean!
   name: String!
@@ -69,4 +69,10 @@ type EraValidatorInfo @entity {
 type IndividualExposure @jsonField {
   who: String!
   value: String!
+}
+
+type StakingEra @entity {
+	id: ID!
+	index: Int! @index
+	start: BigInt! @index
 }

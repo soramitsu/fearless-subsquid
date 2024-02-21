@@ -1,5 +1,5 @@
 import { BlockContext, Call } from '../../types'
-import { getCallData, getOriginAccountId } from '../../utils/entities'
+import { getCallData } from '../../utils/entities'
 import { calls } from '../../types/generated/merged'
 import { logStartProcessingCall } from '../../utils/logs'
 import { createStakeChange } from '../../utils/stakeChange'

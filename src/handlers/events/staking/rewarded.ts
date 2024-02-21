@@ -26,7 +26,6 @@ export async function rewardedEventHandler(
     era,
     isReward: true,
     stash: address,
-    eventIdx: event.id,
   })
 
 	const historyData = {
