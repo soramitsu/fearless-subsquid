@@ -2,8 +2,8 @@ import { BlockContext, Call } from '../../types'
 import { getCallData, getOriginAccountId } from '../../utils/entities'
 import { calls } from '../../types/generated/merged'
 import { createCallHistoryElement } from '../../utils/history'
-import { logStartProcessingEvent } from '../../utils/logs'
-import { AccumulatedStake, StakeChange } from '../../model'
+import { logStartProcessingCall } from '../../utils/logs'
+import { AccumulatedStake } from '../../model'
 
 export interface ActionData {
   id: string
@@ -16,6 +16,12 @@ export interface ActionData {
 interface AccumulatedStakeData extends ActionData {
   amount: bigint
   accountId: string
+}
+
+enum BondType {
+  Bonded = 'bonded',
+  Unbonded = 'unbonded',
+
 }
 
 async function handleAccumulatedStake(ctx: BlockContext, data: AccumulatedStakeData): Promise<bigint | undefined> {
@@ -35,35 +41,41 @@ async function handleAccumulatedStake(ctx: BlockContext, data: AccumulatedStakeD
 
 export async function bondCallHandler(
 	ctx: BlockContext,
-	event: Call<'Staking.bond'>
+	call: Call<'Staking.bond'>
 ): Promise<void> {
-	logStartProcessingEvent(ctx, event)
+	logStartProcessingCall(ctx, call)
 
-  const type = calls.staking.bond
-	const data = getCallData(ctx, type, event)
+  // const type = calls.staking.bond
+	// const data = getCallData(ctx, type, call)
 
-  const address = getOriginAccountId(ctx.call.origin)
-  const accumulatedAmount = await handleAccumulatedStake(ctx, data) ?? 0n;
+  // const address = getOriginAccountId(ctx.call.origin)
+  // const accumulatedAmount = await handleAccumulatedStake(ctx, data) ?? 0n;
 
 	const historyData = {
-		amount: data.amount,
-    address,
-    accumulatedAmount
+		// amount: data.amount,
+    // address,
+    // accumulatedAmount,
+    // type: BondType.Bonded
   }
 
-	createCallHistoryElement(ctx, event, historyData)
+	createCallHistoryElement(ctx, call, historyData)
 }
 
 export async function unbondCallHandler(
 	ctx: BlockContext,
-	event: Call<'Staking.unbond'>
+	call: Call<'Staking.unbond'>
 ): Promise<void> {
-	logStartProcessingEvent(ctx, event)
+	logStartProcessingCall(ctx, call)
 
-  const type = calls.staking.unbond
-	const data = getCallData(ctx, type, event)
+  // const type = calls.staking.unbond
+	// const data = getCallData(ctx, type, call)
 
-	const historyData = {}
+	const historyData = {
+    // amount: data.amount,
+    // address,
+    // accumulatedAmount,
+    // type: BondType.Unbonded
+  }
 
-	createCallHistoryElement(ctx, event, historyData)
+	createCallHistoryElement(ctx, call, historyData)
 }

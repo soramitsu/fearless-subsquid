@@ -33,7 +33,7 @@ export const chains: Chains = {
 		name: 'kusama',
 		description: 'kusama squid',
 		version,
-		chain: 'https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fkusama-rpc.dwellir.com',
+		chain: 'wss://kusama-rpc.polkadot.io',
 		archive: 'kusama',
 		storage: '100G',
 		scaleProfiles: {

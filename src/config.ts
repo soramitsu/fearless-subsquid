@@ -3,7 +3,7 @@ import chains from './chains'
 
 dotenv.config()
 
-const indexerChain = process.env.INDEXER_CHAIN ?? 'sora-polkadot'
+const indexerChain = process.env.INDEXER_CHAIN ?? 'kusama'
 const chainConfig = chains[indexerChain as keyof typeof chains]
 
 if (!chainConfig) {

@@ -9,7 +9,7 @@ import { Chain, chains } from '../src/chains'
 dotenv.config()
 
 // Obtain chain from npm parameters if provided
-let chain: Chain = (process.argv[2] as Chain) || (process.env.INDEXER_CHAIN as Chain) || Chain.SORA_POLKADOT
+let chain: Chain = (process.argv[2] as Chain) || (process.env.INDEXER_CHAIN as Chain) || Chain.KUSAMA
 
 // Obtain chain details
 const details = chains[chain]

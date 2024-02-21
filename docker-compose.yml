@@ -7,7 +7,7 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
-    container_name: sora-polkadot_db
+    container_name: kusama
     image: postgres:14
     environment:
       POSTGRES_DB: ${DB_NAME}
