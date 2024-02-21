@@ -1,15 +1,12 @@
-import * as soraPolkadotStorage from '../../sora-polkadot/timestamp/storage'
-import * as soraKusamaStorage from '../../sora-kusama/timestamp/storage'
+import * as kusamaStorage from '../../kusama/timestamp/storage'
 
 
 export const now = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.now['v1'],
-	v1SoraKusama: soraKusamaStorage.now['v1'],
+	v1020Kusama: kusamaStorage.now['v1020'],
 }
 
 export const didUpdate = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.didUpdate['v1'],
-	v1SoraKusama: soraKusamaStorage.didUpdate['v1'],
+	v1020Kusama: kusamaStorage.didUpdate['v1020'],
 }

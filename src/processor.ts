@@ -1,12 +1,11 @@
 import { SubstrateBatchProcessor } from '@subsquid/substrate-processor'
-import typesBundle from './typesBundle.json'
 import { TypeormDatabase } from '@subsquid/typeorm-store'
 import { eventNames, callNames } from './consts'
 import { chain, startBlock, archive } from './config'
 import { getSortedItems } from './utils/processor'
-import { downwardMessagesProcessedHandler, rewardedEventHandler, slashedEventHandler, stakersElectedEventHandler } from './handlers/events/staking'
+import { rewardedEventHandler, slashedEventHandler, stakersElectedEventHandler } from './handlers/events/staking'
 import { lookupArchive } from '@subsquid/archive-registry'
-import { bondCallHandler, transferAllowDeathCallHandler, transferCallHandler, transferKeepAliveCallHandler, unbondCallHandler } from './handlers/calls/transfers'
+import { transferAllowDeathCallHandler, transferCallHandler, transferKeepAliveCallHandler } from './handlers/calls/transfers'
 
 export const processor = new SubstrateBatchProcessor()
 .setRpcEndpoint({

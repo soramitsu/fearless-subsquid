@@ -1,21 +1,27 @@
-import * as soraPolkadotStorage from '../../sora-polkadot/beefy/storage'
-import * as soraKusamaStorage from '../../sora-kusama/beefy/storage'
+import * as kusamaStorage from '../../kusama/beefy/storage'
 
 
 export const authorities = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.authorities['v1'],
-	v7SoraKusama: soraKusamaStorage.authorities['v7'],
+	v1000000Kusama: kusamaStorage.authorities['v1000000'],
 }
 
 export const validatorSetId = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.validatorSetId['v1'],
-	v7SoraKusama: soraKusamaStorage.validatorSetId['v7'],
+	v1000000Kusama: kusamaStorage.validatorSetId['v1000000'],
 }
 
 export const nextAuthorities = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.nextAuthorities['v1'],
-	v7SoraKusama: soraKusamaStorage.nextAuthorities['v7'],
+	v1000000Kusama: kusamaStorage.nextAuthorities['v1000000'],
+}
+
+export const setIdSession = {
+	name: '',
+	v1000000Kusama: kusamaStorage.setIdSession['v1000000'],
+}
+
+export const genesisBlock = {
+	name: '',
+	v1000000Kusama: kusamaStorage.genesisBlock['v1000000'],
 }

@@ -1,47 +1,46 @@
-import * as soraPolkadotStorage from '../../sora-polkadot/session/storage'
-import * as soraKusamaStorage from '../../sora-kusama/session/storage'
+import * as kusamaStorage from '../../kusama/session/storage'
 
 
 export const validators = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.validators['v1'],
-	v1SoraKusama: soraKusamaStorage.validators['v1'],
+	v1020Kusama: kusamaStorage.validators['v1020'],
 }
 
 export const currentIndex = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.currentIndex['v1'],
-	v1SoraKusama: soraKusamaStorage.currentIndex['v1'],
+	v1020Kusama: kusamaStorage.currentIndex['v1020'],
 }
 
 export const queuedChanged = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.queuedChanged['v1'],
-	v1SoraKusama: soraKusamaStorage.queuedChanged['v1'],
+	v1020Kusama: kusamaStorage.queuedChanged['v1020'],
 }
 
 export const queuedKeys = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.queuedKeys['v1'],
-	v1SoraKusama: soraKusamaStorage.queuedKeys['v1'],
-	v7SoraKusama: soraKusamaStorage.queuedKeys['v7'],
+	v1020Kusama: kusamaStorage.queuedKeys['v1020'],
+	v2028Kusama: kusamaStorage.queuedKeys['v2028'],
+	v9111Kusama: kusamaStorage.queuedKeys['v9111'],
+	v1000000Kusama: kusamaStorage.queuedKeys['v1000000'],
 }
 
 export const disabledValidators = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.disabledValidators['v1'],
-	v1SoraKusama: soraKusamaStorage.disabledValidators['v1'],
+	v1020Kusama: kusamaStorage.disabledValidators['v1020'],
 }
 
 export const nextKeys = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.nextKeys['v1'],
-	v1SoraKusama: soraKusamaStorage.nextKeys['v1'],
-	v7SoraKusama: soraKusamaStorage.nextKeys['v7'],
+	v1020Kusama: kusamaStorage.nextKeys['v1020'],
+	v1051Kusama: kusamaStorage.nextKeys['v1051'],
+	v2028Kusama: kusamaStorage.nextKeys['v2028'],
+	v9111Kusama: kusamaStorage.nextKeys['v9111'],
+	v1000000Kusama: kusamaStorage.nextKeys['v1000000'],
 }
 
 export const keyOwner = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.keyOwner['v1'],
-	v1SoraKusama: soraKusamaStorage.keyOwner['v1'],
+	v1020Kusama: kusamaStorage.keyOwner['v1020'],
+	v1051Kusama: kusamaStorage.keyOwner['v1051'],
+	v9111Kusama: kusamaStorage.keyOwner['v9111'],
 }

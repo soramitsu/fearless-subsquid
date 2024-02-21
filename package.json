@@ -32,7 +32,7 @@
 		"generate-types:kusama": "ts-node ./scripts/prepare-typegen-json.ts kusama && sqd typegen",
 
 		"merge-types": "ts-node ./scripts/merge-types.ts",
-		"generate-types": "npm run fetch-spec-versions:all && npm run generate-types:all && npm run merge-types",
+		"generate-types": "npm run fetch-spec-versions:kusama && npm run generate-types:kusama && npm run merge-types",
 
 		"generate-squid-yaml:kusama": "ts-node ./scripts/generate-squid-yaml.ts kusama",
 

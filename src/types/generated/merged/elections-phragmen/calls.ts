@@ -1,39 +1,44 @@
-import * as soraPolkadotCalls from '../../sora-polkadot/elections-phragmen/calls'
-import * as soraKusamaCalls from '../../sora-kusama/elections-phragmen/calls'
+import * as kusamaCalls from '../../kusama/elections-phragmen/calls'
 
 
 export const vote = {
 	name: 'ElectionsPhragmen.vote',
-	v10SoraPolkadot: soraPolkadotCalls.vote['v10'],
-	v9SoraKusama: soraKusamaCalls.vote['v9'],
+	v1020Kusama: kusamaCalls.vote['v1020'],
 }
 
 export const removeVoter = {
 	name: 'ElectionsPhragmen.remove_voter',
-	v10SoraPolkadot: soraPolkadotCalls.removeVoter['v10'],
-	v9SoraKusama: soraKusamaCalls.removeVoter['v9'],
+	v1020Kusama: kusamaCalls.removeVoter['v1020'],
+}
+
+export const reportDefunctVoter = {
+	name: 'ElectionsPhragmen.report_defunct_voter',
+	v1020Kusama: kusamaCalls.reportDefunctVoter['v1020'],
+	v1050Kusama: kusamaCalls.reportDefunctVoter['v1050'],
+	v2005Kusama: kusamaCalls.reportDefunctVoter['v2005'],
 }
 
 export const submitCandidacy = {
 	name: 'ElectionsPhragmen.submit_candidacy',
-	v10SoraPolkadot: soraPolkadotCalls.submitCandidacy['v10'],
-	v9SoraKusama: soraKusamaCalls.submitCandidacy['v9'],
+	v1020Kusama: kusamaCalls.submitCandidacy['v1020'],
+	v2005Kusama: kusamaCalls.submitCandidacy['v2005'],
 }
 
 export const renounceCandidacy = {
 	name: 'ElectionsPhragmen.renounce_candidacy',
-	v10SoraPolkadot: soraPolkadotCalls.renounceCandidacy['v10'],
-	v9SoraKusama: soraKusamaCalls.renounceCandidacy['v9'],
+	v1020Kusama: kusamaCalls.renounceCandidacy['v1020'],
+	v2005Kusama: kusamaCalls.renounceCandidacy['v2005'],
 }
 
 export const removeMember = {
 	name: 'ElectionsPhragmen.remove_member',
-	v10SoraPolkadot: soraPolkadotCalls.removeMember['v10'],
-	v9SoraKusama: soraKusamaCalls.removeMember['v9'],
+	v1020Kusama: kusamaCalls.removeMember['v1020'],
+	v1050Kusama: kusamaCalls.removeMember['v1050'],
+	v2005Kusama: kusamaCalls.removeMember['v2005'],
+	v2028Kusama: kusamaCalls.removeMember['v2028'],
 }
 
 export const cleanDefunctVoters = {
 	name: 'ElectionsPhragmen.clean_defunct_voters',
-	v10SoraPolkadot: soraPolkadotCalls.cleanDefunctVoters['v10'],
-	v9SoraKusama: soraKusamaCalls.cleanDefunctVoters['v9'],
+	v2028Kusama: kusamaCalls.cleanDefunctVoters['v2028'],
 }

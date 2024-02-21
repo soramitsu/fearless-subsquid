@@ -1,63 +1,130 @@
-import * as soraPolkadotEvents from '../../sora-polkadot/balances/events'
-import * as soraKusamaEvents from '../../sora-kusama/balances/events'
+import * as kusamaEvents from '../../kusama/balances/events'
 
 
-export const endowed = {
-	name: 'Balances.Endowed',
-	v1SoraPolkadot: soraPolkadotEvents.endowed['v1'],
-	v1SoraKusama: soraKusamaEvents.endowed['v1'],
+export const newAccount = {
+	name: 'Balances.NewAccount',
+	v1020Kusama: kusamaEvents.newAccount['v1020'],
 }
 
-export const dustLost = {
-	name: 'Balances.DustLost',
-	v1SoraPolkadot: soraPolkadotEvents.dustLost['v1'],
-	v1SoraKusama: soraKusamaEvents.dustLost['v1'],
+export const reapedAccount = {
+	name: 'Balances.ReapedAccount',
+	v1020Kusama: kusamaEvents.reapedAccount['v1020'],
+	v1031Kusama: kusamaEvents.reapedAccount['v1031'],
 }
 
 export const transfer = {
 	name: 'Balances.Transfer',
-	v1SoraPolkadot: soraPolkadotEvents.transfer['v1'],
-	v1SoraKusama: soraKusamaEvents.transfer['v1'],
+	v1020Kusama: kusamaEvents.transfer['v1020'],
+	v1050Kusama: kusamaEvents.transfer['v1050'],
+	v9130Kusama: kusamaEvents.transfer['v9130'],
 }
 
 export const balanceSet = {
 	name: 'Balances.BalanceSet',
-	v1SoraPolkadot: soraPolkadotEvents.balanceSet['v1'],
-	v1SoraKusama: soraKusamaEvents.balanceSet['v1'],
-}
-
-export const reserved = {
-	name: 'Balances.Reserved',
-	v1SoraPolkadot: soraPolkadotEvents.reserved['v1'],
-	v1SoraKusama: soraKusamaEvents.reserved['v1'],
-}
-
-export const unreserved = {
-	name: 'Balances.Unreserved',
-	v1SoraPolkadot: soraPolkadotEvents.unreserved['v1'],
-	v1SoraKusama: soraKusamaEvents.unreserved['v1'],
-}
-
-export const reserveRepatriated = {
-	name: 'Balances.ReserveRepatriated',
-	v1SoraPolkadot: soraPolkadotEvents.reserveRepatriated['v1'],
-	v1SoraKusama: soraKusamaEvents.reserveRepatriated['v1'],
+	v1031Kusama: kusamaEvents.balanceSet['v1031'],
+	v9130Kusama: kusamaEvents.balanceSet['v9130'],
+	v9420Kusama: kusamaEvents.balanceSet['v9420'],
 }
 
 export const deposit = {
 	name: 'Balances.Deposit',
-	v1SoraPolkadot: soraPolkadotEvents.deposit['v1'],
-	v1SoraKusama: soraKusamaEvents.deposit['v1'],
+	v1032Kusama: kusamaEvents.deposit['v1032'],
+	v9130Kusama: kusamaEvents.deposit['v9130'],
+}
+
+export const endowed = {
+	name: 'Balances.Endowed',
+	v1050Kusama: kusamaEvents.endowed['v1050'],
+	v9130Kusama: kusamaEvents.endowed['v9130'],
+}
+
+export const dustLost = {
+	name: 'Balances.DustLost',
+	v1050Kusama: kusamaEvents.dustLost['v1050'],
+	v9130Kusama: kusamaEvents.dustLost['v9130'],
+}
+
+export const reserved = {
+	name: 'Balances.Reserved',
+	v2008Kusama: kusamaEvents.reserved['v2008'],
+	v9130Kusama: kusamaEvents.reserved['v9130'],
+}
+
+export const unreserved = {
+	name: 'Balances.Unreserved',
+	v2008Kusama: kusamaEvents.unreserved['v2008'],
+	v9130Kusama: kusamaEvents.unreserved['v9130'],
+}
+
+export const reserveRepatriated = {
+	name: 'Balances.ReserveRepatriated',
+	v2008Kusama: kusamaEvents.reserveRepatriated['v2008'],
+	v9130Kusama: kusamaEvents.reserveRepatriated['v9130'],
 }
 
 export const withdraw = {
 	name: 'Balances.Withdraw',
-	v1SoraPolkadot: soraPolkadotEvents.withdraw['v1'],
-	v1SoraKusama: soraKusamaEvents.withdraw['v1'],
+	v9122Kusama: kusamaEvents.withdraw['v9122'],
+	v9130Kusama: kusamaEvents.withdraw['v9130'],
 }
 
 export const slashed = {
 	name: 'Balances.Slashed',
-	v1SoraPolkadot: soraPolkadotEvents.slashed['v1'],
-	v1SoraKusama: soraKusamaEvents.slashed['v1'],
+	v9122Kusama: kusamaEvents.slashed['v9122'],
+	v9130Kusama: kusamaEvents.slashed['v9130'],
+}
+
+export const minted = {
+	name: 'Balances.Minted',
+	v9420Kusama: kusamaEvents.minted['v9420'],
+}
+
+export const burned = {
+	name: 'Balances.Burned',
+	v9420Kusama: kusamaEvents.burned['v9420'],
+}
+
+export const suspended = {
+	name: 'Balances.Suspended',
+	v9420Kusama: kusamaEvents.suspended['v9420'],
+}
+
+export const restored = {
+	name: 'Balances.Restored',
+	v9420Kusama: kusamaEvents.restored['v9420'],
+}
+
+export const upgraded = {
+	name: 'Balances.Upgraded',
+	v9420Kusama: kusamaEvents.upgraded['v9420'],
+}
+
+export const issued = {
+	name: 'Balances.Issued',
+	v9420Kusama: kusamaEvents.issued['v9420'],
+}
+
+export const rescinded = {
+	name: 'Balances.Rescinded',
+	v9420Kusama: kusamaEvents.rescinded['v9420'],
+}
+
+export const locked = {
+	name: 'Balances.Locked',
+	v9420Kusama: kusamaEvents.locked['v9420'],
+}
+
+export const unlocked = {
+	name: 'Balances.Unlocked',
+	v9420Kusama: kusamaEvents.unlocked['v9420'],
+}
+
+export const frozen = {
+	name: 'Balances.Frozen',
+	v9420Kusama: kusamaEvents.frozen['v9420'],
+}
+
+export const thawed = {
+	name: 'Balances.Thawed',
+	v9420Kusama: kusamaEvents.thawed['v9420'],
 }

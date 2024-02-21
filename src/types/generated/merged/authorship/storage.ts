@@ -1,21 +1,18 @@
-import * as soraPolkadotStorage from '../../sora-polkadot/authorship/storage'
-import * as soraKusamaStorage from '../../sora-kusama/authorship/storage'
+import * as kusamaStorage from '../../kusama/authorship/storage'
 
 
 export const uncles = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.uncles['v1'],
-	v1SoraKusama: soraKusamaStorage.uncles['v1'],
+	v1020Kusama: kusamaStorage.uncles['v1020'],
+	v9111Kusama: kusamaStorage.uncles['v9111'],
 }
 
 export const author = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.author['v1'],
-	v1SoraKusama: soraKusamaStorage.author['v1'],
+	v1020Kusama: kusamaStorage.author['v1020'],
 }
 
 export const didSetUncles = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.didSetUncles['v1'],
-	v1SoraKusama: soraKusamaStorage.didSetUncles['v1'],
+	v1020Kusama: kusamaStorage.didSetUncles['v1020'],
 }

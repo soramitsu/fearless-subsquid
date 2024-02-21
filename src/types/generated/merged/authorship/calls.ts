@@ -1,9 +1,9 @@
-import * as soraPolkadotCalls from '../../sora-polkadot/authorship/calls'
-import * as soraKusamaCalls from '../../sora-kusama/authorship/calls'
+import * as kusamaCalls from '../../kusama/authorship/calls'
 
 
 export const setUncles = {
 	name: 'Authorship.set_uncles',
-	v1SoraPolkadot: soraPolkadotCalls.setUncles['v1'],
-	v1SoraKusama: soraKusamaCalls.setUncles['v1'],
+	v1020Kusama: kusamaCalls.setUncles['v1020'],
+	v9111Kusama: kusamaCalls.setUncles['v9111'],
+	v9130Kusama: kusamaCalls.setUncles['v9130'],
 }

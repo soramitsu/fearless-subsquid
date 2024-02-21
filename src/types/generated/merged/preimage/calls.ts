@@ -1,27 +1,27 @@
-import * as soraPolkadotCalls from '../../sora-polkadot/preimage/calls'
-import * as soraKusamaCalls from '../../sora-kusama/preimage/calls'
+import * as kusamaCalls from '../../kusama/preimage/calls'
 
 
 export const notePreimage = {
 	name: 'Preimage.note_preimage',
-	v10SoraPolkadot: soraPolkadotCalls.notePreimage['v10'],
-	v7SoraKusama: soraKusamaCalls.notePreimage['v7'],
+	v9160Kusama: kusamaCalls.notePreimage['v9160'],
 }
 
 export const unnotePreimage = {
 	name: 'Preimage.unnote_preimage',
-	v10SoraPolkadot: soraPolkadotCalls.unnotePreimage['v10'],
-	v7SoraKusama: soraKusamaCalls.unnotePreimage['v7'],
+	v9160Kusama: kusamaCalls.unnotePreimage['v9160'],
 }
 
 export const requestPreimage = {
 	name: 'Preimage.request_preimage',
-	v10SoraPolkadot: soraPolkadotCalls.requestPreimage['v10'],
-	v7SoraKusama: soraKusamaCalls.requestPreimage['v7'],
+	v9160Kusama: kusamaCalls.requestPreimage['v9160'],
 }
 
 export const unrequestPreimage = {
 	name: 'Preimage.unrequest_preimage',
-	v10SoraPolkadot: soraPolkadotCalls.unrequestPreimage['v10'],
-	v7SoraKusama: soraKusamaCalls.unrequestPreimage['v7'],
+	v9160Kusama: kusamaCalls.unrequestPreimage['v9160'],
+}
+
+export const ensureUpdated = {
+	name: 'Preimage.ensure_updated',
+	v1001000Kusama: kusamaCalls.ensureUpdated['v1001000'],
 }

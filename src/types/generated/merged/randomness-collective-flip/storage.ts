@@ -1,7 +1,7 @@
-import * as soraPolkadotStorage from '../../sora-polkadot/randomness-collective-flip/storage'
+import * as kusamaStorage from '../../kusama/randomness-collective-flip/storage'
 
 
 export const randomMaterial = {
 	name: '',
-	v1SoraPolkadot: soraPolkadotStorage.randomMaterial['v1'],
+	v1020Kusama: kusamaStorage.randomMaterial['v1020'],
 }
