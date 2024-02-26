@@ -17,7 +17,7 @@ const details = chains[chain]
 // Create yaml configuration
 const configuration = {
 	manifestVersion: 'subsquid.io/v0.1',
-	name: details.name,
+	name: details.squidName,
 	version: details.version,
 	description: details.description,
 	deploy: {

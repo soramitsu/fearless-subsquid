@@ -10,6 +10,7 @@ export enum ScaleProfile {
 
 export interface EnvironmentAddresses {
 	name: string
+	squidName: string
 	description: string
 	version: number
 	chain: string
@@ -31,6 +32,7 @@ const version = 1
 export const chains: Chains = {
 	[Chain.KUSAMA]: {
 		name: 'kusama',
+		squidName: 'fearless-kusama-releychain',
 		description: 'kusama squid',
 		version,
 		chain: 'wss://kusama-rpc.polkadot.io',
