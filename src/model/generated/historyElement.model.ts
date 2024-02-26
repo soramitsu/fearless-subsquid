@@ -25,16 +25,20 @@ export class HistoryElement {
     blockHash!: string
 
     @Index_()
+    @Column_("text", {nullable: true})
+    address!: string | undefined | null
+
+    @Index_()
+    @Column_("int4", {nullable: false})
+    timestamp!: number
+
+    @Index_()
     @Column_("int4", {nullable: true})
     extrinsicIdx!: number | undefined | null
 
     @Index_()
     @Column_("text", {nullable: true})
     extrinsicHash!: string | undefined | null
-
-    @Index_()
-    @Column_("int4", {nullable: false})
-    timestamp!: number
 
     @Column_("bool", {nullable: false})
     success!: boolean

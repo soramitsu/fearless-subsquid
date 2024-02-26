@@ -4,6 +4,7 @@ import { events } from '../../../types/generated/merged'
 import { createEventHistoryElement } from '../../../utils/history'
 import { logStartProcessingEvent } from '../../../utils/logs'
 import { handleAccumulatedStake } from '../../../utils/staking'
+import { createStakeChange } from '../../../utils/stakeChange'
 
 export async function slashEventHandler(
 	ctx: BlockContext,
@@ -19,12 +20,12 @@ export async function slashEventHandler(
 
   const accumulatedAmount = await handleAccumulatedStake(ctx, { address, amount });
 
-	const historyData = {
-    amount: amount.toString(),
+	const stakeChangeData = {
     address,
     type: 'slashed',
     accumulatedAmount,
+    amount: amount.toString(),
 	}
 
-	createEventHistoryElement(ctx, event, historyData)
+	createStakeChange(ctx, event, stakeChangeData)
 }

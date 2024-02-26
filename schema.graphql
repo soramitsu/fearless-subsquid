@@ -10,9 +10,9 @@ type StakeChange @entity {
 	timestamp: Int! @index
 	success: Boolean!
   address: String! @index
-  payee: String!
   amount: String!
   name: String!
+  type: String!
 	module: String! @index
 	method: String! @index
   accumulatedAmount: BigInt!
@@ -44,9 +44,10 @@ type HistoryElement @entity {
 	type: HistoryElementType!
 	blockHeight: Int! @index
 	blockHash: String! @index
+  address: String @index
+	timestamp: Int! @index
 	extrinsicIdx: Int @index
 	extrinsicHash: String @index
-	timestamp: Int! @index
 	success: Boolean!
   name: String!
 	module: String! @index

@@ -42,7 +42,10 @@ const createHistoryElement = async (
 	historyElement.extrinsicIdx = entity.extrinsicIndex
 	historyElement.extrinsicHash = entity.extrinsic?.hash
 
-	historyElement = { ...historyElement, ...historyData }
+	historyElement.address = historyData?.address
+	historyElement.transfer = historyData?.transfer ?? null
+	historyElement.reward = historyData?.reward ?? null
+	historyElement.data = historyData?.data ?? {}
 
 	await ctx.store.save(historyElement)
 }

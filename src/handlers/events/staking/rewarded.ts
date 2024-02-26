@@ -30,6 +30,7 @@ export async function rewardedEventHandler(
 
 	const historyData = {
     address,
+    type: 'rewarded',
     reward
 	}
 

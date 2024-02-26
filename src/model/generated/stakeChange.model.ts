@@ -30,13 +30,13 @@ export class StakeChange {
     address!: string
 
     @Column_("text", {nullable: false})
-    payee!: string
-
-    @Column_("text", {nullable: false})
     amount!: string
 
     @Column_("text", {nullable: false})
     name!: string
+
+    @Column_("text", {nullable: false})
+    type!: string
 
     @Index_()
     @Column_("text", {nullable: false})

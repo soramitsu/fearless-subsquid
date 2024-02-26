@@ -26,12 +26,8 @@ export async function transferCallHandler(
 		// fee: call?.extrinsic,
   })
 
-	const historyData = {
-		transfer,
-		from,
-	}
-
-	createCallHistoryElement(ctx, call, historyData)
+	await createCallHistoryElement(ctx, call, { transfer, address: from })
+	createCallHistoryElement(ctx, call, { transfer, address: to })
 }
 
 export async function transferKeepAliveCallHandler(
@@ -54,13 +50,8 @@ export async function transferKeepAliveCallHandler(
 		// fee: call?.extrinsic,
   })
 
-	const historyData = {
-		transfer,
-		from,
-	}
-
-	createCallHistoryElement(ctx, call, historyData)
-}
+	await createCallHistoryElement(ctx, call, { transfer, address: from })
+	createCallHistoryElement(ctx, call, { transfer, address: to })}
 
 export async function transferAllowDeathCallHandler(
 	ctx: BlockContext,
@@ -82,10 +73,6 @@ export async function transferAllowDeathCallHandler(
 		// fee: call?.extrinsic,
   })
 
-	const historyData = {
-		transfer,
-		from,
-	}
-
-	createCallHistoryElement(ctx, call, historyData)
+	await createCallHistoryElement(ctx, call, { transfer, address: from })
+	createCallHistoryElement(ctx, call, { transfer, address: to })
 }

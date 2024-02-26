@@ -6,12 +6,6 @@ import { createStakeChange } from '../../utils/stakeChange'
 import { handleAccumulatedStake } from '../../utils/staking'
 import { toAddress } from '../../utils'
 
-enum BondType {
-  Bonded = 'bonded',
-  Unbonded = 'unbonded',
-
-}
-
 export async function bondCallHandler(
 	ctx: BlockContext,
 	call: Call<'Staking.bond'>
@@ -22,15 +16,17 @@ export async function bondCallHandler(
 	const data = getCallData(ctx, type, call)
 
 	const amount = data.value
-	const payee = data.payee
-	const address = toAddress(call?.extrinsic?.signature?.address as any)
+	const payee = data.payee.__kind
+	const signatureAddress = call?.extrinsic?.signature?.address as any
+	const _address = 'value' in signatureAddress ? signatureAddress?.value : signatureAddress
+	const address = toAddress(_address)
   const accumulatedAmount = await handleAccumulatedStake(ctx, { address, amount });
 
 	const stakeChangeData = {
 		amount: amount.toString(),
     address,
+    type: 'bond',
     accumulatedAmount,
-    type: BondType.Bonded,
     data: {
       payee,
     }
@@ -49,14 +45,16 @@ export async function unbondCallHandler(
 	const data = getCallData(ctx, type, call)
 
 	const amount = data.value
-	const address = toAddress(call?.extrinsic?.signature?.address as any)
-  const accumulatedAmount = await handleAccumulatedStake(ctx, { address, amount }, false);
+	const signatureAddress = call?.extrinsic?.signature?.address as any
+	const _address = 'value' in signatureAddress ? signatureAddress?.value : signatureAddress
+	const address = toAddress(_address)
+	const accumulatedAmount = await handleAccumulatedStake(ctx, { address, amount }, false);
 
 	const stakeChangeData = {
 		amount: amount.toString(),
     address,
+    type: 'unbond',
     accumulatedAmount,
-    type: BondType.Bonded
   }
 
 	createStakeChange(ctx, call, stakeChangeData)

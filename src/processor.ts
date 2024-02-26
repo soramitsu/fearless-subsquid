@@ -79,8 +79,6 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 
 				if (event.name === 'Staking.StakersElected') await stakersElectedEventHandler(blockContext, event)
 				if (event.name === 'Staking.StakingElection') await stakersElectionEventHandler(blockContext, event)
-
-
 			}
 		}
 	}
