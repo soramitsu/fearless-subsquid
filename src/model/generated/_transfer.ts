@@ -6,7 +6,6 @@ export class Transfer {
     private _to!: string
     private _from!: string
     private _fee!: bigint | undefined | null
-    private _success!: boolean
 
     constructor(props?: Partial<Omit<Transfer, 'toJSON'>>, json?: any) {
         Object.assign(this, props)
@@ -15,7 +14,6 @@ export class Transfer {
             this._to = marshal.string.fromJSON(json.to)
             this._from = marshal.string.fromJSON(json.from)
             this._fee = json.fee == null ? undefined : marshal.bigint.fromJSON(json.fee)
-            this._success = marshal.boolean.fromJSON(json.success)
         }
     }
 
@@ -54,22 +52,12 @@ export class Transfer {
         this._fee = value
     }
 
-    get success(): boolean {
-        assert(this._success != null, 'uninitialized access')
-        return this._success
-    }
-
-    set success(value: boolean) {
-        this._success = value
-    }
-
     toJSON(): object {
         return {
             amount: this.amount,
             to: this.to,
             from: this.from,
             fee: this.fee == null ? undefined : marshal.bigint.toJSON(this.fee),
-            success: this.success,
         }
     }
 }

@@ -18,7 +18,7 @@ export async function bondCallHandler(
 	const amount = data.value
 	const payee = data.payee.__kind
 	const signatureAddress = call?.extrinsic?.signature?.address as any
-	const _address = 'value' in signatureAddress ? signatureAddress?.value : signatureAddress
+	const _address = typeof signatureAddress === 'string' ? signatureAddress : 'value' in signatureAddress ? signatureAddress?.value : signatureAddress
 	const address = toAddress(_address)
   const accumulatedAmount = await handleAccumulatedStake(ctx, { address, amount });
 
@@ -46,7 +46,7 @@ export async function unbondCallHandler(
 
 	const amount = data.value
 	const signatureAddress = call?.extrinsic?.signature?.address as any
-	const _address = 'value' in signatureAddress ? signatureAddress?.value : signatureAddress
+	const _address = typeof signatureAddress === 'string' ? signatureAddress : 'value' in signatureAddress ? signatureAddress?.value : signatureAddress
 	const address = toAddress(_address)
 	const accumulatedAmount = await handleAccumulatedStake(ctx, { address, amount }, false);
 

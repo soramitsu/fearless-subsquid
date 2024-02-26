@@ -29,6 +29,9 @@ const createHistoryElement = async (
   historyElement.id = isCall ? getCallId(ctx, entity as Call<any>) : getEventId(ctx, entity as Event<any>)
 	historyElement.timestamp = getBlockTimestamp(ctx)
 	historyElement.type = isCall ? HistoryElementType.CALL  : HistoryElementType.EVENT
+
+	console.log('success', entity?.extrinsic?.success);
+	
 	historyElement.success = entity?.extrinsic?.success ?? false
 	historyElement.data = {}
 

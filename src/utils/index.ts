@@ -11,6 +11,7 @@ import {
 } from '../types'
 import { decodeHex } from '@subsquid/substrate-processor'
 import { name } from '../config'
+import { isHex } from '@polkadot/util'
 
 const ss58codec = ss58.codec(name)
 
@@ -90,7 +91,11 @@ export const decodeAddressEthereum = (data: AddressEthereum): Uint8Array => {
 }
 
 export const toAddress = (data: any): Address => {
-	return ss58codec.encode(typeof data === 'string' ? decodeHex(data) : data) as unknown as Address
+	if (!isHex(data)) return data;
+
+	const value = typeof data === 'string' ? decodeHex(data) : data
+
+	return ss58codec.encode(value) as unknown as Address
 }
 
 export const decodeAddress = (data: Address): string => {

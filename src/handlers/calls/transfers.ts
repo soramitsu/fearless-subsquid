@@ -63,6 +63,7 @@ export async function transferAllowDeathCallHandler(
 	const data = getCallData(ctx, type, call)
 
 	const amount = data.value.toString()
+
 	const to = toAddress('value' in data?.dest ? data.dest.value : data.dest.__kind)
 	const from = toAddress(call?.extrinsic?.signature?.address as any)
 

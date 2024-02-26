@@ -29,7 +29,6 @@ type Transfer @jsonField {
   to: String!
   from: String!
   fee: BigInt
-  success: Boolean!
 }
 
 type Reward @jsonField {
