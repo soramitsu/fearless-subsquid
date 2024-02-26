@@ -27,5 +27,5 @@ export async function slashEventHandler(
     amount: amount.toString(),
 	}
 
-	createStakeChange(ctx, event, stakeChangeData)
+	createStakeChange(ctx, event, stakeChangeData, false)
 }
