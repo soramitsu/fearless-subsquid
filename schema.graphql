@@ -33,25 +33,25 @@ type Transfer @jsonField {
 
 type Reward @jsonField {
   amount: String!
-  isReward: Boolean!,
   era: Int,
   stash: String,
 }
 
 type HistoryElement @entity {
 	id: ID!
-	type: HistoryElementType!
+	entityType: HistoryElementType!
 	blockHeight: Int! @index
 	blockHash: String! @index
   address: String @index
 	timestamp: Int! @index
 	extrinsicIdx: Int @index
 	extrinsicHash: String @index
-	success: Boolean!
-  name: String!
 	module: String! @index
 	method: String! @index
+	type: String! @index
 	data: JSON @index
+  success: Boolean!
+  name: String!
 	reward: Reward
   transfer: Transfer
 }

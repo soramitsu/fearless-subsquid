@@ -28,7 +28,7 @@ const createHistoryElement = async (
 
   historyElement.id = isCall ? getCallId(ctx, entity as Call<any>) : getEventId(ctx, entity as Event<any>)
 	historyElement.timestamp = getBlockTimestamp(ctx)
-	historyElement.type = isCall ? HistoryElementType.CALL  : HistoryElementType.EVENT
+	historyElement.entityType = isCall ? HistoryElementType.CALL  : HistoryElementType.EVENT
 
 	historyElement.success = entity?.extrinsic?.success ?? false
 	historyElement.data = {}
@@ -47,6 +47,7 @@ const createHistoryElement = async (
 	historyElement.transfer = historyData?.transfer ?? null
 	historyElement.reward = historyData?.reward ?? null
 	historyElement.data = historyData?.data ?? {}
+	historyElement.type = historyData?.type ?? ''
 
 	await ctx.store.save(historyElement)
 }

@@ -1,7 +1,5 @@
 import { events } from '../../../types/generated/merged'
-import { Reward } from "../../../model";
 import { BlockContext, Event } from "../../../types";
-import { ERA_MS, FIRST_BLOCK_TIMESTAMP } from "../../../utils/consts";
 import { getEventData } from "../../../utils/entities";
 import { logStartProcessingEvent } from "../../../utils/logs";
 import { createEventHistoryElement } from '../../../utils/history';

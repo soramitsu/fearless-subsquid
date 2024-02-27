@@ -5,6 +5,7 @@ import { ERA_MS, FIRST_BLOCK_TIMESTAMP } from "../../../utils/consts";
 import { getEventData } from "../../../utils/entities";
 import { logStartProcessingEvent } from "../../../utils/logs";
 import { createEventHistoryElement } from '../../../utils/history';
+import { toAddress } from '../../../utils';
 
 export async function rewardEventHandler(
 	ctx: BlockContext,
@@ -17,7 +18,7 @@ export async function rewardEventHandler(
 
   if (typeof data[0] !== 'string') return;
 
-  const address = data[0]
+  const address = toAddress(data[0])
   const amount = data[1].toString()
 
   const timestamp = ctx.block.header.timestamp ?? 0
@@ -26,7 +27,6 @@ export async function rewardEventHandler(
   const reward = new Reward({
     amount,
     era,
-    isReward: true,
     stash: address,
   })
 
