@@ -17,7 +17,8 @@ export async function transferCallHandler(
 
 	const amount = data.value.toString()
 	const to = toAddress(typeof data.dest === 'string' ? data.dest : 'value' in data?.dest ? data.dest.value : data.dest.__kind)
-	const from = toAddress(call?.extrinsic?.signature?.address as any)
+	const signatureFrom = call?.extrinsic?.signature?.address as any
+	const from = toAddress(typeof signatureFrom === 'string' ? signatureFrom : 'value' in signatureFrom ? signatureFrom.value : signatureFrom)
 
 	const transfer = new Transfer({
     amount,
@@ -40,8 +41,10 @@ export async function transferKeepAliveCallHandler(
 	const data = getCallData(ctx, type, call)
 
 	const amount = data.value.toString()
+
 	const to = toAddress(typeof data.dest === 'string' ? data.dest : 'value' in data?.dest ? data.dest.value : data.dest.__kind)
-	const from = toAddress(call?.extrinsic?.signature?.address as any)
+	const signatureFrom = call?.extrinsic?.signature?.address as any
+	const from = toAddress(typeof signatureFrom === 'string' ? signatureFrom : 'value' in signatureFrom ? signatureFrom.value : signatureFrom)
 
 	const transfer = new Transfer({
     amount,
@@ -51,7 +54,8 @@ export async function transferKeepAliveCallHandler(
   })
 
 	await createCallHistoryElement(ctx, call, { transfer, address: from })
-	createCallHistoryElement(ctx, call, { transfer, address: to })}
+	createCallHistoryElement(ctx, call, { transfer, address: to })
+}
 
 export async function transferAllowDeathCallHandler(
 	ctx: BlockContext,
@@ -65,7 +69,8 @@ export async function transferAllowDeathCallHandler(
 	const amount = data.value.toString()
 
 	const to = toAddress('value' in data?.dest ? data.dest.value : data.dest.__kind)
-	const from = toAddress(call?.extrinsic?.signature?.address as any)
+	const signatureFrom = call?.extrinsic?.signature?.address as any
+	const from = toAddress(typeof signatureFrom === 'string' ? signatureFrom : 'value' in signatureFrom ? signatureFrom.value : signatureFrom)
 
 	const transfer = new Transfer({
     amount,

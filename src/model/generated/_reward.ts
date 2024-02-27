@@ -3,7 +3,6 @@ import * as marshal from "./marshal"
 
 export class Reward {
     private _amount!: string
-    private _isReward!: boolean
     private _era!: number | undefined | null
     private _stash!: string | undefined | null
 
@@ -11,7 +10,6 @@ export class Reward {
         Object.assign(this, props)
         if (json != null) {
             this._amount = marshal.string.fromJSON(json.amount)
-            this._isReward = marshal.boolean.fromJSON(json.isReward)
             this._era = json.era == null ? undefined : marshal.int.fromJSON(json.era)
             this._stash = json.stash == null ? undefined : marshal.string.fromJSON(json.stash)
         }
@@ -24,15 +22,6 @@ export class Reward {
 
     set amount(value: string) {
         this._amount = value
-    }
-
-    get isReward(): boolean {
-        assert(this._isReward != null, 'uninitialized access')
-        return this._isReward
-    }
-
-    set isReward(value: boolean) {
-        this._isReward = value
     }
 
     get era(): number | undefined | null {
@@ -54,7 +43,6 @@ export class Reward {
     toJSON(): object {
         return {
             amount: this.amount,
-            isReward: this.isReward,
             era: this.era,
             stash: this.stash,
         }

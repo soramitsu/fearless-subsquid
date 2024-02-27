@@ -85,7 +85,6 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 				if (event.name === 'XcmPallet.Attempted') await xcmPalletAttemptedEventHandler(blockContext, event)
 
 				if (event.name === 'MessageQueue.Processed') await messageQueueProcessedEventHandler(blockContext, event)
-
 			}
 		}
 	}

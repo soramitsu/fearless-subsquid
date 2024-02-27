@@ -14,7 +14,7 @@ export class HistoryElement {
     id!: string
 
     @Column_("varchar", {length: 5, nullable: false})
-    type!: HistoryElementType
+    entityType!: HistoryElementType
 
     @Index_()
     @Column_("int4", {nullable: false})
@@ -40,12 +40,6 @@ export class HistoryElement {
     @Column_("text", {nullable: true})
     extrinsicHash!: string | undefined | null
 
-    @Column_("bool", {nullable: false})
-    success!: boolean
-
-    @Column_("text", {nullable: false})
-    name!: string
-
     @Index_()
     @Column_("text", {nullable: false})
     module!: string
@@ -55,8 +49,18 @@ export class HistoryElement {
     method!: string
 
     @Index_()
+    @Column_("text", {nullable: false})
+    type!: string
+
+    @Index_()
     @Column_("jsonb", {nullable: true})
     data!: unknown | undefined | null
+
+    @Column_("bool", {nullable: false})
+    success!: boolean
+
+    @Column_("text", {nullable: false})
+    name!: string
 
     @Column_("jsonb", {transformer: {to: obj => obj == null ? undefined : obj.toJSON(), from: obj => obj == null ? undefined : new Reward(undefined, obj)}, nullable: true})
     reward!: Reward | undefined | null
