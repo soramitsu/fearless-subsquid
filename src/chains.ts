@@ -32,7 +32,7 @@ const version = 1
 export const chains: Chains = {
 	[Chain.KUSAMA]: {
 		name: 'kusama',
-		squidName: 'fearless-kusama-releychain',
+		squidName: 'fearless-kusama-relaychain',
 		description: 'kusama squid',
 		version,
 		chain: 'wss://kusama-rpc.polkadot.io',
