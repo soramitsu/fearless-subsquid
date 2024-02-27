@@ -1,7 +1,6 @@
 import { BlockContext, Event } from '../../../types'
 import { getEventData } from '../../../utils/entities'
 import { events } from '../../../types/generated/merged'
-import { createEventHistoryElement } from '../../../utils/history'
 import { logStartProcessingEvent } from '../../../utils/logs'
 import { handleAccumulatedStake } from '../../../utils/staking'
 import { createStakeChange } from '../../../utils/stakeChange'

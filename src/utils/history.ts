@@ -43,7 +43,7 @@ const createHistoryElement = async (
 	historyElement.extrinsicIdx = entity.extrinsicIndex
 	historyElement.extrinsicHash = entity.extrinsic?.hash
 
-	historyElement.address = historyData?.address
+	historyElement.address = historyData?.address ?? ''
 	historyElement.transfer = historyData?.transfer ?? null
 	historyElement.reward = historyData?.reward ?? null
 	historyElement.data = historyData?.data ?? {}

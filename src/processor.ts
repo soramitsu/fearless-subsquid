@@ -12,6 +12,8 @@ import { slashEventHandler } from './handlers/events/staking/slash'
 import { slashedEventHandler } from './handlers/events/staking/slashed'
 import { stakersElectedEventHandler } from './handlers/events/staking/stakersElected'
 import { stakersElectionEventHandler } from './handlers/events/staking/stakingElection'
+import { xcmPalletAttemptedEventHandler } from './handlers/events/bridge/xcmPallet'
+import { messageQueueProcessedEventHandler } from './handlers/events/bridge/messageQueueProcessed'
 
 export const processor = new SubstrateBatchProcessor()
 .setRpcEndpoint({
@@ -79,6 +81,11 @@ processor.run(new TypeormDatabase({ supportHotBlocks: true }), async (ctx) => {
 
 				if (event.name === 'Staking.StakersElected') await stakersElectedEventHandler(blockContext, event)
 				if (event.name === 'Staking.StakingElection') await stakersElectionEventHandler(blockContext, event)
+
+				if (event.name === 'XcmPallet.Attempted') await xcmPalletAttemptedEventHandler(blockContext, event)
+
+				if (event.name === 'MessageQueue.Processed') await messageQueueProcessedEventHandler(blockContext, event)
+
 			}
 		}
 	}
