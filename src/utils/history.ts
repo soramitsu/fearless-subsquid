@@ -36,12 +36,12 @@ const createHistoryElement = async (
 	historyElement.blockHeight = ctx.block.header.height
 	historyElement.blockHash = ctx.block.header.hash
 
+	historyElement.extrinsicIdx = entity.extrinsicIndex
+	historyElement.extrinsicHash = entity.extrinsic?.hash
+
   historyElement.module = toCamelCase(entity.name.split('.')[0])
 	historyElement.method = toCamelCase(entity.name.split('.')[1])
 	historyElement.name = historyElement.module + '.' + historyElement.method
-
-	historyElement.extrinsicIdx = entity.extrinsicIndex
-	historyElement.extrinsicHash = entity.extrinsic?.hash
 
 	historyElement.address = historyData?.address ?? ''
 	historyElement.transfer = historyData?.transfer ?? null
