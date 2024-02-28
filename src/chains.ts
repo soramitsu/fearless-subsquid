@@ -1,5 +1,5 @@
 export enum Chain {
-	KUSAMA = 'kusama',
+	POLKADOT = 'polkadot',
 }
 
 export enum ScaleProfile {
@@ -30,13 +30,13 @@ type Chains = {
 const version = 1
 
 export const chains: Chains = {
-	[Chain.KUSAMA]: {
-		name: 'kusama',
-		squidName: 'fearless-kusama-relaychain',
-		description: 'kusama squid',
+	[Chain.POLKADOT]: {
+		name: 'polkadot',
+		squidName: 'fearless-polkadot-relaychain',
+		description: 'polkadot squid',
 		version,
 		chain: 'wss://kusama-rpc.polkadot.io',
-		archive: 'kusama',
+		archive: 'polkadot',
 		storage: '100G',
 		scaleProfiles: {
       postgres: ScaleProfile.SMALL,
