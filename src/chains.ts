@@ -32,7 +32,7 @@ const version = 1
 export const chains: Chains = {
 	[Chain.POLKADOT]: {
 		name: 'polkadot',
-		squidName: 'fearless-polkadot-relaychain',
+		squidName: 'fearless-polkadot',
 		description: 'polkadot squid',
 		version,
 		chain: 'wss://rpc.polkadot.io',
