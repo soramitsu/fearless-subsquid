@@ -35,7 +35,7 @@ export const chains: Chains = {
 		squidName: 'fearless-polkadot-relaychain',
 		description: 'polkadot squid',
 		version,
-		chain: 'wss://kusama-rpc.polkadot.io',
+		chain: 'wss://rpc.polkadot.io',
 		archive: 'polkadot',
 		storage: '100G',
 		scaleProfiles: {
