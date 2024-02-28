@@ -48,7 +48,6 @@ export async function transferKeepAliveCallHandler(
 
 	const transfer = new Transfer({
     amount,
-		to,
 		from,
 		// fee: call?.extrinsic,
   })

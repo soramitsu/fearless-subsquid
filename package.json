@@ -1,5 +1,5 @@
 {
-	"name": "kusama-subsquid",
+	"name": "polkadot-subsquid",
 	"version": "1.0.0",
 	"private": true,
 	"engines": {
@@ -27,16 +27,16 @@
 		"processor:start": "node lib/processor.js",
 		"query-node:start": "squid-graphql-server --subscriptions --max-response-size 10000 --dumb-cache in-memory --dumb-cache-ttl 1000 --dumb-cache-size 100 --dumb-cache-max-age 1000",
 
-		"fetch-spec-versions:kusama": "ts-node ./scripts/generate-fetch-spec-versions-command.ts kusama && ./scripts/fetch-spec-versions.sh",
+		"fetch-spec-versions:polkadot": "ts-node ./scripts/generate-fetch-spec-versions-command.ts polkadot && ./scripts/fetch-spec-versions.sh",
 
-		"generate-types:kusama": "ts-node ./scripts/prepare-typegen-json.ts kusama && sqd typegen",
+		"generate-types:polkadot": "ts-node ./scripts/prepare-typegen-json.ts polkadot && sqd typegen",
 
 		"merge-types": "ts-node ./scripts/merge-types.ts",
-		"generate-types": "npm run fetch-spec-versions:kusama && npm run generate-types:kusama && npm run merge-types",
+		"generate-types": "npm run fetch-spec-versions:polkadot && npm run generate-types:polkadot && npm run merge-types",
 
-		"generate-squid-yaml:kusama": "ts-node ./scripts/generate-squid-yaml.ts kusama",
+		"generate-squid-yaml:polkadot": "ts-node ./scripts/generate-squid-yaml.ts polkadot",
 
-		"deploy:kusama": "ts-node ./scripts/generate-squid-yaml.ts kusama && sqd deploy ./",
+		"deploy:polkadot": "ts-node ./scripts/generate-squid-yaml.ts polkadot && sqd deploy ./",
 
 		"serve": "sqd serve",
 		"process": "sqd process",
