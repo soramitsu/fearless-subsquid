@@ -1,64 +1,64 @@
-import * as kusamaEvents from '../../kusama/bounties/events'
+import * as polkadotEvents from '../../polkadot/bounties/events'
 
 
 export const bountyProposed = {
 	name: 'Bounties.BountyProposed',
-	v2028Kusama: kusamaEvents.bountyProposed['v2028'],
-	v9130Kusama: kusamaEvents.bountyProposed['v9130'],
+	v28Polkadot: polkadotEvents.bountyProposed['v28'],
+	v9140Polkadot: polkadotEvents.bountyProposed['v9140'],
 }
 
 export const bountyRejected = {
 	name: 'Bounties.BountyRejected',
-	v2028Kusama: kusamaEvents.bountyRejected['v2028'],
-	v9130Kusama: kusamaEvents.bountyRejected['v9130'],
+	v28Polkadot: polkadotEvents.bountyRejected['v28'],
+	v9140Polkadot: polkadotEvents.bountyRejected['v9140'],
 }
 
 export const bountyBecameActive = {
 	name: 'Bounties.BountyBecameActive',
-	v2028Kusama: kusamaEvents.bountyBecameActive['v2028'],
-	v9130Kusama: kusamaEvents.bountyBecameActive['v9130'],
+	v28Polkadot: polkadotEvents.bountyBecameActive['v28'],
+	v9140Polkadot: polkadotEvents.bountyBecameActive['v9140'],
 }
 
 export const bountyAwarded = {
 	name: 'Bounties.BountyAwarded',
-	v2028Kusama: kusamaEvents.bountyAwarded['v2028'],
-	v9130Kusama: kusamaEvents.bountyAwarded['v9130'],
+	v28Polkadot: polkadotEvents.bountyAwarded['v28'],
+	v9140Polkadot: polkadotEvents.bountyAwarded['v9140'],
 }
 
 export const bountyClaimed = {
 	name: 'Bounties.BountyClaimed',
-	v2028Kusama: kusamaEvents.bountyClaimed['v2028'],
-	v9130Kusama: kusamaEvents.bountyClaimed['v9130'],
+	v28Polkadot: polkadotEvents.bountyClaimed['v28'],
+	v9140Polkadot: polkadotEvents.bountyClaimed['v9140'],
 }
 
 export const bountyCanceled = {
 	name: 'Bounties.BountyCanceled',
-	v2028Kusama: kusamaEvents.bountyCanceled['v2028'],
-	v9130Kusama: kusamaEvents.bountyCanceled['v9130'],
+	v28Polkadot: polkadotEvents.bountyCanceled['v28'],
+	v9140Polkadot: polkadotEvents.bountyCanceled['v9140'],
 }
 
 export const bountyExtended = {
 	name: 'Bounties.BountyExtended',
-	v2028Kusama: kusamaEvents.bountyExtended['v2028'],
-	v9130Kusama: kusamaEvents.bountyExtended['v9130'],
+	v28Polkadot: polkadotEvents.bountyExtended['v28'],
+	v9140Polkadot: polkadotEvents.bountyExtended['v9140'],
 }
 
 export const bountyApproved = {
 	name: 'Bounties.BountyApproved',
-	v1001000Kusama: kusamaEvents.bountyApproved['v1001000'],
+	v1001002Polkadot: polkadotEvents.bountyApproved['v1001002'],
 }
 
 export const curatorProposed = {
 	name: 'Bounties.CuratorProposed',
-	v1001000Kusama: kusamaEvents.curatorProposed['v1001000'],
+	v1001002Polkadot: polkadotEvents.curatorProposed['v1001002'],
 }
 
 export const curatorUnassigned = {
 	name: 'Bounties.CuratorUnassigned',
-	v1001000Kusama: kusamaEvents.curatorUnassigned['v1001000'],
+	v1001002Polkadot: polkadotEvents.curatorUnassigned['v1001002'],
 }
 
 export const curatorAccepted = {
 	name: 'Bounties.CuratorAccepted',
-	v1001000Kusama: kusamaEvents.curatorAccepted['v1001000'],
+	v1001002Polkadot: polkadotEvents.curatorAccepted['v1001002'],
 }

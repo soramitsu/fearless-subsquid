@@ -1,27 +1,27 @@
-import * as kusamaStorage from '../../kusama/finality-tracker/storage'
+import * as polkadotStorage from '../../polkadot/finality-tracker/storage'
 
 
 export const recentHints = {
 	name: '',
-	v1052Kusama: kusamaStorage.recentHints['v1052'],
+	v0Polkadot: polkadotStorage.recentHints['v0'],
 }
 
 export const orderedHints = {
 	name: '',
-	v1052Kusama: kusamaStorage.orderedHints['v1052'],
+	v0Polkadot: polkadotStorage.orderedHints['v0'],
 }
 
 export const median = {
 	name: '',
-	v1052Kusama: kusamaStorage.median['v1052'],
+	v0Polkadot: polkadotStorage.median['v0'],
 }
 
 export const update = {
 	name: '',
-	v1052Kusama: kusamaStorage.update['v1052'],
+	v0Polkadot: polkadotStorage.update['v0'],
 }
 
 export const initialized = {
 	name: '',
-	v1052Kusama: kusamaStorage.initialized['v1052'],
+	v0Polkadot: polkadotStorage.initialized['v0'],
 }

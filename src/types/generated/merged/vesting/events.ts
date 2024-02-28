@@ -1,14 +1,14 @@
-import * as kusamaEvents from '../../kusama/vesting/events'
+import * as polkadotEvents from '../../polkadot/vesting/events'
 
 
 export const vestingUpdated = {
 	name: 'Vesting.VestingUpdated',
-	v1050Kusama: kusamaEvents.vestingUpdated['v1050'],
-	v9130Kusama: kusamaEvents.vestingUpdated['v9130'],
+	v0Polkadot: polkadotEvents.vestingUpdated['v0'],
+	v9140Polkadot: polkadotEvents.vestingUpdated['v9140'],
 }
 
 export const vestingCompleted = {
 	name: 'Vesting.VestingCompleted',
-	v1050Kusama: kusamaEvents.vestingCompleted['v1050'],
-	v9130Kusama: kusamaEvents.vestingCompleted['v9130'],
+	v0Polkadot: polkadotEvents.vestingCompleted['v0'],
+	v9140Polkadot: polkadotEvents.vestingCompleted['v9140'],
 }

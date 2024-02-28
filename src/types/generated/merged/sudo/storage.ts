@@ -1,7 +1,7 @@
-import * as kusamaStorage from '../../kusama/sudo/storage'
+import * as polkadotStorage from '../../polkadot/sudo/storage'
 
 
 export const key = {
 	name: '',
-	v1020Kusama: kusamaStorage.key['v1020'],
+	v0Polkadot: polkadotStorage.key['v0'],
 }

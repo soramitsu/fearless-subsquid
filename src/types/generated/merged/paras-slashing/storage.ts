@@ -1,12 +1,12 @@
-import * as kusamaStorage from '../../kusama/paras-slashing/storage'
+import * as polkadotStorage from '../../polkadot/paras-slashing/storage'
 
 
 export const unappliedSlashes = {
 	name: '',
-	v9420Kusama: kusamaStorage.unappliedSlashes['v9420'],
+	v9430Polkadot: polkadotStorage.unappliedSlashes['v9430'],
 }
 
 export const validatorSetCounts = {
 	name: '',
-	v9420Kusama: kusamaStorage.validatorSetCounts['v9420'],
+	v9430Polkadot: polkadotStorage.validatorSetCounts['v9430'],
 }

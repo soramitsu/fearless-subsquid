@@ -1,13 +1,12 @@
-import * as kusamaStorage from '../../kusama/conviction-voting/storage'
+import * as polkadotStorage from '../../polkadot/conviction-voting/storage'
 
 
 export const votingFor = {
 	name: '',
-	v9320Kusama: kusamaStorage.votingFor['v9320'],
-	v9340Kusama: kusamaStorage.votingFor['v9340'],
+	v9420Polkadot: polkadotStorage.votingFor['v9420'],
 }
 
 export const classLocksFor = {
 	name: '',
-	v9320Kusama: kusamaStorage.classLocksFor['v9320'],
+	v9420Polkadot: polkadotStorage.classLocksFor['v9420'],
 }

@@ -1,18 +1,17 @@
-import * as kusamaStorage from '../../kusama/dmp/storage'
+import * as polkadotStorage from '../../polkadot/dmp/storage'
 
 
 export const downwardMessageQueues = {
 	name: '',
-	v9090Kusama: kusamaStorage.downwardMessageQueues['v9090'],
-	v9111Kusama: kusamaStorage.downwardMessageQueues['v9111'],
+	v9110Polkadot: polkadotStorage.downwardMessageQueues['v9110'],
 }
 
 export const downwardMessageQueueHeads = {
 	name: '',
-	v9090Kusama: kusamaStorage.downwardMessageQueueHeads['v9090'],
+	v9110Polkadot: polkadotStorage.downwardMessageQueueHeads['v9110'],
 }
 
 export const deliveryFeeFactor = {
 	name: '',
-	v9420Kusama: kusamaStorage.deliveryFeeFactor['v9420'],
+	v9420Polkadot: polkadotStorage.deliveryFeeFactor['v9420'],
 }

@@ -1,19 +1,19 @@
-import * as kusamaEvents from '../../kusama/im-online/events'
+import * as polkadotEvents from '../../polkadot/im-online/events'
 
 
 export const heartbeatReceived = {
 	name: 'ImOnline.HeartbeatReceived',
-	v1020Kusama: kusamaEvents.heartbeatReceived['v1020'],
-	v9130Kusama: kusamaEvents.heartbeatReceived['v9130'],
+	v0Polkadot: polkadotEvents.heartbeatReceived['v0'],
+	v9140Polkadot: polkadotEvents.heartbeatReceived['v9140'],
 }
 
 export const allGood = {
 	name: 'ImOnline.AllGood',
-	v1020Kusama: kusamaEvents.allGood['v1020'],
+	v0Polkadot: polkadotEvents.allGood['v0'],
 }
 
 export const someOffline = {
 	name: 'ImOnline.SomeOffline',
-	v1020Kusama: kusamaEvents.someOffline['v1020'],
-	v9130Kusama: kusamaEvents.someOffline['v9130'],
+	v0Polkadot: polkadotEvents.someOffline['v0'],
+	v9140Polkadot: polkadotEvents.someOffline['v9140'],
 }

@@ -1,47 +1,47 @@
-import * as kusamaEvents from '../../kusama/elections-phragmen/events'
+import * as polkadotEvents from '../../polkadot/elections-phragmen/events'
 
 
 export const newTerm = {
 	name: 'ElectionsPhragmen.NewTerm',
-	v1020Kusama: kusamaEvents.newTerm['v1020'],
+	v0Polkadot: polkadotEvents.newTerm['v0'],
 }
 
 export const emptyTerm = {
 	name: 'ElectionsPhragmen.EmptyTerm',
-	v1020Kusama: kusamaEvents.emptyTerm['v1020'],
+	v0Polkadot: polkadotEvents.emptyTerm['v0'],
 }
 
 export const memberKicked = {
 	name: 'ElectionsPhragmen.MemberKicked',
-	v1020Kusama: kusamaEvents.memberKicked['v1020'],
+	v0Polkadot: polkadotEvents.memberKicked['v0'],
 }
 
 export const memberRenounced = {
 	name: 'ElectionsPhragmen.MemberRenounced',
-	v1020Kusama: kusamaEvents.memberRenounced['v1020'],
+	v0Polkadot: polkadotEvents.memberRenounced['v0'],
 }
 
 export const voterReported = {
 	name: 'ElectionsPhragmen.VoterReported',
-	v1020Kusama: kusamaEvents.voterReported['v1020'],
+	v0Polkadot: polkadotEvents.voterReported['v0'],
 }
 
 export const electionError = {
 	name: 'ElectionsPhragmen.ElectionError',
-	v2025Kusama: kusamaEvents.electionError['v2025'],
+	v25Polkadot: polkadotEvents.electionError['v25'],
 }
 
 export const candidateSlashed = {
 	name: 'ElectionsPhragmen.CandidateSlashed',
-	v2027Kusama: kusamaEvents.candidateSlashed['v2027'],
+	v27Polkadot: polkadotEvents.candidateSlashed['v27'],
 }
 
 export const seatHolderSlashed = {
 	name: 'ElectionsPhragmen.SeatHolderSlashed',
-	v2027Kusama: kusamaEvents.seatHolderSlashed['v2027'],
+	v27Polkadot: polkadotEvents.seatHolderSlashed['v27'],
 }
 
 export const renounced = {
 	name: 'ElectionsPhragmen.Renounced',
-	v2028Kusama: kusamaEvents.renounced['v2028'],
+	v28Polkadot: polkadotEvents.renounced['v28'],
 }

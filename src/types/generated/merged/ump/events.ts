@@ -1,47 +1,45 @@
-import * as kusamaEvents from '../../kusama/ump/events'
+import * as polkadotEvents from '../../polkadot/ump/events'
 
 
 export const invalidFormat = {
 	name: 'Ump.InvalidFormat',
-	v9090Kusama: kusamaEvents.invalidFormat['v9090'],
+	v9110Polkadot: polkadotEvents.invalidFormat['v9110'],
 }
 
 export const unsupportedVersion = {
 	name: 'Ump.UnsupportedVersion',
-	v9090Kusama: kusamaEvents.unsupportedVersion['v9090'],
+	v9110Polkadot: polkadotEvents.unsupportedVersion['v9110'],
 }
 
 export const executedUpward = {
 	name: 'Ump.ExecutedUpward',
-	v9090Kusama: kusamaEvents.executedUpward['v9090'],
-	v9100Kusama: kusamaEvents.executedUpward['v9100'],
-	v9111Kusama: kusamaEvents.executedUpward['v9111'],
-	v9160Kusama: kusamaEvents.executedUpward['v9160'],
-	v9381Kusama: kusamaEvents.executedUpward['v9381'],
+	v9110Polkadot: polkadotEvents.executedUpward['v9110'],
+	v9170Polkadot: polkadotEvents.executedUpward['v9170'],
+	v9420Polkadot: polkadotEvents.executedUpward['v9420'],
 }
 
 export const weightExhausted = {
 	name: 'Ump.WeightExhausted',
-	v9090Kusama: kusamaEvents.weightExhausted['v9090'],
-	v9291Kusama: kusamaEvents.weightExhausted['v9291'],
-	v9320Kusama: kusamaEvents.weightExhausted['v9320'],
+	v9110Polkadot: polkadotEvents.weightExhausted['v9110'],
+	v9291Polkadot: polkadotEvents.weightExhausted['v9291'],
+	v9340Polkadot: polkadotEvents.weightExhausted['v9340'],
 }
 
 export const upwardMessagesReceived = {
 	name: 'Ump.UpwardMessagesReceived',
-	v9090Kusama: kusamaEvents.upwardMessagesReceived['v9090'],
+	v9110Polkadot: polkadotEvents.upwardMessagesReceived['v9110'],
 }
 
 export const overweightEnqueued = {
 	name: 'Ump.OverweightEnqueued',
-	v9100Kusama: kusamaEvents.overweightEnqueued['v9100'],
-	v9291Kusama: kusamaEvents.overweightEnqueued['v9291'],
-	v9320Kusama: kusamaEvents.overweightEnqueued['v9320'],
+	v9110Polkadot: polkadotEvents.overweightEnqueued['v9110'],
+	v9291Polkadot: polkadotEvents.overweightEnqueued['v9291'],
+	v9340Polkadot: polkadotEvents.overweightEnqueued['v9340'],
 }
 
 export const overweightServiced = {
 	name: 'Ump.OverweightServiced',
-	v9100Kusama: kusamaEvents.overweightServiced['v9100'],
-	v9291Kusama: kusamaEvents.overweightServiced['v9291'],
-	v9320Kusama: kusamaEvents.overweightServiced['v9320'],
+	v9110Polkadot: polkadotEvents.overweightServiced['v9110'],
+	v9291Polkadot: polkadotEvents.overweightServiced['v9291'],
+	v9340Polkadot: polkadotEvents.overweightServiced['v9340'],
 }

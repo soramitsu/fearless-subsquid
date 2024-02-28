@@ -1,51 +1,45 @@
-import * as kusamaEvents from '../../kusama/system/events'
+import * as polkadotEvents from '../../polkadot/system/events'
 
 
 export const extrinsicSuccess = {
 	name: 'System.ExtrinsicSuccess',
-	v1020Kusama: kusamaEvents.extrinsicSuccess['v1020'],
-	v1058Kusama: kusamaEvents.extrinsicSuccess['v1058'],
-	v1062Kusama: kusamaEvents.extrinsicSuccess['v1062'],
-	v9160Kusama: kusamaEvents.extrinsicSuccess['v9160'],
-	v9291Kusama: kusamaEvents.extrinsicSuccess['v9291'],
-	v9320Kusama: kusamaEvents.extrinsicSuccess['v9320'],
+	v0Polkadot: polkadotEvents.extrinsicSuccess['v0'],
+	v9170Polkadot: polkadotEvents.extrinsicSuccess['v9170'],
+	v9291Polkadot: polkadotEvents.extrinsicSuccess['v9291'],
+	v9340Polkadot: polkadotEvents.extrinsicSuccess['v9340'],
 }
 
 export const extrinsicFailed = {
 	name: 'System.ExtrinsicFailed',
-	v1020Kusama: kusamaEvents.extrinsicFailed['v1020'],
-	v1032Kusama: kusamaEvents.extrinsicFailed['v1032'],
-	v1058Kusama: kusamaEvents.extrinsicFailed['v1058'],
-	v1062Kusama: kusamaEvents.extrinsicFailed['v1062'],
-	v9111Kusama: kusamaEvents.extrinsicFailed['v9111'],
-	v9160Kusama: kusamaEvents.extrinsicFailed['v9160'],
-	v9170Kusama: kusamaEvents.extrinsicFailed['v9170'],
-	v9190Kusama: kusamaEvents.extrinsicFailed['v9190'],
-	v9291Kusama: kusamaEvents.extrinsicFailed['v9291'],
-	v9320Kusama: kusamaEvents.extrinsicFailed['v9320'],
-	v9420Kusama: kusamaEvents.extrinsicFailed['v9420'],
-	v9430Kusama: kusamaEvents.extrinsicFailed['v9430'],
+	v0Polkadot: polkadotEvents.extrinsicFailed['v0'],
+	v9110Polkadot: polkadotEvents.extrinsicFailed['v9110'],
+	v9170Polkadot: polkadotEvents.extrinsicFailed['v9170'],
+	v9190Polkadot: polkadotEvents.extrinsicFailed['v9190'],
+	v9291Polkadot: polkadotEvents.extrinsicFailed['v9291'],
+	v9340Polkadot: polkadotEvents.extrinsicFailed['v9340'],
+	v9420Polkadot: polkadotEvents.extrinsicFailed['v9420'],
+	v9430Polkadot: polkadotEvents.extrinsicFailed['v9430'],
 }
 
 export const codeUpdated = {
 	name: 'System.CodeUpdated',
-	v1045Kusama: kusamaEvents.codeUpdated['v1045'],
+	v0Polkadot: polkadotEvents.codeUpdated['v0'],
 }
 
 export const newAccount = {
 	name: 'System.NewAccount',
-	v1050Kusama: kusamaEvents.newAccount['v1050'],
-	v9160Kusama: kusamaEvents.newAccount['v9160'],
+	v0Polkadot: polkadotEvents.newAccount['v0'],
+	v9170Polkadot: polkadotEvents.newAccount['v9170'],
 }
 
 export const killedAccount = {
 	name: 'System.KilledAccount',
-	v1050Kusama: kusamaEvents.killedAccount['v1050'],
-	v9160Kusama: kusamaEvents.killedAccount['v9160'],
+	v0Polkadot: polkadotEvents.killedAccount['v0'],
+	v9170Polkadot: polkadotEvents.killedAccount['v9170'],
 }
 
 export const remarked = {
 	name: 'System.Remarked',
-	v2030Kusama: kusamaEvents.remarked['v2030'],
-	v9160Kusama: kusamaEvents.remarked['v9160'],
+	v30Polkadot: polkadotEvents.remarked['v30'],
+	v9170Polkadot: polkadotEvents.remarked['v9170'],
 }

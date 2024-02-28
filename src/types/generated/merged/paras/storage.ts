@@ -1,106 +1,105 @@
-import * as kusamaStorage from '../../kusama/paras/storage'
+import * as polkadotStorage from '../../polkadot/paras/storage'
 
 
 export const parachains = {
 	name: '',
-	v9010Kusama: kusamaStorage.parachains['v9010'],
+	v9110Polkadot: polkadotStorage.parachains['v9110'],
 }
 
 export const paraLifecycles = {
 	name: '',
-	v9010Kusama: kusamaStorage.paraLifecycles['v9010'],
-	v9111Kusama: kusamaStorage.paraLifecycles['v9111'],
+	v9110Polkadot: polkadotStorage.paraLifecycles['v9110'],
 }
 
 export const heads = {
 	name: '',
-	v9010Kusama: kusamaStorage.heads['v9010'],
+	v9110Polkadot: polkadotStorage.heads['v9110'],
 }
 
 export const currentCodeHash = {
 	name: '',
-	v9010Kusama: kusamaStorage.currentCodeHash['v9010'],
+	v9110Polkadot: polkadotStorage.currentCodeHash['v9110'],
 }
 
 export const pastCodeHash = {
 	name: '',
-	v9010Kusama: kusamaStorage.pastCodeHash['v9010'],
+	v9110Polkadot: polkadotStorage.pastCodeHash['v9110'],
 }
 
 export const pastCodeMeta = {
 	name: '',
-	v9010Kusama: kusamaStorage.pastCodeMeta['v9010'],
+	v9110Polkadot: polkadotStorage.pastCodeMeta['v9110'],
 }
 
 export const pastCodePruning = {
 	name: '',
-	v9010Kusama: kusamaStorage.pastCodePruning['v9010'],
+	v9110Polkadot: polkadotStorage.pastCodePruning['v9110'],
 }
 
 export const futureCodeUpgrades = {
 	name: '',
-	v9010Kusama: kusamaStorage.futureCodeUpgrades['v9010'],
+	v9110Polkadot: polkadotStorage.futureCodeUpgrades['v9110'],
 }
 
 export const futureCodeHash = {
 	name: '',
-	v9010Kusama: kusamaStorage.futureCodeHash['v9010'],
-}
-
-export const actionsQueue = {
-	name: '',
-	v9010Kusama: kusamaStorage.actionsQueue['v9010'],
-}
-
-export const upcomingParasGenesis = {
-	name: '',
-	v9010Kusama: kusamaStorage.upcomingParasGenesis['v9010'],
-	v9340Kusama: kusamaStorage.upcomingParasGenesis['v9340'],
-}
-
-export const codeByHashRefs = {
-	name: '',
-	v9010Kusama: kusamaStorage.codeByHashRefs['v9010'],
-}
-
-export const codeByHash = {
-	name: '',
-	v9010Kusama: kusamaStorage.codeByHash['v9010'],
+	v9110Polkadot: polkadotStorage.futureCodeHash['v9110'],
 }
 
 export const upgradeGoAheadSignal = {
 	name: '',
-	v9090Kusama: kusamaStorage.upgradeGoAheadSignal['v9090'],
+	v9110Polkadot: polkadotStorage.upgradeGoAheadSignal['v9110'],
 }
 
 export const upgradeRestrictionSignal = {
 	name: '',
-	v9090Kusama: kusamaStorage.upgradeRestrictionSignal['v9090'],
+	v9110Polkadot: polkadotStorage.upgradeRestrictionSignal['v9110'],
 }
 
 export const upgradeCooldowns = {
 	name: '',
-	v9090Kusama: kusamaStorage.upgradeCooldowns['v9090'],
+	v9110Polkadot: polkadotStorage.upgradeCooldowns['v9110'],
 }
 
 export const upcomingUpgrades = {
 	name: '',
-	v9090Kusama: kusamaStorage.upcomingUpgrades['v9090'],
+	v9110Polkadot: polkadotStorage.upcomingUpgrades['v9110'],
+}
+
+export const actionsQueue = {
+	name: '',
+	v9110Polkadot: polkadotStorage.actionsQueue['v9110'],
+}
+
+export const upcomingParasGenesis = {
+	name: '',
+	v9110Polkadot: polkadotStorage.upcomingParasGenesis['v9110'],
+	v9340Polkadot: polkadotStorage.upcomingParasGenesis['v9340'],
+}
+
+export const codeByHashRefs = {
+	name: '',
+	v9110Polkadot: polkadotStorage.codeByHashRefs['v9110'],
+}
+
+export const codeByHash = {
+	name: '',
+	v9110Polkadot: polkadotStorage.codeByHash['v9110'],
 }
 
 export const pvfActiveVoteMap = {
 	name: '',
-	v9160Kusama: kusamaStorage.pvfActiveVoteMap['v9160'],
-	v1000000Kusama: kusamaStorage.pvfActiveVoteMap['v1000000'],
-	v1001000Kusama: kusamaStorage.pvfActiveVoteMap['v1001000'],
+	v9170Polkadot: polkadotStorage.pvfActiveVoteMap['v9170'],
+	v1000001Polkadot: polkadotStorage.pvfActiveVoteMap['v1000001'],
+	v1001002Polkadot: polkadotStorage.pvfActiveVoteMap['v1001002'],
 }
 
 export const pvfActiveVoteList = {
 	name: '',
-	v9160Kusama: kusamaStorage.pvfActiveVoteList['v9160'],
+	v9170Polkadot: polkadotStorage.pvfActiveVoteList['v9170'],
 }
 
 export const mostRecentContext = {
 	name: '',
-	v1000000Kusama: kusamaStorage.mostRecentContext['v1000000'],
+	v1000001Polkadot: polkadotStorage.mostRecentContext['v1000001'],
 }

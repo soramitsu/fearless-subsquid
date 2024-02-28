@@ -1,7 +1,7 @@
-import * as kusamaCalls from '../../kusama/timestamp/calls'
+import * as polkadotCalls from '../../polkadot/timestamp/calls'
 
 
 export const set = {
 	name: 'Timestamp.set',
-	v1020Kusama: kusamaCalls.set['v1020'],
+	v0Polkadot: polkadotCalls.set['v0'],
 }

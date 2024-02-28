@@ -1,35 +1,35 @@
-import * as kusamaEvents from '../../kusama/registrar/events'
+import * as polkadotEvents from '../../polkadot/registrar/events'
 
 
 export const parathreadRegistered = {
 	name: 'Registrar.ParathreadRegistered',
-	v1020Kusama: kusamaEvents.parathreadRegistered['v1020'],
+	v0Polkadot: polkadotEvents.parathreadRegistered['v0'],
 }
 
 export const parathreadDeregistered = {
 	name: 'Registrar.ParathreadDeregistered',
-	v1020Kusama: kusamaEvents.parathreadDeregistered['v1020'],
+	v0Polkadot: polkadotEvents.parathreadDeregistered['v0'],
 }
 
 export const registered = {
 	name: 'Registrar.Registered',
-	v9010Kusama: kusamaEvents.registered['v9010'],
-	v9230Kusama: kusamaEvents.registered['v9230'],
+	v9110Polkadot: polkadotEvents.registered['v9110'],
+	v9230Polkadot: polkadotEvents.registered['v9230'],
 }
 
 export const deregistered = {
 	name: 'Registrar.Deregistered',
-	v9010Kusama: kusamaEvents.deregistered['v9010'],
-	v9230Kusama: kusamaEvents.deregistered['v9230'],
+	v9110Polkadot: polkadotEvents.deregistered['v9110'],
+	v9230Polkadot: polkadotEvents.deregistered['v9230'],
 }
 
 export const reserved = {
 	name: 'Registrar.Reserved',
-	v9010Kusama: kusamaEvents.reserved['v9010'],
-	v9230Kusama: kusamaEvents.reserved['v9230'],
+	v9110Polkadot: polkadotEvents.reserved['v9110'],
+	v9230Polkadot: polkadotEvents.reserved['v9230'],
 }
 
 export const swapped = {
 	name: 'Registrar.Swapped',
-	v9430Kusama: kusamaEvents.swapped['v9430'],
+	v9430Polkadot: polkadotEvents.swapped['v9430'],
 }

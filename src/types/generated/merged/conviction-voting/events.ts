@@ -1,12 +1,12 @@
-import * as kusamaEvents from '../../kusama/conviction-voting/events'
+import * as polkadotEvents from '../../polkadot/conviction-voting/events'
 
 
 export const delegated = {
 	name: 'ConvictionVoting.Delegated',
-	v9320Kusama: kusamaEvents.delegated['v9320'],
+	v9420Polkadot: polkadotEvents.delegated['v9420'],
 }
 
 export const undelegated = {
 	name: 'ConvictionVoting.Undelegated',
-	v9320Kusama: kusamaEvents.undelegated['v9320'],
+	v9420Polkadot: polkadotEvents.undelegated['v9420'],
 }

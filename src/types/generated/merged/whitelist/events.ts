@@ -1,19 +1,18 @@
-import * as kusamaEvents from '../../kusama/whitelist/events'
+import * as polkadotEvents from '../../polkadot/whitelist/events'
 
 
 export const callWhitelisted = {
 	name: 'Whitelist.CallWhitelisted',
-	v9320Kusama: kusamaEvents.callWhitelisted['v9320'],
+	v9420Polkadot: polkadotEvents.callWhitelisted['v9420'],
 }
 
 export const whitelistedCallRemoved = {
 	name: 'Whitelist.WhitelistedCallRemoved',
-	v9320Kusama: kusamaEvents.whitelistedCallRemoved['v9320'],
+	v9420Polkadot: polkadotEvents.whitelistedCallRemoved['v9420'],
 }
 
 export const whitelistedCallDispatched = {
 	name: 'Whitelist.WhitelistedCallDispatched',
-	v9320Kusama: kusamaEvents.whitelistedCallDispatched['v9320'],
-	v9420Kusama: kusamaEvents.whitelistedCallDispatched['v9420'],
-	v9430Kusama: kusamaEvents.whitelistedCallDispatched['v9430'],
+	v9420Polkadot: polkadotEvents.whitelistedCallDispatched['v9420'],
+	v9430Polkadot: polkadotEvents.whitelistedCallDispatched['v9430'],
 }

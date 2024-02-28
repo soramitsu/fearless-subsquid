@@ -1,12 +1,12 @@
-import * as kusamaStorage from '../../kusama/multisig/storage'
+import * as polkadotStorage from '../../polkadot/multisig/storage'
 
 
 export const multisigs = {
 	name: '',
-	v2005Kusama: kusamaStorage.multisigs['v2005'],
+	v5Polkadot: polkadotStorage.multisigs['v5'],
 }
 
 export const calls = {
 	name: '',
-	v2011Kusama: kusamaStorage.calls['v2011'],
+	v10Polkadot: polkadotStorage.calls['v10'],
 }

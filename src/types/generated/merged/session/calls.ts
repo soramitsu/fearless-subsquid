@@ -1,15 +1,15 @@
-import * as kusamaCalls from '../../kusama/session/calls'
+import * as polkadotCalls from '../../polkadot/session/calls'
 
 
 export const setKeys = {
 	name: 'Session.set_keys',
-	v1020Kusama: kusamaCalls.setKeys['v1020'],
-	v2028Kusama: kusamaCalls.setKeys['v2028'],
-	v9111Kusama: kusamaCalls.setKeys['v9111'],
-	v1000000Kusama: kusamaCalls.setKeys['v1000000'],
+	v0Polkadot: polkadotCalls.setKeys['v0'],
+	v28Polkadot: polkadotCalls.setKeys['v28'],
+	v9110Polkadot: polkadotCalls.setKeys['v9110'],
+	v1001002Polkadot: polkadotCalls.setKeys['v1001002'],
 }
 
 export const purgeKeys = {
 	name: 'Session.purge_keys',
-	v1050Kusama: kusamaCalls.purgeKeys['v1050'],
+	v0Polkadot: polkadotCalls.purgeKeys['v0'],
 }

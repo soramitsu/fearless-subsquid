@@ -1,42 +1,42 @@
-import * as kusamaEvents from '../../kusama/paras/events'
+import * as polkadotEvents from '../../polkadot/paras/events'
 
 
 export const currentCodeUpdated = {
 	name: 'Paras.CurrentCodeUpdated',
-	v9010Kusama: kusamaEvents.currentCodeUpdated['v9010'],
+	v9110Polkadot: polkadotEvents.currentCodeUpdated['v9110'],
 }
 
 export const currentHeadUpdated = {
 	name: 'Paras.CurrentHeadUpdated',
-	v9010Kusama: kusamaEvents.currentHeadUpdated['v9010'],
+	v9110Polkadot: polkadotEvents.currentHeadUpdated['v9110'],
 }
 
 export const codeUpgradeScheduled = {
 	name: 'Paras.CodeUpgradeScheduled',
-	v9010Kusama: kusamaEvents.codeUpgradeScheduled['v9010'],
+	v9110Polkadot: polkadotEvents.codeUpgradeScheduled['v9110'],
 }
 
 export const newHeadNoted = {
 	name: 'Paras.NewHeadNoted',
-	v9010Kusama: kusamaEvents.newHeadNoted['v9010'],
+	v9110Polkadot: polkadotEvents.newHeadNoted['v9110'],
 }
 
 export const actionQueued = {
 	name: 'Paras.ActionQueued',
-	v9010Kusama: kusamaEvents.actionQueued['v9010'],
+	v9110Polkadot: polkadotEvents.actionQueued['v9110'],
 }
 
 export const pvfCheckStarted = {
 	name: 'Paras.PvfCheckStarted',
-	v9160Kusama: kusamaEvents.pvfCheckStarted['v9160'],
+	v9170Polkadot: polkadotEvents.pvfCheckStarted['v9170'],
 }
 
 export const pvfCheckAccepted = {
 	name: 'Paras.PvfCheckAccepted',
-	v9160Kusama: kusamaEvents.pvfCheckAccepted['v9160'],
+	v9170Polkadot: polkadotEvents.pvfCheckAccepted['v9170'],
 }
 
 export const pvfCheckRejected = {
 	name: 'Paras.PvfCheckRejected',
-	v9160Kusama: kusamaEvents.pvfCheckRejected['v9160'],
+	v9170Polkadot: polkadotEvents.pvfCheckRejected['v9170'],
 }

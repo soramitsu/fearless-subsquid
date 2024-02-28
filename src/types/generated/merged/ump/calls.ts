@@ -1,9 +1,9 @@
-import * as kusamaCalls from '../../kusama/ump/calls'
+import * as polkadotCalls from '../../polkadot/ump/calls'
 
 
 export const serviceOverweight = {
 	name: 'Ump.service_overweight',
-	v9100Kusama: kusamaCalls.serviceOverweight['v9100'],
-	v9291Kusama: kusamaCalls.serviceOverweight['v9291'],
-	v9320Kusama: kusamaCalls.serviceOverweight['v9320'],
+	v9110Polkadot: polkadotCalls.serviceOverweight['v9110'],
+	v9291Polkadot: polkadotCalls.serviceOverweight['v9291'],
+	v9340Polkadot: polkadotCalls.serviceOverweight['v9340'],
 }

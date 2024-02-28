@@ -1,32 +1,32 @@
-import * as kusamaEvents from '../../kusama/tips/events'
+import * as polkadotEvents from '../../polkadot/tips/events'
 
 
 export const newTip = {
 	name: 'Tips.NewTip',
-	v2028Kusama: kusamaEvents.newTip['v2028'],
-	v9130Kusama: kusamaEvents.newTip['v9130'],
+	v28Polkadot: polkadotEvents.newTip['v28'],
+	v9140Polkadot: polkadotEvents.newTip['v9140'],
 }
 
 export const tipClosing = {
 	name: 'Tips.TipClosing',
-	v2028Kusama: kusamaEvents.tipClosing['v2028'],
-	v9130Kusama: kusamaEvents.tipClosing['v9130'],
+	v28Polkadot: polkadotEvents.tipClosing['v28'],
+	v9140Polkadot: polkadotEvents.tipClosing['v9140'],
 }
 
 export const tipClosed = {
 	name: 'Tips.TipClosed',
-	v2028Kusama: kusamaEvents.tipClosed['v2028'],
-	v9130Kusama: kusamaEvents.tipClosed['v9130'],
+	v28Polkadot: polkadotEvents.tipClosed['v28'],
+	v9140Polkadot: polkadotEvents.tipClosed['v9140'],
 }
 
 export const tipRetracted = {
 	name: 'Tips.TipRetracted',
-	v2028Kusama: kusamaEvents.tipRetracted['v2028'],
-	v9130Kusama: kusamaEvents.tipRetracted['v9130'],
+	v28Polkadot: polkadotEvents.tipRetracted['v28'],
+	v9140Polkadot: polkadotEvents.tipRetracted['v9140'],
 }
 
 export const tipSlashed = {
 	name: 'Tips.TipSlashed',
-	v2028Kusama: kusamaEvents.tipSlashed['v2028'],
-	v9130Kusama: kusamaEvents.tipSlashed['v9130'],
+	v28Polkadot: polkadotEvents.tipSlashed['v28'],
+	v9140Polkadot: polkadotEvents.tipSlashed['v9140'],
 }

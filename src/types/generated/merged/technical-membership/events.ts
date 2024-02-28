@@ -1,32 +1,32 @@
-import * as kusamaEvents from '../../kusama/technical-membership/events'
+import * as polkadotEvents from '../../polkadot/technical-membership/events'
 
 
 export const memberAdded = {
 	name: 'TechnicalMembership.MemberAdded',
-	v1020Kusama: kusamaEvents.memberAdded['v1020'],
+	v0Polkadot: polkadotEvents.memberAdded['v0'],
 }
 
 export const memberRemoved = {
 	name: 'TechnicalMembership.MemberRemoved',
-	v1020Kusama: kusamaEvents.memberRemoved['v1020'],
+	v0Polkadot: polkadotEvents.memberRemoved['v0'],
 }
 
 export const membersSwapped = {
 	name: 'TechnicalMembership.MembersSwapped',
-	v1020Kusama: kusamaEvents.membersSwapped['v1020'],
+	v0Polkadot: polkadotEvents.membersSwapped['v0'],
 }
 
 export const membersReset = {
 	name: 'TechnicalMembership.MembersReset',
-	v1020Kusama: kusamaEvents.membersReset['v1020'],
-}
-
-export const dummy = {
-	name: 'TechnicalMembership.Dummy',
-	v1020Kusama: kusamaEvents.dummy['v1020'],
+	v0Polkadot: polkadotEvents.membersReset['v0'],
 }
 
 export const keyChanged = {
 	name: 'TechnicalMembership.KeyChanged',
-	v1029Kusama: kusamaEvents.keyChanged['v1029'],
+	v0Polkadot: polkadotEvents.keyChanged['v0'],
+}
+
+export const dummy = {
+	name: 'TechnicalMembership.Dummy',
+	v0Polkadot: polkadotEvents.dummy['v0'],
 }

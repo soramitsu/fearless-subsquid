@@ -1,8 +1,8 @@
-import * as kusamaEvents from '../../kusama/claims/events'
+import * as polkadotEvents from '../../polkadot/claims/events'
 
 
 export const claimed = {
 	name: 'Claims.Claimed',
-	v1020Kusama: kusamaEvents.claimed['v1020'],
-	v9230Kusama: kusamaEvents.claimed['v9230'],
+	v0Polkadot: polkadotEvents.claimed['v0'],
+	v9230Polkadot: polkadotEvents.claimed['v9230'],
 }

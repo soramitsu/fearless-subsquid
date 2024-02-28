@@ -1,134 +1,134 @@
-import * as kusamaEvents from '../../kusama/treasury/events'
+import * as polkadotEvents from '../../polkadot/treasury/events'
 
 
 export const proposed = {
 	name: 'Treasury.Proposed',
-	v1020Kusama: kusamaEvents.proposed['v1020'],
-	v9160Kusama: kusamaEvents.proposed['v9160'],
+	v0Polkadot: polkadotEvents.proposed['v0'],
+	v9170Polkadot: polkadotEvents.proposed['v9170'],
 }
 
 export const spending = {
 	name: 'Treasury.Spending',
-	v1020Kusama: kusamaEvents.spending['v1020'],
-	v9160Kusama: kusamaEvents.spending['v9160'],
+	v0Polkadot: polkadotEvents.spending['v0'],
+	v9170Polkadot: polkadotEvents.spending['v9170'],
 }
 
 export const awarded = {
 	name: 'Treasury.Awarded',
-	v1020Kusama: kusamaEvents.awarded['v1020'],
-	v9160Kusama: kusamaEvents.awarded['v9160'],
-}
-
-export const burnt = {
-	name: 'Treasury.Burnt',
-	v1020Kusama: kusamaEvents.burnt['v1020'],
-	v9160Kusama: kusamaEvents.burnt['v9160'],
-}
-
-export const rollover = {
-	name: 'Treasury.Rollover',
-	v1020Kusama: kusamaEvents.rollover['v1020'],
-	v9160Kusama: kusamaEvents.rollover['v9160'],
-}
-
-export const deposit = {
-	name: 'Treasury.Deposit',
-	v1020Kusama: kusamaEvents.deposit['v1020'],
-	v9160Kusama: kusamaEvents.deposit['v9160'],
+	v0Polkadot: polkadotEvents.awarded['v0'],
+	v9170Polkadot: polkadotEvents.awarded['v9170'],
 }
 
 export const rejected = {
 	name: 'Treasury.Rejected',
-	v1032Kusama: kusamaEvents.rejected['v1032'],
-	v9160Kusama: kusamaEvents.rejected['v9160'],
+	v0Polkadot: polkadotEvents.rejected['v0'],
+	v9170Polkadot: polkadotEvents.rejected['v9170'],
+}
+
+export const burnt = {
+	name: 'Treasury.Burnt',
+	v0Polkadot: polkadotEvents.burnt['v0'],
+	v9170Polkadot: polkadotEvents.burnt['v9170'],
+}
+
+export const rollover = {
+	name: 'Treasury.Rollover',
+	v0Polkadot: polkadotEvents.rollover['v0'],
+	v9170Polkadot: polkadotEvents.rollover['v9170'],
+}
+
+export const deposit = {
+	name: 'Treasury.Deposit',
+	v0Polkadot: polkadotEvents.deposit['v0'],
+	v9170Polkadot: polkadotEvents.deposit['v9170'],
 }
 
 export const newTip = {
 	name: 'Treasury.NewTip',
-	v1038Kusama: kusamaEvents.newTip['v1038'],
+	v0Polkadot: polkadotEvents.newTip['v0'],
 }
 
 export const tipClosing = {
 	name: 'Treasury.TipClosing',
-	v1038Kusama: kusamaEvents.tipClosing['v1038'],
+	v0Polkadot: polkadotEvents.tipClosing['v0'],
 }
 
 export const tipClosed = {
 	name: 'Treasury.TipClosed',
-	v1038Kusama: kusamaEvents.tipClosed['v1038'],
+	v0Polkadot: polkadotEvents.tipClosed['v0'],
 }
 
 export const tipRetracted = {
 	name: 'Treasury.TipRetracted',
-	v1038Kusama: kusamaEvents.tipRetracted['v1038'],
+	v0Polkadot: polkadotEvents.tipRetracted['v0'],
 }
 
 export const bountyProposed = {
 	name: 'Treasury.BountyProposed',
-	v2025Kusama: kusamaEvents.bountyProposed['v2025'],
+	v25Polkadot: polkadotEvents.bountyProposed['v25'],
 }
 
 export const bountyRejected = {
 	name: 'Treasury.BountyRejected',
-	v2025Kusama: kusamaEvents.bountyRejected['v2025'],
+	v25Polkadot: polkadotEvents.bountyRejected['v25'],
 }
 
 export const bountyBecameActive = {
 	name: 'Treasury.BountyBecameActive',
-	v2025Kusama: kusamaEvents.bountyBecameActive['v2025'],
+	v25Polkadot: polkadotEvents.bountyBecameActive['v25'],
 }
 
 export const bountyAwarded = {
 	name: 'Treasury.BountyAwarded',
-	v2025Kusama: kusamaEvents.bountyAwarded['v2025'],
+	v25Polkadot: polkadotEvents.bountyAwarded['v25'],
 }
 
 export const bountyClaimed = {
 	name: 'Treasury.BountyClaimed',
-	v2025Kusama: kusamaEvents.bountyClaimed['v2025'],
+	v25Polkadot: polkadotEvents.bountyClaimed['v25'],
 }
 
 export const bountyCanceled = {
 	name: 'Treasury.BountyCanceled',
-	v2025Kusama: kusamaEvents.bountyCanceled['v2025'],
+	v25Polkadot: polkadotEvents.bountyCanceled['v25'],
 }
 
 export const bountyExtended = {
 	name: 'Treasury.BountyExtended',
-	v2025Kusama: kusamaEvents.bountyExtended['v2025'],
+	v25Polkadot: polkadotEvents.bountyExtended['v25'],
 }
 
 export const spendApproved = {
 	name: 'Treasury.SpendApproved',
-	v9250Kusama: kusamaEvents.spendApproved['v9250'],
+	v9250Polkadot: polkadotEvents.spendApproved['v9250'],
 }
 
 export const updatedInactive = {
 	name: 'Treasury.UpdatedInactive',
-	v9370Kusama: kusamaEvents.updatedInactive['v9370'],
+	v9370Polkadot: polkadotEvents.updatedInactive['v9370'],
 }
 
 export const assetSpendApproved = {
 	name: 'Treasury.AssetSpendApproved',
-	v1001000Kusama: kusamaEvents.assetSpendApproved['v1001000'],
+	v1001002Polkadot: polkadotEvents.assetSpendApproved['v1001002'],
 }
 
 export const assetSpendVoided = {
 	name: 'Treasury.AssetSpendVoided',
-	v1001000Kusama: kusamaEvents.assetSpendVoided['v1001000'],
+	v1001002Polkadot: polkadotEvents.assetSpendVoided['v1001002'],
 }
 
 export const paid = {
 	name: 'Treasury.Paid',
-	v1001000Kusama: kusamaEvents.paid['v1001000'],
+	v1001002Polkadot: polkadotEvents.paid['v1001002'],
 }
 
 export const paymentFailed = {
 	name: 'Treasury.PaymentFailed',
-	v1001000Kusama: kusamaEvents.paymentFailed['v1001000'],
+	v1001002Polkadot: polkadotEvents.paymentFailed['v1001002'],
 }
 
 export const spendProcessed = {
 	name: 'Treasury.SpendProcessed',
-	v1001000Kusama: kusamaEvents.spendProcessed['v1001000'],
+	v1001002Polkadot: polkadotEvents.spendProcessed['v1001002'],
 }

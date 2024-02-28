@@ -1,19 +1,19 @@
-import * as kusamaStorage from '../../kusama/preimage/storage'
+import * as polkadotStorage from '../../polkadot/preimage/storage'
 
 
 export const statusFor = {
 	name: '',
-	v9160Kusama: kusamaStorage.statusFor['v9160'],
-	v9320Kusama: kusamaStorage.statusFor['v9320'],
+	v9170Polkadot: polkadotStorage.statusFor['v9170'],
+	v9340Polkadot: polkadotStorage.statusFor['v9340'],
 }
 
 export const preimageFor = {
 	name: '',
-	v9160Kusama: kusamaStorage.preimageFor['v9160'],
-	v9320Kusama: kusamaStorage.preimageFor['v9320'],
+	v9170Polkadot: polkadotStorage.preimageFor['v9170'],
+	v9340Polkadot: polkadotStorage.preimageFor['v9340'],
 }
 
 export const requestStatusFor = {
 	name: '',
-	v1001000Kusama: kusamaStorage.requestStatusFor['v1001000'],
+	v1001002Polkadot: polkadotStorage.requestStatusFor['v1001002'],
 }

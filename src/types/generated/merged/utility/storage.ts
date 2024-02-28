@@ -1,7 +1,7 @@
-import * as kusamaStorage from '../../kusama/utility/storage'
+import * as polkadotStorage from '../../polkadot/utility/storage'
 
 
 export const multisigs = {
 	name: '',
-	v1032Kusama: kusamaStorage.multisigs['v1032'],
+	v0Polkadot: polkadotStorage.multisigs['v0'],
 }

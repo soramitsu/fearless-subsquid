@@ -1,29 +1,24 @@
-import * as kusamaStorage from '../../kusama/im-online/storage'
+import * as polkadotStorage from '../../polkadot/im-online/storage'
 
 
-export const gossipAt = {
+export const heartbeatAfter = {
 	name: '',
-	v1020Kusama: kusamaStorage.gossipAt['v1020'],
+	v0Polkadot: polkadotStorage.heartbeatAfter['v0'],
 }
 
 export const keys = {
 	name: '',
-	v1020Kusama: kusamaStorage.keys['v1020'],
+	v0Polkadot: polkadotStorage.keys['v0'],
 }
 
 export const receivedHeartbeats = {
 	name: '',
-	v1020Kusama: kusamaStorage.receivedHeartbeats['v1020'],
-	v9111Kusama: kusamaStorage.receivedHeartbeats['v9111'],
-	v1000000Kusama: kusamaStorage.receivedHeartbeats['v1000000'],
+	v0Polkadot: polkadotStorage.receivedHeartbeats['v0'],
+	v9110Polkadot: polkadotStorage.receivedHeartbeats['v9110'],
+	v1000001Polkadot: polkadotStorage.receivedHeartbeats['v1000001'],
 }
 
 export const authoredBlocks = {
 	name: '',
-	v1020Kusama: kusamaStorage.authoredBlocks['v1020'],
-}
-
-export const heartbeatAfter = {
-	name: '',
-	v1045Kusama: kusamaStorage.heartbeatAfter['v1045'],
+	v0Polkadot: polkadotStorage.authoredBlocks['v0'],
 }

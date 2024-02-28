@@ -1,12 +1,12 @@
-import * as kusamaStorage from '../../kusama/beefy-mmr-leaf/storage'
+import * as polkadotStorage from '../../polkadot/beefy-mmr-leaf/storage'
 
 
 export const beefyAuthorities = {
 	name: '',
-	v1000000Kusama: kusamaStorage.beefyAuthorities['v1000000'],
+	v1001002Polkadot: polkadotStorage.beefyAuthorities['v1001002'],
 }
 
 export const beefyNextAuthorities = {
 	name: '',
-	v1000000Kusama: kusamaStorage.beefyNextAuthorities['v1000000'],
+	v1001002Polkadot: polkadotStorage.beefyNextAuthorities['v1001002'],
 }

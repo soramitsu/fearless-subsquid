@@ -1,17 +1,17 @@
-import * as kusamaStorage from '../../kusama/attestations/storage'
+import * as polkadotStorage from '../../polkadot/attestations/storage'
 
 
 export const recentParaBlocks = {
 	name: '',
-	v1020Kusama: kusamaStorage.recentParaBlocks['v1020'],
+	v0Polkadot: polkadotStorage.recentParaBlocks['v0'],
 }
 
 export const paraBlockAttestations = {
 	name: '',
-	v1020Kusama: kusamaStorage.paraBlockAttestations['v1020'],
+	v0Polkadot: polkadotStorage.paraBlockAttestations['v0'],
 }
 
 export const didUpdate = {
 	name: '',
-	v1020Kusama: kusamaStorage.didUpdate['v1020'],
+	v0Polkadot: polkadotStorage.didUpdate['v0'],
 }

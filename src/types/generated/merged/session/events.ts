@@ -1,8 +1,8 @@
-import * as kusamaEvents from '../../kusama/session/events'
+import * as polkadotEvents from '../../polkadot/session/events'
 
 
 export const newSession = {
 	name: 'Session.NewSession',
-	v1020Kusama: kusamaEvents.newSession['v1020'],
-	v9130Kusama: kusamaEvents.newSession['v9130'],
+	v0Polkadot: polkadotEvents.newSession['v0'],
+	v9140Polkadot: polkadotEvents.newSession['v9140'],
 }

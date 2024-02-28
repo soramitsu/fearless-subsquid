@@ -1,37 +1,37 @@
-import * as kusamaStorage from '../../kusama/ump/storage'
+import * as polkadotStorage from '../../polkadot/ump/storage'
 
 
 export const relayDispatchQueues = {
 	name: '',
-	v9090Kusama: kusamaStorage.relayDispatchQueues['v9090'],
+	v9110Polkadot: polkadotStorage.relayDispatchQueues['v9110'],
 }
 
 export const relayDispatchQueueSize = {
 	name: '',
-	v9090Kusama: kusamaStorage.relayDispatchQueueSize['v9090'],
+	v9110Polkadot: polkadotStorage.relayDispatchQueueSize['v9110'],
 }
 
 export const needsDispatch = {
 	name: '',
-	v9090Kusama: kusamaStorage.needsDispatch['v9090'],
+	v9110Polkadot: polkadotStorage.needsDispatch['v9110'],
 }
 
 export const nextDispatchRoundStartWith = {
 	name: '',
-	v9090Kusama: kusamaStorage.nextDispatchRoundStartWith['v9090'],
+	v9110Polkadot: polkadotStorage.nextDispatchRoundStartWith['v9110'],
 }
 
 export const overweight = {
 	name: '',
-	v9100Kusama: kusamaStorage.overweight['v9100'],
+	v9110Polkadot: polkadotStorage.overweight['v9110'],
 }
 
 export const overweightCount = {
 	name: '',
-	v9100Kusama: kusamaStorage.overweightCount['v9100'],
+	v9110Polkadot: polkadotStorage.overweightCount['v9110'],
 }
 
 export const counterForOverweight = {
 	name: '',
-	v9381Kusama: kusamaStorage.counterForOverweight['v9381'],
+	v9420Polkadot: polkadotStorage.counterForOverweight['v9420'],
 }

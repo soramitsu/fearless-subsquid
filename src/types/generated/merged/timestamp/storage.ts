@@ -1,12 +1,12 @@
-import * as kusamaStorage from '../../kusama/timestamp/storage'
+import * as polkadotStorage from '../../polkadot/timestamp/storage'
 
 
 export const now = {
 	name: '',
-	v1020Kusama: kusamaStorage.now['v1020'],
+	v0Polkadot: polkadotStorage.now['v0'],
 }
 
 export const didUpdate = {
 	name: '',
-	v1020Kusama: kusamaStorage.didUpdate['v1020'],
+	v0Polkadot: polkadotStorage.didUpdate['v0'],
 }

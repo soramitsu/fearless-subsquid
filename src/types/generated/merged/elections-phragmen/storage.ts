@@ -1,41 +1,31 @@
-import * as kusamaStorage from '../../kusama/elections-phragmen/storage'
+import * as polkadotStorage from '../../polkadot/elections-phragmen/storage'
 
 
 export const members = {
 	name: '',
-	v1020Kusama: kusamaStorage.members['v1020'],
-	v2028Kusama: kusamaStorage.members['v2028'],
+	v0Polkadot: polkadotStorage.members['v0'],
+	v28Polkadot: polkadotStorage.members['v28'],
 }
 
 export const runnersUp = {
 	name: '',
-	v1020Kusama: kusamaStorage.runnersUp['v1020'],
-	v2028Kusama: kusamaStorage.runnersUp['v2028'],
+	v0Polkadot: polkadotStorage.runnersUp['v0'],
+	v28Polkadot: polkadotStorage.runnersUp['v28'],
 }
 
 export const electionRounds = {
 	name: '',
-	v1020Kusama: kusamaStorage.electionRounds['v1020'],
-}
-
-export const votesOf = {
-	name: '',
-	v1020Kusama: kusamaStorage.votesOf['v1020'],
-}
-
-export const stakeOf = {
-	name: '',
-	v1020Kusama: kusamaStorage.stakeOf['v1020'],
-}
-
-export const candidates = {
-	name: '',
-	v1020Kusama: kusamaStorage.candidates['v1020'],
-	v2028Kusama: kusamaStorage.candidates['v2028'],
+	v0Polkadot: polkadotStorage.electionRounds['v0'],
 }
 
 export const voting = {
 	name: '',
-	v1058Kusama: kusamaStorage.voting['v1058'],
-	v2028Kusama: kusamaStorage.voting['v2028'],
+	v0Polkadot: polkadotStorage.voting['v0'],
+	v28Polkadot: polkadotStorage.voting['v28'],
+}
+
+export const candidates = {
+	name: '',
+	v0Polkadot: polkadotStorage.candidates['v0'],
+	v28Polkadot: polkadotStorage.candidates['v28'],
 }

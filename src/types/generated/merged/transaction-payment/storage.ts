@@ -1,13 +1,13 @@
-import * as kusamaStorage from '../../kusama/transaction-payment/storage'
+import * as polkadotStorage from '../../polkadot/transaction-payment/storage'
 
 
 export const nextFeeMultiplier = {
 	name: '',
-	v1020Kusama: kusamaStorage.nextFeeMultiplier['v1020'],
+	v0Polkadot: polkadotStorage.nextFeeMultiplier['v0'],
 }
 
 export const storageVersion = {
 	name: '',
-	v2011Kusama: kusamaStorage.storageVersion['v2011'],
-	v9111Kusama: kusamaStorage.storageVersion['v9111'],
+	v11Polkadot: polkadotStorage.storageVersion['v11'],
+	v9110Polkadot: polkadotStorage.storageVersion['v9110'],
 }

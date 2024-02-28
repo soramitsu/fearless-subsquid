@@ -1,15 +1,15 @@
-import * as kusamaStorage from '../../kusama/proxy/storage'
+import * as polkadotStorage from '../../polkadot/proxy/storage'
 
 
 export const proxies = {
 	name: '',
-	v2005Kusama: kusamaStorage.proxies['v2005'],
-	v2023Kusama: kusamaStorage.proxies['v2023'],
-	v9180Kusama: kusamaStorage.proxies['v9180'],
-	v9420Kusama: kusamaStorage.proxies['v9420'],
+	v5Polkadot: polkadotStorage.proxies['v5'],
+	v23Polkadot: polkadotStorage.proxies['v23'],
+	v9110Polkadot: polkadotStorage.proxies['v9110'],
+	v9420Polkadot: polkadotStorage.proxies['v9420'],
 }
 
 export const announcements = {
 	name: '',
-	v2023Kusama: kusamaStorage.announcements['v2023'],
+	v23Polkadot: polkadotStorage.announcements['v23'],
 }

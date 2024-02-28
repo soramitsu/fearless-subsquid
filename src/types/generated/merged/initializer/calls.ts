@@ -1,7 +1,7 @@
-import * as kusamaCalls from '../../kusama/initializer/calls'
+import * as polkadotCalls from '../../polkadot/initializer/calls'
 
 
 export const forceApprove = {
 	name: 'Initializer.force_approve',
-	v9090Kusama: kusamaCalls.forceApprove['v9090'],
+	v9110Polkadot: polkadotCalls.forceApprove['v9110'],
 }

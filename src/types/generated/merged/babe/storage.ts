@@ -1,91 +1,91 @@
-import * as kusamaStorage from '../../kusama/babe/storage'
+import * as polkadotStorage from '../../polkadot/babe/storage'
 
 
 export const epochIndex = {
 	name: '',
-	v1020Kusama: kusamaStorage.epochIndex['v1020'],
+	v0Polkadot: polkadotStorage.epochIndex['v0'],
 }
 
 export const authorities = {
 	name: '',
-	v1020Kusama: kusamaStorage.authorities['v1020'],
+	v0Polkadot: polkadotStorage.authorities['v0'],
 }
 
 export const genesisSlot = {
 	name: '',
-	v1020Kusama: kusamaStorage.genesisSlot['v1020'],
+	v0Polkadot: polkadotStorage.genesisSlot['v0'],
 }
 
 export const currentSlot = {
 	name: '',
-	v1020Kusama: kusamaStorage.currentSlot['v1020'],
+	v0Polkadot: polkadotStorage.currentSlot['v0'],
 }
 
 export const randomness = {
 	name: '',
-	v1020Kusama: kusamaStorage.randomness['v1020'],
-}
-
-export const nextRandomness = {
-	name: '',
-	v1020Kusama: kusamaStorage.nextRandomness['v1020'],
-}
-
-export const segmentIndex = {
-	name: '',
-	v1020Kusama: kusamaStorage.segmentIndex['v1020'],
-}
-
-export const underConstruction = {
-	name: '',
-	v1020Kusama: kusamaStorage.underConstruction['v1020'],
-}
-
-export const initialized = {
-	name: '',
-	v1020Kusama: kusamaStorage.initialized['v1020'],
-	v9220Kusama: kusamaStorage.initialized['v9220'],
-	v9420Kusama: kusamaStorage.initialized['v9420'],
-}
-
-export const lateness = {
-	name: '',
-	v1058Kusama: kusamaStorage.lateness['v1058'],
+	v0Polkadot: polkadotStorage.randomness['v0'],
 }
 
 export const nextEpochConfig = {
 	name: '',
-	v2005Kusama: kusamaStorage.nextEpochConfig['v2005'],
-	v2030Kusama: kusamaStorage.nextEpochConfig['v2030'],
+	v0Polkadot: polkadotStorage.nextEpochConfig['v0'],
+	v30Polkadot: polkadotStorage.nextEpochConfig['v30'],
+}
+
+export const nextRandomness = {
+	name: '',
+	v0Polkadot: polkadotStorage.nextRandomness['v0'],
+}
+
+export const segmentIndex = {
+	name: '',
+	v0Polkadot: polkadotStorage.segmentIndex['v0'],
+}
+
+export const underConstruction = {
+	name: '',
+	v0Polkadot: polkadotStorage.underConstruction['v0'],
+}
+
+export const initialized = {
+	name: '',
+	v0Polkadot: polkadotStorage.initialized['v0'],
+	v9220Polkadot: polkadotStorage.initialized['v9220'],
+	v9420Polkadot: polkadotStorage.initialized['v9420'],
+}
+
+export const lateness = {
+	name: '',
+	v0Polkadot: polkadotStorage.lateness['v0'],
 }
 
 export const authorVrfRandomness = {
 	name: '',
-	v2026Kusama: kusamaStorage.authorVrfRandomness['v2026'],
+	v26Polkadot: polkadotStorage.authorVrfRandomness['v26'],
 }
 
 export const nextAuthorities = {
 	name: '',
-	v2028Kusama: kusamaStorage.nextAuthorities['v2028'],
+	v28Polkadot: polkadotStorage.nextAuthorities['v28'],
 }
 
 export const pendingEpochConfigChange = {
 	name: '',
-	v2030Kusama: kusamaStorage.pendingEpochConfigChange['v2030'],
-	v9111Kusama: kusamaStorage.pendingEpochConfigChange['v9111'],
+	v30Polkadot: polkadotStorage.pendingEpochConfigChange['v30'],
+	v9110Polkadot: polkadotStorage.pendingEpochConfigChange['v9110'],
 }
 
 export const epochStart = {
 	name: '',
-	v2030Kusama: kusamaStorage.epochStart['v2030'],
+	v30Polkadot: polkadotStorage.epochStart['v30'],
 }
 
 export const epochConfig = {
 	name: '',
-	v2030Kusama: kusamaStorage.epochConfig['v2030'],
+	v30Polkadot: polkadotStorage.epochConfig['v30'],
 }
 
 export const skippedEpochs = {
 	name: '',
-	v9420Kusama: kusamaStorage.skippedEpochs['v9420'],
+	v9420Polkadot: polkadotStorage.skippedEpochs['v9420'],
 }

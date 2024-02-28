@@ -1,17 +1,17 @@
-import * as kusamaEvents from '../../kusama/preimage/events'
+import * as polkadotEvents from '../../polkadot/preimage/events'
 
 
 export const noted = {
 	name: 'Preimage.Noted',
-	v9160Kusama: kusamaEvents.noted['v9160'],
+	v9170Polkadot: polkadotEvents.noted['v9170'],
 }
 
 export const requested = {
 	name: 'Preimage.Requested',
-	v9160Kusama: kusamaEvents.requested['v9160'],
+	v9170Polkadot: polkadotEvents.requested['v9170'],
 }
 
 export const cleared = {
 	name: 'Preimage.Cleared',
-	v9160Kusama: kusamaEvents.cleared['v9160'],
+	v9170Polkadot: polkadotEvents.cleared['v9170'],
 }

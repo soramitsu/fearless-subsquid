@@ -1,9 +1,8 @@
-import * as kusamaCalls from '../../kusama/para-inherent/calls'
+import * as polkadotCalls from '../../polkadot/para-inherent/calls'
 
 
 export const enter = {
 	name: 'ParaInherent.enter',
-	v9090Kusama: kusamaCalls.enter['v9090'],
-	v9111Kusama: kusamaCalls.enter['v9111'],
-	v9130Kusama: kusamaCalls.enter['v9130'],
+	v9110Polkadot: polkadotCalls.enter['v9110'],
+	v9140Polkadot: polkadotCalls.enter['v9140'],
 }

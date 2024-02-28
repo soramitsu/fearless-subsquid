@@ -1,10 +1,9 @@
-import * as kusamaEvents from '../../kusama/offences/events'
+import * as polkadotEvents from '../../polkadot/offences/events'
 
 
 export const offence = {
 	name: 'Offences.Offence',
-	v1020Kusama: kusamaEvents.offence['v1020'],
-	v1058Kusama: kusamaEvents.offence['v1058'],
-	v9010Kusama: kusamaEvents.offence['v9010'],
-	v9130Kusama: kusamaEvents.offence['v9130'],
+	v0Polkadot: polkadotEvents.offence['v0'],
+	v9050Polkadot: polkadotEvents.offence['v9050'],
+	v9140Polkadot: polkadotEvents.offence['v9140'],
 }

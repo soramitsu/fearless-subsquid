@@ -1,7 +1,7 @@
-import * as kusamaStorage from '../../kusama/whitelist/storage'
+import * as polkadotStorage from '../../polkadot/whitelist/storage'
 
 
 export const whitelistedCall = {
 	name: '',
-	v9320Kusama: kusamaStorage.whitelistedCall['v9320'],
+	v9420Polkadot: polkadotStorage.whitelistedCall['v9420'],
 }

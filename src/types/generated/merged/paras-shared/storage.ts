@@ -1,22 +1,22 @@
-import * as kusamaStorage from '../../kusama/paras-shared/storage'
+import * as polkadotStorage from '../../polkadot/paras-shared/storage'
 
 
 export const currentSessionIndex = {
 	name: '',
-	v9010Kusama: kusamaStorage.currentSessionIndex['v9010'],
+	v9110Polkadot: polkadotStorage.currentSessionIndex['v9110'],
 }
 
 export const activeValidatorIndices = {
 	name: '',
-	v9010Kusama: kusamaStorage.activeValidatorIndices['v9010'],
+	v9110Polkadot: polkadotStorage.activeValidatorIndices['v9110'],
 }
 
 export const activeValidatorKeys = {
 	name: '',
-	v9010Kusama: kusamaStorage.activeValidatorKeys['v9010'],
+	v9110Polkadot: polkadotStorage.activeValidatorKeys['v9110'],
 }
 
 export const allowedRelayParents = {
 	name: '',
-	v1000000Kusama: kusamaStorage.allowedRelayParents['v1000000'],
+	v1000001Polkadot: polkadotStorage.allowedRelayParents['v1000001'],
 }

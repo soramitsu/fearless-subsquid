@@ -1,7 +1,7 @@
-import * as kusamaCalls from '../../kusama/paras-disputes/calls'
+import * as polkadotCalls from '../../polkadot/paras-disputes/calls'
 
 
 export const forceUnfreeze = {
 	name: 'ParasDisputes.force_unfreeze',
-	v9130Kusama: kusamaCalls.forceUnfreeze['v9130'],
+	v9180Polkadot: polkadotCalls.forceUnfreeze['v9180'],
 }

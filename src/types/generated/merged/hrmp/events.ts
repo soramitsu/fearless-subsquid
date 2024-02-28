@@ -1,44 +1,42 @@
-import * as kusamaEvents from '../../kusama/hrmp/events'
+import * as polkadotEvents from '../../polkadot/hrmp/events'
 
 
 export const openChannelRequested = {
 	name: 'Hrmp.OpenChannelRequested',
-	v9090Kusama: kusamaEvents.openChannelRequested['v9090'],
-	v1001000Kusama: kusamaEvents.openChannelRequested['v1001000'],
-}
-
-export const openChannelAccepted = {
-	name: 'Hrmp.OpenChannelAccepted',
-	v9090Kusama: kusamaEvents.openChannelAccepted['v9090'],
-	v1001000Kusama: kusamaEvents.openChannelAccepted['v1001000'],
-}
-
-export const channelClosed = {
-	name: 'Hrmp.ChannelClosed',
-	v9090Kusama: kusamaEvents.channelClosed['v9090'],
-	v9111Kusama: kusamaEvents.channelClosed['v9111'],
-	v1001000Kusama: kusamaEvents.channelClosed['v1001000'],
+	v9110Polkadot: polkadotEvents.openChannelRequested['v9110'],
+	v1001002Polkadot: polkadotEvents.openChannelRequested['v1001002'],
 }
 
 export const openChannelCanceled = {
 	name: 'Hrmp.OpenChannelCanceled',
-	v9100Kusama: kusamaEvents.openChannelCanceled['v9100'],
-	v9111Kusama: kusamaEvents.openChannelCanceled['v9111'],
-	v1001000Kusama: kusamaEvents.openChannelCanceled['v1001000'],
+	v9110Polkadot: polkadotEvents.openChannelCanceled['v9110'],
+	v1001002Polkadot: polkadotEvents.openChannelCanceled['v1001002'],
+}
+
+export const openChannelAccepted = {
+	name: 'Hrmp.OpenChannelAccepted',
+	v9110Polkadot: polkadotEvents.openChannelAccepted['v9110'],
+	v1001002Polkadot: polkadotEvents.openChannelAccepted['v1001002'],
+}
+
+export const channelClosed = {
+	name: 'Hrmp.ChannelClosed',
+	v9110Polkadot: polkadotEvents.channelClosed['v9110'],
+	v1001002Polkadot: polkadotEvents.channelClosed['v1001002'],
 }
 
 export const hrmpChannelForceOpened = {
 	name: 'Hrmp.HrmpChannelForceOpened',
-	v9320Kusama: kusamaEvents.hrmpChannelForceOpened['v9320'],
-	v1001000Kusama: kusamaEvents.hrmpChannelForceOpened['v1001000'],
+	v9340Polkadot: polkadotEvents.hrmpChannelForceOpened['v9340'],
+	v1001002Polkadot: polkadotEvents.hrmpChannelForceOpened['v1001002'],
 }
 
 export const hrmpSystemChannelOpened = {
 	name: 'Hrmp.HrmpSystemChannelOpened',
-	v1001000Kusama: kusamaEvents.hrmpSystemChannelOpened['v1001000'],
+	v1001002Polkadot: polkadotEvents.hrmpSystemChannelOpened['v1001002'],
 }
 
 export const openChannelDepositsUpdated = {
 	name: 'Hrmp.OpenChannelDepositsUpdated',
-	v1001000Kusama: kusamaEvents.openChannelDepositsUpdated['v1001000'],
+	v1001002Polkadot: polkadotEvents.openChannelDepositsUpdated['v1001002'],
 }

@@ -1,13 +1,12 @@
-import * as kusamaStorage from '../../kusama/initializer/storage'
+import * as polkadotStorage from '../../polkadot/initializer/storage'
 
 
 export const hasInitialized = {
 	name: '',
-	v9090Kusama: kusamaStorage.hasInitialized['v9090'],
+	v9110Polkadot: polkadotStorage.hasInitialized['v9110'],
 }
 
 export const bufferedSessionChanges = {
 	name: '',
-	v9090Kusama: kusamaStorage.bufferedSessionChanges['v9090'],
-	v9111Kusama: kusamaStorage.bufferedSessionChanges['v9111'],
+	v9110Polkadot: polkadotStorage.bufferedSessionChanges['v9110'],
 }

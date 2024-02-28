@@ -1,7 +1,7 @@
-import * as kusamaCalls from '../../kusama/finality-tracker/calls'
+import * as polkadotCalls from '../../polkadot/finality-tracker/calls'
 
 
 export const finalHint = {
 	name: 'FinalityTracker.final_hint',
-	v1020Kusama: kusamaCalls.finalHint['v1020'],
+	v0Polkadot: polkadotCalls.finalHint['v0'],
 }

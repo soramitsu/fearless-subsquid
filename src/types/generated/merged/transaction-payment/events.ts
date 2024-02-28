@@ -1,7 +1,7 @@
-import * as kusamaEvents from '../../kusama/transaction-payment/events'
+import * as polkadotEvents from '../../polkadot/transaction-payment/events'
 
 
 export const transactionFeePaid = {
 	name: 'TransactionPayment.TransactionFeePaid',
-	v9260Kusama: kusamaEvents.transactionFeePaid['v9260'],
+	v9260Polkadot: polkadotEvents.transactionFeePaid['v9260'],
 }

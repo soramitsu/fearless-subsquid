@@ -1,68 +1,62 @@
-import * as kusamaStorage from '../../kusama/hrmp/storage'
+import * as polkadotStorage from '../../polkadot/hrmp/storage'
 
 
 export const hrmpOpenChannelRequests = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpOpenChannelRequests['v9090'],
-	v9111Kusama: kusamaStorage.hrmpOpenChannelRequests['v9111'],
+	v9110Polkadot: polkadotStorage.hrmpOpenChannelRequests['v9110'],
 }
 
 export const hrmpOpenChannelRequestsList = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpOpenChannelRequestsList['v9090'],
-	v9111Kusama: kusamaStorage.hrmpOpenChannelRequestsList['v9111'],
+	v9110Polkadot: polkadotStorage.hrmpOpenChannelRequestsList['v9110'],
 }
 
 export const hrmpOpenChannelRequestCount = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpOpenChannelRequestCount['v9090'],
+	v9110Polkadot: polkadotStorage.hrmpOpenChannelRequestCount['v9110'],
 }
 
 export const hrmpAcceptedChannelRequestCount = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpAcceptedChannelRequestCount['v9090'],
+	v9110Polkadot: polkadotStorage.hrmpAcceptedChannelRequestCount['v9110'],
 }
 
 export const hrmpCloseChannelRequests = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpCloseChannelRequests['v9090'],
-	v9111Kusama: kusamaStorage.hrmpCloseChannelRequests['v9111'],
+	v9110Polkadot: polkadotStorage.hrmpCloseChannelRequests['v9110'],
 }
 
 export const hrmpCloseChannelRequestsList = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpCloseChannelRequestsList['v9090'],
-	v9111Kusama: kusamaStorage.hrmpCloseChannelRequestsList['v9111'],
+	v9110Polkadot: polkadotStorage.hrmpCloseChannelRequestsList['v9110'],
 }
 
 export const hrmpWatermarks = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpWatermarks['v9090'],
+	v9110Polkadot: polkadotStorage.hrmpWatermarks['v9110'],
 }
 
 export const hrmpChannels = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpChannels['v9090'],
-	v9111Kusama: kusamaStorage.hrmpChannels['v9111'],
+	v9110Polkadot: polkadotStorage.hrmpChannels['v9110'],
 }
 
 export const hrmpIngressChannelsIndex = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpIngressChannelsIndex['v9090'],
+	v9110Polkadot: polkadotStorage.hrmpIngressChannelsIndex['v9110'],
 }
 
 export const hrmpEgressChannelsIndex = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpEgressChannelsIndex['v9090'],
+	v9110Polkadot: polkadotStorage.hrmpEgressChannelsIndex['v9110'],
 }
 
 export const hrmpChannelContents = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpChannelContents['v9090'],
-	v9111Kusama: kusamaStorage.hrmpChannelContents['v9111'],
+	v9110Polkadot: polkadotStorage.hrmpChannelContents['v9110'],
 }
 
 export const hrmpChannelDigests = {
 	name: '',
-	v9090Kusama: kusamaStorage.hrmpChannelDigests['v9090'],
+	v9110Polkadot: polkadotStorage.hrmpChannelDigests['v9110'],
 }

@@ -1,34 +1,34 @@
-import * as kusamaCalls from '../../kusama/phragmen-election/calls'
+import * as polkadotCalls from '../../polkadot/phragmen-election/calls'
 
 
 export const vote = {
 	name: 'PhragmenElection.vote',
-	v9010Kusama: kusamaCalls.vote['v9010'],
+	v9050Polkadot: polkadotCalls.vote['v9050'],
 }
 
 export const removeVoter = {
 	name: 'PhragmenElection.remove_voter',
-	v9010Kusama: kusamaCalls.removeVoter['v9010'],
+	v9050Polkadot: polkadotCalls.removeVoter['v9050'],
 }
 
 export const submitCandidacy = {
 	name: 'PhragmenElection.submit_candidacy',
-	v9010Kusama: kusamaCalls.submitCandidacy['v9010'],
+	v9050Polkadot: polkadotCalls.submitCandidacy['v9050'],
 }
 
 export const renounceCandidacy = {
 	name: 'PhragmenElection.renounce_candidacy',
-	v9010Kusama: kusamaCalls.renounceCandidacy['v9010'],
+	v9050Polkadot: polkadotCalls.renounceCandidacy['v9050'],
 }
 
 export const removeMember = {
 	name: 'PhragmenElection.remove_member',
-	v9010Kusama: kusamaCalls.removeMember['v9010'],
-	v9111Kusama: kusamaCalls.removeMember['v9111'],
-	v9271Kusama: kusamaCalls.removeMember['v9271'],
+	v9050Polkadot: polkadotCalls.removeMember['v9050'],
+	v9110Polkadot: polkadotCalls.removeMember['v9110'],
+	v9270Polkadot: polkadotCalls.removeMember['v9270'],
 }
 
 export const cleanDefunctVoters = {
 	name: 'PhragmenElection.clean_defunct_voters',
-	v9010Kusama: kusamaCalls.cleanDefunctVoters['v9010'],
+	v9050Polkadot: polkadotCalls.cleanDefunctVoters['v9050'],
 }

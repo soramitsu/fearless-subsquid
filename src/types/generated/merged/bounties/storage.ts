@@ -1,23 +1,23 @@
-import * as kusamaStorage from '../../kusama/bounties/storage'
+import * as polkadotStorage from '../../polkadot/bounties/storage'
 
 
 export const bountyCount = {
 	name: '',
-	v2028Kusama: kusamaStorage.bountyCount['v2028'],
+	v28Polkadot: polkadotStorage.bountyCount['v28'],
 }
 
 export const bounties = {
 	name: '',
-	v2028Kusama: kusamaStorage.bounties['v2028'],
-	v9111Kusama: kusamaStorage.bounties['v9111'],
+	v28Polkadot: polkadotStorage.bounties['v28'],
+	v9110Polkadot: polkadotStorage.bounties['v9110'],
 }
 
 export const bountyDescriptions = {
 	name: '',
-	v2028Kusama: kusamaStorage.bountyDescriptions['v2028'],
+	v28Polkadot: polkadotStorage.bountyDescriptions['v28'],
 }
 
 export const bountyApprovals = {
 	name: '',
-	v2028Kusama: kusamaStorage.bountyApprovals['v2028'],
+	v28Polkadot: polkadotStorage.bountyApprovals['v28'],
 }

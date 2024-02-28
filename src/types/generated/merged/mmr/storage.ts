@@ -1,17 +1,17 @@
-import * as kusamaStorage from '../../kusama/mmr/storage'
+import * as polkadotStorage from '../../polkadot/mmr/storage'
 
 
 export const rootHash = {
 	name: '',
-	v1000000Kusama: kusamaStorage.rootHash['v1000000'],
+	v1001002Polkadot: polkadotStorage.rootHash['v1001002'],
 }
 
 export const numberOfLeaves = {
 	name: '',
-	v1000000Kusama: kusamaStorage.numberOfLeaves['v1000000'],
+	v1001002Polkadot: polkadotStorage.numberOfLeaves['v1001002'],
 }
 
 export const nodes = {
 	name: '',
-	v1000000Kusama: kusamaStorage.nodes['v1000000'],
+	v1001002Polkadot: polkadotStorage.nodes['v1001002'],
 }

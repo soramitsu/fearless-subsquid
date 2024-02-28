@@ -1,39 +1,38 @@
-import * as kusamaStorage from '../../kusama/para-scheduler/storage'
+import * as polkadotStorage from '../../polkadot/para-scheduler/storage'
 
 
 export const validatorGroups = {
 	name: '',
-	v9090Kusama: kusamaStorage.validatorGroups['v9090'],
+	v9110Polkadot: polkadotStorage.validatorGroups['v9110'],
 }
 
 export const parathreadQueue = {
 	name: '',
-	v9090Kusama: kusamaStorage.parathreadQueue['v9090'],
+	v9110Polkadot: polkadotStorage.parathreadQueue['v9110'],
 }
 
 export const availabilityCores = {
 	name: '',
-	v9090Kusama: kusamaStorage.availabilityCores['v9090'],
-	v1000000Kusama: kusamaStorage.availabilityCores['v1000000'],
+	v9110Polkadot: polkadotStorage.availabilityCores['v9110'],
+	v1000001Polkadot: polkadotStorage.availabilityCores['v1000001'],
 }
 
 export const parathreadClaimIndex = {
 	name: '',
-	v9090Kusama: kusamaStorage.parathreadClaimIndex['v9090'],
+	v9110Polkadot: polkadotStorage.parathreadClaimIndex['v9110'],
 }
 
 export const sessionStartBlock = {
 	name: '',
-	v9090Kusama: kusamaStorage.sessionStartBlock['v9090'],
+	v9110Polkadot: polkadotStorage.sessionStartBlock['v9110'],
 }
 
 export const scheduled = {
 	name: '',
-	v9090Kusama: kusamaStorage.scheduled['v9090'],
-	v9111Kusama: kusamaStorage.scheduled['v9111'],
+	v9110Polkadot: polkadotStorage.scheduled['v9110'],
 }
 
 export const claimQueue = {
 	name: '',
-	v1000000Kusama: kusamaStorage.claimQueue['v1000000'],
+	v1000001Polkadot: polkadotStorage.claimQueue['v1000001'],
 }

@@ -1,12 +1,12 @@
-import * as kusamaStorage from '../../kusama/tips/storage'
+import * as polkadotStorage from '../../polkadot/tips/storage'
 
 
 export const tips = {
 	name: '',
-	v2028Kusama: kusamaStorage.tips['v2028'],
+	v28Polkadot: polkadotStorage.tips['v28'],
 }
 
 export const reasons = {
 	name: '',
-	v2028Kusama: kusamaStorage.reasons['v2028'],
+	v28Polkadot: polkadotStorage.reasons['v28'],
 }

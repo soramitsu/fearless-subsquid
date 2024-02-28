@@ -1,7 +1,7 @@
-import * as kusamaEvents from '../../kusama/dummy-slots/events'
+import * as polkadotEvents from '../../polkadot/dummy-slots/events'
 
 
 export const dummy = {
 	name: 'DummySlots.Dummy',
-	v2024Kusama: kusamaEvents.dummy['v2024'],
+	v24Polkadot: polkadotEvents.dummy['v24'],
 }

@@ -1,112 +1,109 @@
-import * as kusamaStorage from '../../kusama/nomination-pools/storage'
+import * as polkadotStorage from '../../polkadot/nomination-pools/storage'
 
 
 export const minJoinBond = {
 	name: '',
-	v9220Kusama: kusamaStorage.minJoinBond['v9220'],
+	v9280Polkadot: polkadotStorage.minJoinBond['v9280'],
 }
 
 export const minCreateBond = {
 	name: '',
-	v9220Kusama: kusamaStorage.minCreateBond['v9220'],
+	v9280Polkadot: polkadotStorage.minCreateBond['v9280'],
 }
 
 export const maxPools = {
 	name: '',
-	v9220Kusama: kusamaStorage.maxPools['v9220'],
+	v9280Polkadot: polkadotStorage.maxPools['v9280'],
 }
 
 export const maxPoolMembers = {
 	name: '',
-	v9220Kusama: kusamaStorage.maxPoolMembers['v9220'],
+	v9280Polkadot: polkadotStorage.maxPoolMembers['v9280'],
 }
 
 export const maxPoolMembersPerPool = {
 	name: '',
-	v9220Kusama: kusamaStorage.maxPoolMembersPerPool['v9220'],
+	v9280Polkadot: polkadotStorage.maxPoolMembersPerPool['v9280'],
 }
 
 export const poolMembers = {
 	name: '',
-	v9220Kusama: kusamaStorage.poolMembers['v9220'],
-	v9271Kusama: kusamaStorage.poolMembers['v9271'],
+	v9280Polkadot: polkadotStorage.poolMembers['v9280'],
 }
 
 export const counterForPoolMembers = {
 	name: '',
-	v9220Kusama: kusamaStorage.counterForPoolMembers['v9220'],
+	v9280Polkadot: polkadotStorage.counterForPoolMembers['v9280'],
 }
 
 export const bondedPools = {
 	name: '',
-	v9220Kusama: kusamaStorage.bondedPools['v9220'],
-	v9230Kusama: kusamaStorage.bondedPools['v9230'],
-	v9420Kusama: kusamaStorage.bondedPools['v9420'],
+	v9280Polkadot: polkadotStorage.bondedPools['v9280'],
+	v9420Polkadot: polkadotStorage.bondedPools['v9420'],
 }
 
 export const counterForBondedPools = {
 	name: '',
-	v9220Kusama: kusamaStorage.counterForBondedPools['v9220'],
+	v9280Polkadot: polkadotStorage.counterForBondedPools['v9280'],
 }
 
 export const rewardPools = {
 	name: '',
-	v9220Kusama: kusamaStorage.rewardPools['v9220'],
-	v9271Kusama: kusamaStorage.rewardPools['v9271'],
-	v9420Kusama: kusamaStorage.rewardPools['v9420'],
+	v9280Polkadot: polkadotStorage.rewardPools['v9280'],
+	v9420Polkadot: polkadotStorage.rewardPools['v9420'],
 }
 
 export const counterForRewardPools = {
 	name: '',
-	v9220Kusama: kusamaStorage.counterForRewardPools['v9220'],
+	v9280Polkadot: polkadotStorage.counterForRewardPools['v9280'],
 }
 
 export const subPoolsStorage = {
 	name: '',
-	v9220Kusama: kusamaStorage.subPoolsStorage['v9220'],
+	v9280Polkadot: polkadotStorage.subPoolsStorage['v9280'],
 }
 
 export const counterForSubPoolsStorage = {
 	name: '',
-	v9220Kusama: kusamaStorage.counterForSubPoolsStorage['v9220'],
+	v9280Polkadot: polkadotStorage.counterForSubPoolsStorage['v9280'],
 }
 
 export const metadata = {
 	name: '',
-	v9220Kusama: kusamaStorage.metadata['v9220'],
+	v9280Polkadot: polkadotStorage.metadata['v9280'],
 }
 
 export const counterForMetadata = {
 	name: '',
-	v9220Kusama: kusamaStorage.counterForMetadata['v9220'],
+	v9280Polkadot: polkadotStorage.counterForMetadata['v9280'],
 }
 
 export const lastPoolId = {
 	name: '',
-	v9220Kusama: kusamaStorage.lastPoolId['v9220'],
+	v9280Polkadot: polkadotStorage.lastPoolId['v9280'],
 }
 
 export const reversePoolIdLookup = {
 	name: '',
-	v9220Kusama: kusamaStorage.reversePoolIdLookup['v9220'],
+	v9280Polkadot: polkadotStorage.reversePoolIdLookup['v9280'],
 }
 
 export const counterForReversePoolIdLookup = {
 	name: '',
-	v9220Kusama: kusamaStorage.counterForReversePoolIdLookup['v9220'],
+	v9280Polkadot: polkadotStorage.counterForReversePoolIdLookup['v9280'],
 }
 
 export const globalMaxCommission = {
 	name: '',
-	v9420Kusama: kusamaStorage.globalMaxCommission['v9420'],
+	v9420Polkadot: polkadotStorage.globalMaxCommission['v9420'],
 }
 
 export const claimPermissions = {
 	name: '',
-	v9420Kusama: kusamaStorage.claimPermissions['v9420'],
+	v9420Polkadot: polkadotStorage.claimPermissions['v9420'],
 }
 
 export const totalValueLocked = {
 	name: '',
-	v1001000Kusama: kusamaStorage.totalValueLocked['v1001000'],
+	v1001002Polkadot: polkadotStorage.totalValueLocked['v1001002'],
 }

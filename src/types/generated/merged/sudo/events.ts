@@ -1,17 +1,17 @@
-import * as kusamaEvents from '../../kusama/sudo/events'
+import * as polkadotEvents from '../../polkadot/sudo/events'
 
 
 export const sudid = {
 	name: 'Sudo.Sudid',
-	v1020Kusama: kusamaEvents.sudid['v1020'],
+	v0Polkadot: polkadotEvents.sudid['v0'],
 }
 
 export const keyChanged = {
 	name: 'Sudo.KeyChanged',
-	v1020Kusama: kusamaEvents.keyChanged['v1020'],
+	v0Polkadot: polkadotEvents.keyChanged['v0'],
 }
 
 export const sudoAsDone = {
 	name: 'Sudo.SudoAsDone',
-	v1020Kusama: kusamaEvents.sudoAsDone['v1020'],
+	v0Polkadot: polkadotEvents.sudoAsDone['v0'],
 }

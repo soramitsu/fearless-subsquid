@@ -1,28 +1,28 @@
-import * as kusamaStorage from '../../kusama/para-session-info/storage'
+import * as polkadotStorage from '../../polkadot/para-session-info/storage'
 
 
 export const assignmentKeysUnsafe = {
 	name: '',
-	v9090Kusama: kusamaStorage.assignmentKeysUnsafe['v9090'],
+	v9110Polkadot: polkadotStorage.assignmentKeysUnsafe['v9110'],
 }
 
 export const earliestStoredSession = {
 	name: '',
-	v9090Kusama: kusamaStorage.earliestStoredSession['v9090'],
+	v9110Polkadot: polkadotStorage.earliestStoredSession['v9110'],
 }
 
 export const sessions = {
 	name: '',
-	v9090Kusama: kusamaStorage.sessions['v9090'],
-	v9160Kusama: kusamaStorage.sessions['v9160'],
+	v9110Polkadot: polkadotStorage.sessions['v9110'],
+	v9170Polkadot: polkadotStorage.sessions['v9170'],
 }
 
 export const accountKeys = {
 	name: '',
-	v9230Kusama: kusamaStorage.accountKeys['v9230'],
+	v9230Polkadot: polkadotStorage.accountKeys['v9230'],
 }
 
 export const sessionExecutorParams = {
 	name: '',
-	v9420Kusama: kusamaStorage.sessionExecutorParams['v9420'],
+	v9420Polkadot: polkadotStorage.sessionExecutorParams['v9420'],
 }

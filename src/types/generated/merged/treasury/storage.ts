@@ -1,68 +1,68 @@
-import * as kusamaStorage from '../../kusama/treasury/storage'
+import * as polkadotStorage from '../../polkadot/treasury/storage'
 
 
 export const proposalCount = {
 	name: '',
-	v1020Kusama: kusamaStorage.proposalCount['v1020'],
+	v0Polkadot: polkadotStorage.proposalCount['v0'],
 }
 
 export const proposals = {
 	name: '',
-	v1020Kusama: kusamaStorage.proposals['v1020'],
+	v0Polkadot: polkadotStorage.proposals['v0'],
 }
 
 export const approvals = {
 	name: '',
-	v1020Kusama: kusamaStorage.approvals['v1020'],
+	v0Polkadot: polkadotStorage.approvals['v0'],
 }
 
 export const tips = {
 	name: '',
-	v1038Kusama: kusamaStorage.tips['v1038'],
-	v2013Kusama: kusamaStorage.tips['v2013'],
+	v0Polkadot: polkadotStorage.tips['v0'],
+	v13Polkadot: polkadotStorage.tips['v13'],
 }
 
 export const reasons = {
 	name: '',
-	v1038Kusama: kusamaStorage.reasons['v1038'],
+	v0Polkadot: polkadotStorage.reasons['v0'],
 }
 
 export const bountyCount = {
 	name: '',
-	v2025Kusama: kusamaStorage.bountyCount['v2025'],
+	v25Polkadot: polkadotStorage.bountyCount['v25'],
 }
 
 export const bounties = {
 	name: '',
-	v2025Kusama: kusamaStorage.bounties['v2025'],
+	v25Polkadot: polkadotStorage.bounties['v25'],
 }
 
 export const bountyDescriptions = {
 	name: '',
-	v2025Kusama: kusamaStorage.bountyDescriptions['v2025'],
+	v25Polkadot: polkadotStorage.bountyDescriptions['v25'],
 }
 
 export const bountyApprovals = {
 	name: '',
-	v2025Kusama: kusamaStorage.bountyApprovals['v2025'],
+	v25Polkadot: polkadotStorage.bountyApprovals['v25'],
 }
 
 export const inactive = {
 	name: '',
-	v9340Kusama: kusamaStorage.inactive['v9340'],
+	v9340Polkadot: polkadotStorage.inactive['v9340'],
 }
 
 export const deactivated = {
 	name: '',
-	v9370Kusama: kusamaStorage.deactivated['v9370'],
+	v9370Polkadot: polkadotStorage.deactivated['v9370'],
 }
 
 export const spendCount = {
 	name: '',
-	v1001000Kusama: kusamaStorage.spendCount['v1001000'],
+	v1001002Polkadot: polkadotStorage.spendCount['v1001002'],
 }
 
 export const spends = {
 	name: '',
-	v1001000Kusama: kusamaStorage.spends['v1001000'],
+	v1001002Polkadot: polkadotStorage.spends['v1001002'],
 }

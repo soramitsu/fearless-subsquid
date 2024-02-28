@@ -1,5 +1,5 @@
 import { BlockContext, Call, Event } from '../types'
-import { CallType as CallTypeKusama, EventType as EventTypeKusama } from '../types/generated/kusama/support'
+import { CallType as CallTypeKusama, EventType as EventTypeKusama } from '../types/generated/polkadot/support'
 import * as sts from '@subsquid/substrate-runtime/lib/sts'
 
 type VersionedObject = {

@@ -1,13 +1,13 @@
-import * as kusamaStorage from '../../kusama/vesting/storage'
+import * as polkadotStorage from '../../polkadot/vesting/storage'
 
 
 export const vesting = {
 	name: '',
-	v1050Kusama: kusamaStorage.vesting['v1050'],
-	v9111Kusama: kusamaStorage.vesting['v9111'],
+	v0Polkadot: polkadotStorage.vesting['v0'],
+	v9110Polkadot: polkadotStorage.vesting['v9110'],
 }
 
 export const storageVersion = {
 	name: '',
-	v9111Kusama: kusamaStorage.storageVersion['v9111'],
+	v9110Polkadot: polkadotStorage.storageVersion['v9110'],
 }

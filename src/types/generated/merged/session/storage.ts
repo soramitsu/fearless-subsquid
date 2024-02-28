@@ -1,46 +1,44 @@
-import * as kusamaStorage from '../../kusama/session/storage'
+import * as polkadotStorage from '../../polkadot/session/storage'
 
 
 export const validators = {
 	name: '',
-	v1020Kusama: kusamaStorage.validators['v1020'],
+	v0Polkadot: polkadotStorage.validators['v0'],
 }
 
 export const currentIndex = {
 	name: '',
-	v1020Kusama: kusamaStorage.currentIndex['v1020'],
+	v0Polkadot: polkadotStorage.currentIndex['v0'],
 }
 
 export const queuedChanged = {
 	name: '',
-	v1020Kusama: kusamaStorage.queuedChanged['v1020'],
+	v0Polkadot: polkadotStorage.queuedChanged['v0'],
 }
 
 export const queuedKeys = {
 	name: '',
-	v1020Kusama: kusamaStorage.queuedKeys['v1020'],
-	v2028Kusama: kusamaStorage.queuedKeys['v2028'],
-	v9111Kusama: kusamaStorage.queuedKeys['v9111'],
-	v1000000Kusama: kusamaStorage.queuedKeys['v1000000'],
+	v0Polkadot: polkadotStorage.queuedKeys['v0'],
+	v28Polkadot: polkadotStorage.queuedKeys['v28'],
+	v9110Polkadot: polkadotStorage.queuedKeys['v9110'],
+	v1001002Polkadot: polkadotStorage.queuedKeys['v1001002'],
 }
 
 export const disabledValidators = {
 	name: '',
-	v1020Kusama: kusamaStorage.disabledValidators['v1020'],
+	v0Polkadot: polkadotStorage.disabledValidators['v0'],
 }
 
 export const nextKeys = {
 	name: '',
-	v1020Kusama: kusamaStorage.nextKeys['v1020'],
-	v1051Kusama: kusamaStorage.nextKeys['v1051'],
-	v2028Kusama: kusamaStorage.nextKeys['v2028'],
-	v9111Kusama: kusamaStorage.nextKeys['v9111'],
-	v1000000Kusama: kusamaStorage.nextKeys['v1000000'],
+	v0Polkadot: polkadotStorage.nextKeys['v0'],
+	v28Polkadot: polkadotStorage.nextKeys['v28'],
+	v9110Polkadot: polkadotStorage.nextKeys['v9110'],
+	v1001002Polkadot: polkadotStorage.nextKeys['v1001002'],
 }
 
 export const keyOwner = {
 	name: '',
-	v1020Kusama: kusamaStorage.keyOwner['v1020'],
-	v1051Kusama: kusamaStorage.keyOwner['v1051'],
-	v9111Kusama: kusamaStorage.keyOwner['v9111'],
+	v0Polkadot: polkadotStorage.keyOwner['v0'],
+	v9110Polkadot: polkadotStorage.keyOwner['v9110'],
 }

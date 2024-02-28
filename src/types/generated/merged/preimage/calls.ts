@@ -1,27 +1,27 @@
-import * as kusamaCalls from '../../kusama/preimage/calls'
+import * as polkadotCalls from '../../polkadot/preimage/calls'
 
 
 export const notePreimage = {
 	name: 'Preimage.note_preimage',
-	v9160Kusama: kusamaCalls.notePreimage['v9160'],
+	v9170Polkadot: polkadotCalls.notePreimage['v9170'],
 }
 
 export const unnotePreimage = {
 	name: 'Preimage.unnote_preimage',
-	v9160Kusama: kusamaCalls.unnotePreimage['v9160'],
+	v9170Polkadot: polkadotCalls.unnotePreimage['v9170'],
 }
 
 export const requestPreimage = {
 	name: 'Preimage.request_preimage',
-	v9160Kusama: kusamaCalls.requestPreimage['v9160'],
+	v9170Polkadot: polkadotCalls.requestPreimage['v9170'],
 }
 
 export const unrequestPreimage = {
 	name: 'Preimage.unrequest_preimage',
-	v9160Kusama: kusamaCalls.unrequestPreimage['v9160'],
+	v9170Polkadot: polkadotCalls.unrequestPreimage['v9170'],
 }
 
 export const ensureUpdated = {
 	name: 'Preimage.ensure_updated',
-	v1001000Kusama: kusamaCalls.ensureUpdated['v1001000'],
+	v1001002Polkadot: polkadotCalls.ensureUpdated['v1001002'],
 }

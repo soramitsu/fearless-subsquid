@@ -1,12 +1,12 @@
-import * as kusamaStorage from '../../kusama/para-inherent/storage'
+import * as polkadotStorage from '../../polkadot/para-inherent/storage'
 
 
 export const included = {
 	name: '',
-	v9090Kusama: kusamaStorage.included['v9090'],
+	v9110Polkadot: polkadotStorage.included['v9110'],
 }
 
 export const onChainVotes = {
 	name: '',
-	v9122Kusama: kusamaStorage.onChainVotes['v9122'],
+	v9122Polkadot: polkadotStorage.onChainVotes['v9122'],
 }
