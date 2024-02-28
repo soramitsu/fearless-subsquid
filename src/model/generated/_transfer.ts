@@ -2,45 +2,42 @@ import assert from "assert"
 import * as marshal from "./marshal"
 
 export class Transfer {
-    private _amount!: string
-    private _to!: string
-    private _from!: string
+    private _amount!: string | undefined | null
+    private _to!: string | undefined | null
+    private _from!: string | undefined | null
     private _fee!: bigint | undefined | null
 
     constructor(props?: Partial<Omit<Transfer, 'toJSON'>>, json?: any) {
         Object.assign(this, props)
         if (json != null) {
-            this._amount = marshal.string.fromJSON(json.amount)
-            this._to = marshal.string.fromJSON(json.to)
-            this._from = marshal.string.fromJSON(json.from)
+            this._amount = json.amount == null ? undefined : marshal.string.fromJSON(json.amount)
+            this._to = json.to == null ? undefined : marshal.string.fromJSON(json.to)
+            this._from = json.from == null ? undefined : marshal.string.fromJSON(json.from)
             this._fee = json.fee == null ? undefined : marshal.bigint.fromJSON(json.fee)
         }
     }
 
-    get amount(): string {
-        assert(this._amount != null, 'uninitialized access')
+    get amount(): string | undefined | null {
         return this._amount
     }
 
-    set amount(value: string) {
+    set amount(value: string | undefined | null) {
         this._amount = value
     }
 
-    get to(): string {
-        assert(this._to != null, 'uninitialized access')
+    get to(): string | undefined | null {
         return this._to
     }
 
-    set to(value: string) {
+    set to(value: string | undefined | null) {
         this._to = value
     }
 
-    get from(): string {
-        assert(this._from != null, 'uninitialized access')
+    get from(): string | undefined | null {
         return this._from
     }
 
-    set from(value: string) {
+    set from(value: string | undefined | null) {
         this._from = value
     }
 

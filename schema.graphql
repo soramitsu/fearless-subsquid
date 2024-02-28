@@ -25,9 +25,9 @@ type AccumulatedStake @entity {
 }
 
 type Transfer @jsonField {
-  amount: String!
-  to: String!
-  from: String!
+  amount: String
+  to: String
+  from: String
   fee: BigInt
 }
 
