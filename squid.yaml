@@ -30,9 +30,9 @@ scale:
   dedicated: false
   addons:
     postgres:
-      profile: small
+      profile: large
       storage: 100G
   processor:
-    profile: small
+    profile: large
   api:
-    profile: small
+    profile: large
