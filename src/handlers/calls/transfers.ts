@@ -24,6 +24,7 @@ export async function transferCallHandler(
     amount,
 		to,
 		from,
+		fee: null,
 		// fee: call?.extrinsic,
   })
 
@@ -50,6 +51,7 @@ export async function transferKeepAliveCallHandler(
     amount,
 		to,
 		from,
+		fee: null,
 		// fee: call?.extrinsic,
   })
 
@@ -76,6 +78,7 @@ export async function transferAllowDeathCallHandler(
     amount,
 		to,
 		from,
+		fee: null,
 		// fee: call?.extrinsic,
   })
 

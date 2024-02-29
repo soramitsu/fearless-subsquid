@@ -19,6 +19,6 @@
 typegen.json
 
 .env
-squid.yaml
+# squid.yaml
 .DS_Store
 log.txt

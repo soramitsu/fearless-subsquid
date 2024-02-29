@@ -32,16 +32,16 @@ const version = 1
 export const chains: Chains = {
 	[Chain.KUSAMA]: {
 		name: 'kusama',
-		squidName: 'fearless-kusama-relaychain',
+		squidName: 'fearless-kusama',
 		description: 'kusama squid',
 		version,
 		chain: 'wss://kusama-rpc.polkadot.io',
 		archive: 'kusama',
 		storage: '100G',
 		scaleProfiles: {
-      postgres: ScaleProfile.SMALL,
-      processor: ScaleProfile.SMALL,
-      api: ScaleProfile.SMALL,
+      postgres: ScaleProfile.LARGE,
+      processor: ScaleProfile.LARGE,
+      api: ScaleProfile.LARGE,
 		},
   }
 }
