@@ -93,9 +93,13 @@ export const decodeAddressEthereum = (data: AddressEthereum): Uint8Array => {
 export const toAddress = (data: any): Address => {
 	if (!isHex(data)) return data;
 
-	const value = typeof data === 'string' ? decodeHex(data) : data
+	try {
+		const value = typeof data === 'string' ? decodeHex(data) : data
 
-	return ss58codec.encode(value) as unknown as Address
+		return ss58codec.encode(value) as unknown as Address
+	} catch {
+ 		return data as Address
+	}
 }
 
 export const decodeAddress = (data: Address): string => {
