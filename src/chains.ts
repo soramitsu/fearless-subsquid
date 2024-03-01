@@ -39,9 +39,9 @@ export const chains: Chains = {
 		archive: 'polkadot',
 		storage: '100G',
 		scaleProfiles: {
-      postgres: ScaleProfile.SMALL,
-      processor: ScaleProfile.SMALL,
-      api: ScaleProfile.SMALL,
+      postgres: ScaleProfile.LARGE,
+      processor: ScaleProfile.LARGE,
+      api: ScaleProfile.LARGE,
 		},
   }
 }

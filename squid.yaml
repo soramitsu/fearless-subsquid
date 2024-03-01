@@ -1,0 +1,38 @@
+manifestVersion: subsquid.io/v0.1
+name: fearless-polkadot
+version: 1
+description: polkadot squid
+deploy:
+  addons:
+    postgres: {}
+  processor:
+    env:
+      INDEXER_CHAIN: polkadot
+      INDEXER_START_BLOCK: 0
+      SQD_DEBUG: sqd:processor:mapping
+    cmd:
+      - node
+      - lib/processor
+  api:
+    cmd:
+      - npx
+      - squid-graphql-server
+      - '--subscriptions'
+      - '--dumb-cache'
+      - in-memory
+      - '--dumb-cache-ttl'
+      - '1000'
+      - '--dumb-cache-size'
+      - '100'
+      - '--dumb-cache-max-age'
+      - '1000'
+scale:
+  dedicated: false
+  addons:
+    postgres:
+      profile: large
+      storage: 100G
+  processor:
+    profile: large
+  api:
+    profile: large
