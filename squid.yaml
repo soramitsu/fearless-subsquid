@@ -1,6 +1,6 @@
 manifestVersion: subsquid.io/v0.1
 name: fearless-polkadot
-version: 1
+version: 2
 description: polkadot squid
 deploy:
   addons:

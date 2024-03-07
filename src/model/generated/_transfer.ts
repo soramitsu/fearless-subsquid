@@ -5,7 +5,7 @@ export class Transfer {
     private _amount!: string | undefined | null
     private _to!: string | undefined | null
     private _from!: string | undefined | null
-    private _fee!: bigint | undefined | null
+    private _fee!: string | undefined | null
 
     constructor(props?: Partial<Omit<Transfer, 'toJSON'>>, json?: any) {
         Object.assign(this, props)
@@ -13,7 +13,7 @@ export class Transfer {
             this._amount = json.amount == null ? undefined : marshal.string.fromJSON(json.amount)
             this._to = json.to == null ? undefined : marshal.string.fromJSON(json.to)
             this._from = json.from == null ? undefined : marshal.string.fromJSON(json.from)
-            this._fee = json.fee == null ? undefined : marshal.bigint.fromJSON(json.fee)
+            this._fee = json.fee == null ? undefined : marshal.string.fromJSON(json.fee)
         }
     }
 
@@ -41,11 +41,11 @@ export class Transfer {
         this._from = value
     }
 
-    get fee(): bigint | undefined | null {
+    get fee(): string | undefined | null {
         return this._fee
     }
 
-    set fee(value: bigint | undefined | null) {
+    set fee(value: string | undefined | null) {
         this._fee = value
     }
 
@@ -54,7 +54,7 @@ export class Transfer {
             amount: this.amount,
             to: this.to,
             from: this.from,
-            fee: this.fee == null ? undefined : marshal.bigint.toJSON(this.fee),
+            fee: this.fee,
         }
     }
 }

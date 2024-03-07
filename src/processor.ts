@@ -27,6 +27,7 @@ export const processor = new SubstrateBatchProcessor()
 		error: true,
 		hash: true,
 		signature: true,
+		fee: true
 	},
 	block: {
 		timestamp: true,

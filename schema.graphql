@@ -28,7 +28,7 @@ type Transfer @jsonField {
   amount: String
   to: String
   from: String
-  fee: BigInt
+  fee: String
 }
 
 type Reward @jsonField {
