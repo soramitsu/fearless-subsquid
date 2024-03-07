@@ -1,6 +1,6 @@
 manifestVersion: subsquid.io/v0.1
 name: fearless-kusama-2
-version: 1
+version: 2
 description: kusama squid
 deploy:
   addons:

@@ -24,9 +24,10 @@ export async function transferCallHandler(
     amount,
 		to,
 		from,
-		fee: null,
-		// fee: call?.extrinsic,
+		fee: call?.extrinsic?.fee?.toString(),
   })
+
+	await new Promise((res) => setTimeout(() => res(true), 100000))
 
 	await createCallHistoryElement(ctx, call, { transfer, address: from })
 	createCallHistoryElement(ctx, call, { transfer, address: to })
@@ -51,8 +52,7 @@ export async function transferKeepAliveCallHandler(
     amount,
 		to,
 		from,
-		fee: null,
-		// fee: call?.extrinsic,
+		fee: call?.extrinsic?.fee?.toString(),
   })
 
 	await createCallHistoryElement(ctx, call, { transfer, address: from })
@@ -78,8 +78,7 @@ export async function transferAllowDeathCallHandler(
     amount,
 		to,
 		from,
-		fee: null,
-		// fee: call?.extrinsic,
+		fee: call?.extrinsic?.fee?.toString(),
   })
 
 	await createCallHistoryElement(ctx, call, { transfer, address: from })
