@@ -27,8 +27,6 @@ export async function transferCallHandler(
 		fee: call?.extrinsic?.fee?.toString(),
   })
 
-	await new Promise((res) => setTimeout(() => res(true), 100000))
-
 	await createCallHistoryElement(ctx, call, { transfer, address: from })
 	createCallHistoryElement(ctx, call, { transfer, address: to })
 }
