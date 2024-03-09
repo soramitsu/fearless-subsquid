@@ -32,7 +32,7 @@ export async function bondCallHandler(
     }
   }
 
-	createStakeChange(ctx, call, stakeChangeData)
+	await createStakeChange(ctx, call, stakeChangeData)
 }
 
 export async function unbondCallHandler(
@@ -57,5 +57,5 @@ export async function unbondCallHandler(
     accumulatedAmount,
   }
 
-	createStakeChange(ctx, call, stakeChangeData)
+	await createStakeChange(ctx, call, stakeChangeData)
 }

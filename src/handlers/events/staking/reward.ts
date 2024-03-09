@@ -36,5 +36,5 @@ export async function rewardEventHandler(
     reward
 	}
 
-	createEventHistoryElement(ctx, event, historyData)
+	await createEventHistoryElement(ctx, event, historyData)
 }

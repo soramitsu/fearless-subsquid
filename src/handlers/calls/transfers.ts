@@ -28,7 +28,7 @@ export async function transferCallHandler(
   })
 
 	await createCallHistoryElement(ctx, call, { transfer, address: from })
-	createCallHistoryElement(ctx, call, { transfer, address: to })
+	await createCallHistoryElement(ctx, call, { transfer, address: to })
 }
 
 export async function transferKeepAliveCallHandler(
@@ -54,7 +54,7 @@ export async function transferKeepAliveCallHandler(
   })
 
 	await createCallHistoryElement(ctx, call, { transfer, address: from })
-	createCallHistoryElement(ctx, call, { transfer, address: to })
+	await createCallHistoryElement(ctx, call, { transfer, address: to })
 }
 
 export async function transferAllowDeathCallHandler(
@@ -80,5 +80,5 @@ export async function transferAllowDeathCallHandler(
   })
 
 	await createCallHistoryElement(ctx, call, { transfer, address: from })
-	createCallHistoryElement(ctx, call, { transfer, address: to })
+	await createCallHistoryElement(ctx, call, { transfer, address: to })
 }

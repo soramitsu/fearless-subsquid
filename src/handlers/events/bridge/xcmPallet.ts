@@ -22,5 +22,5 @@ export async function xcmPalletAttemptedEventHandler(
     value
 	}
 
-	createEventHistoryElement(ctx, event, historyData)
+	await createEventHistoryElement(ctx, event, historyData)
 }
