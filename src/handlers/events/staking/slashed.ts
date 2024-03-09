@@ -26,5 +26,5 @@ export async function slashedEventHandler(
     amount: amount.toString(),
 	}
 
-	createStakeChange(ctx, event, stakeChangeData, false)
+	await createStakeChange(ctx, event, stakeChangeData, false)
 }

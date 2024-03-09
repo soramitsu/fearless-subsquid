@@ -29,5 +29,5 @@ export async function messageQueueProcessedEventHandler(
     weightUsed
 	}
 
-	createEventHistoryElement(ctx, event, historyData)
+	await createEventHistoryElement(ctx, event, historyData)
 }

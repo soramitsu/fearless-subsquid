@@ -1,13 +1,13 @@
 import { BlockContext, Event, Call } from '../types'
 import { getBlockTimestamp, getCallId, getEventId, toCamelCase } from '../utils'
-import {  HistoryElement, HistoryElementType } from '../model'
+import { HistoryElement, HistoryElementType } from '../model'
 
 export const createCallHistoryElement = async (
 	ctx: BlockContext,
 	call: Call<any>,
   historyData: Record<string, any>
 ): Promise<void> => {
-	createHistoryElement(ctx, call, historyData)
+	await createHistoryElement(ctx, call, historyData)
 }
 
 export const createEventHistoryElement = async (
@@ -15,7 +15,7 @@ export const createEventHistoryElement = async (
 	event: Event<any>,
   historyData: Record<string, any>
 ): Promise<void> => {
-	createHistoryElement(ctx, event, historyData, false)
+	await createHistoryElement(ctx, event, historyData, false)
 }
 
 const createHistoryElement = async (
