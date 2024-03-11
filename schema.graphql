@@ -3,24 +3,13 @@ enum HistoryElementType {
 	EVENT
 }
 
-type ExecutionResult @jsonField {
-	success: Boolean!
-	error: ExecutionError
-}
-
-type ExecutionError @jsonField {
-	moduleErrorId: Int
-	moduleErrorIndex: Int
-	nonModuleErrorMessage: String
-}
-
 type HistoryElement @entity {
 	id: ID!
 	type: HistoryElementType!
 	blockHeight: Int! @index
 	blockHash: String! @index
 	timestamp: Int! @index
-	execution: ExecutionResult!
+	success: Boolean!
   name: String!
 	module: String! @index
 	method: String! @index

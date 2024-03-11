@@ -38,9 +38,9 @@ export const chains: Chains = {
 		archive: null,
 		storage: '100G',
 		scaleProfiles: {
-      postgres: ScaleProfile.SMALL,
-      processor: ScaleProfile.SMALL,
-      api: ScaleProfile.SMALL,
+      postgres: ScaleProfile.LARGE,
+      processor: ScaleProfile.LARGE,
+      api: ScaleProfile.LARGE,
 		},
 	},
 	[Chain.SORA_KUSAMA]: {
@@ -51,9 +51,9 @@ export const chains: Chains = {
 		archive: null,
 		storage: '100G',
 		scaleProfiles: {
-      postgres: ScaleProfile.SMALL,
-      processor: ScaleProfile.SMALL,
-      api: ScaleProfile.SMALL,
+      postgres: ScaleProfile.LARGE,
+      processor: ScaleProfile.LARGE,
+      api: ScaleProfile.LARGE,
 		},
   }
 }
