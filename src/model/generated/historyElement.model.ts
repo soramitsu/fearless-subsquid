@@ -52,10 +52,6 @@ export class HistoryElement {
     @Column_("text", {nullable: false})
     type!: string
 
-    @Index_()
-    @Column_("jsonb", {nullable: true})
-    data!: unknown | undefined | null
-
     @Column_("bool", {nullable: false})
     success!: boolean
 

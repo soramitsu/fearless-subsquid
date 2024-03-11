@@ -31,7 +31,6 @@ const createHistoryElement = async (
 	historyElement.entityType = isCall ? HistoryElementType.CALL  : HistoryElementType.EVENT
 
 	historyElement.success = entity?.extrinsic?.success ?? false
-	historyElement.data = {}
 
 	historyElement.blockHeight = ctx.block.header.height
 	historyElement.blockHash = ctx.block.header.hash
@@ -46,7 +45,6 @@ const createHistoryElement = async (
 	historyElement.address = historyData?.address ?? ''
 	historyElement.transfer = historyData?.transfer ?? null
 	historyElement.reward = historyData?.reward ?? null
-	historyElement.data = historyData?.data ?? {}
 	historyElement.type = historyData?.type ?? ''
 
 	await ctx.store.save(historyElement)

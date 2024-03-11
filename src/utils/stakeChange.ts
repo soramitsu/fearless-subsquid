@@ -25,7 +25,6 @@ export const createStakeChange = async (
 	stakeChange.amount = stakeChangeData?.amount
 	stakeChange.type = stakeChangeData?.type
 	stakeChange.accumulatedAmount = stakeChangeData?.accumulatedAmount
-	stakeChange.data = stakeChangeData?.data ?? {}
 
 	await ctx.store.save(stakeChange)
 }

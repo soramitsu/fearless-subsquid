@@ -31,6 +31,7 @@ export const processor = new SubstrateBatchProcessor()
 	},
 	block: {
 		timestamp: true,
+		validator: true
 	}
 })
 
