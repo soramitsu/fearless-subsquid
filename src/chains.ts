@@ -27,7 +27,7 @@ type Chains = {
 	[chain in Chain]: EnvironmentAddresses
 }
 
-const version = 2
+const version = 3
 
 export const chains: Chains = {
 	[Chain.KUSAMA]: {

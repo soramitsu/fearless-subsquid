@@ -35,6 +35,7 @@ type Reward @jsonField {
   amount: String!
   era: Int,
   stash: String,
+  validator: String
 }
 
 type HistoryElement @entity {
@@ -49,7 +50,6 @@ type HistoryElement @entity {
 	module: String! @index
 	method: String! @index
 	type: String! @index
-	data: JSON @index
   success: Boolean!
   name: String!
 	reward: Reward
