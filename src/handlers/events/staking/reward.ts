@@ -23,11 +23,13 @@ export async function rewardEventHandler(
 
   const timestamp = ctx.block.header.timestamp ?? 0
   const era = Math.ceil((timestamp - FIRST_BLOCK_TIMESTAMP) / ERA_MS);
+  const validator = toAddress(ctx?.block?.header?.validator)
 
   const reward = new Reward({
     amount,
     era,
     stash: address,
+    validator
   })
 
 	const historyData = {

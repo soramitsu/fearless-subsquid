@@ -16,7 +16,6 @@ type StakeChange @entity {
 	module: String! @index
 	method: String! @index
   accumulatedAmount: BigInt!
-	data: JSON @index
 }
 
 type AccumulatedStake @entity {
