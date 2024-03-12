@@ -1,15 +1,14 @@
-module.exports = class Data1710160348920 {
-    name = 'Data1710160348920'
+module.exports = class Data1710232198051 {
+    name = 'Data1710232198051'
 
     async up(db) {
-        await db.query(`CREATE TABLE "stake_change" ("id" character varying NOT NULL, "block_height" integer NOT NULL, "block_hash" text NOT NULL, "timestamp" integer NOT NULL, "success" boolean NOT NULL, "address" text NOT NULL, "amount" text NOT NULL, "name" text NOT NULL, "type" text NOT NULL, "module" text NOT NULL, "method" text NOT NULL, "accumulated_amount" numeric NOT NULL, "data" jsonb, CONSTRAINT "PK_c8caa97569762773f19cf127103" PRIMARY KEY ("id"))`)
+        await db.query(`CREATE TABLE "stake_change" ("id" character varying NOT NULL, "block_height" integer NOT NULL, "block_hash" text NOT NULL, "timestamp" integer NOT NULL, "success" boolean NOT NULL, "address" text NOT NULL, "amount" text NOT NULL, "name" text NOT NULL, "type" text NOT NULL, "module" text NOT NULL, "method" text NOT NULL, "accumulated_amount" numeric NOT NULL, CONSTRAINT "PK_c8caa97569762773f19cf127103" PRIMARY KEY ("id"))`)
         await db.query(`CREATE INDEX "IDX_6d6406a87d5f1bf807b53fd8df" ON "stake_change" ("block_height") `)
         await db.query(`CREATE INDEX "IDX_951fb5610606ecb37bf2fe35d8" ON "stake_change" ("block_hash") `)
         await db.query(`CREATE INDEX "IDX_2997b20e37e04627447d4b0766" ON "stake_change" ("timestamp") `)
         await db.query(`CREATE INDEX "IDX_5e1d6f66bbeaa9800ac1d41559" ON "stake_change" ("address") `)
         await db.query(`CREATE INDEX "IDX_6390d5284d0b0cb148caf9e4cc" ON "stake_change" ("module") `)
         await db.query(`CREATE INDEX "IDX_15d3cd621e76f6a29f7269363b" ON "stake_change" ("method") `)
-        await db.query(`CREATE INDEX "IDX_d77a8d971ed41b9b1fdca81286" ON "stake_change" ("data") `)
         await db.query(`CREATE TABLE "accumulated_stake" ("id" character varying NOT NULL, "amount" numeric NOT NULL, CONSTRAINT "PK_b8067048d2065bcf1c7dd1a6ae0" PRIMARY KEY ("id"))`)
         await db.query(`CREATE TABLE "history_element" ("id" character varying NOT NULL, "entity_type" character varying(5) NOT NULL, "block_height" integer NOT NULL, "block_hash" text NOT NULL, "address" text, "timestamp" integer NOT NULL, "extrinsic_idx" integer, "extrinsic_hash" text, "module" text NOT NULL, "method" text NOT NULL, "type" text NOT NULL, "success" boolean NOT NULL, "name" text NOT NULL, "reward" jsonb, "transfer" jsonb, CONSTRAINT "PK_b10b09ee684b794e1ca6dc2470c" PRIMARY KEY ("id"))`)
         await db.query(`CREATE INDEX "IDX_1e20194d81a1b3745e74305903" ON "history_element" ("block_height") `)
@@ -37,7 +36,6 @@ module.exports = class Data1710160348920 {
         await db.query(`DROP INDEX "public"."IDX_5e1d6f66bbeaa9800ac1d41559"`)
         await db.query(`DROP INDEX "public"."IDX_6390d5284d0b0cb148caf9e4cc"`)
         await db.query(`DROP INDEX "public"."IDX_15d3cd621e76f6a29f7269363b"`)
-        await db.query(`DROP INDEX "public"."IDX_d77a8d971ed41b9b1fdca81286"`)
         await db.query(`DROP TABLE "accumulated_stake"`)
         await db.query(`DROP TABLE "history_element"`)
         await db.query(`DROP INDEX "public"."IDX_1e20194d81a1b3745e74305903"`)

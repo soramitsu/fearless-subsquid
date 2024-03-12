@@ -48,8 +48,4 @@ export class StakeChange {
 
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     accumulatedAmount!: bigint
-
-    @Index_()
-    @Column_("jsonb", {nullable: true})
-    data!: unknown | undefined | null
 }
